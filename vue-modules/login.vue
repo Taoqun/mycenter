@@ -67,9 +67,9 @@
             border:1px solid #eee;
             box-shadow:0 0 10px #D3DCE6;
             position:absolute;
-            top:30%;
+            top:100px;
             left:50%;
-            transform:translate(-50%,-50%);
+            transform:translate(-50%,0px);
         }
 
         h4{

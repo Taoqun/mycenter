@@ -8,7 +8,7 @@ module.exports = {
     },
     output:{
         path: path.resolve(__dirname, './views/index/'),
-        filename:"[name].js"
+        filename:"[name].js",
     },
     resolveLoader: {
         root: path.join(__dirname, 'node_modules')
