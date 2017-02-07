@@ -1,12 +1,13 @@
 var path = require('path')
 var webpack = require('webpack')
+var VUEMODULES = path.resolve(__dirname,'vue-modules')
+var LIBCSS = path.resolve(__dirname,'public/css')
 module.exports = {
     entry:{
-      bunder:"./src/entry.js",
+      index:"./src/index/index.js",
     },
     output:{
-        path: path.resolve(__dirname, './dist'),
-        publicPath: '/dist/',
+        path: path.resolve(__dirname, './views/index/'),
         filename:"[name].js"
     },
     resolveLoader: {
@@ -15,9 +16,9 @@ module.exports = {
     module:{
         loaders:[
             {test:/\.css$/,loader:"style!css"},
-            {test:/\.scss$/,loader:'style!css!sass'},
+            {test: /\.scss$/, loader: 'style!css!sass?sourceMap'},
             {test:/\.html$/,loader:"html-loader"},
-            {test:/\.(png|jpg)$/,loader:"url-loader?limit=8192"},
+            {test:/\.(png|jpg|gif|jpeg)$/,loader:"url-loader?limit=8192"},
             {test:/\.vue$/,loader:"vue-loader"},
             {test:/\.js$/,loader:'babel-loader',exclude:/node_module/},
             {test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,loader: 'file-loader'},
@@ -36,7 +37,9 @@ module.exports = {
     resolve: {
       extensions:['','.js','.vue'],
       alias: {
-        'vue$': 'vue/dist/vue.js'
+        'vue$': 'vue/dist/vue.js',
+        VUEMODULES:VUEMODULES,
+        LIBCSS:LIBCSS
       }
     },
     devServer:{
