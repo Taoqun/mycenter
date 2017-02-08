@@ -36,33 +36,7 @@ const open = require('child_process')
     //do something after connecting
     //console.log('mongo 连接成功')
 
-    /* mongoose 增加 */
-    // var sam = new MyStudent({
-    //     name: "taoqun",
-    //     age: 18706888888,
-    //     account:'taoqun'
-    // });
-    // /* 保存 */
-    // sam.save(function(err) {});
 
-    /* mongoose 查找 */
-    // MyStudent.find({account: "taoqun"}, (err, result, res) => {
-    //     if (err) {
-    //         return console.log(err)
-    //     }
-    // })
-
-    /* mongoose 更新 修改 */
-    // MyStudent.update({ _id:"589862c2d58de6283ca983b7"},{date:Date.now()},(err,result)=>{
-    //     if(err){ return console.log(err) }
-    //     console.log(result)
-    // })
-
-    /* mongoose 删除 */
-    // MyStudent.remove({},(err,result)=>{
-    //     if(err){ return console.log(err) }
-    //     console.log(result)
-    // })
 //})
 
 // 运行
@@ -82,27 +56,20 @@ app.get('/index', (req, res) => {
     res.sendFile(__dirname, 'index/index.html')
 })
 
+app.get('/index/a', function (req, res) {
+    res.send('<p>222</p>')
+});
 
 
 app.get('/login', (req, res) => {
 
-    var userInfo = require('./controller/loginController').userInfo
-
-    userInfo.find({account: "taoqun"}, (err, result) => {
-        if (err) { return console.log(err)}
-
-        if(result){
-          res.json(result)
-        }else{
-          res.json({})
-        }
-
-    })
+    var run = require('./controller/loginController').run
+        run.find(req,res)
 })
 
 
 app.use(function(req, res, next) {
-    res.status(404).send('Sorry cant find that!')
+    res.status(404).send('404 未找到')
 });
 
 var server = app.listen(8081, () => {
@@ -112,5 +79,5 @@ var server = app.listen(8081, () => {
     console.log('应用实例 访问地址为 http://localhost:8081')
 
     // 自动打开浏览器 指定网址
-    open.exec('start http://localhost:8081/index/')
+    // open.exec('start http://localhost:8081/index/')
 })
