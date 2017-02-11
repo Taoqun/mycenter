@@ -1,9 +1,9 @@
 <template>
-    <div id="login">
-        <div class="login-main">
-            <h4>登陆私人助理</h4>
+    <div id="register">
+        <div class="register-main">
+            <h4>注册账户</h4>
             <p class="description">
-              没有账号可以点击<a href="/account/register"> 注 册</a>
+              如果已有账号可以选择<a href="/account/login">登 陆</a>
             </p>
             <div class="account">
                 <span><i class="el-icon-message"></i>账户名</span>
@@ -13,31 +13,35 @@
                 <span><i class="el-icon-information" ></i>密码</span>
                 <el-input type="text" class="text" placeholder="密码" v-model="password"></el-input>
             </div>
+            <div class="password">
+                <span><i class="el-icon-information" ></i>重复密码</span>
+                <el-input type="text" class="text" placeholder="密码" v-model="password"></el-input>
+            </div>
             <div class="submitwrap">
-              <el-button type="primary" class="submit" @click="loginIn">登录</el-button>
+              <el-button type="primary" class="submit" @click="loginIn">注册</el-button>
             </div>
 
             <div class="login-select">
-                <p> - <a href="/account/login">登录</a> - <a href="/account/register">注册</a> - </p>
+                  <p> - <a href="/account/login">登录</a> - <a href="/account/register">注册</a> - </p>
             </div>
         </div>
 
         <el-dialog title="提示" v-model="dialog" size="tiny">
           <span>没有输入账号或者密码</span>
           <span slot="footer" class="dialog-footer">
-            <el-button type="primary" @click="dialog = false">确 定</el-button>
+            <el-button type="success" @click="dialog = false">确 定</el-button>
           </span>
         </el-dialog>
     </div>
 </template>
 <script>
-    import Vue from 'vue'
-    import VueResource from 'vue-resource'
-    import 'LIBCSS/cssreset.css'
-    import element from 'element-ui'
-    import 'LIBCSS/element.css'
-    Vue.use(element)
-    Vue.use(VueResource)
+  import Vue from 'vue'
+  import VueResource from 'vue-resource'
+  import 'LIBCSS/cssreset.css'
+  import element from 'element-ui'
+  import 'LIBCSS/element.css'
+  Vue.use(element)
+  Vue.use(VueResource)
     export default{
         data(){
             return{
@@ -66,17 +70,16 @@
     }
 </script>
 <style lang="scss">
-    #login{
+    #register{
         width:900px;
         margin:30px auto;
-        .login-main{
+        .register-main{
             width:100%;
             padding:20px;
             margin:0 auto;
             background-color:#F9FAFC;
             border:1px solid #eee;
             box-shadow:0 0 10px #D3DCE6;
-
         }
 
         h4{
@@ -86,6 +89,7 @@
             line-height:40px;
         }
         .description{
+
           line-height:30px;
           border-bottom:1px solid #e8e8e8;
           a{

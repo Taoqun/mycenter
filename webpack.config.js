@@ -4,10 +4,11 @@ var VUEMODULES = path.resolve(__dirname,'vue-modules')
 var LIBCSS = path.resolve(__dirname,'public/css')
 module.exports = {
     entry:{
-      index:"./src/index/index.js",
+      "login/index":'./src/account/login/index.js',
+      "register/index":'./src/account/register/index.js'
     },
     output:{
-        path: path.resolve(__dirname, './views/index/'),
+        path: path.resolve(__dirname, './views/account/'),
         filename:"[name].js",
     },
     resolveLoader: {
