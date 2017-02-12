@@ -49,15 +49,18 @@
         methods:{
             loginIn(){
                 if(this.account && this.password){
-                    this.$http.get('http://localhost:8081/login')
-                        .then((res)=>{
-                            console.log(res.body[0])
-                            let data = res.body[0]
-                            this.account =   data.account
-                            this.password = data.password
-                        },(res)=>{
-                            console.log(1)
-                        })
+                    this.$http({
+                      url:'http://localhost:8081/login',
+                      method:'GET',
+                      params:{aa:'22'},
+                    }).then((res)=>{
+                          console.log(res.body[0])
+                          let data = res.body[0]
+                          this.account =   data.account
+                          this.password = data.password
+                    },(res)=>{
+                          console.log(1)
+                    })
                 }else{
                     this.dialog = true
                 }

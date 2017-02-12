@@ -15,7 +15,7 @@
             </div>
             <div class="password">
                 <span><i class="el-icon-information" ></i>重复密码</span>
-                <el-input type="text" class="text" placeholder="密码" v-model="password"></el-input>
+                <el-input type="text" class="text" placeholder="密码" v-model="passwordAgain"></el-input>
             </div>
             <div class="submitwrap">
               <el-button type="primary" class="submit" @click="loginIn">注册</el-button>
@@ -47,21 +47,25 @@
             return{
                 account:'',
                 password:'',
+                passwordAgain:'',
                 dialog:false,
             }
         },
         methods:{
             loginIn(){
                 if(this.account && this.password){
-                    this.$http.get('http://localhost:8081/login')
-                        .then((res)=>{
+                    this.$http.post(
+                      'http://localhost:8081/account/sendRegister',
+                      {aa:'1122'},
+                      {emulateJSON:true}
+                    ).then((res)=>{
                             console.log(res.body[0])
                             let data = res.body[0]
-                            this.account =   data.account
-                            this.password = data.password
+                            this.account =  data.account || ''
+                            this.password = data.password || ''
                         },(res)=>{
                             console.log(1)
-                        })
+                    })
                 }else{
                     this.dialog = true
                 }

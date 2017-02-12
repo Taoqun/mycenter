@@ -1,6 +1,6 @@
 const express = require('express')
 // const mongoose = require('mongoose')
-const open = require('child_process')
+const child = require('child_process')
 
 // 运行
 var app = express()
@@ -13,11 +13,10 @@ app.use(express.static('views'))
 require('./router/routes.js').routers(app)
 
 var server = app.listen(8081, () => {
-    let host = server.address().address
-    let port = server.address().port
-    console.log(host)
-    console.log('应用实例 访问地址为 http://localhost:8081')
+  
+    console.log('自动打开 http://localhost:8081/')
 
-    // 自动打开浏览器 指定网址
-    // open.exec('start http://localhost:8081/index/')
+    // 自动打开默认浏览器 指定网址 window start || mac open
+    // child.exec('start http://localhost:8081/index/')
+    // child.exec('open http://localhost:8081/')
 })

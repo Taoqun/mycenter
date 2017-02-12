@@ -13,7 +13,7 @@ module.exports = {
     },
     resolveLoader: {
         root: path.join(__dirname, 'node_modules')
-   },
+    },
     module:{
         loaders:[
             {test:/\.css$/,loader:"style!css"},
@@ -22,7 +22,7 @@ module.exports = {
             {test:/\.(png|jpg|gif|jpeg)$/,loader:"url-loader?limit=8192"},
             {test:/\.vue$/,loader:"vue-loader"},
             {test:/\.js$/,loader:'babel-loader',exclude:/node_module/},
-            {test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,loader: 'file-loader'},
+            {test:/\.(eot|svg|ttf|woff)(\?\S*)?$/,loader: 'url-loader'},
         ]
     },
     vue:{
