@@ -19,15 +19,44 @@ var userInfo = mongoose.model('userlist',DB_type_userinfo)
 function run (){}
 
 run.prototype.find = (req,res)=>{
-    let obj = {account:'taoqun'}
+    let obj = {
+        account: req.query.account,
+        password: req.query.password
+    }
 
-    userInfo.find(obj, (err, result) => {
+    userInfo.find({account:obj.account}, (err, result) => {
+
         if (err) { return console.log(err)}
 
-        if(result){
-          res.json(result)
+        if( result && result.length === 1){
+            if(obj.password === result[0].password){
+                res.json({verify:true})
+            }else{
+                res.json({verify:false})
+            }
         }else{
-          res.json({})
+          res.json({verify:'没有查找到账户!'})
+        }
+    })
+}
+
+run.prototype.save = function(req,res){
+    let account = req.body.account
+    let password = req.body.password
+
+    userInfo.find({account:account},(err,result) => {
+        if(err){return console.log(err)}
+        if(result && result.length === 0){
+            let add = new userInfo({
+                account:account,
+                password:password,
+                date: Date.now()
+            })
+
+            add.save(function(err){})
+            res.json({register:'yes'})
+        }else{
+            res.json({register:'no'})
         }
     })
 }

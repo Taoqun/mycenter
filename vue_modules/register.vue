@@ -56,13 +56,13 @@
                 if(this.account && this.password){
                     this.$http.post(
                       'http://localhost:8081/account/sendRegister',
-                      {aa:'1122'},
+                      {
+                          account:this.account,
+                          password:this.password
+                      },
                       {emulateJSON:true}
                     ).then((res)=>{
-                            console.log(res.body[0])
-                            let data = res.body[0]
-                            this.account =  data.account || ''
-                            this.password = data.password || ''
+                            console.log(res.body)
                         },(res)=>{
                             console.log(1)
                     })

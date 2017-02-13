@@ -1,6 +1,10 @@
+let run = require('../dataController/loginController').run
+
 exports.login = function(req,res){
 
-  console.log(req.query)
-  let run = require('../dataController/loginController').run
       run.find(req,res)
+}
+
+exports.register = function(req,res){
+    run.save(req,res)
 }

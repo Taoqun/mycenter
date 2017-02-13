@@ -52,14 +52,14 @@
                     this.$http({
                       url:'http://localhost:8081/login',
                       method:'GET',
-                      params:{aa:'22'},
+                      params:{
+                          account:this.account,
+                          password:this.password
+                      },
                     }).then((res)=>{
-                          console.log(res.body[0])
-                          let data = res.body[0]
-                          this.account =   data.account
-                          this.password = data.password
+                          console.log(res.body)
                     },(res)=>{
-                          console.log(1)
+                          console.log('失败')
                     })
                 }else{
                     this.dialog = true
