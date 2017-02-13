@@ -30,12 +30,12 @@ run.prototype.find = (req,res)=>{
 
         if( result && result.length === 1){
             if(obj.password === result[0].password){
-                res.json({verify:true})
+                res.json({verify:true,account:true,password:true})
             }else{
-                res.json({verify:false})
+                res.json({verify:false,account:true,password:false})
             }
         }else{
-          res.json({verify:'没有查找到账户!'})
+          res.json({verify:false,account:false,password:false})
         }
     })
 }
@@ -43,13 +43,16 @@ run.prototype.find = (req,res)=>{
 run.prototype.save = function(req,res){
     let account = req.body.account
     let password = req.body.password
+    let name = req.body.name
 
     userInfo.find({account:account},(err,result) => {
         if(err){return console.log(err)}
+
         if(result && result.length === 0){
             let add = new userInfo({
                 account:account,
                 password:password,
+                name:name,
                 date: Date.now()
             })
 

@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import 'LIBCSS/cssreset.css'
 export default {
   props:{
     text:{
@@ -18,10 +19,13 @@ export default {
   data(){
     return {
       head_list:[
-        {name:'首页',url:'/account/login/'},
-        {name:'发现',url:'/account/login/'},
-        {name:'收藏',url:'/account/login/'},
-        {name:'关于',url:'/account/login/'}
+        {name:'首页',url:'/index/'},
+        {name:'任务中心',url:'/task/'},
+        {name:'发现',url:'/index'},
+        {name:'收藏',url:'/index'},
+        {name:'个人中心',url:'/index'},
+        {name:'设置',url:'/index'},
+        {name:'关于',url:'/index'},
       ]
     }
   }
@@ -34,13 +38,13 @@ export default {
     background-color:#324057;
     color:#20A0FF;
     h1{
-      width:900px;
+      width:1000px;
       margin:20px auto;
       font-size:20px;
       line-height:1.5;
     }
     .nav-list{
-      width:900px;
+      width:1000px;
       margin: 0 auto;
       font-size:0px;
       li{

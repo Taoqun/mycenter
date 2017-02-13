@@ -33,7 +33,6 @@
 <script>
     import Vue from 'vue'
     import VueResource from 'vue-resource'
-    import 'LIBCSS/cssreset.css'
     import element from 'element-ui'
     import 'LIBCSS/element.css'
     Vue.use(element)
@@ -70,7 +69,7 @@
 </script>
 <style lang="scss">
     #login{
-        width:900px;
+        width:1000px;
         margin:30px auto;
         .login-main{
             width:100%;

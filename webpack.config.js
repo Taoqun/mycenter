@@ -2,13 +2,16 @@ var path = require('path')
 var webpack = require('webpack')
 var VUEMODULES = path.resolve(__dirname,'vue_modules')
 var LIBCSS = path.resolve(__dirname,'public/css')
+var entryObj ={
+    "account/login/index":'./src/account/login/index.js',
+    "account/register/index":'./src/account/register/index.js',
+    "index/index":'./src/index/index.js',
+    "task/index":"./src/task/index.js",
+}
 module.exports = {
-    entry:{
-      "login/index":'./src/account/login/index.js',
-      "register/index":'./src/account/register/index.js'
-    },
+    entry:entryObj,
     output:{
-        path: path.resolve(__dirname, './views/account/'),
+        path: path.resolve(__dirname, './views/'),
         filename:"[name].js",
     },
     resolveLoader: {
