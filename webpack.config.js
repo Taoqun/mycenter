@@ -1,6 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
-var VUEMODULES = path.resolve(__dirname,'vue-modules')
+var VUEMODULES = path.resolve(__dirname,'vue_modules')
 var LIBCSS = path.resolve(__dirname,'public/css')
 module.exports = {
     entry:{
