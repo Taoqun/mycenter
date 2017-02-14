@@ -23,7 +23,7 @@
         </div>
 
         <el-dialog title="提示" v-model="dialog" size="tiny">
-          <span>没有输入账号或者密码</span>
+          <span>{{ dialog_text }}</span>
           <span slot="footer" class="dialog-footer">
             <el-button type="primary" @click="dialog = false">确 定</el-button>
           </span>
@@ -43,6 +43,7 @@
                 account:'',
                 password:'',
                 dialog:false,
+                dialog_text:'没有输入账号或者密码',
             }
         },
         methods:{
@@ -56,11 +57,25 @@
                           password:this.password
                       },
                     }).then((res)=>{
-                          console.log(res.body)
+                            let data = res.body
+                            if(data.verify){
+                                setTimeout(()=>{
+                                    location.href = location.protocol + '//'+location.hostname+':'+location.port+"/index"
+                                },1000)
+                            }else if( !data.verify && data.account ){
+                                this.dialog_text='密码错误！'
+                                this.dialog = true;
+                            }else if(!data.verify && !data.account ){
+                                this.dialog_text='账户不存在,若无账户，可<a href="/account/register/"> 注册 </a> !'
+                                this.dialog = true;
+                            }
                     },(res)=>{
-                          console.log('失败')
+                        this.dialog_text='登录失败！'
+                        this.dialog = true;
+                        console.log('失败')
                     })
                 }else{
+                    this.dialog_text='没有输入账号或者密码'
                     this.dialog = true
                 }
             }

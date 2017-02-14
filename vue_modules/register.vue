@@ -169,11 +169,14 @@
                     ).then((res)=>{
                             console.log(res.body)
                             let result = res.body
-                            if(result.register === 'yes'){
+                            if(result.register){
                               localStorage.account = this.account
                               localStorage.password = this.password
                               this.loading = true
-                            }else if(result.register === 'no'){
+                              setTimeout(()=>{
+                                  location.href = location.protocol + '//'+location.hostname+':'+location.port+"/index"
+                              },1000)
+                          }else if(!result.register){
                               this.alertText = '账号已存在，请更换后重试！'
                               this.dialog = true
                             }

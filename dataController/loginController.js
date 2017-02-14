@@ -55,11 +55,10 @@ run.prototype.save = function(req,res){
                 name:name,
                 date: Date.now()
             })
-
             add.save(function(err){})
-            res.json({register:'yes'})
+            res.json({register:true})
         }else{
-            res.json({register:'no'})
+            res.json({register:false})
         }
     })
 }
