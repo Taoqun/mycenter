@@ -159,7 +159,7 @@
                 }
                 if(this.account && this.password){
                     this.$http.post(
-                      'http://localhost:8081/account/sendRegister',
+                      'http://localhost:80/account/sendRegister',
                       {
                           account:this.account,
                           password:this.password,

@@ -1,7 +1,7 @@
 
 let Login = require('../controller/login.js')
-var bodyParser = require('body-parser');
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
+let bodyParser = require('body-parser');
+let urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 exports.routers = function(app){
     // get请求

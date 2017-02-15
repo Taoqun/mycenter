@@ -1,50 +1,33 @@
 <template lang="html">
     <div class="task-center">
-        <div class="list-group">
+        <div class="list-group" @click="chooseList">
             <h3 class="title">任务夹</h3>
-            <p class="list-name" data-id="123"><i class="icon el-icon-document"></i>菜单1</p>
-            <p class="list-name" data-id="123"><i class="icon el-icon-document"></i>菜单1</p>
-            <p class="list-name" data-id="123"><i class="icon el-icon-document"></i>菜单1</p>
-            <div class="list-ui-group">
-                <h6 class="group-name"><i class="icon el-icon-menu"></i>书单</h6>
-                <ul>
-                    <li class="list-name" data-id='123'><i class="icon el-icon-document"></i>菜单1</li>
-                    <li class="list-name active" data-id='123'><i class="icon el-icon-document"></i>菜单1</li>
-                    <li class="list-name" data-id='123'><i class="icon el-icon-document"></i>菜单1</li>
-                    <li class="list-name" data-id='123'><i class="icon el-icon-document"></i>菜单1</li>
-                </ul>
+            <div class="list-ui-group" v-for="item in list_ui_group">
+                <h6 class="group-name"><i class="icon iconfont  icon-file"></i>{{item.name}}</h6>
+                <p class="list-name" v-for="li in item.task_list" data-id="li.id"><i class="icon iconfont icon-post"></i>{{li.name}}</p>
             </div>
-            <p class="list-name" data-id="123"><i class="icon el-icon-document"></i>菜单1</p>
-            <p class="list-name" data-id="123"><i class="icon el-icon-document"></i>菜单1</p>
-            <p class="list-name" data-id="123"><i class="icon el-icon-document"></i>菜单1</p>
+            <p class="list-name"  v-for="item in list_group" :data-id="item.id"><i class="icon iconfont icon-edit"></i>{{item.name}}</p>
         </div>
 
         <div class="task-list">
             <h3 class="title">列表: 书单</h3>
             <div class="add-task">
-                <input type="input" name="name" placeholder='添加任务至"书单"' value="">
+                <input type="input" name="name" placeholder='添加任务至"书单"' v-model="add_task" @keyup.enter="addTask">
             </div>
             <div class="task-list-show task-list-no">
                 <h3 class="task-list-show-name"><i class="el-icon-arrow-down"></i>待完成</h3>
                 <ul>
-                    <li>111111</li>
-                    <li>111111</li>
-                    <li>111111</li>
-                    <li>111111</li>
+                    <li v-for="item in no_List"><input type="text" name="" v-model="item.name"></li>
                 </ul>
             </div>
             <div class="task-list-show task-list-off">
                 <h3 class="task-list-show-name"><i class="el-icon-arrow-down"></i>已完成</h3>
                 <ul>
-                    <li>222222</li>
-                    <li>222222</li>
-                    <li>222222</li>
-                    <li>222222</li>
-                    <li>222222</li>
+                    <li v-for="item in off_list"><input type="text" name="" v-model="item.name"></li>
                 </ul>
             </div>
         </div>
-        
+
         <div class="task-discription">
 
             <h3 class="title">任务描述</h3>
@@ -64,7 +47,132 @@
 
 <script>
     import "CSS/element.css"
+    import 'CSS/ali/iconfont.css'
     export default {
+        data(){
+            return{
+                list_group:[
+                    {name:"菜单",type:"list",id:123},
+                    {name:"菜单",type:"list",id:123},
+                    {name:"菜单",type:"list",id:123},
+                    {name:"菜单",type:"list",id:123},
+                ],
+                list_ui_group:[
+                    {
+                        name:"书单1",
+                        type:"group",
+                        name_id:123,
+                        task_list:[
+                            {name:"菜单",id:123},
+                            {name:"菜单",id:123},
+                            {name:"菜单",id:123},
+                            {name:"菜单",id:123},
+                        ]
+                    },
+                    {
+                        name:"书单2",
+                        type:"group",
+                        name_id:123,
+                        task_list:[
+                            {name:"菜单",id:123},
+                            {name:"菜单",id:123},
+                            {name:"菜单",id:123},
+                            {name:"菜单",id:123},
+                        ]
+                    }
+                ],
+                task_list:[
+                    {
+                        name:'2222',
+                        IsCompalte:false,
+                        id:123,
+                        discription:'aaaaaaaaaaa',
+                    },
+                    {
+                        name:'2222',
+                        IsCompalte:false,
+                        id:123,
+                        discription:'aaaaaaaaaaa',
+                    },
+                    {
+                        name:'2222',
+                        IsCompalte:false,
+                        id:123,
+                        discription:'aaaaaaaaaaa',
+                    },
+                    {
+                        name:'2222',
+                        IsCompalte:false,
+                        id:123,
+                        discription:'aaaaaaaaaaa',
+                    },
+                    {
+                        name:'2222',
+                        IsCompalte:true,
+                        id:123,
+                        discription:'aaaaaaaaaaa',
+                    }
+                ],
+                choose_list:'',
+                add_task:'',
+            }
+        },
+        computed:{
+            no_List(){
+                let list = []
+                this.task_list.map( (i)=>{
+                    if(!i.IsCompalte){
+                        list.push(i)
+                    }
+                } )
+                return list
+            },
+            off_list(){
+                let list = []
+                this.task_list.map( (i)=>{
+                    if(i.IsCompalte){
+                        list.push(i)
+                    }
+                } )
+                return list
+            },
+        },
+        methods:{
+            chooseList(event){
+                let the = event.target
+                let tagName = the.tagName.toLowerCase()
+                if(tagName === 'p' ){
+                    if(this.choose_list){
+                        this.choose_list.className = this.choose_list.className.replace('active','').trim()
+                    }
+                    this.choose_list = the
+                    this.choose_list.className += ' active'
+                }
+                if(tagName === 'h6'){
+                    let group = the.parentNode
+                    if( group.className.indexOf('close') != -1 ){
+                        group.style.height = group.dataset.height
+                        group.className = group.className.replace('close','').trim()
+                        return;
+                    }
+                    group.style.height = group.dataset.height = group.clientHeight + 'px'
+
+                    setTimeout(()=>{
+                        group.style.height="40px"
+                        group.className += ' close'
+                    },0)
+                }
+            },
+            addTask(event){
+                this.task_list.push({
+                    name:this.add_task,
+                    IsCompalte:false,
+                    id:'',
+                    discription:'',
+                })
+                this.add_task = ''
+            }
+        },
     }
 </script>
 
@@ -74,6 +182,7 @@
     }
     // 调整head样式
     .head{
+        display:none;
         padding:0;
         h1{
             margin-top:0;
@@ -81,14 +190,20 @@
             padding-top:10px;
         }
     }
-
-    .task-center{
+    html,body,#app,#app > div,.task-center{
         width:100%;
-        margin:10px auto 0;
+        height:100%;
+        overflow:hidden;
+        box-sizing:border-box;
+    }
+    .task-center{
+        margin:0 auto 0;
         display:flex;
         background-color:#EFF2F7;
+        align-items: stretch;
         & > div{
             flex-grow:1;
+            height:100%;
             box-sizing:border-box;
             padding-bottom:30px;
         }
@@ -107,14 +222,9 @@
         }
         .list-group{
             flex-grow:0;
-            width:300px;
+            width:250px;
             background-color:#313643;
             color:#fff;
-            ul{
-                overflow:hidden;
-                transition:all 0.4s ease-out 0s;
-            }
-
             .icon{
                 margin-right:10px;
                 display:inline-block;
@@ -127,6 +237,7 @@
                 white-space:nowrap;
                 cursor:pointer;
                 transition:all 0.2s linear 0s;
+                border-bottom:1px solid #1F2D3D;
                 &:hover{
                     background-color:#324057;
                 }
@@ -136,8 +247,11 @@
             }
             .list-ui-group{
                 border-bottom:1px solid #1F2D3D;
+                overflow:hidden;
+                transition:all 0.5s ease-in-out 0s;
                 .list-name{
                     padding-left:40px;
+                    border-bottom:0px solid #1F2D3D;
                 }
 
             }
@@ -166,6 +280,7 @@
                     font-size:14px;
                     line-height:40px;
                     padding:0 20px;
+                    margin:10px 0;
                     border-bottom:1px solid #D3DCE6;
                     border-top:1px solid #D3DCE6;
                     color:#475669;
@@ -174,12 +289,28 @@
                     }
                 }
                 li{
+                    height:40px;
                     margin:0 20px;
                     font-size:12px;
                     line-height:30px;
-                    padding:5px 20px;
                     box-sizing:border-box;
                     border-bottom:1px solid #EFF2F7;
+                    input{
+                        width:100%;
+                        height:100%;
+                        padding:0;
+                        margin:0;
+                        outline:0;
+                        border:none;
+                        padding:5px 20px;
+                        line-height:30px;
+                        font-size:13px;
+                        box-sizing:border-box;
+                        background-color:transparent;
+                    }
+                    &:hover{
+                        background-color:#EFF2F7;
+                    }
                 }
             }
         }

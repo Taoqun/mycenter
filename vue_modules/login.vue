@@ -50,7 +50,7 @@
             loginIn(){
                 if(this.account && this.password){
                     this.$http({
-                      url:'http://localhost:8081/login',
+                      url:'http://localhost:80/login',
                       method:'GET',
                       params:{
                           account:this.account,

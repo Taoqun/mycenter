@@ -19,20 +19,21 @@ var userInfo = mongoose.model('userlist',DB_type_userinfo)
 function run (){}
 
 run.prototype.find = (req,res)=>{
+    res.header('Access-Control-Allow-Origin', '*')
     let obj = {
         account: req.query.account,
         password: req.query.password
     }
     if(!obj.account || !obj.password){
-        res.json({tips:'麻烦不要传空值！'})
+        res.json({code:0,tips:'麻烦不要传空值！'})
         return
     }
     if( !/.+@.+\..+/.test(obj.account) ){
-        res.json({tips:'邮箱不符合规则'})
+        res.json({code:2,tips:'邮箱不符合规则'})
         return
     }
     if( obj.password.length < 6 ){
-        res.json({tips:'密码太短不符合规则'})
+        res.json({code:3,tips:'密码太短不符合规则'})
         return
     }
     userInfo.find({account:obj.account}, (err, result) => {
@@ -41,12 +42,16 @@ run.prototype.find = (req,res)=>{
 
         if( result && result.length === 1){
             if(obj.password === result[0].password){
-                res.json({verify:true,account:true,password:true})
+                let str = req.cookies
+                let hstr = req.headers.cookie
+                res.cookie('sessions_id',"12345")
+                res.json({code:1,verify:true,account:true,password:true})
+                res.end()
             }else{
-                res.json({verify:false,account:true,password:false})
+                res.json({code:0,verify:false,account:true,password:false})
             }
         }else{
-          res.json({verify:false,account:false,password:false})
+          res.json({code:0,verify:false,account:false,password:false})
         }
     })
 }
@@ -67,6 +72,7 @@ run.prototype.save = function(req,res){
                 date: Date.now()
             })
             add.save(function(err){})
+
             res.json({register:true})
         }else{
             res.json({register:false})
