@@ -32,11 +32,10 @@
 </template>
 <script>
     import Vue from 'vue'
-    import VueResource from 'vue-resource'
     import element from 'element-ui'
     import 'CSS/element.css'
+    import {ajax} from 'JS/ajax.js'
     Vue.use(element)
-    Vue.use(VueResource)
     export default{
         data(){
             return{
@@ -49,10 +48,10 @@
         methods:{
             loginIn(){
                 if(this.account && this.password){
-                    this.$http({
-                      url:'http://localhost:80/login',
+                    ajax({
+                      url:'/login',
                       method:'GET',
-                      params:{
+                      data:{
                           account:this.account,
                           password:this.password
                       },

@@ -69,11 +69,10 @@
 </template>
 <script>
   import Vue from 'vue'
-  import VueResource from 'vue-resource'
   import element from 'element-ui'
+  import {ajax} from 'JS/ajax.js'
   import 'CSS/element.css'
   Vue.use(element)
-  Vue.use(VueResource)
     export default{
         data(){
             return{
@@ -158,15 +157,13 @@
                   return
                 }
                 if(this.account && this.password){
-                    this.$http.post(
-                      'http://localhost:80/account/sendRegister',
-                      {
-                          account:this.account,
+                    ajax({
+                      url:'/account/sendRegister',
+                      method:'post',
+                      data:{account:this.account,
                           password:this.password,
-                          name:this.name,
-                      },
-                      {emulateJSON:true}
-                    ).then((res)=>{
+                          name:this.name}
+                  }).then((res)=>{
                             console.log(res.body)
                             let result = res.body
                             if(result.register){

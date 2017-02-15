@@ -44,9 +44,7 @@ run.prototype.find = (req,res)=>{
             if(obj.password === result[0].password){
                 let str = req.cookies
                 let hstr = req.headers.cookie
-                res.cookie('sessions_id',"12345")
                 res.json({code:1,verify:true,account:true,password:true})
-                res.end()
             }else{
                 res.json({code:0,verify:false,account:true,password:false})
             }
