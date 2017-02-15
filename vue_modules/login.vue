@@ -34,7 +34,7 @@
     import Vue from 'vue'
     import VueResource from 'vue-resource'
     import element from 'element-ui'
-    import 'LIBCSS/element.css'
+    import 'CSS/element.css'
     Vue.use(element)
     Vue.use(VueResource)
     export default{

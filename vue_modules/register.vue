@@ -71,7 +71,7 @@
   import Vue from 'vue'
   import VueResource from 'vue-resource'
   import element from 'element-ui'
-  import 'LIBCSS/element.css'
+  import 'CSS/element.css'
   Vue.use(element)
   Vue.use(VueResource)
     export default{
@@ -181,7 +181,8 @@
                               this.dialog = true
                             }
                         },(res)=>{
-                            console.log(1)
+                            this.alertText = '注册失败，未知错误！'
+                            this.dialog = true
                     })
                 }
             }

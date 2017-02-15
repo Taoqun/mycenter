@@ -1,7 +1,8 @@
 var path = require('path')
 var webpack = require('webpack')
 var VUEMODULES = path.resolve(__dirname,'vue_modules')
-var LIBCSS = path.resolve(__dirname,'public/css')
+var CSS = path.resolve(__dirname,'public/css')
+var JS = path.resolve(__dirname,'public/js')
 var entryObj ={
     "account/login/index":'./src/account/login/index.js',
     "account/register/index":'./src/account/register/index.js',
@@ -43,7 +44,8 @@ module.exports = {
       alias: {
         'vue$': 'vue/dist/vue.js',
         VUEMODULES:VUEMODULES,
-        LIBCSS:LIBCSS
+        CSS:CSS,
+        JS:JS,
       }
     },
     devServer:{

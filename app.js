@@ -12,11 +12,17 @@ app.use(express.static('views'))
 
 require('./router/routes.js').routers(app)
 
-var server = app.listen(8081, () => {
+var server = app.listen(80, () => {
   
-    console.log('自动打开 http://localhost:8081/')
+    // 端口号80 默认为本地ip打开  可以更改host 域名 这样可以直接访问
+    
+    console.log('自动打开 taoqun.com')
 
     // 自动打开默认浏览器 指定网址 window start || mac open
-    // child.exec('start http://localhost:8081/index/')
-    // child.exec('open http://localhost:8081/')
+    try{
+        child.exec('open  http://taoqun.com/')
+        child.exec('start http://taoqun.com/')
+    }catch(err){
+
+    }
 })

@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import 'LIBCSS/cssreset.css'
+import 'CSS/cssreset.css'
 export default {
   props:{
     text:{

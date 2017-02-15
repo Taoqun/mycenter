@@ -23,7 +23,18 @@ run.prototype.find = (req,res)=>{
         account: req.query.account,
         password: req.query.password
     }
-
+    if(!obj.account || !obj.password){
+        res.json({tips:'麻烦不要传空值！'})
+        return
+    }
+    if( !/.+@.+\..+/.test(obj.account) ){
+        res.json({tips:'邮箱不符合规则'})
+        return
+    }
+    if( obj.password.length < 6 ){
+        res.json({tips:'密码太短不符合规则'})
+        return
+    }
     userInfo.find({account:obj.account}, (err, result) => {
 
         if (err) { return console.log(err)}

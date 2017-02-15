@@ -1,6 +1,5 @@
 <template lang="html">
     <div class="task-center">
-
         <div class="list-group">
             <h3 class="title">任务夹</h3>
             <p class="list-name" data-id="123"><i class="icon el-icon-document"></i>菜单1</p>
@@ -45,6 +44,7 @@
                 </ul>
             </div>
         </div>
+        
         <div class="task-discription">
 
             <h3 class="title">任务描述</h3>
@@ -63,7 +63,7 @@
 </template>
 
 <script>
-    import "LIBCSS/element.css"
+    import "CSS/element.css"
     export default {
     }
 </script>
