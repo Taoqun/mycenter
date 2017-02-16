@@ -19,7 +19,6 @@ var userInfo = mongoose.model('userlist',DB_type_userinfo)
 function run (){}
 
 run.prototype.find = (req,res)=>{
-    res.header('Access-Control-Allow-Origin', '*')
     let obj = {
         account: req.query.account,
         password: req.query.password

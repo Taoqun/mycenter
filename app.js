@@ -2,7 +2,7 @@ const express = require('express')
 // const mongoose = require('mongoose')
 const child = require('child_process')
 const cookieParser = require('cookie-parser')
-
+const obj = require('./config.js').obj
 // 运行
 const app = express()
 app.use(cookieParser())
@@ -13,15 +13,15 @@ app.use(express.static('views'))
 
 require('./router/routes.js').routers(app)
 
-const server = app.listen(80, () => {
+
+
+const server = app.listen( obj.port , () => {
 
     // 端口号80 默认为本地ip打开  可以更改host 域名 这样可以直接访问
-     console.log('可以设置监听80端口，配置host域名，即可访问!')
-     console.log('已创建服务器，监听端口8081  http://localhost:80/index')
+     console.log('tips:可以设置监听80端口，配置host域名，即可访问!')
+     console.log('已创建服务器，监听端口'+ obj.port + '    ' + obj.hostname +':'+obj.port )
 
     // 自动打开默认浏览器 指定网址 window start || mac open
     // child.exec('open  http://taoqun.com/')
     // child.exec('start http://taoqun.com/')
-    //
-    // }
 })

@@ -1,12 +1,19 @@
 <template lang="html">
     <div class="task-center">
         <div class="list-group" @click="chooseList">
+            <div class="user-info">
+                <div class="img" @click.stop="showDropList">
+                    <img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=950162565,3259577602&fm=21&gp=0.jpg" alt="" width=50 height=50>
+                </div>
+                <p class="name" @click.stop="showDropList">taoqun</p>
+                <s-drop-menu :list="drop_list" :show="drop_list_show"></s-drop-menu>
+            </div>
             <h3 class="title">任务夹</h3>
             <div class="list-ui-group" v-for="item in list_ui_group">
                 <h6 class="group-name"><i class="icon iconfont  icon-file"></i>{{item.name}}</h6>
-                <p class="list-name" v-for="li in item.task_list" data-id="li.id"><i class="icon iconfont icon-post"></i>{{li.name}}</p>
+                <p class="list-name" v-for="li in item.task_list" data-id="li.id"><i class="icon iconfont icon-form_light"></i>{{li.name}}</p>
             </div>
-            <p class="list-name"  v-for="item in list_group" :data-id="item.id"><i class="icon iconfont icon-edit"></i>{{item.name}}</p>
+            <p class="list-name"  v-for="item in list_group" :data-id="item.id"><i class="icon iconfont icon-form_light"></i>{{item.name}}</p>
         </div>
 
         <div class="task-list">
@@ -48,9 +55,20 @@
 <script>
     import "CSS/element.css"
     import 'CSS/ali/iconfont.css'
+    import dropMenu from 'VUEMODULES/common/drop-down'
     export default {
+        components:{
+            "s-drop-menu":dropMenu
+        },
         data(){
             return{
+                drop_list:[
+                    {name:'同步',event:this.test},
+                    {name:'设置',event:this.test},
+                    {name:'首页',event:this.test},
+                    {name:'退出',event:this.test},
+                ],
+                drop_list_show:false,
                 list_group:[
                     {name:"菜单",type:"list",id:123},
                     {name:"菜单",type:"list",id:123},
@@ -141,14 +159,15 @@
             chooseList(event){
                 let the = event.target
                 let tagName = the.tagName.toLowerCase()
-                if(tagName === 'p' ){
+                let clsName = the.className
+                if(tagName === 'p' && clsName.indexOf('list-name') != -1 ){
                     if(this.choose_list){
                         this.choose_list.className = this.choose_list.className.replace('active','').trim()
                     }
                     this.choose_list = the
                     this.choose_list.className += ' active'
                 }
-                if(tagName === 'h6'){
+                if(tagName === 'h6' && clsName.indexOf('group-name') != -1 ){
                     let group = the.parentNode
                     if( group.className.indexOf('close') != -1 ){
                         group.style.height = group.dataset.height
@@ -171,8 +190,19 @@
                     discription:'',
                 })
                 this.add_task = ''
+            },
+            test(){
+                console.log(1)
+            },
+            showDropList(){
+                this.drop_list_show = !this.drop_list_show
             }
         },
+        mounted(){
+            document.addEventListener('click',()=>{
+                this.drop_list_show = false
+            })
+        }
     }
 </script>
 
@@ -214,11 +244,13 @@
             text-indent:20px;
             transition:all 0.2s linear 0s;
             color:#fff;
-            border-right:1px solid #333;
             box-sizing:border-box;
             &:hover{
                 background-color:#475669;
             }
+        }
+        .list-group,.task-list,.list-discription{
+            overflow:hidden;
         }
         .list-group{
             flex-grow:0;
@@ -229,6 +261,35 @@
                 margin-right:10px;
                 display:inline-block;
             }
+            .user-info{
+                position:relative;
+                .img{
+                    display:inline-block;
+                    vertical-align:middle;
+                    width:50px;
+                    height:50px;
+                    font-size:0px;
+                    overflow:hidden;
+                    cursor:pointer;
+                    img{
+                        width:100%;
+                        height:100%;
+                    }
+                }
+                .name{
+                    display:inline-block;
+                    vertical-align: middle;
+                    height:50px;
+                    line-height:50px;
+                    overflow:hidden;
+                    text-overflow:ellipsis;
+                    white-space: nowrap;
+                    letter-spacing: 1px;
+                    padding-left:10px;
+                    font-size:16px;
+                    cursor:pointer;
+                }
+            }
             .group-name,.list-name{
                 line-height:20px;
                 padding:10px 20px;
@@ -238,8 +299,10 @@
                 cursor:pointer;
                 transition:all 0.2s linear 0s;
                 border-bottom:1px solid #1F2D3D;
+                color:#ccc;
                 &:hover{
                     background-color:#324057;
+                    color:#fff;
                 }
             }
             .active{
@@ -343,6 +406,17 @@
                     box-sizing:border-box;
                 }
             }
+        }
+    }
+
+    @media screen and (max-width:900px){
+        #app .task-center .task-discription{
+            display:none;
+        }
+    }
+    @media screen and (max-width:600px){
+        #app .task-center .list-group{
+            display:none;
         }
     }
 </style>

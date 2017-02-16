@@ -5,6 +5,10 @@ let urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 exports.routers = function(app){
     // get请求
+    app.all('*',(req,res,next)=>{
+        res.header('Access-Control-Allow-Origin', '*')
+        next()
+    })
     app.get('/', (req, res) => {
         res.redirect('/account/login')
     })

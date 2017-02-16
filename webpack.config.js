@@ -3,6 +3,7 @@ var webpack = require('webpack')
 var VUEMODULES = path.resolve(__dirname,'vue_modules')
 var CSS = path.resolve(__dirname,'public/css')
 var JS = path.resolve(__dirname,'public/js')
+var ROOT = path.resolve(__dirname)
 var entryObj ={
     "account/login/index":'./src/account/login/index.js',
     "account/register/index":'./src/account/register/index.js',
@@ -46,6 +47,7 @@ module.exports = {
         VUEMODULES:VUEMODULES,
         CSS:CSS,
         JS:JS,
+        ROOT:ROOT,
       }
     },
     devServer:{
