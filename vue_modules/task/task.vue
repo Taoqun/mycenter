@@ -9,11 +9,14 @@
                 <s-drop-menu :list="drop_list" :show="drop_list_show"></s-drop-menu>
             </div>
             <h3 class="title">任务夹</h3>
+            <p class="list-name"><i class="icon iconfont icon-form_light"></i>所有任务</p>
+            <p class="list-name"><i class="icon el-icon-date"></i>日历</p>
+            <p class="list-name"><i class="icon iconfont icon-punch_light"></i>收集箱</p>
             <div class="list-ui-group" v-for="item in list_ui_group">
                 <h6 class="group-name"><i class="icon iconfont  icon-file"></i>{{item.name}}</h6>
-                <p class="list-name" v-for="li in item.task_list" data-id="li.id"><i class="icon iconfont icon-form_light"></i>{{li.name}}</p>
+                <p class="list-name" v-for="li in item.task_list" data-id="li.id"><i class="icon iconfont icon-sortlight"></i>{{li.name}}</p>
             </div>
-            <p class="list-name"  v-for="item in list_group" :data-id="item.id"><i class="icon iconfont icon-form_light"></i>{{item.name}}</p>
+            <p class="list-name"  v-for="item in list_group" :data-id="item.id"><i class="icon iconfont icon-sortlight"></i>{{item.name}}</p>
         </div>
 
         <div class="task-list">
@@ -22,29 +25,29 @@
                 <input type="input" name="name" placeholder='添加任务至"书单"' v-model="add_task" @keyup.enter="addTask">
             </div>
             <div class="task-list-show task-list-no">
-                <h3 class="task-list-show-name"><i class="el-icon-arrow-down"></i>待完成</h3>
+                <h3 class="task-list-show-name" @click="closeTaskList"><i class="el-icon-arrow-down"></i>待完成</h3>
                 <ul>
-                    <li v-for="item in no_List"><input type="text" name="" v-model="item.name"></li>
+                    <li v-for="item in no_List"><input type="text" name="" @click.stop="setdis(item)" v-model="item.name"></li>
                 </ul>
             </div>
             <div class="task-list-show task-list-off">
-                <h3 class="task-list-show-name"><i class="el-icon-arrow-down"></i>已完成</h3>
+                <h3 class="task-list-show-name" @click="closeTaskList"><i class="el-icon-arrow-down"></i>已完成</h3>
                 <ul>
-                    <li v-for="item in off_list"><input type="text" name="" v-model="item.name"></li>
+                    <li v-for="item in off_list"><input type="text" name="" @click.stop="setdis(item)" v-model="item.name"></li>
                 </ul>
             </div>
         </div>
 
-        <div class="task-discription">
+        <div class="task-discription" @click.stop="stopEvent">
 
             <h3 class="title">任务描述</h3>
 
             <div class="task-li-name">
-                <input type="text" value="" placeholder="任务名称">
+                <input type="text" value="" placeholder="任务名称" v-model="task_dis.name">
             </div>
 
             <div class="task-li-discription">
-                <textarea placeholder="任务描述"></textarea>
+                <textarea placeholder="任务描述" v-model="task_dis.dis"></textarea>
             </div>
 
         </div>
@@ -56,6 +59,7 @@
     import "CSS/element.css"
     import 'CSS/ali/iconfont.css'
     import dropMenu from 'VUEMODULES/common/drop-down'
+    import {ajax} from 'JS/ajax.js'
     export default {
         components:{
             "s-drop-menu":dropMenu
@@ -63,13 +67,16 @@
         data(){
             return{
                 drop_list:[
-                    {name:'同步',event:this.test},
-                    {name:'设置',event:this.test},
-                    {name:'首页',event:this.test},
-                    {name:'退出',event:this.test},
+                    {name:'同步',event:this.stopEvent},
+                    {name:'设置',event:this.stopEvent},
+                    {name:'首页',event:this.stopEvent},
+                    {name:'退出',event:this.stopEvent},
                 ],
                 drop_list_show:false,
                 list_group:[
+                    {name:"菜单",type:"list",id:123},
+                    {name:"菜单",type:"list",id:123},
+                    {name:"菜单",type:"list",id:123},
                     {name:"菜单",type:"list",id:123},
                     {name:"菜单",type:"list",id:123},
                     {name:"菜单",type:"list",id:123},
@@ -88,7 +95,7 @@
                         ]
                     },
                     {
-                        name:"书单2",
+                        name:"书单1",
                         type:"group",
                         name_id:123,
                         task_list:[
@@ -97,42 +104,74 @@
                             {name:"菜单",id:123},
                             {name:"菜单",id:123},
                         ]
-                    }
+                    },
+                    {
+                        name:"书单1",
+                        type:"group",
+                        name_id:123,
+                        task_list:[
+                            {name:"菜单",id:123},
+                            {name:"菜单",id:123},
+                            {name:"菜单",id:123},
+                            {name:"菜单",id:123},
+                        ]
+                    },
+                    {
+                        name:"书单1",
+                        type:"group",
+                        name_id:123,
+                        task_list:[
+                            {name:"菜单",id:123},
+                            {name:"菜单",id:123},
+                            {name:"菜单",id:123},
+                            {name:"菜单",id:123},
+                        ]
+                    },
                 ],
                 task_list:[
                     {
-                        name:'2222',
-                        IsCompalte:false,
-                        id:123,
-                        discription:'aaaaaaaaaaa',
-                    },
-                    {
-                        name:'2222',
-                        IsCompalte:false,
-                        id:123,
-                        discription:'aaaaaaaaaaa',
-                    },
-                    {
-                        name:'2222',
-                        IsCompalte:false,
-                        id:123,
-                        discription:'aaaaaaaaaaa',
-                    },
-                    {
-                        name:'2222',
-                        IsCompalte:false,
-                        id:123,
-                        discription:'aaaaaaaaaaa',
-                    },
-                    {
-                        name:'2222',
+                        name:'已完成的任务会在这里显示',
                         IsCompalte:true,
                         id:123,
-                        discription:'aaaaaaaaaaa',
-                    }
+                        dis:'已完成的任务会在这里显示',
+                    },
+                    {
+                        name:'取消勾选，可回退至待完成',
+                        IsCompalte:true,
+                        id:123,
+                        dis:'取消勾选，可回退至待完成',
+                    },
+                    {
+                        name:'是不是很赞',
+                        IsCompalte:true,
+                        id:123,
+                        dis:'是不是很赞',
+                    },
+                    {
+                        name:'回车添加任务',
+                        IsCompalte:false,
+                        id:123,
+                        dis:'回车添加任务',
+                    },
+                    {
+                        name:'点击查看任务详情',
+                        IsCompalte:false,
+                        id:123,
+                        dis:'点击查看任务详情',
+                    },
+                    {
+                        name:'勾选完成任务',
+                        IsCompalte:false,
+                        id:123,
+                        dis:'勾选完成任务',
+                    },
                 ],
                 choose_list:'',
                 add_task:'',
+                task_dis:{
+                    name:'',
+                    dis:'',
+                },
             }
         },
         computed:{
@@ -142,7 +181,8 @@
                     if(!i.IsCompalte){
                         list.push(i)
                     }
-                } )
+                })
+
                 return list
             },
             off_list(){
@@ -183,24 +223,77 @@
                 }
             },
             addTask(event){
-                this.task_list.push({
-                    name:this.add_task,
-                    IsCompalte:false,
-                    id:'',
-                    discription:'',
-                })
+                if(this.add_task){
+                    this.task_list.push({
+                        name:this.add_task,
+                        IsCompalte:false,
+                        id:'',
+                        discription:'',
+                        date:Date.now()
+                    })
+                    let ui = document.querySelector('.task-list-no ul')
+                        ui.style.height = 'auto'
+                        ui.dataset.show = 'true'
+                    let i = document.querySelector('.task-list-no h3 i')
+                        i.className = 'el-icon-arrow-down'
+                }
                 this.add_task = ''
             },
-            test(){
+            closeTaskList(event){
+                let the = event.target
+                let tagName = the.tagName.toLowerCase()
+                let clsname = the.className
+                if( tagName === 'h3' && clsname.indexOf('task-list-show-name') != -1 ){
+                    let ui = the.nextElementSibling
+                    if( ui.dataset.show === 'false'  ){
+                        ui.style.height = ui.dataset.height
+                        setTimeout(()=>{
+                            the.querySelector('i').className = 'el-icon-arrow-down'
+                        },500)
+                        ui.dataset.show = 'true'
+                        return
+                    }
+                    ui.style.height = ui.dataset.height = ui.clientHeight + 'px'
+                    setTimeout(()=>{
+                        ui.style.height = '0px'
+                        setTimeout(()=>{
+                            the.querySelector('i').className = 'el-icon-arrow-right'
+                        },500)
+                        ui.dataset.show = 'false'
+                    },0)
+                }
+            },
+            stopEvent(){
                 console.log(1)
             },
             showDropList(){
                 this.drop_list_show = !this.drop_list_show
+            },
+            setdis(item){
+                this.task_dis = item
             }
         },
         mounted(){
             document.addEventListener('click',()=>{
                 this.drop_list_show = false
+                this.task_dis = {}
+            })
+
+            ajax({
+                url:"/task/create",
+                method:"post",
+                data:{
+                    name:'taoqun',
+                    dis:'',
+                    task_list:'hahaha',
+                    task_id:Date.now().toString(),
+                    IsCompalte:false,
+                    create_date:Date.now()
+                },
+            }).then((res)=>{
+                console.log(res)
+            },(res)=>{
+                console.log(res)
             })
         }
     }
@@ -235,7 +328,6 @@
             flex-grow:1;
             height:100%;
             box-sizing:border-box;
-            padding-bottom:30px;
         }
         .title{
             line-height:20px;
@@ -255,14 +347,25 @@
         .list-group{
             flex-grow:0;
             width:250px;
+            overflow-y: auto;
+            margin-right:-17px;
             background-color:#313643;
             color:#fff;
+            .title{
+                font-size:15px;
+                color:#ccc;
+            }
+            .title:hover{
+                color:#fff;
+            }
             .icon{
                 margin-right:10px;
                 display:inline-block;
             }
             .user-info{
                 position:relative;
+                padding:10px;
+                box-sizing: border-box;
                 .img{
                     display:inline-block;
                     vertical-align:middle;
@@ -271,6 +374,7 @@
                     font-size:0px;
                     overflow:hidden;
                     cursor:pointer;
+                    border-radius:50%;
                     img{
                         width:100%;
                         height:100%;
@@ -292,7 +396,7 @@
             }
             .group-name,.list-name{
                 line-height:20px;
-                padding:10px 20px;
+                padding:10px 15px;
                 overflow:hidden;
                 text-overflow:ellipsis;
                 white-space:nowrap;
@@ -300,6 +404,7 @@
                 transition:all 0.2s linear 0s;
                 border-bottom:1px solid #1F2D3D;
                 color:#ccc;
+                font-size:15px;
                 &:hover{
                     background-color:#324057;
                     color:#fff;
@@ -344,12 +449,18 @@
                     line-height:40px;
                     padding:0 20px;
                     margin:10px 0;
-                    border-bottom:1px solid #D3DCE6;
                     border-top:1px solid #D3DCE6;
                     color:#475669;
+                    cursor:pointer;
                     i{
                         margin-right:5px;
                     }
+                }
+                ul{
+                    transition:all 0.5s ease-in-out 0s;
+                    border-bottom:1px solid #D3DCE6;
+                    box-sizing:border-box;
+                    overflow:hidden;
                 }
                 li{
                     height:40px;
@@ -370,6 +481,7 @@
                         font-size:13px;
                         box-sizing:border-box;
                         background-color:transparent;
+                        cursor:pointer;
                     }
                     &:hover{
                         background-color:#EFF2F7;
@@ -380,8 +492,10 @@
         .task-discription{
             display:flex;
             flex-direction:column;
+
             .task-li-name{
-                margin:10px 20px;
+                border-left:1px solid #D3DCE6;
+                border-bottom:1px solid #D3DCE6;
                 input{
                     width:100%;
                     height:50px;
@@ -392,7 +506,7 @@
                 }
             }
             .task-li-discription{
-                margin:10px 20px 0;
+                border-left:1px solid #D3DCE6;
                 flex-grow:1;
                 display:flex;
                 flex-direction: column;

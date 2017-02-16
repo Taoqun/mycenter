@@ -41,8 +41,7 @@ run.prototype.find = (req,res)=>{
 
         if( result && result.length === 1){
             if(obj.password === result[0].password){
-                let str = req.cookies
-                let hstr = req.headers.cookie
+                res.cookie( session_id,Date.now() )
                 res.json({code:1,verify:true,account:true,password:true})
             }else{
                 res.json({code:0,verify:false,account:true,password:false})
@@ -68,9 +67,12 @@ run.prototype.save = function(req,res){
                 name:name,
                 date: Date.now()
             })
-            add.save(function(err){})
-
-            res.json({register:true})
+            add.save(function(err){
+                if(err){
+                    return res.json({register:false})
+                }
+                res.json({register:true})
+            })
         }else{
             res.json({register:false})
         }
