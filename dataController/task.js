@@ -26,7 +26,7 @@ run.prototype.create = function(req,res){
     let task = new taskList({
         name:obj.name,
         task_id:obj.task_id,
-        task_list:obj.task_list,
+        task_list_id:obj.task_list,
         dis:obj.dis,
         IsCompalte:obj.IsCompalte,
         create_date:obj.create_date,

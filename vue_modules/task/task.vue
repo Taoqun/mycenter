@@ -279,22 +279,22 @@
                 this.task_dis = {}
             })
 
-            ajax({
-                url:"/task/create",
-                method:"post",
-                data:{
-                    name:'taoqun',
-                    dis:'',
-                    task_list:'hahaha',
-                    task_id:Date.now().toString(),
-                    IsCompalte:false,
-                    create_date:Date.now()
-                },
-            }).then((res)=>{
-                console.log(res)
-            },(res)=>{
-                console.log(res)
-            })
+            // ajax({
+            //     url:"/task/create",
+            //     method:"post",
+            //     data:{
+            //         name:'taoqun',
+            //         dis:'',
+            //         task_list_id:'hahaha',
+            //         task_id:Date.now().toString(),
+            //         IsCompalte:false,
+            //         create_date:Date.now()
+            //     },
+            // }).then((res)=>{
+            //     console.log(res)
+            // },(res)=>{
+            //     console.log(res)
+            // })
         }
     }
 </script>
