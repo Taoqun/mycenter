@@ -14,25 +14,8 @@
             <p class="list-menu"><i class="icon iconfont icon-punch_light"></i>收集箱</p>
             <p class="list-menu" @click="chooceAddType"><i class="icon iconfont icon-add"></i>新建</p>
 
-            <div class="list-ui-group" v-for="item in list_ui_group">
-                <h6 class="group-name"><i class="icon iconfont  icon-file"></i>{{item.name}}
-                    <i class="more iconfont icon-more" @click.stop="showMore(item)"></i>
-                    <s-drop-menu :list="groupMore" :obj="item" :show="item.moreMenu"></s-drop-menu>
-                </h6>
-                <div class="ui_group_list_group">
-                    <p class="list-name" v-for="li in item.task_list" data-id="li.id">
-                        <i class="icon iconfont icon-sortlight"></i>{{li.name}}
-                        <i class="more iconfont icon-more" @click.stop="showMore(li)"></i>
-                        <s-drop-menu :list="listMore" :obj="li" :show="li.moreMenu"></s-drop-menu>
-                    </p>
-                    <p v-show="!item.task_list.length" class="no_list">暂无清单</p>
-                </div>
-            </div>
-            <p class="list-name"  v-for="item in list_group" :data-id="item.id">
-                <i class="icon iconfont icon-sortlight"></i>{{item.name}}
-                <i class="more iconfont icon-more" @click.stop="showMore(item)"></i>
-                <s-drop-menu :list="listMore" :obj="item" :show="item.moreMenu"></s-drop-menu>
-            </p>
+            <s-list-group :list="list_ui_group" :groupmore="groupMore" :listmore="listMore"></s-list-group>
+            <s-list-name  :list="list_group" :listmore="listMore"></s-list-name>
         </div>
 
         <div class="task-list">
@@ -109,10 +92,14 @@
     import dropMenu from 'VUEMODULES/common/drop-down'
     import {ajax} from 'JS/ajax.js'
     import { MessageBox } from 'element-ui';
+    import s_list_name from './list-name.vue'
+    import s_list_group from './list-group.vue'
     Vue.use(ElementUI)
     export default {
         components:{
-            "s-drop-menu":dropMenu
+            "s-drop-menu":dropMenu,
+            's-list-name':s_list_name,
+            's-list-group':s_list_group,
         },
         data(){
             return{
@@ -285,20 +272,52 @@
                 }
                 this.add_task = ''
             },
-            updateList(item){
-                 this.$prompt('请输入新名称','修改',{
-                     confirmButtonText: '确定',
-                     cancelButtonText: '取消',
-                 }).then(({value})=>{
-                     item.name = value
-                 })
-            },
-            updateGroup(item){
-                this.$prompt('请输入新名称','修改',{
+            updateList(item,list){
+                this.$prompt('请输入新名称',item.name,{
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
                 }).then(({value})=>{
-                    item.name = value
+                    if(value){
+                        let check = true
+                        list.map((i)=>{
+                            if( i.name == value){
+                                check = false
+                            }
+                        })
+                        if(check){
+                            item.name = value
+                        }else{
+                            this.$message({
+                                message:'清单名称已存在!',
+                                type:'error'
+                            })
+                        }
+                    }
+                })
+            },
+            updateGroup(item,list){
+                this.$prompt('请输入新名称',item.name,{
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                }).then(({value})=>{
+                    if(value){
+                        console.log(value)
+                        console.log(list)
+                        let check = true
+                        list.map((i)=>{
+                            if( i.name == value){
+                                check = false
+                            }
+                        })
+                        if(check){
+                            item.name = value
+                        }else{
+                            this.$message({
+                                message:'清单名称已存在!',
+                                type:'error'
+                            })
+                        }
+                    }
                 })
             },
             delTask(item){
@@ -435,19 +454,6 @@
             },
             setdis(item){
                 this.task_dis = item
-            },
-            showMore(item){
-                let show = item.moreMenu
-                this.list_ui_group.map((i)=>{
-                    i.moreMenu = false
-                    i.task_list.map((j)=>{
-                        j.moreMenu = false
-                    })
-                })
-                this.list_group.map((i)=>{
-                    i.moreMenu = false
-                })
-                item.moreMenu = !show;
             },
         },
         mounted(){
@@ -593,7 +599,7 @@
                     cursor:pointer;
                 }
             }
-            .group-name,.list-name,.list-menu{
+            .list-menu{
                 margin-right:17px;
                 line-height:20px;
                 padding:10px 0px;
@@ -625,28 +631,6 @@
             }
             .active{
                 background-color:#475669;
-            }
-            .list-ui-group{
-                border-bottom:1px solid #1F2D3D;
-                transition:all 0.5s ease-in-out 0s;
-                .group-name{
-                }
-                .list-name{
-                    padding-left:40px;
-                    border-bottom:0px solid #1F2D3D;
-                    margin-right:0px;
-                }
-                .ui_group_list_group{
-                    transition:all 0.5s ease-in 0s;
-                    box-sizing:border-box;
-                    margin-right:17px;
-
-                    .no_list{
-                        line-height:30px;
-                        text-align:center;
-                        color:#ccc;
-                    }
-                }
             }
         }
         .task-list{
