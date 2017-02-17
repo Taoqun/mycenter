@@ -9,14 +9,30 @@
                 <s-drop-menu :list="drop_list" :show="drop_list_show"></s-drop-menu>
             </div>
             <h3 class="title">任务夹</h3>
-            <p class="list-name"><i class="icon iconfont icon-form_light"></i>所有任务</p>
-            <p class="list-name"><i class="icon el-icon-date"></i>日历</p>
-            <p class="list-name"><i class="icon iconfont icon-punch_light"></i>收集箱</p>
+            <p class="list-menu"><i class="icon iconfont icon-form_light"></i>所有任务</p>
+            <p class="list-menu"><i class="icon el-icon-date"></i>日历</p>
+            <p class="list-menu"><i class="icon iconfont icon-punch_light"></i>收集箱</p>
+            <p class="list-menu" @click="chooceAddType"><i class="icon iconfont icon-add"></i>新建</p>
+
             <div class="list-ui-group" v-for="item in list_ui_group">
-                <h6 class="group-name"><i class="icon iconfont  icon-file"></i>{{item.name}}</h6>
-                <p class="list-name" v-for="li in item.task_list" data-id="li.id"><i class="icon iconfont icon-sortlight"></i>{{li.name}}</p>
+                <h6 class="group-name"><i class="icon iconfont  icon-file"></i>{{item.name}}
+                    <i class="more iconfont icon-more" @click.stop="showMore(item)"></i>
+                    <s-drop-menu :list="groupMore" :obj="item" :show="item.moreMenu"></s-drop-menu>
+                </h6>
+                <div class="ui_group_list_group">
+                    <p class="list-name" v-for="li in item.task_list" data-id="li.id">
+                        <i class="icon iconfont icon-sortlight"></i>{{li.name}}
+                        <i class="more iconfont icon-more" @click.stop="showMore(li)"></i>
+                        <s-drop-menu :list="listMore" :obj="li" :show="li.moreMenu"></s-drop-menu>
+                    </p>
+                    <p v-show="!item.task_list.length" class="no_list">暂无清单</p>
+                </div>
             </div>
-            <p class="list-name"  v-for="item in list_group" :data-id="item.id"><i class="icon iconfont icon-sortlight"></i>{{item.name}}</p>
+            <p class="list-name"  v-for="item in list_group" :data-id="item.id">
+                <i class="icon iconfont icon-sortlight"></i>{{item.name}}
+                <i class="more iconfont icon-more" @click.stop="showMore(item)"></i>
+                <s-drop-menu :list="listMore" :obj="item" :show="item.moreMenu"></s-drop-menu>
+            </p>
         </div>
 
         <div class="task-list">
@@ -26,31 +42,61 @@
             </div>
             <div class="task-list-show task-list-no">
                 <h3 class="task-list-show-name" @click="closeTaskList"><i class="el-icon-arrow-down"></i>待完成</h3>
-                <ul>
-                    <li v-for="item in no_List"><input type="text" name="" @click.stop="setdis(item)" v-model="item.name"></li>
-                </ul>
+                    <transition-group name="leave-arr" tag="ul">
+                    <li v-for="item in no_List" :key="item.id">
+                        <i class="iconfont icon-square" @click.stop="item.IsCompalte = !item.IsCompalte"></i>
+                        <input type="text" name="" @click.stop="setdis(item)" v-model="item.name">
+                        <i class="iconfont icon-delete_light" @click="delTask(item)"></i>
+                    </li>
+                    </transition-group>
             </div>
             <div class="task-list-show task-list-off">
                 <h3 class="task-list-show-name" @click="closeTaskList"><i class="el-icon-arrow-down"></i>已完成</h3>
-                <ul>
-                    <li v-for="item in off_list"><input type="text" name="" @click.stop="setdis(item)" v-model="item.name"></li>
-                </ul>
+                    <transition-group name="leave-arr" tag="ul">
+                    <li v-for="item in off_list" :key="item.id">
+                        <i class="iconfont icon-squarecheck" @click.stop="item.IsCompalte = !item.IsCompalte"></i>
+                        <input type="text" name="" @click.stop="setdis(item)" v-model="item.name">
+                        <i class="iconfont icon-delete_light" @click="delTask(item)"></i>
+                    </li>
+                    </transition-group>
             </div>
         </div>
 
         <div class="task-discription" @click.stop="stopEvent">
-
             <h3 class="title">任务描述</h3>
-
             <div class="task-li-name">
                 <input type="text" value="" placeholder="任务名称" v-model="task_dis.name">
             </div>
-
             <div class="task-li-discription">
                 <textarea placeholder="任务描述" v-model="task_dis.dis"></textarea>
             </div>
-
         </div>
+
+        <el-dialog title="请选择" v-model="dialogVisible" size="tiny">
+            <el-radio-group v-model="addType">
+                <el-radio-button label="文件夹"></el-radio-button>
+                <el-radio-button label="清单"></el-radio-button>
+             </el-radio-group>
+           <div class="dialog-input">
+               <p>请输入{{addType}}名称:</p>
+               <el-input v-model="add_list_name" placeholder="请输入名称"></el-input>
+           </div>
+          <span slot="footer" class="dialog-footer">
+            <el-button @click="dialogVisible = false">取 消</el-button>
+            <el-button type="primary" @click="showAddListInput">确 定</el-button>
+          </span>
+        </el-dialog>
+
+        <el-dialog title="请输入清单名称！" v-model="add_list_obj.show" size="tiny">
+
+           <div class="dialog-input" style="margin:5px 0;">
+               <el-input v-model="add_list_obj.str" placeholder="请输入名称"></el-input>
+           </div>
+          <span slot="footer" class="dialog-footer">
+            <el-button @click="add_list_obj.show = false">取 消</el-button>
+            <el-button type="primary" @click="addListName">确 定</el-button>
+          </span>
+        </el-dialog>
 
     </div>
 </template>
@@ -58,8 +104,12 @@
 <script>
     import "CSS/element.css"
     import 'CSS/ali/iconfont.css'
+    import Vue from 'vue'
+    import ElementUI from 'element-ui'
     import dropMenu from 'VUEMODULES/common/drop-down'
     import {ajax} from 'JS/ajax.js'
+    import { MessageBox } from 'element-ui';
+    Vue.use(ElementUI)
     export default {
         components:{
             "s-drop-menu":dropMenu
@@ -74,57 +124,20 @@
                 ],
                 drop_list_show:false,
                 list_group:[
-                    {name:"菜单",type:"list",id:123},
-                    {name:"菜单",type:"list",id:123},
-                    {name:"菜单",type:"list",id:123},
-                    {name:"菜单",type:"list",id:123},
-                    {name:"菜单",type:"list",id:123},
-                    {name:"菜单",type:"list",id:123},
-                    {name:"菜单",type:"list",id:123},
+                    {name:"这里是菜单",type:"list",id:123,moreMenu:false},
                 ],
                 list_ui_group:[
                     {
-                        name:"书单1",
+                        name:"这里是文件夹",
                         type:"group",
+                        group_id:'123456789',
                         name_id:123,
+                        moreMenu:false,
                         task_list:[
-                            {name:"菜单",id:123},
-                            {name:"菜单",id:123},
-                            {name:"菜单",id:123},
-                            {name:"菜单",id:123},
-                        ]
-                    },
-                    {
-                        name:"书单1",
-                        type:"group",
-                        name_id:123,
-                        task_list:[
-                            {name:"菜单",id:123},
-                            {name:"菜单",id:123},
-                            {name:"菜单",id:123},
-                            {name:"菜单",id:123},
-                        ]
-                    },
-                    {
-                        name:"书单1",
-                        type:"group",
-                        name_id:123,
-                        task_list:[
-                            {name:"菜单",id:123},
-                            {name:"菜单",id:123},
-                            {name:"菜单",id:123},
-                            {name:"菜单",id:123},
-                        ]
-                    },
-                    {
-                        name:"书单1",
-                        type:"group",
-                        name_id:123,
-                        task_list:[
-                            {name:"菜单",id:123},
-                            {name:"菜单",id:123},
-                            {name:"菜单",id:123},
-                            {name:"菜单",id:123},
+                            {name:"菜单1",type:'list',group_id:'123456789',id:123,moreMenu:false},
+                            {name:"菜单2",type:'list',group_id:'123456789',id:123,moreMenu:false,},
+                            {name:"菜单3",type:'list',group_id:'123456789',id:123,moreMenu:false,},
+                            {name:"菜单4",type:'list',group_id:'123456789',id:123,moreMenu:false,},
                         ]
                     },
                 ],
@@ -132,37 +145,37 @@
                     {
                         name:'已完成的任务会在这里显示',
                         IsCompalte:true,
-                        id:123,
+                        id:2,
                         dis:'已完成的任务会在这里显示',
                     },
                     {
                         name:'取消勾选，可回退至待完成',
                         IsCompalte:true,
-                        id:123,
+                        id:2,
                         dis:'取消勾选，可回退至待完成',
                     },
                     {
                         name:'是不是很赞',
                         IsCompalte:true,
-                        id:123,
+                        id:2,
                         dis:'是不是很赞',
                     },
                     {
                         name:'回车添加任务',
                         IsCompalte:false,
-                        id:123,
+                        id:4,
                         dis:'回车添加任务',
                     },
                     {
                         name:'点击查看任务详情',
                         IsCompalte:false,
-                        id:123,
+                        id:5,
                         dis:'点击查看任务详情',
                     },
                     {
                         name:'勾选完成任务',
                         IsCompalte:false,
-                        id:123,
+                        id:6,
                         dis:'勾选完成任务',
                     },
                 ],
@@ -171,6 +184,34 @@
                 task_dis:{
                     name:'',
                     dis:'',
+                },
+                dialogVisible:false,
+                addType:'清单',
+                listOptions:[
+                    {
+                        label:'文件夹',
+                        value:'1'
+                    },
+                    {
+                        label:'清单',
+                        value:'2'
+                    },
+                ],
+                add_list_name:'',
+                groupMore:[
+                    {name:'添加',event:this.addList},
+                    {name:'重命名',event:this.updateGroup},
+                    {name:'删除',event:this.delGroup},
+                ],
+                listMore:[
+                    {name:'重命名',event:this.updateList},
+                    {name:'删除',event:this.delList},
+                ],
+                add_list_obj:{
+                    show:false,
+                    str:'',
+                    tips:'',
+                    item:'',
                 },
             }
         },
@@ -208,23 +249,28 @@
                     this.choose_list.className += ' active'
                 }
                 if(tagName === 'h6' && clsName.indexOf('group-name') != -1 ){
-                    let group = the.parentNode
-                    if( group.className.indexOf('close') != -1 ){
-                        group.style.height = group.dataset.height
-                        group.className = group.className.replace('close','').trim()
-                        return;
-                    }
-                    group.style.height = group.dataset.height = group.clientHeight + 'px'
-
-                    setTimeout(()=>{
-                        group.style.height="40px"
-                        group.className += ' close'
-                    },0)
+                    let parent = the.parentNode
+                    let list = parent.querySelector('.ui_group_list_group')
+                        if(list.dataset.show === 'false'){
+                            list.style.height = list.dataset.height
+                            list.dataset.show = 'true'
+                            setTimeout(()=>{
+                                list.style.height = 'auto'
+                                list.style.overflow = 'visible'
+                            },500)
+                            return
+                        }
+                        list.style.height = list.dataset.height = list.offsetHeight + 'px'
+                        list.style.overflow = 'hidden'
+                        setTimeout(()=>{
+                            list.style.height="0px"
+                            list.dataset.show = 'false'
+                        },0)
                 }
             },
             addTask(event){
                 if(this.add_task){
-                    this.task_list.push({
+                    this.task_list.unshift({
                         name:this.add_task,
                         IsCompalte:false,
                         id:'',
@@ -238,6 +284,124 @@
                         i.className = 'el-icon-arrow-down'
                 }
                 this.add_task = ''
+            },
+            updateList(item){
+                 this.$prompt('请输入新名称','修改',{
+                     confirmButtonText: '确定',
+                     cancelButtonText: '取消',
+                 }).then(({value})=>{
+                     item.name = value
+                 })
+            },
+            updateGroup(item){
+                this.$prompt('请输入新名称','修改',{
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                }).then(({value})=>{
+                    item.name = value
+                })
+            },
+            delTask(item){
+                this.task_list.splice( this.task_list.indexOf(item),1 )
+            },
+            delGroup(item){
+                this.list_ui_group.splice( this.list_ui_group.indexOf(item),1 )
+            },
+            delList(item){
+                if(item.group_id){
+                    this.list_ui_group.map((i)=>{
+                        if(i.group_id === item.group_id){
+                            i.task_list.splice( i.task_list.indexOf(item),1 )
+                        }
+                    })
+                }else{
+                    this.list_group.splice( this.list_group.indexOf(item),1 )
+                }
+            },
+            chooceAddType(){
+                this.dialogVisible = true
+            },
+            showAddListInput(){
+                console.log( this.addType )
+                if( this.add_list_name ){
+
+                    if(this.addType == '文件夹'){
+                        let check = true
+                        this.list_ui_group.map((i)=>{
+                            if(i.name === this.add_list_name ){
+                                check = false
+                            }
+                        })
+                        if(check){
+                            this.dialogVisible = false
+                            this.list_ui_group.unshift( {name:this.add_list_name,type:'group',group_id:Date.now().toString(),moreMenu:false,name_id:Date.now(),task_list:[]} )
+                            this.$message({
+                                message:'文件夹添加成功!',
+                                type:'success'
+                            })
+                        }else{
+                            this.$message('文件夹名称已存在！');
+                            return
+                        }
+                    }else if(this.addType == '清单'){
+                        let check = true
+                        this.list_group.map((i)=>{
+                            if( i.name === this.add_list_name ){
+                                check = false
+                            }
+                        })
+                        if(check){
+                            this.dialogVisible = false
+                            this.list_group.unshift( {name:this.add_list_name,group_id:'all',type:'list',moreMenu:false,id:Date.now()} )
+                            this.$message({
+                                message:'清单添加成功!',
+                                type:'success'
+                            })
+                        }else{
+                            this.$message('清单名称已存在！')
+                            return
+                        }
+                    }
+                }else{
+                    this.$message('请输入清单名称')
+                }
+                this.add_list_name = ''
+            },
+            addList(item){
+                this.add_list_obj.show = true
+                this.add_list_obj.item = item
+                this.add_list_obj.str = ''
+            },
+            addListName(){
+                let check = true
+                this.add_list_obj.item.task_list.map((i)=>{
+                    if(i.name == this.add_list_obj.str){
+                        check = false
+                    }
+                })
+                if(check){
+                    let item = this.add_list_obj.item
+
+                    item.task_list.unshift({
+                        name:this.add_list_obj.str,
+                        group_id:item.group_id,
+                        type:'list',
+                        moreMenu:false,
+                        date:Date.now(),
+                        id:Date.now(),
+                    })
+                    this.add_list_obj.str = ''
+                    this.add_list_obj.show = false
+                    this.$message({
+                        message:'添加成功!',
+                        type:'success'
+                    })
+                }else{
+                    this.$message({
+                        message:'清单名称已存在!',
+                        type:'error'
+                    })
+                }
             },
             closeTaskList(event){
                 let the = event.target
@@ -271,12 +435,35 @@
             },
             setdis(item){
                 this.task_dis = item
-            }
+            },
+            showMore(item){
+                let show = item.moreMenu
+                this.list_ui_group.map((i)=>{
+                    i.moreMenu = false
+                    i.task_list.map((j)=>{
+                        j.moreMenu = false
+                    })
+                })
+                this.list_group.map((i)=>{
+                    i.moreMenu = false
+                })
+                item.moreMenu = !show;
+            },
         },
         mounted(){
             document.addEventListener('click',()=>{
                 this.drop_list_show = false
                 this.task_dis = {}
+
+                this.list_ui_group.map((i)=>{
+                    i.moreMenu = false
+                    i.task_list.map((j)=>{
+                        j.moreMenu = false
+                    })
+                })
+                this.list_group.map((i)=>{
+                    i.moreMenu = false
+                })
             })
 
             // ajax({
@@ -302,6 +489,7 @@
 <style lang="scss">
     body{
         background-color:#F9FAFC;
+        font-family:'microsoft Yahei';
     }
     // 调整head样式
     .head{
@@ -313,11 +501,20 @@
             padding-top:10px;
         }
     }
+
     html,body,#app,#app > div,.task-center{
         width:100%;
         height:100%;
         overflow:hidden;
         box-sizing:border-box;
+    }
+    .dialog-input{
+        margin:20px 0 0;
+        width:217px;
+        p{
+            line-height:25px;
+            font-size:14px;
+        }
     }
     .task-center{
         margin:0 auto 0;
@@ -351,6 +548,7 @@
             margin-right:-17px;
             background-color:#313643;
             color:#fff;
+            overflow:hidden;
             .title{
                 font-size:15px;
                 color:#ccc;
@@ -366,6 +564,7 @@
                 position:relative;
                 padding:10px;
                 box-sizing: border-box;
+                margin-right:17px;
                 .img{
                     display:inline-block;
                     vertical-align:middle;
@@ -394,10 +593,10 @@
                     cursor:pointer;
                 }
             }
-            .group-name,.list-name{
+            .group-name,.list-name,.list-menu{
+                margin-right:17px;
                 line-height:20px;
-                padding:10px 15px;
-                overflow:hidden;
+                padding:10px 0px;
                 text-overflow:ellipsis;
                 white-space:nowrap;
                 cursor:pointer;
@@ -405,9 +604,23 @@
                 border-bottom:1px solid #1F2D3D;
                 color:#ccc;
                 font-size:15px;
+                box-sizing: border-box;
+                position:relative;
                 &:hover{
                     background-color:#324057;
                     color:#fff;
+                }
+                .icon{
+                    margin-left:15px;
+                }
+                .more{
+                    float:right;
+                    margin-right:10px;
+                    opacity:0.2;
+                }
+
+                &:hover .more{
+                    opacity:1;
                 }
             }
             .active{
@@ -415,13 +628,25 @@
             }
             .list-ui-group{
                 border-bottom:1px solid #1F2D3D;
-                overflow:hidden;
                 transition:all 0.5s ease-in-out 0s;
+                .group-name{
+                }
                 .list-name{
                     padding-left:40px;
                     border-bottom:0px solid #1F2D3D;
+                    margin-right:0px;
                 }
+                .ui_group_list_group{
+                    transition:all 0.5s ease-in 0s;
+                    box-sizing:border-box;
+                    margin-right:17px;
 
+                    .no_list{
+                        line-height:30px;
+                        text-align:center;
+                        color:#ccc;
+                    }
+                }
             }
         }
         .task-list{
@@ -446,12 +671,18 @@
                 margin:0 20px;
                 .task-list-show-name{
                     font-size:14px;
+                    font-weight:normal;
+                    letter-spacing: 2px;
                     line-height:40px;
                     padding:0 20px;
                     margin:10px 0;
                     border-top:1px solid #D3DCE6;
                     color:#475669;
                     cursor:pointer;
+                    transition:all 0.5s linear 0s;
+                    &:hover{
+                        letter-spacing: 0px;
+                    }
                     i{
                         margin-right:5px;
                     }
@@ -469,15 +700,26 @@
                     line-height:30px;
                     box-sizing:border-box;
                     border-bottom:1px solid #EFF2F7;
+                    display:flex;
+                    transition:all 0.5s ease-in 0s;
+                    i{
+                        font-size:15px;
+                        height:40px;
+                        width:40px;
+                        text-align:center;
+                        line-height:40px;
+                    }
                     input{
+                        flex-grow:1;
                         width:100%;
                         height:100%;
+                        overflow:hidden;
                         padding:0;
                         margin:0;
                         outline:0;
                         border:none;
-                        padding:5px 20px;
-                        line-height:30px;
+                        padding:0px 0px;
+                        line-height:40px;
                         font-size:13px;
                         box-sizing:border-box;
                         background-color:transparent;
@@ -486,6 +728,11 @@
                     &:hover{
                         background-color:#EFF2F7;
                     }
+                }
+            }
+            .task-list-off{
+                li input,li .iconfont,.task-list-show-name{
+                    color:#ccc;
                 }
             }
         }
@@ -532,5 +779,13 @@
         #app .task-center .list-group{
             display:none;
         }
+    }
+    .leave-arr-enter,.leave-arr-active{
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    .leave-arr-leave-active{
+        opacity:0;
+        transform: translateX(100%);
     }
 </style>

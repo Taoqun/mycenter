@@ -1,7 +1,7 @@
 <template lang="html">
     <div class="drop-down" v-show="show">
         <i class="drop-down-icon iconfont icon-triangleupfill"></i>
-        <p v-for="item in list" @click="item.event">{{item.name}}</p>
+        <p v-for="item in list"  @click="item.event(obj)">{{item.name}}</p>
     </div>
 </template>
 
@@ -10,35 +10,39 @@ export default {
     props:{
         list:Array,
         show:Boolean,
+        obj:Object,
     },
 }
 </script>
 
 <style lang="scss">
     .drop-down{
-        width:100%;
+        width:50%;
         position:absolute;
         top:100%;
-        left:50%;
-        margin-left:-50%;
+        right:0;
         padding:10px 0;
         box-sizing: border-box;
+        z-index:99;
         .drop-down-icon{
             display:inline-block;
             width:20px;
             height:20px;
             position:absolute;
             top:-3px;
-            left:50%;
-            margin-left:-10px;
+            right:20px;
             font-size:16px;
             text-align: center;
             color:#fff;
         }
         p{
             background-color:#fff;
-            padding:15px 20px;
+            padding:0px 20px;
+            height:45px;
+            line-height:45px;
             margin:0 10px;
+            font-size:15px;
+            font-weight:normal;
             color:#272727;
             overflow: hidden;
             text-overflow: ellipsis;
