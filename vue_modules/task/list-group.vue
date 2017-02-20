@@ -75,7 +75,7 @@ export default {
         }
     }
     .list-name{
-        padding-left:40px;
+        padding-left:10px;
         border-bottom:0px solid #1F2D3D;
         margin-right:0px;
     }

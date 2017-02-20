@@ -65,7 +65,7 @@
                                 this.dialog_text='密码错误！'
                                 this.dialog = true;
                             }else if(!data.verify && !data.account ){
-                                this.dialog_text='账户不存在,若无账户，可<a href="/account/register/"> 注册 </a> !'
+                                this.dialog_text='账户不存在,若无账户，可注册!'
                                 this.dialog = true;
                             }
                     },(res)=>{

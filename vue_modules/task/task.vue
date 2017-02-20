@@ -26,7 +26,7 @@
             <div class="task-list-show task-list-no">
                 <h3 class="task-list-show-name" @click="closeTaskList"><i class="el-icon-arrow-down"></i>待完成</h3>
                     <transition-group name="leave-arr" tag="ul">
-                    <li v-for="item in no_List" :key="item.id">
+                    <li v-for="item in no_List" :key="item.id" data-list-id="item.list_id">
                         <i class="iconfont icon-square" @click.stop="item.IsCompalte = !item.IsCompalte"></i>
                         <input type="text" name="" @click.stop="setdis(item)" v-model="item.name">
                         <i class="iconfont icon-delete_light" @click="delTask(item)"></i>
@@ -111,58 +111,64 @@
                 ],
                 drop_list_show:false,
                 list_group:[
-                    {name:"这里是菜单",type:"list",id:123,moreMenu:false},
+                    {name:"这里是清单",type:"list",list_id:123,group_id:'',moreMenu:false},
                 ],
                 list_ui_group:[
                     {
-                        name:"这里是文件夹",
-                        type:"group",
-                        group_id:'123456789',
-                        name_id:123,
-                        moreMenu:false,
-                        task_list:[
-                            {name:"菜单1",type:'list',group_id:'123456789',id:123,moreMenu:false},
-                            {name:"菜单2",type:'list',group_id:'123456789',id:123,moreMenu:false,},
-                            {name:"菜单3",type:'list',group_id:'123456789',id:123,moreMenu:false,},
-                            {name:"菜单4",type:'list',group_id:'123456789',id:123,moreMenu:false,},
-                        ]
-                    },
+                                name:"这里是文件夹",
+                                type:"group",
+                                group_id:'123456789',
+                                name_id:123,
+                                moreMenu:false,
+                                task_list:[
+                                    {name:"点击获取清单任务",type:'list',group_id:'123456789',id:123,moreMenu:false},
+                                    {name:"右侧可以点击删除",type:'list',group_id:'123456789',id:123,moreMenu:false,},
+                                    {name:"或者重新命名",type:'list',group_id:'123456789',id:123,moreMenu:false,},
+                                    {name:"可以添加清单",type:'list',group_id:'123456789',id:123,moreMenu:false,},
+                                ]
+                            },
                 ],
                 task_list:[
                     {
                         name:'已完成的任务会在这里显示',
+                        id:1,
                         IsCompalte:true,
-                        id:2,
+                        list_id:2,
                         dis:'已完成的任务会在这里显示',
                     },
                     {
                         name:'取消勾选，可回退至待完成',
+                        id:1,
                         IsCompalte:true,
-                        id:2,
+                        list_id:2,
                         dis:'取消勾选，可回退至待完成',
                     },
                     {
                         name:'是不是很赞',
+                        id:1,
                         IsCompalte:true,
-                        id:2,
+                        list_id:2,
                         dis:'是不是很赞',
                     },
                     {
                         name:'回车添加任务',
+                        id:1,
                         IsCompalte:false,
-                        id:4,
+                        list_id:4,
                         dis:'回车添加任务',
                     },
                     {
                         name:'点击查看任务详情',
+                        id:1,
                         IsCompalte:false,
-                        id:5,
+                        list_id:5,
                         dis:'点击查看任务详情',
                     },
                     {
                         name:'勾选完成任务',
+                        id:1,
                         IsCompalte:false,
-                        id:6,
+                        list_id:6,
                         dis:'勾选完成任务',
                     },
                 ],

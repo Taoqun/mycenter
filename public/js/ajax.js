@@ -39,7 +39,6 @@ exports.ajax = function(obj){
                 body: obj.data,
             }).then( (res)=>{
                 resolve(res)
-
             },(res)=>{
                 reject(res)
             } )
