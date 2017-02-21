@@ -11,6 +11,7 @@ exports.ajax = function(obj){
     // obj.method
     // obj.url
     // obj.data
+    obj.method = obj.method || 'get'
 
     if( obj && obj.method.toLowerCase() === 'get'  ){
         return new Promise( ( resolve , reject ) => {
@@ -22,7 +23,7 @@ exports.ajax = function(obj){
                 method:'get',
                 params:obj.data,
             }).then( (res)=>{
-                resolve(res)
+                resolve(res.body)
 
             },(res)=>{
                 reject(res)
@@ -38,10 +39,20 @@ exports.ajax = function(obj){
                 method: 'post',
                 body: obj.data,
             }).then( (res)=>{
-                resolve(res)
+                resolve(res.body)
             },(res)=>{
                 reject(res)
             } )
         })
+    }
+}
+
+
+exports.gotologin = function(obj){
+    if( obj.login === 0){
+        let str = location.protocol + '//' + location.hostname +':'+location.port + '/account/login'
+        console.log(str)
+        location.href = str
+        return true
     }
 }

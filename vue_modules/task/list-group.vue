@@ -6,11 +6,7 @@
                 <s-drop-menu :list="groupmore" :obj="item"  :listgroup="list" :show="item.moreMenu"></s-drop-menu>
             </h6>
             <div class="ui_group_list_group">
-                <p class="list-name" v-for="li in item.task_list" data-id="li.id">
-                    <i class="icon iconfont icon-sortlight"></i>{{li.name}}
-                    <i class="more iconfont icon-more" @click.stop="showMore(li)"></i>
-                    <s-drop-menu :list="listmore" :obj="li" :listgroup="item.task_list" :show="li.moreMenu"></s-drop-menu>
-                </p>
+                <s-list-name :list="item.task_list" :listmore="listmore" :tasklist="tasklist"></s-list-name>
                 <p v-show="!item.task_list.length" class="no_list">暂无清单</p>
             </div>
         </div>
@@ -19,14 +15,17 @@
 
 <script>
 import dropMenu from 'VUEMODULES/common/drop-down'
+import s_list_name from './list-name.vue'
 export default {
     props:{
         list:Array,
         groupmore:Array,
         listmore:Array,
+        tasklist:Object,
     },
     components:{
         "s-drop-menu":dropMenu,
+        's-list-name':s_list_name,
     },
     methods:{
         showMore(item){

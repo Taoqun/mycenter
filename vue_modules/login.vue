@@ -56,10 +56,10 @@
                           password:this.password
                       },
                     }).then((res)=>{
-                            let data = res.body
+                            let data = res
                             if(data.verify){
                                 setTimeout(()=>{
-                                    location.href = location.protocol + '//'+location.hostname+':'+location.port+"/index"
+                                    location.href = location.protocol + '//'+location.hostname+':'+location.port+"/task"
                                 },1000)
                             }else if( !data.verify && data.account ){
                                 this.dialog_text='密码错误！'

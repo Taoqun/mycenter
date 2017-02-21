@@ -1,6 +1,6 @@
 <template lang="html">
     <div class="">
-        <p class="list-name"  v-for="item in list" :data-id="item.id">
+        <p class="list-name"  v-for="item in list" :data-id="item.list_id" @click="getTaskList">
             <i class="icon iconfont icon-sortlight"></i>{{item.name}}
             <i class="more iconfont icon-more" @click.stop="showMore(item)"></i>
             <s-drop-menu :list="listmore" :obj="item" :listgroup="list" :show="item.moreMenu"></s-drop-menu>
@@ -10,10 +10,12 @@
 
 <script>
 import dropMenu from 'VUEMODULES/common/drop-down'
+import {ajax} from 'JS/ajax.js'
 export default {
     props:{
         list:Array,
         listmore:Array,
+        tasklist:Object,
     },
     components:{
         "s-drop-menu":dropMenu,
@@ -26,6 +28,20 @@ export default {
             })
             item.moreMenu = !show;
         },
+        getTaskList(event){
+            let the = event.target
+            if(the.tagName.toLowerCase() === 'p' && the.className.indexOf('list-name') > -1 ){
+                let list_id = the.dataset.id
+                ajax({
+                    url:'/task/getTask',
+                    method:'get',
+                    data:{list_id:list_id}
+                }).then((data)=>{
+                    this.tasklist['tasklist'] = data
+                    this.tasklist['list_id'] =  list_id
+                })
+            }
+        }
     }
 }
 </script>

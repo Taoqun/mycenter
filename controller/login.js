@@ -6,6 +6,7 @@ exports.login = function(req, res) {
         account: req.query.account,
         password: req.query.password
     }
+    // 检测账号密码 是否符合规则
     if (!obj.account || !obj.password) {
         res.json({
             code: 0,
@@ -27,9 +28,8 @@ exports.login = function(req, res) {
         })
         return
     }
-    userInfo.find({
-        account: obj.account
-    }, (err, result) => {
+    // 检查账号是否已经注册
+    userInfo.find({account: obj.account}, (err, result) => {
 
         if (err) {
             return console.log(err)
@@ -37,7 +37,9 @@ exports.login = function(req, res) {
 
         if (result && result.length === 1) {
             if (obj.password === result[0].password) {
-
+                // 获取账号的状态 是否已经登录
+                // 登录返回 session_id
+                // 未登录 生成 session_id 存储并返回
                 let setSession = require('../dataModel/sessionDataModel.js').session
                 setSession.find({ account: obj.account }, (err, result) => {
                     if(result.length === 0){
@@ -58,7 +60,6 @@ exports.login = function(req, res) {
                         res.json({code: 1,verify: true,account: true,password: true})
                     }
                 })
-
             } else {
                 res.json({
                     code: 0,
@@ -82,19 +83,16 @@ exports.login = function(req, res) {
 
 exports.register = function(req, res) {
 
-
-    let account = req.body.account
-    let password = req.body.password
-    let name = req.body.name
+    // 存储需要注册的账号密码
+    let account = req.body.account.trim()
+    let password = req.body.password.trim()
+    let name = req.body.name.trim()
 
     // 查找是够有相同的账户
-    userInfo.find({
-        account: account
-    }, (err, result) => {
-        if (err) {
-            return console.log(err)
-        }
+    userInfo.find({ account: account }, (err, result) => {
+        if (err) { return console.log(err) }
 
+        // 账户不存在 进行保存
         if (result && result.length === 0) {
             let add = new userInfo({
                     account: account,
@@ -102,46 +100,41 @@ exports.register = function(req, res) {
                     name: name,
                     date: Date.now()
                 })
-                // 生成session id
-            let session_id = Math.random().toString(36).substr(2)
-            let setSession = require('../dataModel/sessionDataModel.js').session
 
-            setSession.find({
-                session_id: session_id
-            }, (err, result) => {
-                if (result.length === 0) {
-                    // 存储session_id 到数据库
-                    let ses_id = new setSession({
-                        session_id: session_id,
-                        account: account,
-                    })
-                    res.clearCookie()
-                    ses_id.save(function(err) {})
-                        // 清除cookie
-                        // 设置session id
-                        // 保存
-                    add.save(function(err) {
-                        if (err) {
-                            return res.json({
-                                register: false
-                            })
-                        }
-                        res.cookie('sessions_id', session_id)
-                        res.cookie('account', decodeURIComponent(account) )
-                        require('../dataModel/taskDataModel.js').run.init(account, res)
-                        //res.json({register:true})
-                    })
-                } else {
-                    res.json({
-                        register: false
-                    })
-                }
-            })
+            // 生成session id
+            getSessionId()
+            function getSessionId(){
+                let session_id = Math.random().toString(36).substr(2)
+                let setSession = require('../dataModel/sessionDataModel.js').session
 
+                setSession.find({ session_id: session_id }, (err, result) => {
+                    if (result.length === 0) {
+                        // 存储session_id 到数据库
+                        let ses_id = new setSession({
+                            session_id: session_id,
+                            account: account,
+                        })
+                        res.clearCookie()
+                        ses_id.save(function(err) {})
+                            // 清除cookie
+                            // 设置session id
+                            // 保存
+                        add.save(function(err) {
+                            if (err) { return res.json({ register: false , dis:'保存失败!'}) }
+
+                            res.cookie('sessions_id', session_id)
+                            res.cookie('account', decodeURIComponent(account) )
+                            require('../dataModel/taskDataModel.js').run.init(account, res)
+                            //res.json({register:true})
+                        })
+                    } else {
+                        getSessionId()
+                    }
+                })
+            }
         } else {
-            res.json({
-                register: false
-            })
+            // 账户存在返回false
+            res.json({ register: false ,dis:'账户已存在!'})
         }
     })
 }

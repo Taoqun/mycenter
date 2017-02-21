@@ -141,6 +141,9 @@
         methods:{
             loginIn(){
                 // 检测邮箱账户 邮箱是否匹配 重复密码是否相等 并且密码的长度大于6
+                this.account = this.account.trim()
+                this.password = this.password.trim()
+                this.passwordAgain = this.passwordAgain.trim()
                 if(!this.account || !this.password){
                   this.alertText = '请输入账号或者密码！'
                   this.dialog = true
@@ -156,7 +159,10 @@
                   this.dialog = true
                   return
                 }
-                if(this.account && this.password){
+                if(this.account.trim() && this.password.trim() ){
+                    this.account = this.account.trim()
+                    this.password = this.password.trim()
+                    this.passwordAgain = this.passwordAgain.trim()
                     ajax({
                       url:'/account/sendRegister',
                       method:'post',
@@ -164,14 +170,14 @@
                           password:this.password,
                           name:this.name}
                   }).then((res)=>{
-                            console.log(res.body)
-                            let result = res.body
+                            console.log(res)
+                            let result = res
                             if(result.register){
                               localStorage.account = this.account
                               localStorage.password = this.password
                               this.loading = true
                               setTimeout(()=>{
-                                  location.href = location.protocol + '//'+location.hostname+':'+location.port+"/index"
+                                  location.href = location.protocol + '//'+location.hostname+':'+location.port+"/task"
                               },1000)
                           }else if(!result.register){
                               this.alertText = '账号已存在，请更换后重试！'

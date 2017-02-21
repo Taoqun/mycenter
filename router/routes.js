@@ -1,7 +1,7 @@
 
 let Login = require('../controller/login.js')
 let Task = require('../controller/task.js')
-let run = require('../controller/verify.js').run
+let verify = require('../controller/verify.js').run
 let bodyParser = require('body-parser');
 let urlencodedParser = bodyParser.urlencoded({ extended: false })
 const cookieParser = require('cookie-parser')
@@ -11,14 +11,14 @@ exports.routers = function(app){
     app.use(cookieParser())
 
     // get请求
-    app.get('/task',run)
     app.get('/login', Login.login)
     app.post('/account/sendRegister',urlencodedParser,Login.register)
 
-    app.post('/task/createTask',urlencodedParser,run,Task.createTask)
-    app.get('/task/getTask',run,Task.getTask)
+    app.post('/task/createTask',urlencodedParser,verify,Task.createTask)
+    app.get('/task/getList',verify,Task.getList)
+    app.get('/task/getTask',verify,Task.getTask)
+    app.post('/task/updateTask',urlencodedParser,verify,Task.updateTask)
     app.use(function(req, res, next) {
         res.status(404).send('404 未找到')
     });
-
 }

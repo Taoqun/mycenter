@@ -9,13 +9,13 @@
                 <s-drop-menu :list="drop_list" :show="drop_list_show"></s-drop-menu>
             </div>
             <h3 class="title">任务夹</h3>
-            <p class="list-menu"><i class="icon iconfont icon-form_light"></i>所有任务</p>
+            <p class="list-menu" @click="getAllTask" data-listid='all'><i class="icon iconfont icon-form_light"></i>所有任务</p>
             <p class="list-menu"><i class="icon el-icon-date"></i>日历</p>
             <p class="list-menu"><i class="icon iconfont icon-punch_light"></i>收集箱</p>
             <p class="list-menu" @click="chooceAddType"><i class="icon iconfont icon-add"></i>新建</p>
 
-            <s-list-group :list="list_ui_group" :groupmore="groupMore" :listmore="listMore"></s-list-group>
-            <s-list-name  :list="list_group" :listmore="listMore"></s-list-name>
+            <s-list-group :list="list_ui_group" :groupmore="groupMore" :listmore="listMore" :tasklist="task_list"></s-list-group>
+            <s-list-name  :list="list_group" :listmore="listMore" :tasklist="task_list"></s-list-name>
         </div>
 
         <div class="task-list">
@@ -24,7 +24,7 @@
                 <input type="input" name="name" placeholder='添加任务至"书单"' v-model="add_task" @keyup.enter="addTask">
             </div>
             <div class="task-list-show task-list-no">
-                <h3 class="task-list-show-name" @click="closeTaskList"><i class="el-icon-arrow-down"></i>待完成</h3>
+                <h3 class="task-list-show-name" v-show="no_List.length" @click="closeTaskList"><i class="el-icon-arrow-down"></i>待完成</h3>
                     <transition-group name="leave-arr" tag="ul">
                     <li v-for="item in no_List" :key="item.id" data-list-id="item.list_id">
                         <i class="iconfont icon-square" @click.stop="item.IsCompalte = !item.IsCompalte"></i>
@@ -34,7 +34,7 @@
                     </transition-group>
             </div>
             <div class="task-list-show task-list-off">
-                <h3 class="task-list-show-name" @click="closeTaskList"><i class="el-icon-arrow-down"></i>已完成</h3>
+                <h3 class="task-list-show-name" v-show="off_list.length" @click="closeTaskList"><i class="el-icon-arrow-down"></i>已完成</h3>
                     <transition-group name="leave-arr" tag="ul">
                     <li v-for="item in off_list" :key="item.id">
                         <i class="iconfont icon-squarecheck" @click.stop="item.IsCompalte = !item.IsCompalte"></i>
@@ -90,8 +90,8 @@
     import Vue from 'vue'
     import ElementUI from 'element-ui'
     import dropMenu from 'VUEMODULES/common/drop-down'
-    import {ajax} from 'JS/ajax.js'
-    import { MessageBox } from 'element-ui';
+    import {ajax,gotologin} from 'JS/ajax.js'
+    import { MessageBox , Loading  } from 'element-ui';
     import s_list_name from './list-name.vue'
     import s_list_group from './list-group.vue'
     Vue.use(ElementUI)
@@ -110,68 +110,9 @@
                     {name:'退出',event:this.stopEvent},
                 ],
                 drop_list_show:false,
-                list_group:[
-                    {name:"这里是清单",type:"list",list_id:123,group_id:'',moreMenu:false},
-                ],
-                list_ui_group:[
-                    {
-                                name:"这里是文件夹",
-                                type:"group",
-                                group_id:'123456789',
-                                name_id:123,
-                                moreMenu:false,
-                                task_list:[
-                                    {name:"点击获取清单任务",type:'list',group_id:'123456789',id:123,moreMenu:false},
-                                    {name:"右侧可以点击删除",type:'list',group_id:'123456789',id:123,moreMenu:false,},
-                                    {name:"或者重新命名",type:'list',group_id:'123456789',id:123,moreMenu:false,},
-                                    {name:"可以添加清单",type:'list',group_id:'123456789',id:123,moreMenu:false,},
-                                ]
-                            },
-                ],
-                task_list:[
-                    {
-                        name:'已完成的任务会在这里显示',
-                        id:1,
-                        IsCompalte:true,
-                        list_id:2,
-                        dis:'已完成的任务会在这里显示',
-                    },
-                    {
-                        name:'取消勾选，可回退至待完成',
-                        id:1,
-                        IsCompalte:true,
-                        list_id:2,
-                        dis:'取消勾选，可回退至待完成',
-                    },
-                    {
-                        name:'是不是很赞',
-                        id:1,
-                        IsCompalte:true,
-                        list_id:2,
-                        dis:'是不是很赞',
-                    },
-                    {
-                        name:'回车添加任务',
-                        id:1,
-                        IsCompalte:false,
-                        list_id:4,
-                        dis:'回车添加任务',
-                    },
-                    {
-                        name:'点击查看任务详情',
-                        id:1,
-                        IsCompalte:false,
-                        list_id:5,
-                        dis:'点击查看任务详情',
-                    },
-                    {
-                        name:'勾选完成任务',
-                        id:1,
-                        IsCompalte:false,
-                        list_id:6,
-                        dis:'勾选完成任务',
-                    },
-                ],
+                list_group:[],
+                list_ui_group:[],
+                task_list:{tasklist:[],list_id:'all'},
                 choose_list:'',
                 add_task:'',
                 task_dis:{
@@ -211,7 +152,7 @@
         computed:{
             no_List(){
                 let list = []
-                this.task_list.map( (i)=>{
+                this.task_list['tasklist'].map( (i)=>{
                     if(!i.IsCompalte){
                         list.push(i)
                     }
@@ -221,7 +162,7 @@
             },
             off_list(){
                 let list = []
-                this.task_list.map( (i)=>{
+                this.task_list['tasklist'].map( (i)=>{
                     if(i.IsCompalte){
                         list.push(i)
                     }
@@ -263,20 +204,33 @@
             },
             addTask(event){
                 if(this.add_task){
-                    this.task_list.unshift({
+                    let obj = {
                         name:this.add_task,
                         IsCompalte:false,
-                        id:'',
+                        id:parseInt( Date.now() ).toString() + Math.random().toString(36).substr(2),
+                        list_id:this.task_list['list_id'],
                         discription:'',
                         date:Date.now()
-                    })
+                    }
+
+                    this.task_list['tasklist'].unshift(obj)
                     let ui = document.querySelector('.task-list-no ul')
                         ui.style.height = 'auto'
                         ui.dataset.show = 'true'
                     let i = document.querySelector('.task-list-no h3 i')
                         i.className = 'el-icon-arrow-down'
+
+                    ajax({
+                        method:'post',
+                        url:"/task/createTask",
+                        data:{ obj: JSON.stringify( obj )  }
+                    }).then((data)=>{
+                        console.log(data)
+                    })
                 }
                 this.add_task = ''
+
+
             },
             updateList(item,list){
                 this.$prompt('请输入新名称',item.name,{
@@ -327,7 +281,7 @@
                 })
             },
             delTask(item){
-                this.task_list.splice( this.task_list.indexOf(item),1 )
+                this.task_list['tasklist'].splice( this.task_list['tasklist'].indexOf(item),1 )
             },
             delGroup(item){
                 this.list_ui_group.splice( this.list_ui_group.indexOf(item),1 )
@@ -359,7 +313,15 @@
                         })
                         if(check){
                             this.dialogVisible = false
-                            this.list_ui_group.unshift( {name:this.add_list_name,type:'group',group_id:Date.now().toString(),moreMenu:false,name_id:Date.now(),task_list:[]} )
+                            let obj = {
+                                name:this.add_list_name,
+                                type:'group',
+                                group_id:Date.now().toString() + Math.radnom().toStrintg(36).substr(2),
+                                moreMenu:false,
+                                name_id:Date.now(),
+                                task_list:[]
+                            }
+                            this.list_ui_group.unshift( obj )
                             this.$message({
                                 message:'文件夹添加成功!',
                                 type:'success'
@@ -377,7 +339,14 @@
                         })
                         if(check){
                             this.dialogVisible = false
-                            this.list_group.unshift( {name:this.add_list_name,group_id:'all',type:'list',moreMenu:false,id:Date.now()} )
+                            let obj = {
+                                name:this.add_list_name,
+                                group_id:'all',
+                                type:'list',
+                                list_id:Date.now().toString() + Math.radnom().toStrintg(36).substr(2),
+                                moreMenu:false,
+                            }
+                            this.list_group.unshift( obj )
                             this.$message({
                                 message:'清单添加成功!',
                                 type:'success'
@@ -406,15 +375,15 @@
                 })
                 if(check){
                     let item = this.add_list_obj.item
-
-                    item.task_list.unshift({
+                    let obj = {
                         name:this.add_list_obj.str,
                         group_id:item.group_id,
                         type:'list',
                         moreMenu:false,
                         date:Date.now(),
-                        id:Date.now(),
-                    })
+                        list_id: Date.now().toString() + Math.radnom().toStrintg(36).substr(2),
+                    }
+                    item.task_list.unshift(obj)
                     this.add_list_obj.str = ''
                     this.add_list_obj.show = false
                     this.$message({
@@ -461,6 +430,20 @@
             setdis(item){
                 this.task_dis = item
             },
+            getAllTask(){
+                this.task_list['list_id'] = 'all'
+                ajax({
+                    url:"/task/getTask",
+                    method:'get',
+                    data:{list_id: this.task_list['list_id'] }
+                }).then((data)=>{
+                    if(data){
+                        this.task_list['tasklist'] = data
+                        console.log( this.task_list['tasklist'] )
+                        this.task_list['list_id'] = 'all'
+                    }
+                })
+            },
         },
         mounted(){
             document.addEventListener('click',()=>{
@@ -478,23 +461,39 @@
                 })
             })
 
-            // ajax({
-            //     url:"/task/create",
-            //     method:"post",
-            //     data:{
-            //         name:'taoqun',
-            //         dis:'',
-            //         task_list_id:'hahaha',
-            //         task_id:Date.now().toString(),
-            //         IsCompalte:false,
-            //         create_date:Date.now()
-            //     },
-            // }).then((res)=>{
-            //     console.log(res)
-            // },(res)=>{
-            //     console.log(res)
-            // })
-        }
+            let loadscreen = Loading.service({ fullscreen: true , text:'获取数据中！' })
+
+            ajax({
+                url:'/task/getList',
+                method:'get',
+            }).then((data)=>{
+                if( gotologin(data) ){
+                    return
+                }
+                this.list_ui_group = data.group_arr
+                this.list_group = data.list_arr
+
+                this.list_ui_group.map( (i)=>{
+                    let arr = []
+                    this.list_group.map( (j)=>{
+                        if(i.group_id === j.group_id){
+                            i.task_list.push(j)
+                            arr.push(j)
+                        }
+                    })
+                    arr.map((k)=>{
+                        this.list_group.splice( this.list_group.indexOf(k),1 )
+                    })
+                })
+
+                loadscreen.close()
+                this.$message({message:'数据获取完毕！',type:'success'});
+            })
+        },
+        created(){
+            this.list_ui_group = []
+            this.list_group = []
+        },
     }
 </script>
 
@@ -771,11 +770,9 @@
         }
     }
     .leave-arr-enter,.leave-arr-active{
-        opacity: 0;
-        transform: translateX(100%);
+        transform: translateY(-30px)
     }
     .leave-arr-leave-active{
-        opacity:0;
-        transform: translateX(100%);
+        transform: translateY(30px)
     }
 </style>
