@@ -14,14 +14,14 @@
             <p class="list-menu"><i class="icon iconfont icon-punch_light"></i>收集箱</p>
             <p class="list-menu" @click="chooceAddType"><i class="icon iconfont icon-add"></i>新建</p>
 
-            <s-list-group :list="list_ui_group" :groupmore="groupMore" :listmore="listMore" :tasklist="task_list"></s-list-group>
-            <s-list-name  :list="list_group" :listmore="listMore" :tasklist="task_list"></s-list-name>
+            <s-list-group :list="list_ui_group" :groupmore="groupMore" :listmore="listMore" :tasklist="task_list" :listname="task_list_name"></s-list-group>
+            <s-list-name  :list="list_group" :listmore="listMore" :tasklist="task_list" :listname="task_list_name"></s-list-name>
         </div>
 
         <div class="task-list">
-            <h3 class="title">列表: 书单</h3>
+            <h3 class="title">{{task_list_name.name}}</h3>
             <div class="add-task">
-                <input type="input" name="name" placeholder='添加任务至"书单"' v-model="add_task" @keyup.enter="addTask">
+                <input type="input" name="name" :placeholder=' " 添加任务至  " + task_list_name.name ' v-model="add_task" @keyup.enter="addTask">
             </div>
             <div class="task-list-show task-list-no">
                 <h3 class="task-list-show-name" v-show="no_List.length" @click="closeTaskList"><i class="el-icon-arrow-down"></i>待完成</h3>
@@ -109,6 +109,7 @@
                     {name:'首页',event:this.stopEvent},
                     {name:'退出',event:this.stopEvent},
                 ],
+                task_list_name:{name:'所有任务'},
                 drop_list_show:false,
                 list_group:[],
                 list_ui_group:[],
@@ -432,6 +433,7 @@
             },
             getAllTask(){
                 this.task_list['list_id'] = 'all'
+                this.task_list_name.name = '所有任务'
                 ajax({
                     url:"/task/getTask",
                     method:'get',

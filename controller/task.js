@@ -17,7 +17,6 @@ exports.createTask = function(req,res){
                 res.json({code:1})
             })
     })
-
 }
 exports.createTaskList = function(req,res){
 }

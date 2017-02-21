@@ -1,6 +1,6 @@
 <template lang="html">
     <div class="">
-        <p class="list-name"  v-for="item in list" :data-id="item.list_id" @click="getTaskList">
+        <p class="list-name"  v-for="item in list" :data-id="item.list_id" :data-name="item.name" @click="getTaskList">
             <i class="icon iconfont icon-sortlight"></i>{{item.name}}
             <i class="more iconfont icon-more" @click.stop="showMore(item)"></i>
             <s-drop-menu :list="listmore" :obj="item" :listgroup="list" :show="item.moreMenu"></s-drop-menu>
@@ -16,6 +16,7 @@ export default {
         list:Array,
         listmore:Array,
         tasklist:Object,
+        listname:Object,
     },
     components:{
         "s-drop-menu":dropMenu,
@@ -32,6 +33,7 @@ export default {
             let the = event.target
             if(the.tagName.toLowerCase() === 'p' && the.className.indexOf('list-name') > -1 ){
                 let list_id = the.dataset.id
+                this.listname['name'] =the.dataset.name
                 ajax({
                     url:'/task/getTask',
                     method:'get',
@@ -39,6 +41,7 @@ export default {
                 }).then((data)=>{
                     this.tasklist['tasklist'] = data
                     this.tasklist['list_id'] =  list_id
+
                 })
             }
         }

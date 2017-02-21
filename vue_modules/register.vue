@@ -38,7 +38,7 @@
             </div>
             <div class="password">
                 <span class="input-title"><i class="el-icon-information" ></i>重复密码</span>
-                <div class="line-input">
+                <div class="line-input"  @keyup.enter="loginIn">
                   <el-input type="text" class="text" placeholder="密码" v-model="passwordAgain"></el-input>
                   <el-alert
                    :title="passwordAgain_alert.text"

@@ -15,11 +15,13 @@ require('./router/routes.js').routers(app)
 
 const server = app.listen( obj.port , () => {
 
+    let str = obj.hostname +':'+obj.port
     // 端口号80 默认为本地ip打开  可以更改host 域名 这样可以直接访问
      console.log('tips:可以设置监听80端口，配置host域名，即可访问!')
-     console.log('已创建服务器，监听端口'+ obj.port + '    ' + obj.hostname +':'+obj.port )
+     console.log('已创建服务器，监听端口'+ obj.port + '    ' + str )
      child.exec('webpack  --watch')
+
     // 自动打开默认浏览器 指定网址 window start || mac open
-    // child.exec('open  http://taoqun.com/')
-    // child.exec('start http://taoqun.com/')
+    // child.exec('open ' + str)
+    // child.exec('open ' + str)
 })

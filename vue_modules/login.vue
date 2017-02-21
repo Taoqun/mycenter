@@ -9,9 +9,9 @@
                 <span><i class="el-icon-message"></i>账户名</span>
                 <el-input type="text" class="text" placeholder="账户名/邮箱/电话号码" v-model="account"></el-input>
             </div>
-            <div class="password">
+            <div class="password" @keyup.enter="loginIn">
                 <span><i class="el-icon-information" ></i>密码</span>
-                <el-input type="text" class="text" placeholder="密码" v-model="password"></el-input>
+                <el-input type="text" class="text" placeholder="密码" v-model="password" ></el-input>
             </div>
             <div class="submitwrap">
               <el-button type="primary" class="submit" @click="loginIn">登录</el-button>

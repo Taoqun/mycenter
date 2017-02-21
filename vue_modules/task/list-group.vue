@@ -6,7 +6,7 @@
                 <s-drop-menu :list="groupmore" :obj="item"  :listgroup="list" :show="item.moreMenu"></s-drop-menu>
             </h6>
             <div class="ui_group_list_group">
-                <s-list-name :list="item.task_list" :listmore="listmore" :tasklist="tasklist"></s-list-name>
+                <s-list-name :list="item.task_list" :listmore="listmore" :tasklist="tasklist" :listname="listname"></s-list-name>
                 <p v-show="!item.task_list.length" class="no_list">暂无清单</p>
             </div>
         </div>
@@ -22,6 +22,7 @@ export default {
         groupmore:Array,
         listmore:Array,
         tasklist:Object,
+        listname:Object,
     },
     components:{
         "s-drop-menu":dropMenu,
