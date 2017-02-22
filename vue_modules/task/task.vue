@@ -210,7 +210,7 @@
                         IsCompalte:false,
                         id:parseInt( Date.now() ).toString() + Math.random().toString(36).substr(2),
                         list_id:this.task_list['list_id'],
-                        discription:'',
+                        dis:'',
                         date:Date.now()
                     }
 
@@ -247,6 +247,23 @@
                         })
                         if(check){
                             item.name = value
+                            ajax({
+                                url:'/task/updateList',
+                                method:'post',
+                                data:{list: JSON.stringify(item)}
+                            }).then((data)=>{
+                                if(data.code){
+                                    this.$message({
+                                        message:'保存成功!',
+                                        type:'success'
+                                    })
+                                }else{
+                                    this.$message({
+                                        message:'保存失败!',
+                                        type:'error'
+                                    })
+                                }
+                            })
                         }else{
                             this.$message({
                                 message:'清单名称已存在!',
@@ -282,7 +299,25 @@
                 })
             },
             delTask(item){
-                this.task_list['tasklist'].splice( this.task_list['tasklist'].indexOf(item),1 )
+                ajax({
+                    url:'/task/delTask',
+                    method:'get',
+                    data:{task_id:item.id}
+                }).then((data)=>{
+                    if(data.code){
+                        this.task_list['tasklist'].splice( this.task_list['tasklist'].indexOf(item),1 )
+                        this.$message({
+                            message:'删除成功！',
+                            type:'success'
+                        })
+                    }else{
+                        this.$message({
+                            message:'删除失败！',
+                            type:'error'
+                        })
+                    }
+                })
+
             },
             delGroup(item){
                 this.list_ui_group.splice( this.list_ui_group.indexOf(item),1 )
@@ -472,6 +507,7 @@
                 if( gotologin(data) ){
                     return
                 }
+                console.log(data)
                 this.list_ui_group = data.group_arr
                 this.list_group = data.list_arr
 
@@ -699,6 +735,7 @@
                         width:40px;
                         text-align:center;
                         line-height:40px;
+                        cursor:pointer;
                     }
                     input{
                         flex-grow:1;

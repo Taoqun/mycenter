@@ -6,7 +6,7 @@ let bodyParser = require('body-parser');
 let urlencodedParser = bodyParser.urlencoded({ extended: false })
 const cookieParser = require('cookie-parser')
 
-exports.routers = function(app){
+module.exports = function(app){
 
     app.use(cookieParser())
 
@@ -15,9 +15,12 @@ exports.routers = function(app){
     app.post('/account/sendRegister',urlencodedParser,Login.register)
 
     app.post('/task/createTask',urlencodedParser,verify,Task.createTask)
-    app.get('/task/getList',verify,Task.getList)
     app.get('/task/getTask',verify,Task.getTask)
     app.post('/task/updateTask',urlencodedParser,verify,Task.updateTask)
+    app.get('/task/delTask',verify,Task.delTask)
+
+    app.get('/task/getList',verify,Task.getList)
+    app.post('/task/updateList',urlencodedParser,verify,Task.updateList)
     app.use(function(req, res, next) {
         res.status(404).send('404 未找到')
     });

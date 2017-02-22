@@ -49,7 +49,7 @@ exports.ajax = function(obj){
 
 
 exports.gotologin = function(obj){
-    if( obj.login === 0){
+    if( obj.code === 0){
         let str = location.protocol + '//' + location.hostname +':'+location.port + '/account/login'
         console.log(str)
         location.href = str

@@ -2,6 +2,7 @@ const express = require('express')
 // const mongoose = require('mongoose')
 const child = require('child_process')
 const cookieParser = require('cookie-parser')
+const routers = require('./router/routes.js')
 const obj = require('./config.js').obj
 // 运行
 const app = express()
@@ -11,7 +12,7 @@ app.use(express.static('public')) // public 文件  && 字体文件element.css�
 app.use(express.static('views'))
 
 
-require('./router/routes.js').routers(app)
+routers(app)
 
 const server = app.listen( obj.port , () => {
 
