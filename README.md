@@ -9,6 +9,7 @@ github : [https://github.com/Taoqun/mycenter](https://github.com/Taoqun/mycenter
 前端：
 - vue 全家桶
 - webpack
+- element-ui
 
 后端：
 - node
@@ -20,13 +21,13 @@ github : [https://github.com/Taoqun/mycenter](https://github.com/Taoqun/mycenter
 ###### 已完成
 - 登录
 - 注册
+- 任务中心 清单
 
 ###### 正在完成
-- 任务中心 清单
+- 人生进度 今年已经过去了多少天 百分之多少的进度
 
 ###### 待完成
 - echarts 图表
-- 人生进度 今年已经过去了多少天 百分之多少的进度
 - 生辰  模仿纯银的生辰
 - FM 随机播放音乐
 - markdown 写作
@@ -34,12 +35,4 @@ github : [https://github.com/Taoqun/mycenter](https://github.com/Taoqun/mycenter
 ---------------
 也可以clone仓库到本地，本地使用：
 进入到项目目录
-`app.js`  ==>  可以修改 端口号 默认8081 可以自行修改
-```
-const server = app.listen(8081, () => {
-```
-
-全局ajax域名配置  `public/js/ajax.js` 修改本站所有的ajax请求地址的域名 端口号
-```
-let host = 'http://localhost:8081'
-```
+`config.js`  ==>  可以修改 端口号 默认8081  也可以设置host 配置本地域名
