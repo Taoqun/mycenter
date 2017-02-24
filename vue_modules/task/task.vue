@@ -27,8 +27,8 @@
                 <h3 class="task-list-show-name" v-show="no_List.length" @click="closeTaskList"><i class="el-icon-arrow-down"></i>待完成</h3>
                     <transition-group name="leave-arr" tag="ul">
                     <li v-for="item in no_List" :key="item.id" data-list-id="item.list_id">
-                        <i class="iconfont icon-square" @click.stop="item.IsCompalte = !item.IsCompalte"></i>
-                        <input type="text" name="" @click.stop="setdis(item)" v-model="item.name">
+                        <i class="iconfont icon-square" @click.stop="changeComplate(item)"></i>
+                        <input type="text" name="" @click.stop="setdis(item)" v-model="item.name" @change="updateTask">
                         <i class="iconfont icon-delete_light" @click="delTask(item)"></i>
                     </li>
                     </transition-group>
@@ -37,7 +37,7 @@
                 <h3 class="task-list-show-name" v-show="off_list.length" @click="closeTaskList"><i class="el-icon-arrow-down"></i>已完成</h3>
                     <transition-group name="leave-arr" tag="ul">
                     <li v-for="item in off_list" :key="item.id">
-                        <i class="iconfont icon-squarecheck" @click.stop="item.IsCompalte = !item.IsCompalte"></i>
+                        <i class="iconfont icon-squarecheck" @click.stop="changeComplate(item)"></i>
                         <input type="text" name="" @click.stop="setdis(item)" v-model="item.name">
                         <i class="iconfont icon-delete_light" @click="delTask(item)"></i>
                     </li>
@@ -48,10 +48,10 @@
         <div class="task-discription" @click.stop="stopEvent">
             <h3 class="title">任务描述</h3>
             <div class="task-li-name">
-                <input type="text" value="" placeholder="任务名称" v-model="task_dis.name">
+                <input type="text" value="" placeholder="任务名称" v-model="task_dis.name" @change="updateTask">
             </div>
             <div class="task-li-discription">
-                <textarea placeholder="任务描述" v-model="task_dis.dis"></textarea>
+                <textarea placeholder="任务描述" v-model="task_dis.dis" @keyup="updateTask" ></textarea>
             </div>
         </div>
 
@@ -85,7 +85,7 @@
 </template>
 
 <script>
-    import "CSS/element.css"
+    // import "CSS/element.css"
     import 'CSS/ali/iconfont.css'
     import Vue from 'vue'
     import ElementUI from 'element-ui'
@@ -119,6 +119,7 @@
                 task_dis:{
                     name:'',
                     dis:'',
+                    id:''
                 },
                 dialogVisible:false,
                 addType:'清单',
@@ -154,7 +155,7 @@
             no_List(){
                 let list = []
                 this.task_list['tasklist'].map( (i)=>{
-                    if(!i.IsCompalte){
+                    if(!i.IsComplete){
                         list.push(i)
                     }
                 })
@@ -164,7 +165,7 @@
             off_list(){
                 let list = []
                 this.task_list['tasklist'].map( (i)=>{
-                    if(i.IsCompalte){
+                    if(i.IsComplete){
                         list.push(i)
                     }
                 } )
@@ -207,7 +208,7 @@
                 if(this.add_task){
                     let obj = {
                         name:this.add_task,
-                        IsCompalte:false,
+                        IsComplete:false,
                         id:parseInt( Date.now() ).toString() + Math.random().toString(36).substr(2),
                         list_id:this.task_list['list_id'],
                         dis:'',
@@ -226,12 +227,9 @@
                         url:"/task/createTask",
                         data:{ obj: JSON.stringify( obj )  }
                     }).then((data)=>{
-                        console.log(data)
                     })
                 }
                 this.add_task = ''
-
-
             },
             updateList(item,list){
                 this.$prompt('请输入新名称',item.name,{
@@ -553,7 +551,7 @@
                 }
             },
             stopEvent(){
-                console.log(1)
+
             },
             showDropList(){
                 this.drop_list_show = !this.drop_list_show
@@ -571,11 +569,32 @@
                 }).then((data)=>{
                     if(data){
                         this.task_list['tasklist'] = data
-                        console.log( this.task_list['tasklist'] )
                         this.task_list['list_id'] = 'all'
                     }
                 })
             },
+            changeComplate(item){
+                item.IsComplete = !item.IsComplete
+                ajax({
+                    url:'/task/updateTask',
+                    method:'post',
+                    data:{task: JSON.stringify(item)}
+                }).then( (data)=>{
+                    if(data.code){
+                    }
+                } )
+            },
+            updateTask(){
+                ajax({
+                    url:'/task/updateTask',
+                    method:'post',
+                    data:{task: JSON.stringify(this.task_dis) }
+                }).then( (data)=>{
+                    if(data.code){
+
+                    }
+                } )
+            }
         },
         mounted(){
             document.addEventListener('click',()=>{
@@ -602,10 +621,8 @@
                 if( gotologin(data) ){
                     return
                 }
-                console.log(data)
                 this.list_ui_group = data.group_arr
                 this.list_group = data.list_arr
-
                 this.list_ui_group.map( (i)=>{
                     let arr = []
                     this.list_group.map( (j)=>{
@@ -621,7 +638,7 @@
                 setTimeout(()=>{
                     loadscreen.close()
                     this.$message({message:'数据获取完毕！',type:'success'});
-                },1500)
+                },1000)
 
             })
         },

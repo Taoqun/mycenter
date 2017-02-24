@@ -28,15 +28,40 @@ exports.getTask = function(req,res){
         if(err){return}
         let account = result[0].account
         var taskdata = mongoose.model(account,task_type)
-        let obj = {}
-        obj.list_id =  list_id
-        taskdata.find(obj,(err,result)=>{
-            if(err){return res.json({code:0})}
-            res.json(result)
+        if(list_id === 'all'){
+            taskdata.find({},(err,result)=>{
+                if(err){return res.json({code:0})}
+                res.json(result)
+            })
+        }else if(list_id === 'box'){
+            taskdata.find({list_id:''},(err,result)=>{
+                if(err){return res.json({code:0})}
+                res.json(result)
+            })
+        }else{
+            let obj = {}
+            obj.list_id =  list_id
+            taskdata.find(obj,(err,result)=>{
+                if(err){return res.json({code:0})}
+                res.json(result)
+            })
+        }
+
+    })
+}
+exports.updateTask = function(req,res){
+    let id = req.cookies.sessions_id
+    let task = JSON.parse( req.body.task )
+    session.find({session_id:id},(err,result)=>{
+        if(err){return}
+        let account = result[0].account
+        var taskdata = mongoose.model(account,task_type)
+        taskdata.update({id:task.id},task,(err,result)=>{
+            if(err){ return res.json({code:0}) }
+            res.json({code:1})
         })
     })
 }
-exports.updateTask = function(req,res){}
 exports.delTask = function(req,res){
     let ses_id = req.cookies.sessions_id
     let task_id = req.query.task_id

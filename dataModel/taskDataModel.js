@@ -15,7 +15,7 @@ var list_type = new mongoose.Schema({
 var task_type = new mongoose.Schema({
     account:String,
     name:String,
-    IsCompalte:Boolean,
+    IsComplete:Boolean,
     id:String,
     list_id:String,
     dis:String,
@@ -30,12 +30,12 @@ run.prototype.init =  function(account,res){
 
     var taskdata = mongoose.model(account,task_type)
     let taskArr = [
-        {name:'已完成的任务会在这里显示',IsCompalte:true,id: parseInt( Date.now() ).toString() + Math.random().toString(36).substr(2) , list_id:'all' , dis:'已完成的任务会在这里显示',date:Date.now()},
-        {name:'取消勾选，可回退至待完成',IsCompalte:true,id: parseInt( Date.now() ).toString() + Math.random().toString(36).substr(2) , list_id:'all' , dis:'取消勾选，可回退至待完成',date:Date.now()},
-        {name:'是不是很赞',IsCompalte:true,id: parseInt( Date.now() ).toString() + Math.random().toString(36).substr(2) , list_id:'all' , dis:'是不是很赞', date:Date.now()},
-        {name:'回车添加任务',IsCompalte:false,id: parseInt( Date.now() ).toString() + Math.random().toString(36).substr(2) , list_id:'all' , dis:'回车添加任务', date:Date.now()},
-        {name:'点击查看任务详情',IsCompalte:false,id: parseInt( Date.now() ).toString() + Math.random().toString(36).substr(2) , list_id:'all' , dis:'点击查看任务详情', date:Date.now()},
-        {name:'勾选完成任务',IsCompalte:false,id: parseInt( Date.now() ).toString() + Math.random().toString(36).substr(2) , list_id:'all' , dis:'勾选完成任务',date:Date.now() }
+        {name:'已完成的任务会在这里显示',IsComplete:true,id: parseInt( Date.now() ).toString() + Math.random().toString(36).substr(2) , list_id:'all' , dis:'已完成的任务会在这里显示',date:Date.now()},
+        {name:'取消勾选，可回退至待完成',IsComplete:true,id: parseInt( Date.now() ).toString() + Math.random().toString(36).substr(2) , list_id:'all' , dis:'取消勾选，可回退至待完成',date:Date.now()},
+        {name:'是不是很赞',IsComplete:true,id: parseInt( Date.now() ).toString() + Math.random().toString(36).substr(2) , list_id:'all' , dis:'是不是很赞', date:Date.now()},
+        {name:'回车添加任务',IsComplete:false,id: parseInt( Date.now() ).toString() + Math.random().toString(36).substr(2) , list_id:'all' , dis:'回车添加任务', date:Date.now()},
+        {name:'点击查看任务详情',IsComplete:false,id: parseInt( Date.now() ).toString() + Math.random().toString(36).substr(2) , list_id:'all' , dis:'点击查看任务详情', date:Date.now()},
+        {name:'勾选完成任务',IsComplete:false,id: parseInt( Date.now() ).toString() + Math.random().toString(36).substr(2) , list_id:'all' , dis:'勾选完成任务',date:Date.now() }
         ]
     taskArr.map((i)=>{
         let task = new taskdata(i)
