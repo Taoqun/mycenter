@@ -279,8 +279,6 @@
                     cancelButtonText: '取消',
                 }).then(({value})=>{
                     if(value){
-                        console.log(value)
-                        console.log(list)
                         let check = true
                         list.map((i)=>{
                             if( i.name == value){
@@ -289,6 +287,23 @@
                         })
                         if(check){
                             item.name = value
+                            ajax({
+                                url:'/task/updateGroup',
+                                method:'post',
+                                data:{list : JSON.stringify(item)}
+                            }).then( (data)=>{
+                                if(data.code){
+                                    this.$message({
+                                        message:'保存成功!',
+                                        type:'success'
+                                    })
+                                }else{
+                                    this.$message({
+                                        message:'保存失败!',
+                                        type:'error'
+                                    })
+                                }
+                            } )
                         }else{
                             this.$message({
                                 message:'清单名称已存在!',
@@ -321,6 +336,23 @@
             },
             delGroup(item){
                 this.list_ui_group.splice( this.list_ui_group.indexOf(item),1 )
+                ajax({
+                    url:'/task/delGroup',
+                    method:"get",
+                    data:{group_id:item.group_id}
+                }).then((data)=>{
+                    if(data.code){
+                        this.$message({
+                            message:'删除成功！',
+                            type:'success'
+                        })
+                    }else{
+                        this.$message({
+                            message:'删除失败！',
+                            type:'error'
+                        })
+                    }
+                })
             },
             delList(item){
                 if(item.group_id){
@@ -332,14 +364,35 @@
                 }else{
                     this.list_group.splice( this.list_group.indexOf(item),1 )
                 }
+
+                ajax({
+                    url:'/task/delList',
+                    method:'get',
+                    data:{list_id:item.list_id}
+                }).then((data)=>{
+                    if(data.code){
+                        this.$message({
+                            message:'删除成功！',
+                            type:'success'
+                        })
+                    }else{
+                        this.$message({
+                            message:'删除失败！',
+                            type:'error'
+                        })
+                    }
+                })
+
             },
             chooceAddType(){
                 this.dialogVisible = true
             },
+            // 增加文件夹或者清单
+            // 遍历清单检查名字是否已经存在
+            // 添加名称到文件夹或者清单
+            // 发送ajax
             showAddListInput(){
-                console.log( this.addType )
                 if( this.add_list_name ){
-
                     if(this.addType == '文件夹'){
                         let check = true
                         this.list_ui_group.map((i)=>{
@@ -352,16 +405,30 @@
                             let obj = {
                                 name:this.add_list_name,
                                 type:'group',
-                                group_id:Date.now().toString() + Math.radnom().toStrintg(36).substr(2),
+                                group_id:Date.now().toString() + Math.random().toString(36).substr(2),
                                 moreMenu:false,
                                 name_id:Date.now(),
                                 task_list:[]
                             }
                             this.list_ui_group.unshift( obj )
-                            this.$message({
-                                message:'文件夹添加成功!',
-                                type:'success'
-                            })
+                            ajax({
+                                url:'/task/addGroup',
+                                method:'post',
+                                data:{list: JSON.stringify(obj) }
+                            }).then( (data)=>{
+                                if(data.code){
+                                    this.$message({
+                                        message:'文件夹添加成功!',
+                                        type:'success'
+                                    })
+                                }else{
+                                    this.$message({
+                                        message:'文件夹添加失败!',
+                                        type:'error'
+                                    })
+                                }
+                            } )
+
                         }else{
                             this.$message('文件夹名称已存在！');
                             return
@@ -379,14 +446,28 @@
                                 name:this.add_list_name,
                                 group_id:'all',
                                 type:'list',
-                                list_id:Date.now().toString() + Math.radnom().toStrintg(36).substr(2),
+                                list_id:Date.now().toString() + Math.random().toString(36).substr(2),
                                 moreMenu:false,
                             }
                             this.list_group.unshift( obj )
-                            this.$message({
-                                message:'清单添加成功!',
-                                type:'success'
+                            ajax({
+                                url:'/task/addList',
+                                method:'post',
+                                data:{list:JSON.stringify(obj)}
+                            }).then( (data)=>{
+                                if(data.code){
+                                    this.$message({
+                                        message:'清单添加成功!',
+                                        type:'success'
+                                    })
+                                }else{
+                                    this.$message({
+                                        message:'添加失败!',
+                                        type:'error'
+                                    })
+                                }
                             })
+
                         }else{
                             this.$message('清单名称已存在！')
                             return
@@ -417,15 +498,29 @@
                         type:'list',
                         moreMenu:false,
                         date:Date.now(),
-                        list_id: Date.now().toString() + Math.radnom().toStrintg(36).substr(2),
+                        list_id: Date.now().toString() + Math.random().toString(36).substr(2),
                     }
                     item.task_list.unshift(obj)
                     this.add_list_obj.str = ''
                     this.add_list_obj.show = false
-                    this.$message({
-                        message:'添加成功!',
-                        type:'success'
+                    ajax({
+                        url:'/task/addList',
+                        method:'post',
+                        data:{list: JSON.stringify(obj) }
+                    }).then( (data)=>{
+                        if(data.code){
+                            this.$message({
+                                message:'添加成功!',
+                                type:'success'
+                            })
+                        }else{
+                            this.$message({
+                                message:'添加失败!',
+                                type:'error'
+                            })
+                        }
                     })
+
                 }else{
                     this.$message({
                         message:'清单名称已存在!',
@@ -523,9 +618,11 @@
                         this.list_group.splice( this.list_group.indexOf(k),1 )
                     })
                 })
+                setTimeout(()=>{
+                    loadscreen.close()
+                    this.$message({message:'数据获取完毕！',type:'success'});
+                },1500)
 
-                loadscreen.close()
-                this.$message({message:'数据获取完毕！',type:'success'});
             })
         },
         created(){
