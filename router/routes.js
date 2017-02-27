@@ -10,9 +10,26 @@ module.exports = function(app){
 
     app.use(cookieParser())
 
+
+    app.get('/test',function(req,res){
+        res.render('test/test.ejs',{name:'aaaaaas'})
+    })
+    // 渲染页面模板
+    app.get('/account/login',function(req,res){
+        res.render('account/login/index.ejs')
+    })
+    app.get('/account/register',function(req,res){
+        res.render('account/register/index.ejs')
+    })
+    app.get('/index',function(req,res){
+        res.render('index/index.ejs')
+    })
+    app.get('/task',function(req,res){
+        res.render('task/index.ejs')
+    })
     // get请求
     app.get('/',function(req,res){
-        res.redirect('/account/login')
+        res.render('account/login/index.ejs')
     })
     // 登录注册请求
     app.get('/login', Login.login)

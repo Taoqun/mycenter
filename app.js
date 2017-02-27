@@ -6,6 +6,9 @@ const routers = require('./router/routes.js')
 const obj = require('./config.js').obj
 // 运行
 const app = express()
+
+app.set('view engine','ejs')
+app.set('views',__dirname+'/views')
 app.use(cookieParser())
 // 设置静态文件
 app.use(express.static('public')) // public 文件  && 字体文件element.css里配置

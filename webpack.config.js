@@ -13,7 +13,7 @@ var entryObj ={
 module.exports = {
     entry:entryObj,
     output:{
-        path: path.resolve(__dirname, './views/'),
+        path: path.resolve(__dirname, './public/js/'),
         filename:"[name].js",
     },
     resolveLoader: {
