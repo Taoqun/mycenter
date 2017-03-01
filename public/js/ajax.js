@@ -24,7 +24,6 @@ exports.ajax = function(obj){
                 params:obj.data,
             }).then( (res)=>{
                 resolve(res.body)
-
             },(res)=>{
                 reject(res)
             } )

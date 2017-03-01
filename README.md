@@ -33,6 +33,9 @@ github : [https://github.com/Taoqun/mycenter](https://github.com/Taoqun/mycenter
 - markdown 写作
 
 ---------------
-也可以clone仓库到本地，本地使用：
-进入到项目目录
-`config.js`  ==>  可以修改 端口号 默认8081  也可以设置host 配置本地域名
+说明:
+- 需要本地安装 mongodb 运行后会连接 `taoqun` 数据库
+- `config.js`  ==>  可以修改 端口号和配置域名 默认8081  也可以设置host 配置本地域名
+- 运行 node app.js 可以启动服务器
+- 访问地址 可以注册 / 登录 访问页面
+- 所有请求都有sessions_id 验证 没有登录账号 无法访问页面 会跳转到登录页

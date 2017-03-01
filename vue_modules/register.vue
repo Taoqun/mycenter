@@ -71,7 +71,6 @@
   import Vue from 'vue'
   import element from 'element-ui'
   import {ajax} from 'JS/ajax.js'
-  import 'CSS/element.css'
   Vue.use(element)
     export default{
         data(){
