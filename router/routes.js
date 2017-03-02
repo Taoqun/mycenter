@@ -20,7 +20,7 @@ module.exports = function(app){
     birth_router(app)
 
     app.get('/test',function(req,res){
-        res.render('test/test.ejs',{name:'aaaaaas'})
+        res.render('test/test.ejs', {json:'{name:[1,2,3]}'} )
     })
     // 渲染页面模板
     app.get('/account/login',function(req,res){
@@ -59,7 +59,6 @@ module.exports = function(app){
     app.post('/task/addGroup',urlencodedParser,verify,Task.addGroup)
     app.get('/task/delGroup',verify,Task.delGroup)
     app.post('/task/updatGroup',urlencodedParser,verify,Task.updateGroup)
-
 
     // 404
     app.use(function(req, res, next) {
