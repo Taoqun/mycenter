@@ -1,18 +1,18 @@
 <template lang="html">
     <div id="index">
-        <h6 class="title">生辰</h6>
-        <div class="alive">
+        <h6 class="title">生辰 <p>彼得·潘</p> </h6>
+        <div class="birth_text alive">
             <p>生之时</p>
             <p v-show="birth_date" class="birth_date">出生日期{{birth_date}}</p>
-            <p>你已经23.24302619岁了</p>
+            <p >你已经23.24302619岁了</p>
             <h5>在这个世界上，你已经存在了</h5>
             <ul>
-                <li> 23年 </li>
-                <li> 279月 </li>
-                <li> 1212周 </li>
-                <li> 8489天 </li>
-                <li> 203752小时 </li>
-                <li> 12225174分钟 </li>
+                <li><p> 23年 </p></li>
+                <li><p> 279月 </p></li>
+                <li><p> 1212周 </p></li>
+                <li><p> 8489天 </p></li>
+                <li><p> 203752小时 </p></li>
+                <li><p> 12225174分钟 </p></li>
             </ul>
         </div>
 
@@ -44,62 +44,62 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import elementUI from 'element-ui'
-Vue.use(elementUI)
+    import Vue from 'vue'
+    import elementUI from 'element-ui'
+    Vue.use(elementUI)
 
-export default {
-    data(){
-        return {
-            progress:0,
-            birth_value:'',
-            pickerOptions0:{
-                disabledDate(time) {
-                    return time.getTime() > Date.now()
+    export default {
+        data(){
+            return {
+                progress:0,
+                birth_value:'',
+                pickerOptions0:{
+                    disabledDate(time) {
+                        return time.getTime() > Date.now()
+                    }
+                },
+                model_date:false,
+            }
+        },
+        computed:{
+            birth_date(){
+                let str = ''
+                if(this.birth_value){
+                    let year = this.birth_value.getFullYear()
+                    let month = this.birth_value.getMonth() +1
+                    let day = this.birth_value.getDate()
+                    str = year + '-' + month + '-' + day
+                }
+                return str
+            }
+        },
+        methods:{
+            contime(){
+                console.log( this.birth_value.getFullYear() )
+            },
+            close_date_model(){
+                console.log( this.birth_value )
+                if(!this.birth_value){
+                    this.$alert('请选择您的出生日期', '选择日期', {
+                      confirmButtonText: '确定',
+                   })
+                }else{
+                    this.model_date = false
                 }
             },
-            model_date:false,
-        }
-    },
-    computed:{
-        birth_date(){
-            let str = ''
-            if(this.birth_value){
-                let year = this.birth_value.getFullYear()
-                let month = this.birth_value.getMonth() +1
-                let day = this.birth_value.getDate()
-                str = year + '-' + month + '-' + day
-            }
-            return str
-        }
-    },
-    methods:{
-        contime(){
-            console.log( this.birth_value.getFullYear() )
         },
-        close_date_model(){
-            console.log( this.birth_value )
-            if(!this.birth_value){
-                this.$alert('请选择您的出生日期', '选择日期', {
-                  confirmButtonText: '确定',
-               })
-            }else{
-                this.model_date = false
-            }
-        },
-    },
-    mounted(){
-        let timer = setInterval(()=>{
-            if(this.progress === 100 ){
-                clearInterval(timer)
-                return
-            }
-            let ps = document.querySelector(".progress")
-            this.progress += 10
-            ps.style.width = this.progress + '%'
-        },300)
+        mounted(){
+            let timer = setInterval(()=>{
+                if(this.progress === 100 ){
+                    clearInterval(timer)
+                    return
+                }
+                let ps = document.querySelector(".progress")
+                this.progress += 10
+                ps.style.width = this.progress + '%'
+            },300)
+        }
     }
-}
 </script>
 
 <style lang="scss">
@@ -136,6 +136,23 @@ export default {
         font-size:30px;
         letter-spacing: 20px;
         line-height: 50px;
+    }
+    .birth_text{
+        padding:50px;
+        p{
+            font-size:20px;
+            line-height:40px;
+            text-align:center;
+        }
+        h5{
+            font-size:20px;
+            line-height:40px;
+        }
+        li{
+            float:left;
+            width:33%;
+            box-sizing: border-box;
+        }
     }
     .birth_date{
 

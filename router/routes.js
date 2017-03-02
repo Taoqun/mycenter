@@ -1,15 +1,23 @@
 
-let Login = require('../controller/login.js')
-let Task = require('../controller/task.js')
-let verify = require('../controller/verify.js').run
-let bodyParser = require('body-parser');
-let urlencodedParser = bodyParser.urlencoded({ extended: false })
+//  控制器 逻辑
+const Login = require('../controller/login.js')
+const Task = require('../controller/task.js')
+const verify = require('../controller/verify.js').run
+
+// 引入路由
+const birth_router = require("./birth_router.js")
+
+// 插件类
+const bodyParser = require('body-parser');
+const urlencodedParser = bodyParser.urlencoded({ extended: false })
 const cookieParser = require('cookie-parser')
 
 module.exports = function(app){
 
     app.use(cookieParser())
 
+    // 执行其他路由
+    birth_router(app)
 
     app.get('/test',function(req,res){
         res.render('test/test.ejs',{name:'aaaaaas'})

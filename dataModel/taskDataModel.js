@@ -5,6 +5,11 @@ const mongoose = require('mongoose')
 //mongoose.Promise = global.Promise;
 //mongoose.connect('mongodb://localhost:27017/taoqun')
 
+
+// 账户名
+// 清单列表
+// 文件夹列表
+// 创建日期
 var list_type = new mongoose.Schema({
     account:String,
     list_arr:Array,
@@ -12,6 +17,13 @@ var list_type = new mongoose.Schema({
     create_date:Date,
 })
 
+// 账户名
+// 任务名称
+// 是否完成
+// 任务id
+// 所对应的清单id
+// 描述
+// 日期
 var task_type = new mongoose.Schema({
     account:String,
     name:String,

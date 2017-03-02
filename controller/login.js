@@ -1,4 +1,4 @@
-const userInfo = require('../dataModel/loginDataModel.js').userInfo
+const userInfo = require('../dataModel/userInfoDataModel.js').userInfo
 
 // 登录账户验证
 exports.login = function(req, res) {

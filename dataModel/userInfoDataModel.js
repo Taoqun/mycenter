@@ -5,10 +5,19 @@ const mongoose = require('mongoose')
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost:27017/taoqun')
 
+
+// 名字
+// 账户名
+// 密码
+// 创建日期
+
 let DB_type_userinfo = new mongoose.Schema({
     name:String,
     account:String,
     password:String,
+    birth_day:Date,
+    death_day:Date,
+    phone:String,
     date:Date,
 })
 
@@ -23,8 +32,6 @@ exports.userInfo = userInfo
 //     return result
 // })
 // console.log('yes mongo')
-
-
 
 /* mongoose 增加 */
 // var sam = new MyStudent({
