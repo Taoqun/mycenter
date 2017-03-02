@@ -22,13 +22,13 @@ github : [https://github.com/Taoqun/mycenter](https://github.com/Taoqun/mycenter
 - 登录
 - 注册
 - 任务中心 清单
+- 人生进度 今年已经过去了多少天 百分之多少的进度
 
 ###### 正在完成
-- 人生进度 今年已经过去了多少天 百分之多少的进度
+- 生辰  模仿纯银的生辰
 
 ###### 待完成
 - echarts 图表
-- 生辰  模仿纯银的生辰
 - FM 随机播放音乐
 - markdown 写作
 
