@@ -5,15 +5,16 @@ var CSS = path.resolve(__dirname,'public/css')
 var JS = path.resolve(__dirname,'public/js')
 var ROOT = path.resolve(__dirname)
 var entryObj ={
-    // "account/login/index":'./src/account/login/index.js',
-    // "account/register/index":'./src/account/register/index.js',
+    "account/login/index":'./src/account/login/index.js',
+    "account/register/index":'./src/account/register/index.js',
     "index/index":'./src/index/index.js',
-    // "task/index":"./src/task/index.js",
+    "task/index":"./src/task/index.js",
+    "account/user_info/index":"./src/account/user_info/index.js",
 }
 module.exports = {
     entry:entryObj,
     output:{
-        path: path.resolve(__dirname, './public/js/'),
+        path: path.resolve(__dirname, './views/'),
         filename:"[name].js",
     },
     resolveLoader: {

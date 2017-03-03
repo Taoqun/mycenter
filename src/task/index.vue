@@ -6,7 +6,7 @@
 </template>
 
 <script>
-    import Shead from 'VUEMODULES/head'
+    import Shead from 'VUEMODULES/common/head'
     import Stask from 'VUEMODULES/task/task'
     export default {
         components:{

@@ -17,7 +17,9 @@ let DB_type_userinfo = new mongoose.Schema({
     password:String,
     birth_day:Date,
     death_day:Date,
+    sex:String,
     phone:String,
+    email:String,
     date:Date,
 })
 

@@ -6,8 +6,8 @@
 </template>
 
 <script>
-  import sHead from 'VUEMODULES/head'
-  import Login from 'VUEMODULES/login'
+  import sHead from 'VUEMODULES/common/head'
+  import Login from 'VUEMODULES/account/login'
   export default {
     components:{
       "s-head":sHead,

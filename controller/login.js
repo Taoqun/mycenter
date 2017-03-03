@@ -1,12 +1,13 @@
 const userInfo = require('../dataModel/userInfoDataModel.js').userInfo
+const getaccount = require("./getAccount.js")
 
 // 登录账户验证
 exports.login = function(req, res) {
     let obj = {
-        account: req.query.account,
-        password: req.query.password
-    }
-    // 检测账号密码 是否符合规则
+            account: req.query.account,
+            password: req.query.password
+        }
+        // 检测账号密码 是否符合规则
     if (!obj.account || !obj.password) {
         res.json({
             code: 0,
@@ -29,7 +30,7 @@ exports.login = function(req, res) {
         return
     }
     // 检查账号是否已经注册
-    userInfo.find({account: obj.account}, (err, result) => {
+    userInfo.find({ account: obj.account }, (err, result) => {
 
         if (err) {
             return console.log(err)
@@ -42,22 +43,22 @@ exports.login = function(req, res) {
                 // 未登录 生成 session_id 存储并返回
                 let setSession = require('../dataModel/sessionDataModel.js').session
                 setSession.find({ account: obj.account }, (err, result) => {
-                    if(result.length === 0){
+                    if (result.length === 0) {
                         let ss = Math.random().toString(36).substr(2)
                         let account = obj.account
                         let obj = new setSession({
-                            session_id:ss,
-                            account:account
+                            session_id: ss,
+                            account: account
                         })
-                        obj.save((err)=>{
-                            if(err){}
-                            res.cookie('sessions_id',ss)
-                            res.cookie('account',account)
-                            res.json({code: 1,verify: true,account: true,password: true})
+                        obj.save((err) => {
+                            if (err) {}
+                            res.cookie('sessions_id', ss)
+                            res.cookie('account', account)
+                            res.json({ code: 1, verify: true, account: true, password: true })
                         })
-                    }else{
-                        res.cookie('sessions_id',result[0].session_id)
-                        res.json({code: 1,verify: true,account: true,password: true})
+                    } else {
+                        res.cookie('sessions_id', result[0].session_id)
+                        res.json({ code: 1, verify: true, account: true, password: true })
                     }
                 })
             } else {
@@ -95,15 +96,16 @@ exports.register = function(req, res) {
         // 账户不存在 进行保存
         if (result && result.length === 0) {
             let add = new userInfo({
-                    account: account,
-                    password: password,
-                    name: name,
-                    date: Date.now()
-                })
+                account: account,
+                password: password,
+                name: name,
+                date: Date.now()
+            })
 
             // 生成session id
             getSessionId()
-            function getSessionId(){
+
+            function getSessionId() {
                 let session_id = Math.random().toString(36).substr(2)
                 let setSession = require('../dataModel/sessionDataModel.js').session
 
@@ -120,12 +122,12 @@ exports.register = function(req, res) {
                             // 设置session id
                             // 保存
                         add.save(function(err) {
-                            if (err) { return res.json({ register: false , dis:'保存失败!'}) }
+                            if (err) { return res.json({ register: false, dis: '保存失败!' }) }
 
                             res.cookie('sessions_id', session_id)
-                            res.cookie('account', decodeURIComponent(account) )
+                            res.cookie('account', decodeURIComponent(account))
                             require('../dataModel/taskDataModel.js').run.init(account, res)
-                            //res.json({register:true})
+                                //res.json({register:true})
                         })
                     } else {
                         getSessionId()
@@ -134,7 +136,48 @@ exports.register = function(req, res) {
             }
         } else {
             // 账户存在返回false
-            res.json({ register: false ,dis:'账户已存在!'})
+            res.json({ register: false, dis: '账户已存在!' })
         }
+    })
+}
+
+// 获取用户信息
+
+exports.getUserInfo = function(req, res) {
+    let session_id = req.cookies.sessions_id
+    getaccount(session_id).then((account) => {
+        userInfo.find({ account: account }, (err, result) => {
+            if (err) { return console.log(err) }
+
+            let obj = result[0]
+            let json = {}
+            json.name = obj.name
+            json.phone = obj.phone
+            json.email = obj.email
+            json.sex = obj.sex
+            json.date = obj.date
+            json.birth_day = obj.birth_day
+            res.json(json)
+        })
+    })
+}
+
+// 更新用户信息
+exports.updateUserInfo = function(req, res) {
+    let session_id = req.cookie.sessions_id
+    let obj = {}
+
+    if (req.body.name) { obj.name = req.body.name }
+    if (req.body.email) { obj.email = req.body.email }
+    if (req.body.phone) { obj.phone = req.body.phone }
+    if (req.body.sex) { obj.sex = req.body.sex }
+    if (req.body.birth_day) { obj.birth_day = req.body.birth_day }
+
+    getaccount(session_id).then((account) => {
+        userInfo.update({ account: account }, obj, (err, result) => {
+            if (err) { return console.log(err);
+                res.json({ code: 0 }) }
+            res.json({ code: 1 })
+        })
     })
 }

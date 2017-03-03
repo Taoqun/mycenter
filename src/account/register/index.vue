@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import Shead from 'VUEMODULES/head'
-import Register from 'VUEMODULES/register'
+import Shead from 'VUEMODULES/common/head'
+import Register from 'VUEMODULES/account/register'
 export default {
   components:{
     "s-head":Shead,
