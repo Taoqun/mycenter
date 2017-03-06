@@ -155,7 +155,7 @@ exports.getUserInfo = function(req, res) {
             json.phone = obj.phone
             json.email = obj.email
             json.sex = obj.sex
-            json.date = obj.date
+            json.date = obj.date.valueOf()
             json.birth_day = obj.birth_day
             res.json(json)
         })
@@ -164,19 +164,16 @@ exports.getUserInfo = function(req, res) {
 
 // 更新用户信息
 exports.updateUserInfo = function(req, res) {
-    let session_id = req.cookie.sessions_id
+    let session_id = req.cookies.sessions_id
     let obj = {}
-
     if (req.body.name) { obj.name = req.body.name }
     if (req.body.email) { obj.email = req.body.email }
     if (req.body.phone) { obj.phone = req.body.phone }
     if (req.body.sex) { obj.sex = req.body.sex }
-    if (req.body.birth_day) { obj.birth_day = req.body.birth_day }
-
+    if (req.body.birth_day) { obj.birth_day = parseInt(req.body.birth_day) + (8*1000*60*60) }
     getaccount(session_id).then((account) => {
         userInfo.update({ account: account }, obj, (err, result) => {
-            if (err) { return console.log(err);
-                res.json({ code: 0 }) }
+            if (err) { console.log(err); res.json({ code: 0 }) ;return }
             res.json({ code: 1 })
         })
     })

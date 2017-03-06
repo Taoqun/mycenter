@@ -91,9 +91,7 @@
             background-color:#F9FAFC;
             border:1px solid #eee;
             box-shadow:0 0 10px #D3DCE6;
-
         }
-
         h4{
             font-size:20px;
             color:#1D8CE0;
