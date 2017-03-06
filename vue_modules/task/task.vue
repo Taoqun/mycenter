@@ -25,23 +25,23 @@
             </div>
             <div class="task-list-show task-list-no">
                 <h3 class="task-list-show-name" v-show="no_List.length" @click="closeTaskList"><i class="el-icon-arrow-down"></i>待完成</h3>
-                    <transition-group name="leave-arr" tag="ul">
+                    <ul>
                     <li v-for="item in no_List" :key="item.id" data-list-id="item.list_id">
                         <i class="iconfont icon-square" @click.stop="changeComplate(item)"></i>
                         <input type="text" name="" @click.stop="setdis(item)" v-model="item.name" @change="updateTask">
                         <i class="iconfont icon-delete_light" @click="delTask(item)"></i>
                     </li>
-                    </transition-group>
+                    </ul>
             </div>
             <div class="task-list-show task-list-off">
                 <h3 class="task-list-show-name" v-show="off_list.length" @click="closeTaskList"><i class="el-icon-arrow-down"></i>已完成</h3>
-                    <transition-group name="leave-arr" tag="ul">
+                    <ul>
                     <li v-for="item in off_list" :key="item.id">
                         <i class="iconfont icon-squarecheck" @click.stop="changeComplate(item)"></i>
                         <input type="text" name="" @click.stop="setdis(item)" v-model="item.name">
                         <i class="iconfont icon-delete_light" @click="delTask(item)"></i>
                     </li>
-                    </transition-group>
+                    </ul>
             </div>
         </div>
 
@@ -574,15 +574,20 @@
                 })
             },
             changeComplate(item){
-                item.IsComplete = !item.IsComplete
-                ajax({
-                    url:'/task/updateTask',
-                    method:'post',
-                    data:{task: JSON.stringify(item)}
-                }).then( (data)=>{
-                    if(data.code){
-                    }
-                } )
+                let parentNode = event.target.parentNode
+                parentNode.style.transform = 'translateY(100%)'
+                setTimeout(()=>{
+                    parentNode.style.transform = 'translateY(0)'
+                    item.IsComplete = !item.IsComplete
+                    ajax({
+                        url:'/task/updateTask',
+                        method:'post',
+                        data:{task: JSON.stringify(item)}
+                    }).then( (data)=>{
+                        if(data.code){
+                        }
+                    })
+                },300)
             },
             updateTask(){
                 ajax({
@@ -593,7 +598,7 @@
                     if(data.code){
 
                     }
-                } )
+                })
             }
         },
         mounted(){
@@ -842,7 +847,7 @@
                     box-sizing:border-box;
                     border-bottom:1px solid #EFF2F7;
                     display:flex;
-                    transition:all 0.5s ease-in 0s;
+                    transition:all 0.3s ease-in 0s;
                     i{
                         font-size:15px;
                         height:40px;

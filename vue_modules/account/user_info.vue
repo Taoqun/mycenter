@@ -5,8 +5,6 @@
                 <ul @click="showContent">
                     <li><p class="base" :class=" {'active':show_content == 'setting_base'}" data-show="setting_base">基础设置</p></li>
                     <li><p data-show="setting_user">个人资料</p></li>
-                    <li><p>其他设置</p></li>
-                    <li><p>账号管理</p></li>
                 </ul>
             </div>
             <div class="setting_right">
@@ -25,6 +23,7 @@
                     <div class="line_row"><span class="row_text">邮箱</span><input class="row_input" type="text" name="" v-model="user_info.email"></div>
                     <div class="line_row"><span class="row_text">电话</span><input class="row_input" type="text" name="" v-model="user_info.phone"></div>
                     <div class="line_row"><el-button class="save_btn" size="large" @click="saveUserInfo">保存</el-button></div>
+                    <div class="line_row clearfix"><el-button class="del_account" size="large" type="danger" @click.stop="delAccount">注销此账号</el-button></div>
                 </div>
 
                 <div v-show="show_content == 'setting_user' " class="setting_content setting_base">
@@ -41,6 +40,8 @@
                     <div class="line_row"><span class="row_text">性别</span><input class="row_input" type="text" name="" v-model="user_info.sex"></div>
                     <div class="line_row"><span class="row_text">邮箱</span><input class="row_input" type="text" name="" v-model="user_info.email"></div>
                     <div class="line_row"><span class="row_text">电话</span><input class="row_input" type="text" name="" v-model="user_info.phone"></div>
+                    <!-- <div class="line_row"><span class="row_text">简介</span><textarea class="row_input" type="text" name="" v-model="user_info.phone"></textarea></div> -->
+                    <!-- <div class="line_row"><span class="row_text">个人网站</span><input class="row_input" type="text" name="" v-model="user_info.phone"></div> -->
                     <div class="line_row"><el-button class="save_btn" size="large" @click="saveUserInfo">保存</el-button></div>
                 </div>
             </div>
@@ -50,7 +51,7 @@
 
 <script>
     import Vue from 'vue'
-    import element_ui from 'element-ui'
+    import element_ui,{Loading} from 'element-ui'
     import {ajax} from 'JS/ajax.js'
     Vue.use(element_ui)
 
@@ -116,6 +117,53 @@
                     }
                     this.the_active = the
                 }
+            },
+            delAccount(){
+                this.$confirm("您正在注销此账户，是否继续？","提示！",{
+                      confirmButtonText: '确定',
+                      cancelButtonText: '取消',
+                      type: 'danger'
+                }).then( () => {
+                    inputPassword(this)
+                })
+
+                function inputPassword(_this){
+                    _this.$prompt("请输入密码！","提示",{
+                        confirmButtonText: '确定',
+                        cancelButtonText: '取消',
+                    }).then( ({value})=> {
+                        ajaxDelAccount(value,_this)
+                    })
+                }
+
+                function ajaxDelAccount(password,_this){
+                    let loading_del = Loading.service({ fullscreen:true })
+                    ajax({
+                        method:'post',
+                        url:'/account/delAccount',
+                        data:{password:password}
+                    }).then( (data)=> {
+
+                        loading_del.close()
+                        if(data.code === 1){
+                            _this.$alert("账户已删除","提示",{
+                                comfirmButtonText:"确定",
+                                callback:action =>{
+                                    let str = location.protocol + '//' + location.hostname +':'+location.port + '/account/login'
+                                    location.href = str
+                                }
+                            })
+                        }else if(data.code === 2){
+                            _this.$alert("密码不正确","提示")
+                        }else if(data.code === 0){
+                            _this.$alert("服务器错误","提示")
+                        }else{
+                            _this.$alert("出现位置问题，稍后再试","提示")
+                        }
+
+                    } )
+                }
+
             }
         }
     }
@@ -210,6 +258,9 @@
                 .save_btn{
                     width:100px;
                     margin-top:20px;
+                }
+                .del_account{
+                    margin-top:50px;
                 }
             }
         }

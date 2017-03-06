@@ -178,3 +178,39 @@ exports.updateUserInfo = function(req, res) {
         })
     })
 }
+
+// 删除账户
+exports.delAccount = function(req,res){
+    let session_id = req.cookies.sessions_id
+    let password = req.body.password
+
+    getaccount(session_id).then((account) => {
+
+        userInfo.find({account:account},(err,result) => {
+            if(result[0].password === password){
+                let session = require('../dataModel/sessionDataModel.js').session
+                let mongoose = require('mongoose')
+                let task = require("../dataModel/taskDataModel.js")
+                var taskdata = mongoose.model(account,task.task_type)
+                session.remove({account:account},(err)=>{
+                    if(err){ console.log(err);res.json({code:0,dis:"服务器错误"}) ;return}
+                })
+
+                taskdata.remove({},(err)=>{
+                    if(err){ console.log(err);res.json({code:0,dis:"服务器错误"}) ;return}
+                })
+                task.tasklist.remove({account:account},(err)=>{
+                    if(err){ console.log(err);res.json({code:0,dis:"服务器错误"}) ;return}
+                })
+                userInfo.remove({ account: account }, (err, result) => {
+                    if(err){ console.log(err);res.json({code:0,dis:'服务器错误，删除失败！'});return}
+                        res.cookie('sessions_id','null')
+                        res.cookie('account','null')
+                        res.json({code:1,dis:'删除成功'})
+                })
+            }else{
+                res.json({code:2,dis:'密码不正确！'})
+            }
+        })
+    })
+}
