@@ -10,6 +10,7 @@ var entryObj ={
     "index/index":'./src/index/index.js',
     "task/index":"./src/task/index.js",
     "account/user_info/index":"./src/account/user_info/index.js",
+    "markdown/index":"./src/markdown/index.js",
 }
 module.exports = {
     entry:entryObj,
