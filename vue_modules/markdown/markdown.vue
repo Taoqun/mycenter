@@ -11,17 +11,19 @@
         </div>
         <div class="markdown_main">
             <div class="markdown_edit" id="markdown_edit">
-                <textarea id="edit" contenteditable="true" @keyup.stop="run"></textarea>
+                <textarea id="edit" contenteditable="true" @keydown.stop="stop" @keyup.stop="run"></textarea>
             </div>
-            <div class="markdown_preview markdown-body" id="markdown_preview"></div>
+            <code class="markdown_preview" id="markdown_preview">
+                <div class="markdown-body"></div>
+            </code>
         </div>
     </div>
 </template>
 
 <script>
-    import "CSS/cssreset.css"
+    // import "CSS/cssreset.css"
     import "CSS/markdown.css"
-    import { markdown } from 'markdown'
+    import { markdown ,parse } from 'markdown'
     import Vue from 'vue'
     import ElementUI from "element-ui"
     Vue.use(ElementUI)
@@ -33,10 +35,13 @@
             }
         },
         methods:{
+            stop(){
+                return false
+            },
             run(){
                 let tem = document.querySelector("#markdown_edit #edit").value
-                let str = markdown.toHTML(tem)
-                document.querySelector("#markdown_preview").innerHTML = str
+                    tem = parse(tem)
+                document.querySelector(".markdown-body").innerHTML = tem
             }
         }
     }
@@ -46,6 +51,8 @@
     html,body,#app,.markdown{
         width:100%;
         height:100%;
+        margin:0;
+        padding:0;
         overflow:hidden;
     }
     .markdown{

@@ -153,6 +153,7 @@
 .markdown-body code,
 .markdown-body kbd,
 .markdown-body pre {
+  display:block;
   font-family: monospace, monospace;
   font-size: 1em;
 }
@@ -548,9 +549,10 @@
   padding: 0;
   padding-top: 0.2em;
   padding-bottom: 0.2em;
-  margin: 0;
+  padding:0.2em;
+  margin: 10px 0;
   font-size: 85%;
-  background-color: rgba(0,0,0,0.04);
+  background-color: rgba(0,0,0,0.3);
   border-radius: 3px;
 }
 
