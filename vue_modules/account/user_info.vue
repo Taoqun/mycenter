@@ -11,15 +11,6 @@
                 <div v-show="show_content == 'setting_base' " class="setting_content setting_base">
                     <h6>基础设置</h6>
                     <div class="line_row"><span class="row_text">姓名</span><input class="row_input" type="text" name="" v-model="user_info.name"></div>
-                    <div class="line_row"><span class="row_text">生日</span>
-                        <el-date-picker
-                              class="row_date"
-                              v-model="user_info.birth_day"
-                              type="date"
-                              placeholder="选择日期"
-                              :picker-options="pickerOptions0">
-                        </el-date-picker></div>
-                    <div class="line_row"><span class="row_text">性别</span><input class="row_input" type="text" name="" v-model="user_info.sex"></div>
                     <div class="line_row"><span class="row_text">邮箱</span><input class="row_input" type="text" name="" v-model="user_info.email"></div>
                     <div class="line_row"><span class="row_text">电话</span><input class="row_input" type="text" name="" v-model="user_info.phone"></div>
                     <div class="line_row"><el-button class="save_btn" size="large" @click="saveUserInfo">保存</el-button></div>
@@ -37,7 +28,15 @@
                               placeholder="选择日期"
                               :picker-options="pickerOptions0">
                         </el-date-picker></div>
-                    <div class="line_row"><span class="row_text">性别</span><input class="row_input" type="text" name="" v-model="user_info.sex"></div>
+                    <div class="line_row"><span class="row_text">性别</span>
+                        <el-select v-model="user_info.sex" placeholder="请选择" class="row_date">
+                           <el-option
+                             v-for="item in sexlist"
+                             :label="item.label"
+                             :value="item.value">
+                           </el-option>
+                         </el-select>
+                    </div>
                     <div class="line_row"><span class="row_text">邮箱</span><input class="row_input" type="text" name="" v-model="user_info.email"></div>
                     <div class="line_row"><span class="row_text">电话</span><input class="row_input" type="text" name="" v-model="user_info.phone"></div>
                     <!-- <div class="line_row"><span class="row_text">简介</span><textarea class="row_input" type="text" name="" v-model="user_info.phone"></textarea></div> -->
@@ -52,7 +51,7 @@
 <script>
     import Vue from 'vue'
     import element_ui,{Loading} from 'element-ui'
-    import {ajax} from 'JS/ajax.js'
+    import {ajax, gotologin} from 'JS/ajax.js'
     Vue.use(element_ui)
 
     export default {
@@ -65,6 +64,16 @@
                     email:'',
                     phone:''
                 },
+                sexlist:[
+                    {
+                        label:"男",
+                        value:"男"
+                    },
+                    {
+                        label:"女",
+                        value:"女"
+                    }
+                ],
                 pickerOptions0:{
                     disabledDate(time) {
                         return time.getTime() > Date.now()
@@ -78,17 +87,20 @@
             ajax({
                 url:"/account/getUserInfo",
             }).then( ( data ) => {
-                // let date = new Date(data.birth_day)
-                // let str = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
-                    // data.birth_day = str
-                    this.user_info = data
-                    console.log(data.birth_day)
+                gotologin(data)
+                this.user_info.name = data.name
+                this.user_info.birth_day = data.birth_day
+                this.user_info.sex = data.sex
+                this.user_info.email = data.email
+                this.user_info.phone = data.phone
             } )
+        },
+        mounted(){
+
         },
         methods:{
             saveUserInfo(){
                 this.user_info.birth_day = (new Date(this.user_info.birth_day)).valueOf()
-                console.log(this.user_info.birth_day)
                 ajax({
                     method:'post',
                     url:'/account/updateUserInfo',

@@ -36,19 +36,24 @@
             </ul>
         </div>
 
+        <transition name="fade">
         <div class="model_choice_date" v-show="model_date">
             <div class="black_bg"> </div>
             <div class="chiose_body">
-                <p class="chioce_text">选择你的出生日期</p>
+                <p class="chioce_text">选择你的出生日期,并预测下你的寿命</p>
                 <el-date-picker
                   v-model="birth_value"
                   type="date"
                   placeholder="选择日期"
                   :picker-options="pickerOptions0">
                 </el-date-picker>
-                <el-button type="success" @click="close_date_model">确定</el-buttom>
+                <input class="death_input" type="text" name="" v-model="death_span" @keyup="death_span = parseInt( death_span ) " placeholder="输入你的寿命 如:100">
+                <div class="btn_date">
+                    <el-button type="success" size="large" @click="close_date_model">确定</el-buttom>
+                </div>
             </div>
         </div>
+        </transition>
 
     </div>
 </template>
@@ -63,6 +68,7 @@
         data(){
             return {
                 birth_value:'',
+                death_span:'',
                 pickerOptions0:{
                     disabledDate(time) {
                         return time.getTime() > Date.now()
@@ -70,6 +76,7 @@
                 },
                 model_date:false,
                 your_birth_day:'',
+                your_death_day:'',
                 your_age:'',
                 your_month:'',
                 your_day:'',
@@ -90,32 +97,45 @@
                 }
                 return str
             },
+            death_date(){
+                let str = ''
+                if( this.your_birth_day && this.death_span ){
+                    let date = parseInt( this.your_borth_day.valueOf() ) + (this.death_span * 1000*60*60*24*365 )
+                        date = new Date(date)
+                    let year = date.getFullYear()
+                    let month = date.getMonth() + 1
+                    let day = date.getDate()
+                    str = year + '-' + month + '-' + day
+                }
+                return str
+            }
         },
         methods:{
             contime(){
-                console.log( this.birth_value )
             },
             close_date_model(){
-                console.log( this.birth_value )
-                if(!this.birth_value){
-                    this.$alert('请选择您的出生日期', '选择日期', {
+                if(!this.birth_value || !this.death_span ){
+                    this.$alert('请选择您的出生日期和预测寿命', '选择日期', {
                       confirmButtonText: '确定',
                    })
                 }else{
-                    console.log( this.birth_value )
                     ajax({
                       url:'/birth/setbirth',
                       method:'post',
-                      data:{birth_day: this.birth_value.valueOf() }
-                  }).then( (data) => {
+                      data:{
+                            birth_day: this.birth_value.valueOf(),
+                            death_span: this.death_span
+                            }
+                    }).then( (data) => {
                         if(data.code){
                             this.your_birth_day = this.birth_value
+                            this.update_time()
                             setInterval( () => {
                                 this.update_time()
                             },1000)
                             this.model_date = false
                         }
-                    } )
+                    })
                 }
             },
             update_time(){
@@ -185,7 +205,7 @@
             width:100%;
             height:30px;
             margin:20px 0;
-            position:relative;
+            position: relative;
             border-radius:10px;
             overflow:hidden;
             border:1px solid rgba(0,0,0,0.1);
@@ -261,12 +281,11 @@
             background-color: #1F2D3D;
             .progress_wrap{
                 border:1px solid rgba(255,255,255,0.5);
-                .progress{
-                    background-color: #324057;
-                    color:#8492A6;
-                }
             }
-
+            .progress{
+                background-color: #324057;
+                color:#8492A6;
+            }
             ul{
                 border-color:#475669;
             }
@@ -304,7 +323,7 @@
             left:0;
             right:0;
             bottom:0;
-            background-color: rgba(0,0,0,0.6);
+            background-color: rgba(0,0,0,0.8);
             z-index:0;
         }
         .chiose_body{
@@ -317,12 +336,37 @@
             line-height: 60px;
             letter-spacing: 2px;
             margin-bottom:20px;
-            color:#20A0FF;
+            color:#F9FAFC;
+        }
+        .death_input{
+            display: block;
+            margin:20px auto;
+            width:193px;
+            height:36px;
+            color:#1f2d3d;
+            border:1px solid #bfcbd9;
+            border-radius:3px;
+            padding:5px 10px;
+            font-size:15px;
+            box-sizing:border-box;
+        }
+        .btn_date{
+            margin:20px auto;
+            button{
+                width:193px;
+                padding:10px 30px;
+            }
         }
     }
     @media screen and (max-width:1000px){
         #index{
             width:100%;
         }
+    }
+    .fade-enter-active, .fade-leave-active {
+      transition: opacity .5s
+    }
+    .fade-enter, .fade-leave-active {
+      opacity: 0
     }
 </style>
