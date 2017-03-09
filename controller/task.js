@@ -104,11 +104,14 @@ exports.getList = function(req,res){
     let id =  req.cookies.sessions_id
     session.find({session_id:id},(err,result)=>{
         let account = result[0].account
+        let name = result[0].name
         tasklist.find( {account:account} , (err,result)=>{
             if(err){return console.log(err)}
             let obj = {}
             obj.list_arr = result[0].list_arr
             obj.group_arr = result[0].group_arr
+            obj.account = account
+            obj.name = name
             res.json(obj)
         })
     })

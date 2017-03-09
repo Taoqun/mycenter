@@ -5,13 +5,13 @@
                 <div class="img" @click.stop="showDropList">
                     <img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=950162565,3259577602&fm=21&gp=0.jpg" alt="" width=50 height=50>
                 </div>
-                <p class="name" @click.stop="showDropList">taoqun</p>
+                <p class="name" @click.stop="showDropList">{{user_info.name}}</p>
                 <s-drop-menu :list="drop_list" :show="drop_list_show"></s-drop-menu>
             </div>
             <h3 class="title">任务夹</h3>
             <p class="list-menu" @click="getAllTask" data-listid='all'><i class="icon iconfont icon-form_light"></i>所有任务</p>
-            <p class="list-menu"><i class="icon el-icon-date"></i>日历</p>
-            <p class="list-menu"><i class="icon iconfont icon-punch_light"></i>收集箱</p>
+            <p class="list-menu" @click="NoFn"><i class="icon el-icon-date"></i>日历</p>
+            <p class="list-menu" @click="getAllTask" data-listid='all'><i class="icon iconfont icon-punch_light"></i>收集箱</p>
             <p class="list-menu" @click="chooceAddType"><i class="icon iconfont icon-add"></i>新建</p>
 
             <s-list-group :list="list_ui_group" :groupmore="groupMore" :listmore="listMore" :tasklist="task_list" :listname="task_list_name"></s-list-group>
@@ -104,11 +104,15 @@
         data(){
             return{
                 drop_list:[
-                    {name:'同步',event:this.stopEvent},
-                    {name:'设置',event:this.stopEvent},
-                    {name:'首页',event:this.stopEvent},
-                    {name:'退出',event:this.stopEvent},
+                    // {name:'同步',event:this.stopEvent},
+                    {name:'首页',event:this.gotoIndex},
+                    {name:'设置',event:this.gotoSetting},
+                    {name:'退出',event:this.exitAccount},
                 ],
+                user_info:{
+                    name:'',
+                    account:'',
+                },
                 task_list_name:{name:'所有任务'},
                 drop_list_show:false,
                 list_group:[],
@@ -159,7 +163,6 @@
                         list.push(i)
                     }
                 })
-
                 return list
             },
             off_list(){
@@ -168,23 +171,76 @@
                     if(i.IsComplete){
                         list.push(i)
                     }
-                } )
+                })
                 return list
             },
+        },
+        mounted(){
+            document.addEventListener('click',()=>{
+                this.drop_list_show = false
+                this.task_dis = {}
+
+                this.list_ui_group.map((i)=>{
+                    i.moreMenu = false
+                    i.task_list.map((j)=>{
+                        j.moreMenu = false
+                    })
+                })
+                this.list_group.map((i)=>{
+                    i.moreMenu = false
+                })
+            })
+
+            let loadscreen = Loading.service({ fullscreen: true , text:'获取数据中！' })
+
+            ajax({
+                url:'/task/getList',
+                method:'get',
+            }).then((data)=>{
+                if( gotologin(data) ){
+                    return
+                }
+                this.list_ui_group = data.group_arr
+                this.list_group = data.list_arr
+                this.user_info.name = data.name
+                this.user_info.account = data.account
+
+                this.list_ui_group.map( (i)=>{
+                    let arr = []
+                    this.list_group.map( (j)=>{
+                        if(i.group_id === j.group_id){
+                            i.task_list.push(j)
+                            arr.push(j)
+                        }
+                    })
+                    arr.map((k)=>{
+                        this.list_group.splice( this.list_group.indexOf(k),1 )
+                    })
+                })
+                setTimeout(()=>{
+                    loadscreen.close()
+                    this.$message({message:'数据获取完毕！',type:'success'});
+                },500)
+
+            })
+        },
+        created(){
+            this.list_ui_group = []
+            this.list_group = []
         },
         methods:{
             chooseList(event){
                 let the = event.target
                 let tagName = the.tagName.toLowerCase()
                 let clsName = the.className
-                if(tagName === 'p' && clsName.indexOf('list-name') != -1 ){
+                if( tagName === 'p' && clsName.indexOf('list-name') != -1 ){
                     if(this.choose_list){
                         this.choose_list.className = this.choose_list.className.replace('active','').trim()
                     }
                     this.choose_list = the
                     this.choose_list.className += ' active'
                 }
-                if(tagName === 'h6' && clsName.indexOf('group-name') != -1 ){
+                if( tagName === 'h6' && clsName.indexOf('group-name') != -1 ){
                     let parent = the.parentNode
                     let list = parent.querySelector('.ui_group_list_group')
                         if(list.dataset.show === 'false'){
@@ -559,9 +615,14 @@
             setdis(item){
                 this.task_dis = item
             },
+            // 获取所有任务
             getAllTask(){
                 this.task_list['list_id'] = 'all'
                 this.task_list_name.name = '所有任务'
+
+                if(this.choose_list){
+                    this.choose_list.className = this.choose_list.className.replace('active','').trim()
+                }
                 ajax({
                     url:"/task/getTask",
                     method:'get',
@@ -599,70 +660,53 @@
 
                     }
                 })
-            }
-        },
-        mounted(){
-            document.addEventListener('click',()=>{
-                this.drop_list_show = false
-                this.task_dis = {}
-
-                this.list_ui_group.map((i)=>{
-                    i.moreMenu = false
-                    i.task_list.map((j)=>{
-                        j.moreMenu = false
-                    })
+            },
+            NoFn(){
+                this.$message({
+                    message:'功能还没做!',
+                    type:'error'
                 })
-                this.list_group.map((i)=>{
-                    i.moreMenu = false
+            },
+            gotoIndex(){
+                location.href = location.protocol + '//' + location.hostname + ':' + location.port+ '/index/'
+            },
+            gotoSetting(){
+                location.href = location.protocol + '//' + location.hostname + ':' + location.port+ '/account/user_info'
+            },
+            exitAccount(){
+                ajax({
+                    url:"/account/exit"
+                }).then( (data)=>{
+                    if(data.code){
+                        this.$message({
+                            message:'已退出!，3秒后跳出页面',
+                            type:'success'
+                        })
+                        setTimeout( ()=>{
+                            location.href = location.protocol + '//' + location.hostname + ':' + location.port+ '/account/login'
+                        },3000)
+                    }else{
+                        this.$message({
+                            message:'退出错误，请重试！',
+                            type:'error'
+                        })
+                    }
                 })
-            })
-
-            let loadscreen = Loading.service({ fullscreen: true , text:'获取数据中！' })
-
-            ajax({
-                url:'/task/getList',
-                method:'get',
-            }).then((data)=>{
-                if( gotologin(data) ){
-                    return
-                }
-                this.list_ui_group = data.group_arr
-                this.list_group = data.list_arr
-                this.list_ui_group.map( (i)=>{
-                    let arr = []
-                    this.list_group.map( (j)=>{
-                        if(i.group_id === j.group_id){
-                            i.task_list.push(j)
-                            arr.push(j)
-                        }
-                    })
-                    arr.map((k)=>{
-                        this.list_group.splice( this.list_group.indexOf(k),1 )
-                    })
-                })
-                setTimeout(()=>{
-                    loadscreen.close()
-                    this.$message({message:'数据获取完毕！',type:'success'});
-                },1000)
-
-            })
-        },
-        created(){
-            this.list_ui_group = []
-            this.list_group = []
-        },
+            },
+        }
     }
 </script>
 
 <style lang="scss">
     body{
         background-color:#F9FAFC;
-        font-family:'microsoft Yahei';
+        font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
     }
     // 调整head样式
     .head{
         display:none;
         padding:0;
+        font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
         h1{
             margin-top:0;
             margin-bottom:10px;

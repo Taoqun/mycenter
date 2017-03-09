@@ -33,10 +33,14 @@ export default {
 </script>
 
 <style lang="scss">
+    body{
+        font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+    }
   .head{
     padding:30px 0;
     background-color:#324057;
     color:#20A0FF;
+    font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
     h1{
       width:1000px;
       margin:20px auto;

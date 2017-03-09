@@ -38,6 +38,8 @@ exports.login = function(req, res) {
 
         if (result && result.length === 1) {
             if (obj.password === result[0].password) {
+                let name = result[0].name
+                let account = obj.account
                 // 获取账号的状态 是否已经登录
                 // 登录返回 session_id
                 // 未登录 生成 session_id 存储并返回
@@ -45,10 +47,10 @@ exports.login = function(req, res) {
                 setSession.find({ account: obj.account }, (err, result) => {
                     if (result.length === 0) {
                         let ss = Math.random().toString(36).substr(2)
-                        let account = obj.account
                         let obj = new setSession({
                             session_id: ss,
-                            account: account
+                            account: account,
+                            name:name,
                         })
                         obj.save((err) => {
                             if (err) {}
@@ -115,6 +117,7 @@ exports.register = function(req, res) {
                         let ses_id = new setSession({
                             session_id: session_id,
                             account: account,
+                            name:name,
                         })
                         res.clearCookie()
                         ses_id.save(function(err) {})
@@ -141,8 +144,18 @@ exports.register = function(req, res) {
     })
 }
 
+// 退出 清除session
+exports.exit = function(req,res){
+    let session_id = req.cookies.sessions_id
+    getaccount(session_id).then((account) => {
+        let session = require('../dataModel/sessionDataModel.js').session
+            session.remove( { account:account },(err)=>{
+                if(err){ console.log(err);res.json({code:0});return }
+                res.json( { code:1 } )
+            })
+    })
+}
 // 获取用户信息
-
 exports.getUserInfo = function(req, res) {
     let session_id = req.cookies.sessions_id
     getaccount(session_id).then((account) => {
@@ -175,6 +188,10 @@ exports.updateUserInfo = function(req, res) {
         userInfo.update({ account: account }, obj, (err, result) => {
             if (err) { console.log(err); res.json({ code: 0 }) ;return }
             res.json({ code: 1 })
+        })
+        let session = require("../dataModel/sessionDataModel.js").session
+        session.update({session_id:session_id},{name:obj.name},(err,result)=>{
+            if(err){ return console.log(err) }
         })
     })
 }

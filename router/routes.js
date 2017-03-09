@@ -22,7 +22,7 @@ module.exports = function(app){
     app.get('/test',function(req,res){
         res.render('test/test.ejs', {json:'{name:[1,2,3]}'} )
     })
-    
+
     app.get('/',function(req,res){
         res.redirect('/account/login')
     })
@@ -30,7 +30,7 @@ module.exports = function(app){
     // 登录注册请求
     app.get('/login', Login.login)
     app.post('/account/sendRegister',urlencodedParser,Login.register)
-
+    app.get('/account/exit',Login.exit)
     // 获取更新个人资料
     app.get('/account/getUserInfo',verify,Login.getUserInfo)
     app.post('/account/updateUserInfo',urlencodedParser,verify,Login.updateUserInfo)
