@@ -27,6 +27,6 @@ const server = app.listen( obj.port , () => {
     //  child.exec('webpack  --watch')
 
     // 自动打开默认浏览器 指定网址 window start || mac open
-    // child.exec('open ' + str)
-    // child.exec('open ' + str)
+    child.exec('start ' + str)
+    child.exec('open ' + str)
 })

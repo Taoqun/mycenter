@@ -25,12 +25,13 @@ github : [https://github.com/Taoqun/mycenter](https://github.com/Taoqun/mycenter
 - 人生进度 今年已经过去了多少天 百分之多少的进度
 
 ###### 正在完成
+
+- markdown 写作
 - 生辰  模仿纯银的生辰
 
 ###### 待完成
 - echarts 图表
 - FM 随机播放音乐
-- markdown 写作
 
 ---------------
 说明:
@@ -39,3 +40,21 @@ github : [https://github.com/Taoqun/mycenter](https://github.com/Taoqun/mycenter
 - 运行 node app.js 可以启动服务器
 - 访问地址 可以注册 / 登录 访问页面
 - 所有请求都有sessions_id 验证 没有登录账号 无法访问页面 会跳转到登录页
+
+
+```
+// 需要本地mongdDB 服务器支持
+// cd 到 mongoDB
+// 启动连接本地服务器
+// 执行命令
+  ./mongod --dbpath  d:\\data\db ( 数据库地址,一个空文件夹即可)
+```
+
+```
+// --------- 下载本仓库  ------------
+git clone https://github.com/Taoqun/mycenter.git
+cd mycenter
+nom install
+node app.js
+// 自动打开默认浏览器 进入首页
+```
