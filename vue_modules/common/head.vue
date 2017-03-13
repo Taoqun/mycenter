@@ -21,8 +21,9 @@ export default {
       head_list:[
         {name:'首页',url:'/index/'},
         {name:'任务中心',url:'/task/'},
-        {name:'发现',url:'/index'},
-        {name:'收藏',url:'/index'},
+        {name:'文章中心',url:'/markdown/'},
+        {name:'写文章',url:'/markdown/index'},
+        {name:'生辰',url:'/birth/index'},
         {name:'个人中心',url:'/account/user_info'},
         {name:'设置',url:'/index'},
         {name:'关于',url:'/index'},

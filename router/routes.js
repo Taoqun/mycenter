@@ -2,11 +2,13 @@
 //  控制器 逻辑
 const Login = require('../controller/login.js')
 const Task = require('../controller/task.js')
+
+
 const verify = require('../controller/verify.js').run
 
 // 引入路由
 const birth_router = require("./birth_router.js")
-
+const markdown_router = require("./markdown.js")
 // 插件类
 const bodyParser = require('body-parser');
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
@@ -17,7 +19,8 @@ module.exports = function(app){
     app.use(cookieParser())
 
     // 执行其他路由
-    birth_router(app)
+    birth_router(app);
+    markdown_router(app);
 
     app.get('/test',function(req,res){
         res.render('test/test.ejs', {json:'{name:[1,2,3]}'} )

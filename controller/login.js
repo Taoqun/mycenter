@@ -129,8 +129,9 @@ exports.register = function(req, res) {
 
                             res.cookie('sessions_id', session_id)
                             res.cookie('account', decodeURIComponent(account))
+                            require("../dataModel/markdownDataModel.js").init(account)
                             require('../dataModel/taskDataModel.js').run.init(account, res)
-                                //res.json({register:true})
+                            //res.json({register:true})
                         })
                     } else {
                         getSessionId()
