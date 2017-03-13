@@ -1,4 +1,3 @@
-
 const mongoose = require('mongoose')
 
 // 链接mongoDB 数据库
@@ -12,19 +11,19 @@ mongoose.connect('mongodb://localhost:27017/taoqun')
 // 创建日期
 
 let DB_type_userinfo = new mongoose.Schema({
-    name:String,
-    account:String,
-    password:String,
-    birth_day:Date,
-    death_span:Number,
-    sex:String,
-    phone:String,
-    email:String,
-    date:Date,
+    name: String,
+    account: String,
+    password: String,
+    birth_day: Date,
+    death_span: Number,
+    sex: String,
+    phone: String,
+    email: String,
+    date: Date,
 })
 
 // 选择集合
-let userInfo = mongoose.model('userlist',DB_type_userinfo)
+let userInfo = mongoose.model('userlist', DB_type_userinfo)
 
 exports.userInfo = userInfo
 
