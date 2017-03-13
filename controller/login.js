@@ -40,9 +40,9 @@ exports.login = function(req, res) {
             if (obj.password === result[0].password) {
                 let name = result[0].name
                 let account = obj.account
-                // 获取账号的状态 是否已经登录
-                // 登录返回 session_id
-                // 未登录 生成 session_id 存储并返回
+                    // 获取账号的状态 是否已经登录
+                    // 登录返回 session_id
+                    // 未登录 生成 session_id 存储并返回
                 let setSession = require('../dataModel/sessionDataModel.js').session
                 setSession.find({ account: obj.account }, (err, result) => {
                     if (result.length === 0) {
@@ -50,7 +50,7 @@ exports.login = function(req, res) {
                         let obj = new setSession({
                             session_id: ss,
                             account: account,
-                            name:name,
+                            name: name,
                         })
                         obj.save((err) => {
                             if (err) {}
@@ -117,7 +117,7 @@ exports.register = function(req, res) {
                         let ses_id = new setSession({
                             session_id: session_id,
                             account: account,
-                            name:name,
+                            name: name,
                         })
                         res.clearCookie()
                         ses_id.save(function(err) {})
@@ -129,6 +129,7 @@ exports.register = function(req, res) {
 
                             res.cookie('sessions_id', session_id)
                             res.cookie('account', decodeURIComponent(account))
+                            require("../dataModel/markdownDataModel.js").init(account)
                             require('../dataModel/taskDataModel.js').run.init(account, res)
                                 //res.json({register:true})
                         })
@@ -145,17 +146,21 @@ exports.register = function(req, res) {
 }
 
 // 退出 清除session
-exports.exit = function(req,res){
-    let session_id = req.cookies.sessions_id
-    getaccount(session_id).then((account) => {
-        let session = require('../dataModel/sessionDataModel.js').session
-            session.remove( { account:account },(err)=>{
-                if(err){ console.log(err);res.json({code:0});return }
-                res.json( { code:1 } )
+exports.exit = function(req, res) {
+        let session_id = req.cookies.sessions_id
+        getaccount(session_id).then((account) => {
+            let session = require('../dataModel/sessionDataModel.js').session
+            session.remove({ account: account }, (err) => {
+                if (err) {
+                    console.log(err);
+                    res.json({ code: 0 });
+                    return
+                }
+                res.json({ code: 1 })
             })
-    })
-}
-// 获取用户信息
+        })
+    }
+    // 获取用户信息
 exports.getUserInfo = function(req, res) {
     let session_id = req.cookies.sessions_id
     getaccount(session_id).then((account) => {
@@ -183,50 +188,70 @@ exports.updateUserInfo = function(req, res) {
     if (req.body.email) { obj.email = req.body.email }
     if (req.body.phone) { obj.phone = req.body.phone }
     if (req.body.sex) { obj.sex = req.body.sex }
-    if (req.body.birth_day) { obj.birth_day = parseInt(req.body.birth_day) + (8*1000*60*60) }
+    if (req.body.birth_day) { obj.birth_day = parseInt(req.body.birth_day) + (8 * 1000 * 60 * 60) }
     getaccount(session_id).then((account) => {
         userInfo.update({ account: account }, obj, (err, result) => {
-            if (err) { console.log(err); res.json({ code: 0 }) ;return }
+            if (err) {
+                console.log(err);
+                res.json({ code: 0 });
+                return
+            }
             res.json({ code: 1 })
         })
         let session = require("../dataModel/sessionDataModel.js").session
-        session.update({session_id:session_id},{name:obj.name},(err,result)=>{
-            if(err){ return console.log(err) }
+        session.update({ session_id: session_id }, { name: obj.name }, (err, result) => {
+            if (err) { return console.log(err) }
         })
     })
 }
 
 // 删除账户
-exports.delAccount = function(req,res){
+exports.delAccount = function(req, res) {
     let session_id = req.cookies.sessions_id
     let password = req.body.password
 
     getaccount(session_id).then((account) => {
 
-        userInfo.find({account:account},(err,result) => {
-            if(result[0].password === password){
+        userInfo.find({ account: account }, (err, result) => {
+            if (result[0].password === password) {
                 let session = require('../dataModel/sessionDataModel.js').session
                 let mongoose = require('mongoose')
                 let task = require("../dataModel/taskDataModel.js")
-                var taskdata = mongoose.model(account,task.task_type)
-                session.remove({account:account},(err)=>{
-                    if(err){ console.log(err);res.json({code:0,dis:"服务器错误"}) ;return}
+                var taskdata = mongoose.model(account, task.task_type)
+                session.remove({ account: account }, (err) => {
+                    if (err) {
+                        console.log(err);
+                        res.json({ code: 0, dis: "服务器错误" });
+                        return
+                    }
                 })
 
-                taskdata.remove({},(err)=>{
-                    if(err){ console.log(err);res.json({code:0,dis:"服务器错误"}) ;return}
+                taskdata.remove({}, (err) => {
+                    if (err) {
+                        console.log(err);
+                        res.json({ code: 0, dis: "服务器错误" });
+                        return
+                    }
                 })
-                task.tasklist.remove({account:account},(err)=>{
-                    if(err){ console.log(err);res.json({code:0,dis:"服务器错误"}) ;return}
+                task.tasklist.remove({ account: account }, (err) => {
+                    if (err) {
+                        console.log(err);
+                        res.json({ code: 0, dis: "服务器错误" });
+                        return
+                    }
                 })
                 userInfo.remove({ account: account }, (err, result) => {
-                    if(err){ console.log(err);res.json({code:0,dis:'服务器错误，删除失败！'});return}
-                        res.cookie('sessions_id','null')
-                        res.cookie('account','null')
-                        res.json({code:1,dis:'删除成功'})
+                    if (err) {
+                        console.log(err);
+                        res.json({ code: 0, dis: '服务器错误，删除失败！' });
+                        return
+                    }
+                    res.cookie('sessions_id', 'null')
+                    res.cookie('account', 'null')
+                    res.json({ code: 1, dis: '删除成功' })
                 })
-            }else{
-                res.json({code:2,dis:'密码不正确！'})
+            } else {
+                res.json({ code: 2, dis: '密码不正确！' })
             }
         })
     })

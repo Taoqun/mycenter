@@ -34,10 +34,10 @@ exports.setbirth = function(req, res) {
         let obj = {}
 
         if (req.body.birth_day) {
-            obj.birth_day = parseInt( req.body.birth_day ) + (1000*60*60*8)
+            obj.birth_day = parseInt(req.body.birth_day) + (1000 * 60 * 60 * 8)
         }
         if (req.body.death_span) {
-            obj.death_span = parseInt( req.body.death_span )
+            obj.death_span = parseInt(req.body.death_span)
         }
         userinfo.update({ account: account }, obj, (err, result) => {
             if (err) { return console.log(err) }
