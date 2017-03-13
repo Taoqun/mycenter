@@ -3,7 +3,7 @@
 </template>
 
 <script>
-    import markdown from "VUEMODULES/markdown/markdown"
+    import markdown from "VUEMODULES/markdown/markdown.vue"
     export default {
         components:{
             "s-markdown":markdown

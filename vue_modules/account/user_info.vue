@@ -100,7 +100,12 @@
         },
         methods:{
             saveUserInfo(){
-                this.user_info.birth_day = (new Date(this.user_info.birth_day)).valueOf()
+                if(this.user_info.birth_day && this.user_info.birth_day instanceof Date){
+                    this.user_info.birth_day = (new Date(this.user_info.birth_day)).valueOf()
+                }
+                this.user_info.birth_day = this.user_info.birth_day || ''
+                this.user_info.sex = this.user_info.sex || ''
+
                 ajax({
                     method:'post',
                     url:'/account/updateUserInfo',

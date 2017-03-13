@@ -21,10 +21,10 @@ export default {
       head_list:[
         {name:'首页',url:'/index/'},
         {name:'任务中心',url:'/task/'},
-        {name:'发现',url:'/index'},
-        {name:'收藏',url:'/index'},
+        {name:'文章列表',url:'/index'},
+        {name:'写文章',url:'/markdown/'},
         {name:'个人中心',url:'/account/user_info'},
-        {name:'设置',url:'/index'},
+        {name:'设置',url:'/account/user_info'},
         {name:'关于',url:'/index'},
       ]
     }
