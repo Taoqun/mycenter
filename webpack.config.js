@@ -3,14 +3,16 @@ var webpack = require('webpack')
 var VUEMODULES = path.resolve(__dirname, 'vue_modules')
 var CSS = path.resolve(__dirname, 'public/css')
 var JS = path.resolve(__dirname, 'public/js')
+var REACTMODULES = path.resolve(__dirname,'react_modules')
 var ROOT = path.resolve(__dirname)
 var entryObj = {
-    "account/login/index": './src/account/login/index.js',
-    "account/register/index": './src/account/register/index.js',
-    "birth/index": './src/index/index.js',
-    "task/index": "./src/task/index.js",
-    "account/user_info/index": "./src/account/user_info/index.js",
-    "markdown/index": "./src/markdown/index.js",
+    // "account/login/index": './src/account/login/index.js',
+    // "account/register/index": './src/account/register/index.js',
+    // "birth/index": './src/index/index.js',
+    // "task/index": "./src/task/index.js",
+    // "account/user_info/index": "./src/account/user_info/index.js",
+    // "markdown/index": "./src/markdown/index.js",
+    "test/index":"./src/test/index.js",
 }
 module.exports = {
     entry: entryObj,
@@ -28,7 +30,7 @@ module.exports = {
             { test: /\.html$/, loader: "html-loader" },
             { test: /\.(png|jpg|gif|jpeg)$/, loader: "url-loader?limit=8192" },
             { test: /\.vue$/, loader: "vue-loader" },
-            { test: /\.js$/, loader: 'babel-loader', exclude: /node_module/ },
+            { test: /\.(js|jsx)$/, loader: 'babel-loader', exclude: /node_module/ },
             { test: /\.(eot|svg|ttf|woff)(\?\S*)?$/, loader: 'url-loader' },
         ]
     },
@@ -50,6 +52,7 @@ module.exports = {
             CSS: CSS,
             JS: JS,
             ROOT: ROOT,
+            REACTMODULES:REACTMODULES,
         }
     },
     devServer: {

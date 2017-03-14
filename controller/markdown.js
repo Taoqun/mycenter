@@ -33,15 +33,19 @@ exports.addPaper = function(req, res) {
             if (err) { return console.log(err) }
 
             if (result.length) {
+
                 res.json({ code: 2, des: 'id已存在' })
             } else {
+
                 obj.name = req.body.name
                 obj.title = req.body.title
                 obj.date = Date.now()
                 obj.keywords = req.body.keywords
                 obj.content = req.body.content
                 obj.type = req.body.type
+
                 let md = new markdown(obj)
+
                 md.save((err) => {
                     if (err) { return console.log(err) }
                     res.json({ code: 1, des: 'success' })
@@ -59,10 +63,10 @@ exports.getPaperList = function(req, res) {
         let markdown = mk(account)
 
         let pageSize = req.query.pageSize || 10
-        pageSize = parseInt(pageSize) || 10
+            pageSize = parseInt(pageSize) || 10
 
         let currentPage = req.query.currentPage || 0
-        currentPage = parseInt(currentPage) || 0
+            currentPage = parseInt(currentPage) || 0
 
         let skips = currentPage * pageSize
 

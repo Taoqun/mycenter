@@ -9,12 +9,12 @@ const markdown_data_type = new mongoose.Schema({
     keywords: Array,
     content: String,
     type: String,
-})
+});
 
 
 exports.getMarkdownModel = function(account) {
     return mongoose.model(account + '_md', markdown_data_type)
-}
+};
 exports.init = function(account) {
     let md = mongoose.model(account + '_md', markdown_data_type)
     let data = new md({
@@ -29,4 +29,4 @@ exports.init = function(account) {
     data.save((err) => {
         if (err) { return console.log(err) }
     })
-}
+};
