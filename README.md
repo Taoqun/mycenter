@@ -7,6 +7,9 @@ github : [https://github.com/Taoqun/mycenter](https://github.com/Taoqun/mycenter
 了解项目的搭建和架构
 当然也是想自己制作创造产品，创世的欲望！
 
+- [x] test
+- [ ] test
+
 -----------
 ###### 技术选型
 前端：
