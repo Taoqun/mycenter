@@ -9091,6 +9091,18 @@
 
 	__webpack_require__(13);
 
+	var _config = __webpack_require__(153);
+
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+
 	exports.default = {
 	  props: {
 	    text: {
@@ -9100,18 +9112,10 @@
 	  },
 	  data: function data() {
 	    return {
-	      head_list: [{ name: '首页', url: '/index/' }, { name: '任务中心', url: '/task/' }, { name: '文章中心', url: '/markdown/' }, { name: '写文章', url: '/markdown/index' }, { name: '生辰', url: '/birth/index' }, { name: '个人中心', url: '/account/user_info' }, { name: '设置', url: '/account/user_info' }, { name: '关于', url: '/index' }]
+	      head_list: _config.headList
 	    };
 	  }
-	}; //
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
+	};
 
 /***/ },
 /* 13 */
@@ -45830,6 +45834,11 @@
 
 	exports.obj = obj;
 
+	// 配置首页名称 地址 头部模块  方便 vue react 调用
+	var head_list = [{ name: '首页', url: '/index/' }, { name: '任务中心', url: '/task/' }, { name: '文章中心', url: '/markdown/' }, { name: '写文章', url: '/markdown/' }, { name: '生辰', url: '/birth/index' }, { name: '个人中心', url: '/account/user_info' }, { name: '设置', url: '/account/user_info' }, { name: '关于', url: '/index' }];
+
+	exports.headList = head_list;
+
 /***/ },
 /* 154 */,
 /* 155 */,
@@ -46339,7 +46348,6 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	_vue2.default.use(_elementUi2.default); //
 	//
 	//
 	//
@@ -46399,6 +46407,9 @@
 	//
 	//
 	//
+	//
+
+	_vue2.default.use(_elementUi2.default);
 
 	exports.default = {
 	    data: function data() {

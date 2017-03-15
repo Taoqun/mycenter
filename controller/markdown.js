@@ -116,3 +116,48 @@ exports.upPaper = function(req, res) {
         })
     })
 };
+exports.delPaper = (req,res) => {
+    let sessions_id = req.sessions_id
+    getAccount(sessions_id).then((account) => {
+        let paper_id = req.body.paper_id
+        let markdown = mk(account)
+        let arr = []
+
+        if(paper_id instanceof String){
+            arr.push( paper_id )
+        }else if( paper_id instanceof Array ){
+            arr = paper_id
+        }
+
+        let success = []
+        let error = []
+
+        // 从数据删除 并且判断是否全部遍历完成
+        const remove = (item) => {
+            markdown.remove({paper_id:item},(err)=>{
+                if(err){ return console.log(err) }
+                if( (success.length + error.length) === arr.length  || (success.length + error.length) === (arr.length - 1) ){
+                    res.json( {code:1,success:success.length,error:error.length} )
+                }
+            })
+        }
+        // 查询 判断是否查询成功 执行删除
+        const find = (item)=>{
+            markdown.find( { paper_id:item },(err,result)=>{
+                if(err){ return console.log(err) }
+                if( result.length ){
+                    success.push(item)
+                    remove(item)
+                }else{
+                    error.push(item)
+                }
+
+            })
+        }
+
+        arr.map(( item, index ) => {
+            find(item)
+        })
+
+    })
+}

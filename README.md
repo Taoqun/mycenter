@@ -36,7 +36,7 @@ github : [https://github.com/Taoqun/mycenter](https://github.com/Taoqun/mycenter
 
 ###### 待完成
 - [ ] echarts 图表
-- [ ] FM 随机播放音乐
+- [ ] FM 随机播放音乐 豆瓣接口
 
 ###### 描述
 1. 现在在用 react antd 构思文章列表页面和编辑文章的逻辑，增查改删的接口已经写好

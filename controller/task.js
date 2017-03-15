@@ -179,7 +179,7 @@ exports.addGroup = function(req,res){
     })
 }
 exports.getGroup = function(req,res){}
-exports.updateGroup = function(req,res){
+exports.updateGroup = (req,res) => {
     let ses_id = req.cookies.sessions_id
     let list = JSON.parse( req.body.list )
     session.find({session_id:ses_id},(err,result)=>{
@@ -200,7 +200,7 @@ exports.updateGroup = function(req,res){
         })
     })
 }
-exports.delGroup = function(req,res){
+exports.delGroup = (req,res) => {
     let ses_id = req.cookies.sessions_id
     let group_id =  req.query.group_id
     session.find({session_id:ses_id},(err,result)=>{
@@ -208,12 +208,18 @@ exports.delGroup = function(req,res){
         tasklist.find( {account:account} , (err,result)=>{
             if(err){ return res.json({code:0}) }
             var group_arr = result[0].group_arr
+            var list_arr = result[0].list_arr
                 group_arr.map( (i,index)=>{
                     if(i.group_id === group_id){
                         group_arr.splice(index,1)
                     }
                 })
-            tasklist.update({account:account},{group_arr:group_arr},(err,result)=>{
+                list_arr.map((j)=>{
+                    if(j.group_id === group_id){
+                        j.group_id = ''
+                    }
+                })
+            tasklist.update({account:account},{group_arr:group_arr,list_arr:list_arr},(err,result)=>{
                 if(err){return res.json({code:0}) }
                 if(result){
                     res.json({code:1})

@@ -4,6 +4,6 @@ import Com1 from 'REACTMODULES/common/head.jsx'
 
 
 ReactDom.render(
-    <Com1 />,
+    <Com1 text={"文章"} />,
     document.getElementById("app")
 )

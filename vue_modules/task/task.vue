@@ -365,7 +365,7 @@
                             })
                         }
                     }
-                })
+                },()=>{})
             },
             delTask(item){
                 ajax({
@@ -390,6 +390,10 @@
             },
             delGroup(item){
                 this.list_ui_group.splice( this.list_ui_group.indexOf(item),1 )
+                item.task_list.map((i)=>{
+                    i.group_id = ''
+                })
+                this.list_group = item.task_list.concat( this.list_group )
                 ajax({
                     url:'/task/delGroup',
                     method:"get",
@@ -400,6 +404,7 @@
                             message:'删除成功！',
                             type:'success'
                         })
+
                     }else{
                         this.$message({
                             message:'删除失败！',
@@ -606,9 +611,7 @@
                     },0)
                 }
             },
-            stopEvent(){
-
-            },
+            stopEvent(){ },
             showDropList(){
                 this.drop_list_show = !this.drop_list_show
             },

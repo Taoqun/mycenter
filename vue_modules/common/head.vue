@@ -8,29 +8,21 @@
 </template>
 
 <script>
-import 'CSS/cssreset.css'
-export default {
-  props:{
-    text:{
-      type:String,
-      default:'测试'
+    import 'CSS/cssreset.css'
+    import {headList} from "ROOT/config.js"
+    export default {
+      props:{
+        text:{
+          type:String,
+          default:'测试'
+        }
+      },
+      data(){
+        return {
+          head_list:headList
+        }
+      }
     }
-  },
-  data(){
-    return {
-      head_list:[
-        {name:'首页',url:'/index/'},
-        {name:'任务中心',url:'/task/'},
-        {name:'文章中心',url:'/markdown/'},
-        {name:'写文章',url:'/markdown/index'},
-        {name:'生辰',url:'/birth/index'},
-        {name:'个人中心',url:'/account/user_info'},
-        {name:'设置',url:'/account/user_info'},
-        {name:'关于',url:'/index'},
-      ]
-    }
-  }
-}
 </script>
 
 <style lang="scss">
