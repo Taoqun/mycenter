@@ -34,12 +34,12 @@ github : [https://github.com/Taoqun/mycenter](https://github.com/Taoqun/mycenter
 
 ###### 正在完成
 
-- [] markdown 写作
-- [] 生辰 ( 模仿纯银的生辰 )
+- [ ] markdown 写作
+- [ ] 生辰 ( 模仿纯银的生辰 )
 
 ###### 待完成
-- [] echarts 图表
-- [] FM 随机播放音乐
+- [ ] echarts 图表
+- [ ] FM 随机播放音乐
 
 ---------------
 说明:
