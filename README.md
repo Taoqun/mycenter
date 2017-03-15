@@ -2,7 +2,10 @@
 
 github : [https://github.com/Taoqun/mycenter](https://github.com/Taoqun/mycenter)
 
-主要是自己做着玩的，看到一些简单的，又可以自己做的，就想实现下，也是练习自己前后端技术的方式，因为自己平时用的比较多todo-list，还有喜欢的一些功能。
+主要自己做着玩，练习项目。
+练习使用node后端，vue框架和ract框架，了解UI组件的使用
+了解项目的搭建和架构
+当然也是想自己制作创造产品，创世的欲望！
 
 -----------
 ###### 技术选型
@@ -10,6 +13,8 @@ github : [https://github.com/Taoqun/mycenter](https://github.com/Taoqun/mycenter
 - vue 全家桶
 - webpack
 - element-ui
+- react
+- antd UI
 
 后端：
 - node
@@ -35,26 +40,29 @@ github : [https://github.com/Taoqun/mycenter](https://github.com/Taoqun/mycenter
 
 ---------------
 说明:
-- 需要本地安装 mongodb 运行后会连接 `taoqun` 数据库
+- 需要本地安装 mongodb 运行后会连接数据库
 - `config.js`  ==>  可以修改 端口号和配置域名 默认8081  也可以设置host 配置本地域名
-- 运行 node app.js 可以启动服务器
-- 访问地址 可以注册 / 登录 访问页面
+- 运行 node app.js 启动服务器
+- 访问地址 可以注册 / 登录 访问
 - 所有请求都有sessions_id 验证 没有登录账号 无法访问页面 会跳转到登录页
 
 
 ```
-// 需要本地mongdDB 服务器支持
-// cd 到 mongoDB
-// 启动连接本地服务器
-// 执行命令
-  ./mongod --dbpath  d:\\data\db ( 数据库地址,一个空文件夹即可)
-```
-
-```
-// --------- 下载本仓库  ------------
 git clone https://github.com/Taoqun/mycenter.git
 cd mycenter
-nom install
+npm install
 node app.js
-// 自动打开默认浏览器 进入首页
 ```
+图片预览（还没有全部完成）
+
+- 登录
+- 注册
+- todo list （仿滴答清单）
+- 设置中心
+- markdown 写作（仿简书）
+
+![登录](http://ocrcrbkp1.bkt.clouddn.com/myCenterlogin.png)
+![注册](http://ocrcrbkp1.bkt.clouddn.com/myCenterregister.png)
+![todo list](http://ocrcrbkp1.bkt.clouddn.com/myCentertodo_list.png)
+![设置中心](http://ocrcrbkp1.bkt.clouddn.com/myCentersetting.png)
+![markdown](http://ocrcrbkp1.bkt.clouddn.com/myCentermarkdown.png)
