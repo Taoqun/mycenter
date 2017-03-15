@@ -89,10 +89,10 @@
             }).then( ( data ) => {
                 gotologin(data)
                 this.user_info.name = data.name
-                this.user_info.birth_day = data.birth_day
-                this.user_info.sex = data.sex
-                this.user_info.email = data.email
-                this.user_info.phone = data.phone
+                this.user_info.birth_day = data.birth_day || ""
+                this.user_info.sex = data.sex || ""
+                this.user_info.email = data.email || ""
+                this.user_info.phone = data.phone || ""
             } )
         },
         mounted(){
