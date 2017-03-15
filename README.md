@@ -7,9 +7,6 @@ github : [https://github.com/Taoqun/mycenter](https://github.com/Taoqun/mycenter
 了解项目的搭建和架构
 当然也是想自己制作创造产品，创世的欲望！
 
-- [x] test
-- [ ] test
-
 -----------
 ###### 技术选型
 前端：
@@ -41,6 +38,11 @@ github : [https://github.com/Taoqun/mycenter](https://github.com/Taoqun/mycenter
 - [ ] echarts 图表
 - [ ] FM 随机播放音乐
 
+###### 描述
+1. 现在在用 react antd 构思文章列表页面和编辑文章的逻辑，增查改删的接口已经写好
+2. 后台批量管理文章，删除等操作界面
+3. 生辰 死之钟 死亡日期计算 剩下的日子 逻辑
+
 ---------------
 说明:
 - 需要本地安装 mongodb 运行后会连接数据库
@@ -64,8 +66,12 @@ node app.js
 - 设置中心
 - markdown 写作（仿简书）
 
-![登录](http://ocrcrbkp1.bkt.clouddn.com/myCenterlogin.png)
-![注册](http://ocrcrbkp1.bkt.clouddn.com/myCenterregister.png)
-![todo list](http://ocrcrbkp1.bkt.clouddn.com/myCentertodo_list.png)
-![设置中心](http://ocrcrbkp1.bkt.clouddn.com/myCentersetting.png)
-![markdown](http://ocrcrbkp1.bkt.clouddn.com/myCentermarkdown.png)
+![登录](http://ocrcrbkp1.bkt.clouddn.com/myCenter/login.png)
+
+![注册](http://ocrcrbkp1.bkt.clouddn.com/myCenter/register.png)
+
+![todo list](http://ocrcrbkp1.bkt.clouddn.com/myCenter/todo_list.png)
+
+![设置中心](http://ocrcrbkp1.bkt.clouddn.com/myCenter/setting.png)
+
+![markdown](http://ocrcrbkp1.bkt.clouddn.com/myCenter/markdown.png)
