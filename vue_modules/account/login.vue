@@ -34,6 +34,7 @@
     import Vue from 'vue'
     import elementUI from 'element-ui'
     import {ajax} from 'JS/ajax.js'
+
     Vue.use(elementUI)
     export default{
         data(){

@@ -1,10 +1,12 @@
 var path = require('path')
 var webpack = require('webpack')
+
 var VUEMODULES = path.resolve(__dirname, 'vue_modules')
 var CSS = path.resolve(__dirname, 'public/css')
 var JS = path.resolve(__dirname, 'public/js')
 var REACTMODULES = path.resolve(__dirname,'react_modules')
 var ROOT = path.resolve(__dirname)
+
 var entryObj = {
     "account/login/index": './src/account/login/index.js',
     "account/register/index": './src/account/register/index.js',
@@ -12,7 +14,7 @@ var entryObj = {
     "task/index": "./src/task/index.js",
     "account/user_info/index": "./src/account/user_info/index.js",
     "markdown/index": "./src/markdown/index.js",
-    "test/index":"./src/test/index.js",
+    "paper/index":"./src/paper/index.js",
 }
 module.exports = {
     entry: entryObj,
