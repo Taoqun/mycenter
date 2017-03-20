@@ -97,6 +97,7 @@ exports.register = function(req, res) {
 
         // 账户不存在 进行保存
         if (result && result.length === 0) {
+            let id = Date.now()
             let add = new userInfo({
                 account: account,
                 password: password,

@@ -13,6 +13,7 @@ mongoose.connect('mongodb://localhost:27017/taoqun')
 let DB_type_userinfo = new mongoose.Schema({
     name: String,
     account: String,
+    id:String,
     password: String,
     birth_day: Date,
     death_span: Number,

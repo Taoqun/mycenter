@@ -16,7 +16,6 @@ app.use(cookieParser())
 app.use(express.static('public')) // public 文件  && 字体文件element.css里配置
 app.use(express.static('views'))
 
-
 routers(app)
 
 const server = app.listen( obj.port , () => {

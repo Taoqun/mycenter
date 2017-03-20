@@ -57,60 +57,80 @@ exports.addPaper = function(req, res) {
 };
 
 exports.getPaperList = function(req, res) {
-    let account = req.params.id
+    let id = req.params.id
     let page = req.query.page || 1
     let userList = require("../dataModel/userInfoDataModel").userInfo
-    userList.find({account:account},(err,result)=>{
-        if(err){
+
+    userList.find({ _id: id }, (err, result) => {
+        if (err) {
             console.log(err);
             res.end("服务器错误，查询账户失败!")
             return
-         }
-         if(result.length === 1){
-             redner_paper()
-         }else{
-             res.end("没有查询到账户")
-         }
+        }
+        if (result.length === 1) {
+            render_paper(result[0].account)
+        } else {
+            res.end("没有查询到账户")
+        }
     })
-    function redner_paper(){
+
+    function render_paper(account) {
         let markdown = mk(account)
-        markdown.count({},(err,count)=>{
-            if(err){
+        markdown.count({}, (err, count) => {
+            if (err) {
                 console.log(err)
                 res.end("服务器错误")
                 return
             }
-            if( page > count/10 ){
-                page = Math.ceil(count/10)
+            if (page > count / 10) {
+                page = Math.ceil(count / 10)
             }
-            markdown.find({}).sort({date:-1}).limit(10).skip( (page-1)*10 ).exec((err,result)=>{
-                if(err){
+            if (page <= 0) {
+                page = 1
+            }
+            markdown.find({}).sort({ date: -1 }).limit(10).skip((page - 1) * 10).exec((err, result) => {
+                if (err) {
                     console.log(err)
                     res.end("服务器错误")
                     return
                 }
-                let obj ={}
-                    obj.list = result
-                    obj.account = account
-                    obj.name = result[0].name
-                    obj.page = Math.ceil(count/10)
-                    obj.active = page
-                    obj.maxpage = page
-                res.render("paper/index.html",obj)
+                let obj = {}
+                obj.list = result
+                obj.account = account
+                obj.name = result[0].name
+                obj.userid = id
+                obj.page = Math.ceil(count / 10)
+                obj.active = page
+                obj.maxpage = page
+                res.render("paper/index.html", obj)
             })
         })
     }
 };
 
-exports.getPaper = function(req,res){
+exports.getPaper = function(req, res) {
 
-    let account = req.params.account
-    let paper_id = req.params.id
+    let user_id = req.params.user_id
+    let paper_id = req.params.paper_id
+    let userList = require("../dataModel/userInfoDataModel").userInfo
 
-    let markdown = mk(account)
-        markdown.find( { paper_id:paper_id },(err,result) => {
-            res.end( "文章页面" )
+    userList.find({ _id: user_id }, (err, result) => {
+        if (err) {
+            console.log(err)
+            res.end("error,查找用户id错误")
+            return
+        }
+        let account = result[0].account
+        let markdown = mk(account)
+        markdown.find({ _id: paper_id }, (err, result) => {
+            // 返回文章的信息
+            // 文章标签 关键词 标题 内容 时间 修改文章的地址 等等
+            res.end(result[0]["content"])
         })
+
+    })
+
+
 };
 
 exports.upPaper = function(req, res) {
@@ -145,16 +165,16 @@ exports.upPaper = function(req, res) {
         })
     })
 };
-exports.delPaper = (req,res) => {
+exports.delPaper = (req, res) => {
     let sessions_id = req.sessions_id
     getAccount(sessions_id).then((account) => {
         let paper_id = req.body.paper_id
         let markdown = mk(account)
         let arr = []
 
-        if(paper_id instanceof String){
-            arr.push( paper_id )
-        }else if( paper_id instanceof Array ){
+        if (paper_id instanceof String) {
+            arr.push(paper_id)
+        } else if (paper_id instanceof Array) {
             arr = paper_id
         }
 
@@ -163,28 +183,28 @@ exports.delPaper = (req,res) => {
 
         // 从数据删除 并且判断是否全部遍历完成
         const remove = (item) => {
-            markdown.remove({paper_id:item},(err)=>{
-                if(err){ return console.log(err) }
-                if( (success.length + error.length) === arr.length  || (success.length + error.length) === (arr.length - 1) ){
-                    res.json( {code:1,success:success.length,error:error.length} )
-                }
-            })
-        }
-        // 查询 判断是否查询成功 执行删除
-        const find = (item)=>{
-            markdown.find( { paper_id:item },(err,result)=>{
-                if(err){ return console.log(err) }
-                if( result.length ){
+                markdown.remove({ paper_id: item }, (err) => {
+                    if (err) { return console.log(err) }
+                    if ((success.length + error.length) === arr.length || (success.length + error.length) === (arr.length - 1)) {
+                        res.json({ code: 1, success: success.length, error: error.length })
+                    }
+                })
+            }
+            // 查询 判断是否查询成功 执行删除
+        const find = (item) => {
+            markdown.find({ paper_id: item }, (err, result) => {
+                if (err) { return console.log(err) }
+                if (result.length) {
                     success.push(item)
                     remove(item)
-                }else{
+                } else {
                     error.push(item)
                 }
 
             })
         }
 
-        arr.map(( item, index ) => {
+        arr.map((item, index) => {
             find(item)
         })
 

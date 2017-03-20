@@ -11,5 +11,5 @@ module.exports = function(app){
     app.post("/markdown/upPaper",verify,urlencodedParser,markdown.upPaper)
 
     // 查看文章
-    app.get("/paper/:account/:id",markdown.getPaper)
+    app.get("/paper/:user_id/:paper_id",markdown.getPaper)
 }
