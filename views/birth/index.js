@@ -46348,6 +46348,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	_vue2.default.use(_elementUi2.default); //
 	//
 	//
 	//
@@ -46407,9 +46408,6 @@
 	//
 	//
 	//
-	//
-
-	_vue2.default.use(_elementUi2.default);
 
 	exports.default = {
 	    data: function data() {

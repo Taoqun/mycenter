@@ -97,16 +97,22 @@ exports.getPaperList = function(req, res) {
                     obj.active = page
                     obj.maxpage = page
                 res.render("paper/index.html",obj)
-
             })
         })
-
     }
-
 };
-exports.getPaper = (req,res) => {
 
-}
+exports.getPaper = function(req,res){
+
+    let account = req.params.account
+    let paper_id = req.params.id
+
+    let markdown = mk(account)
+        markdown.find( { paper_id:paper_id },(err,result) => {
+            res.end( "文章页面" )
+        })
+};
+
 exports.upPaper = function(req, res) {
     let sessions_id = req.sessions_id
     getAccount(sessions_id).then((account) => {
