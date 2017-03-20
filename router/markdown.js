@@ -6,7 +6,10 @@ const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 
 module.exports = function(app){
-    app.get("/markdown/getPaperList",verify,markdown.getPaperList)
+    app.get("/getPaperList/:id",markdown.getPaperList)
     app.post("/markdown/setPaper",verify,urlencodedParser,markdown.addPaper)
     app.post("markdown/upPaper",verify,urlencodedParser,markdown.upPaper)
+
+    //  查看文章
+    app.get("paper/:id",markdown.getPaper)
 }

@@ -3,11 +3,13 @@ const mongoose = require("mongoose")
 const markdown_data_type = new mongoose.Schema({
     account: String,
     paper_id: String,
-    name: String,
     title: String,
+    content: String,
+    name: String,
     date: Date,
     keywords: Array,
-    content: String,
+    des:String,
+    tag:Array,
     type: String,
 });
 

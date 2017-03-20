@@ -57,33 +57,56 @@ exports.addPaper = function(req, res) {
 };
 
 exports.getPaperList = function(req, res) {
-    let sessions_id = req.cookies.sessions_id
-    if (!sessions_id) { return res.json({ code: 0, des: '没有sessions_id' }) }
-    getAccount(sessions_id).then((account) => {
-        let markdown = mk(account)
-
-        let pageSize = req.query.pageSize || 10
-            pageSize = parseInt(pageSize) || 10
-
-        let currentPage = req.query.currentPage || 0
-            currentPage = parseInt(currentPage) || 0
-
-        let skips = currentPage * pageSize
-
-        let type = req.query.type || ''
-
-        markdown.find({ type: type }).skip(skips).limit(pageSize).sort({ "date": 1 }).exec((err, result) => {
-            if (err) { return console.log(err) }
-
-            if (result.length) {
-                res.json(result[0])
-            } else {
-                res.json({ code: 0, des: '无数据' })
-            }
-        })
+    let account = req.params.id
+    let page = req.query.page || 1
+    let userList = require("../dataModel/userInfoDataModel").userInfo
+    userList.find({account:account},(err,result)=>{
+        if(err){
+            console.log(err);
+            res.end("服务器错误，查询账户失败!")
+            return
+         }
+         if(result.length === 1){
+             redner_paper()
+         }else{
+             res.end("没有查询到账户")
+         }
     })
+    function redner_paper(){
+        let markdown = mk(account)
+        markdown.count({},(err,count)=>{
+            if(err){
+                console.log(err)
+                res.end("服务器错误")
+                return
+            }
+            if( page > count/10 ){
+                page = Math.ceil(count/10)
+            }
+            markdown.find({}).sort({date:-1}).limit(10).skip( (page-1)*10 ).exec((err,result)=>{
+                if(err){
+                    console.log(err)
+                    res.end("服务器错误")
+                    return
+                }
+                let obj ={}
+                    obj.list = result
+                    obj.account = account
+                    obj.name = result[0].name
+                    obj.page = Math.ceil(count/10)
+                    obj.active = page
+                    obj.maxpage = page
+                res.render("paper/index.html",obj)
+
+            })
+        })
+
+    }
 
 };
+exports.getPaper = (req,res) => {
+
+}
 exports.upPaper = function(req, res) {
     let sessions_id = req.sessions_id
     getAccount(sessions_id).then((account) => {

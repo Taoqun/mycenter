@@ -4,10 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title><%= name %>的文章列表</title>
+
 </head>
 <body>
-    <div id="app"></div>
-    <script src="./index.js"></script>
+    <div id="head"></div>
+    <script src="/paper/index.js"></script>
+    <div id="app">
+        <ul class="paper_list_wrap">.
+            <% list.forEach(function(item){ %>
+                <% let date_str = item.date.getFullYear() +'-'+ (item.date.getMonth()+1) +'-'+ item.date.getDate()  %>
+                <li class="paper_list">
+                    <h4 class="paper_title"><a href="/getpaper/<%= item.paper_id %>"><%= item.title %></a></h4>
+                    <p class="paper_name"><%= item.name %> <span><%= date_str %></span></p>
+                    <p class="paper_content"><%= item.des %></p>
+                    <span class="paper_read_more"><a href="/getpaper/<%= item.paper_id %>">阅读更多</a></span>
+                </li>
+            <% }) %>
+        </ul>
+        <div class="paper_page_down" >
+            <a href="/getPaperList/<%=account%>?page=<%= page -1 %>">上一页</a>
+            <ul>
+                <% for( let i=1; i<=page; i++ ){ %>
+                <li><a href="/getPaperList/<%=account%>?page=<%= i %>"><%= i %></a></li>
+                <% } %>
+            </ul>
+            <a href="/getPaperList/<%=account%>?page=<%= page + 1 %>">下一页</a>
+        </div>
+    </div>
+
 </body>
 </html>

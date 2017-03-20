@@ -1,21 +1,20 @@
 .paper_list_wrap{
     width:1000px;
-    margin:20px auto;
-    padding:20px;
+    margin:0px auto;
     box-sizing:border-box;
     line-height:2em;
     font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
     .paper_list{
         width:700px;
-        padding:30px 0;
         border-bottom:1px solid #C0CCDA;
         transition:all 0.3s linear 0s;
         color:#555555;
+        padding:5px 0;
     }
     .paper_title{
         font-size:20px;
         line-height:2em;
-        padding:20px 0;
+        padding:10px 0;
         color:#555555;
         font-weight:normal;
     }
@@ -31,7 +30,7 @@
         bottom:-5px;
         left:50%;
         background-color: #555;
-        transition:all 0.5s ease-in 0s;
+        transition:all 0.3s ease-in 0s;
         transform:translateX(-50%);
     }
     .paper_title a:hover:after{
@@ -61,14 +60,39 @@
         font-size:13px;
         line-height:1em;
         padding:5px 0;
-        border-bottom:2px solid #555;
-        transition:all 0.3s ease-in 0s;
+        transition:all 0.3s linear 0s;
         padding:5px;
         &:hover{
-            color:#fff;
-            background-color:#333;
-            border-bottom:2px solid #fff;
+            color:#666;
         }
     }
+}
 
+
+.paper_page_down{
+    width:1000px;
+    margin:20px auto;
+    font-size:0px;
+    text-align: left;
+    ul,li{
+        display:inline-block;
+    }
+    a{
+        font-size:13px;
+        display:inline-block;
+        padding:5px 10px;
+        margin-right:5px;
+        border:1px solid #D3DCE6;
+        text-align:center;
+        transition:all 0.5s linear 0s;
+    }
+    a:hover{
+        background-color:#F9FAFC;
+        border:1px solid #20A0FF;
+        color:#20A0FF;
+    }
+    a.active{
+        background-color:#20A0FF;
+        color:#fff;
+    }
 }

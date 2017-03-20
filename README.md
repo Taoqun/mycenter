@@ -13,7 +13,9 @@ github : [https://github.com/Taoqun/mycenter](https://github.com/Taoqun/mycenter
 -----------
 ###### 技术选型
 前端：
-- vue 全家桶
+- vue
+- vue-resource
+- vue-router
 - webpack
 - element-ui
 - react
@@ -22,6 +24,7 @@ github : [https://github.com/Taoqun/mycenter](https://github.com/Taoqun/mycenter
 后端：
 - node
 - express
+- ejs
 - mongoDB
 
 --------------

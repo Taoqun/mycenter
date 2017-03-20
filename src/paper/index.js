@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react"
 import ReactDOM from 'react-dom'
-import Head from "REACTMODULES/common/head.jsx"
-import Body from "REACTMODULES/paper/paper_list.jsx"
+import "REACTMODULES/paper/paper_list.scss"
+import Head from  "REACTMODULES/common/head.jsx"
+
+let title = "文章列表"
+
 ReactDOM.render(
-    <div>
-        <Head text={"文章列表"} />
-        <Body />
-    </div>,
-    document.getElementById("app")
+    <Head text={title} />,
+    document.getElementById("head")
 )

@@ -7,7 +7,9 @@ const obj = require('./config.js').obj
 // 运行
 const app = express()
 
-app.set('view engine','ejs')
+app.engine('.html', require('ejs').__express);
+app.set('view engine', 'html');
+
 app.set('views',__dirname+'/views')
 app.use(cookieParser())
 // 设置静态文件
