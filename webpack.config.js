@@ -14,6 +14,7 @@ var entryObj = {
     "task/index": "./src/task/index.js",
     "account/user_info/index": "./src/account/user_info/index.js",
     "markdown/index": "./src/markdown/index.js",
+    "paperlist/index":"./src/paperlist/index.js",
     "paper/index":"./src/paper/index.js",
 }
 module.exports = {

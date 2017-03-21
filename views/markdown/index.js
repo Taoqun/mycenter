@@ -9006,8 +9006,46 @@
 /* 10 */,
 /* 11 */,
 /* 12 */,
-/* 13 */,
-/* 14 */,
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(14);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(6)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./cssreset.css", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./cssreset.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(5)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "/* reset */\r\nhtml,body,h1,h2,h3,h4,h5,h6,div,dl,dt,dd,ul,ol,li,p,blockquote,pre,hr,figure,table,caption,th,td,form,fieldset,legend,input,button,textarea,menu{margin:0;padding:0;}\r\nheader,footer,section,article,aside,nav,hgroup,address,figure,figcaption,menu,details{display:block;}\r\ntable{border-collapse:collapse;border-spacing:0;}\r\ncaption,th{text-align:left;font-weight:normal;}\r\nhtml,body,fieldset,img,iframe,abbr{border:0;}\r\ni,cite,em,var,address,dfn{font-style:normal;}\r\n[hidefocus],summary{outline:0;}\r\nli{list-style:none;}\r\nh1,h2,h3,h4,h5,h6,small{font-size:100%;}\r\nsup,sub{font-size:83%;}\r\npre,code,kbd,samp{font-family:inherit;}\r\nq:before,q:after{content:none;}\r\ntextarea{overflow:auto;resize:none;}\r\nlabel,summary{cursor:default;}\r\na,button{cursor:pointer;}\r\nh1,h2,h3,h4,h5,h6,em,strong,b{font-weight:bold;}\r\ndel,ins,u,s,a,a:hover{text-decoration:none;}\r\nbody,textarea,input,button,select,keygen,legend{font:12px/1.14 arial,\\5b8b\\4f53;color:#333;outline:0;}\r\nbody{background:#fff;}\r\na,a:hover{color:#333;} ", ""]);
+
+	// exports
+
+
+/***/ },
 /* 15 */,
 /* 16 */,
 /* 17 */,
@@ -42690,7 +42728,7 @@
 	  /* cssModules */
 	  null
 	)
-	Component.options.__file = "/Users/taoqun/webProject/mycode/src/markdown/index.vue"
+	Component.options.__file = "F:\\myCode\\src\\markdown\\index.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -42701,9 +42739,9 @@
 	  if (!hotAPI.compatible) return
 	  module.hot.accept()
 	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-65f8e855", Component.options)
+	    hotAPI.createRecord("data-v-3bd6d035", Component.options)
 	  } else {
-	    hotAPI.reload("data-v-65f8e855", Component.options)
+	    hotAPI.reload("data-v-3bd6d035", Component.options)
 	  }
 	})()}
 
@@ -42726,8 +42764,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-65f8e855!./../../node_modules/sass-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-65f8e855!./../../node_modules/sass-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-3bd6d035!./../../node_modules/sass-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-3bd6d035!./../../node_modules/sass-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -42793,7 +42831,7 @@
 	  /* cssModules */
 	  null
 	)
-	Component.options.__file = "/Users/taoqun/webProject/mycode/vue_modules/markdown/markdown.vue"
+	Component.options.__file = "F:\\myCode\\vue_modules\\markdown\\markdown.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] markdown.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -42804,9 +42842,9 @@
 	  if (!hotAPI.compatible) return
 	  module.hot.accept()
 	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-10d352b4", Component.options)
+	    hotAPI.createRecord("data-v-657a7a74", Component.options)
 	  } else {
-	    hotAPI.reload("data-v-10d352b4", Component.options)
+	    hotAPI.reload("data-v-657a7a74", Component.options)
 	  }
 	})()}
 
@@ -42829,8 +42867,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-10d352b4!./../../node_modules/sass-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./markdown.vue", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-10d352b4!./../../node_modules/sass-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./markdown.vue");
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-657a7a74!./../../node_modules/sass-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./markdown.vue", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-657a7a74!./../../node_modules/sass-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./markdown.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -42857,7 +42895,7 @@
 /* 196 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -42870,6 +42908,8 @@
 	var _elementUi = __webpack_require__(27);
 
 	var _elementUi2 = _interopRequireDefault(_elementUi);
+
+	__webpack_require__(13);
 
 	__webpack_require__(197);
 
@@ -42913,23 +42953,43 @@
 	//
 	//
 	//
+	//
 
-	// import "CSS/cssreset.css"
 	exports.default = {
 	    data: function data() {
 	        return {
-	            preview_show: true
+	            preview_show: true,
+	            title: '',
+	            name: '',
+	            content: '',
+	            date: '',
+	            user_id: '',
+	            paper_id: ''
 	        };
+	    },
+
+	    watch: {
+	        title: function title() {
+	            document.querySelector("title").innerText = this.title;
+	        },
+	        content: function content() {
+	            var tem = this.content;
+	            tem = _markdown.markdown.toHTML(tem);
+	            document.querySelector(".markdown-body").innerHTML = tem;
+	        }
+	    },
+	    mounted: function mounted() {
+	        this.title = title;
+	        this.name = name;
+	        this.date = date;
+	        this.user_id = user_id;
+	        this.paper_id = paper_id;
+	        this.content = document.querySelector("#content").value;
 	    },
 
 	    methods: {
 	        stop: function stop() {
 	            return false;
-	        },
-	        run: function run() {
-	            var tem = document.querySelector("#markdown_edit #edit").value;
-	            tem = _markdown.markdown.toHTML(tem);
-	            document.querySelector(".markdown-body").innerHTML = tem;
 	        },
 	        changeEditType: function changeEditType() {
 	            this.preview_show = !this.preview_show;
@@ -42972,7 +43032,7 @@
 
 
 	// module
-	exports.push([module.id, "@font-face {\n  font-family: octicons-link;\n  src: url(data:font/woff;charset=utf-8;base64,d09GRgABAAAAAAZwABAAAAAACFQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEU0lHAAAGaAAAAAgAAAAIAAAAAUdTVUIAAAZcAAAACgAAAAoAAQAAT1MvMgAAAyQAAABJAAAAYFYEU3RjbWFwAAADcAAAAEUAAACAAJThvmN2dCAAAATkAAAABAAAAAQAAAAAZnBnbQAAA7gAAACyAAABCUM+8IhnYXNwAAAGTAAAABAAAAAQABoAI2dseWYAAAFsAAABPAAAAZwcEq9taGVhZAAAAsgAAAA0AAAANgh4a91oaGVhAAADCAAAABoAAAAkCA8DRGhtdHgAAAL8AAAADAAAAAwGAACfbG9jYQAAAsAAAAAIAAAACABiATBtYXhwAAACqAAAABgAAAAgAA8ASm5hbWUAAAToAAABQgAAAlXu73sOcG9zdAAABiwAAAAeAAAAME3QpOBwcmVwAAAEbAAAAHYAAAB/aFGpk3jaTY6xa8JAGMW/O62BDi0tJLYQincXEypYIiGJjSgHniQ6umTsUEyLm5BV6NDBP8Tpts6F0v+k/0an2i+itHDw3v2+9+DBKTzsJNnWJNTgHEy4BgG3EMI9DCEDOGEXzDADU5hBKMIgNPZqoD3SilVaXZCER3/I7AtxEJLtzzuZfI+VVkprxTlXShWKb3TBecG11rwoNlmmn1P2WYcJczl32etSpKnziC7lQyWe1smVPy/Lt7Kc+0vWY/gAgIIEqAN9we0pwKXreiMasxvabDQMM4riO+qxM2ogwDGOZTXxwxDiycQIcoYFBLj5K3EIaSctAq2kTYiw+ymhce7vwM9jSqO8JyVd5RH9gyTt2+J/yUmYlIR0s04n6+7Vm1ozezUeLEaUjhaDSuXHwVRgvLJn1tQ7xiuVv/ocTRF42mNgZGBgYGbwZOBiAAFGJBIMAAizAFoAAABiAGIAznjaY2BkYGAA4in8zwXi+W2+MjCzMIDApSwvXzC97Z4Ig8N/BxYGZgcgl52BCSQKAA3jCV8CAABfAAAAAAQAAEB42mNgZGBg4f3vACQZQABIMjKgAmYAKEgBXgAAeNpjYGY6wTiBgZWBg2kmUxoDA4MPhGZMYzBi1AHygVLYQUCaawqDA4PChxhmh/8ODDEsvAwHgMKMIDnGL0x7gJQCAwMAJd4MFwAAAHjaY2BgYGaA4DAGRgYQkAHyGMF8NgYrIM3JIAGVYYDT+AEjAwuDFpBmA9KMDEwMCh9i/v8H8sH0/4dQc1iAmAkALaUKLgAAAHjaTY9LDsIgEIbtgqHUPpDi3gPoBVyRTmTddOmqTXThEXqrob2gQ1FjwpDvfwCBdmdXC5AVKFu3e5MfNFJ29KTQT48Ob9/lqYwOGZxeUelN2U2R6+cArgtCJpauW7UQBqnFkUsjAY/kOU1cP+DAgvxwn1chZDwUbd6CFimGXwzwF6tPbFIcjEl+vvmM/byA48e6tWrKArm4ZJlCbdsrxksL1AwWn/yBSJKpYbq8AXaaTb8AAHja28jAwOC00ZrBeQNDQOWO//sdBBgYGRiYWYAEELEwMTE4uzo5Zzo5b2BxdnFOcALxNjA6b2ByTswC8jYwg0VlNuoCTWAMqNzMzsoK1rEhNqByEyerg5PMJlYuVueETKcd/89uBpnpvIEVomeHLoMsAAe1Id4AAAAAAAB42oWQT07CQBTGv0JBhagk7HQzKxca2sJCE1hDt4QF+9JOS0nbaaYDCQfwCJ7Au3AHj+LO13FMmm6cl7785vven0kBjHCBhfpYuNa5Ph1c0e2Xu3jEvWG7UdPDLZ4N92nOm+EBXuAbHmIMSRMs+4aUEd4Nd3CHD8NdvOLTsA2GL8M9PODbcL+hD7C1xoaHeLJSEao0FEW14ckxC+TU8TxvsY6X0eLPmRhry2WVioLpkrbp84LLQPGI7c6sOiUzpWIWS5GzlSgUzzLBSikOPFTOXqly7rqx0Z1Q5BAIoZBSFihQYQOOBEdkCOgXTOHA07HAGjGWiIjaPZNW13/+lm6S9FT7rLHFJ6fQbkATOG1j2OFMucKJJsxIVfQORl+9Jyda6Sl1dUYhSCm1dyClfoeDve4qMYdLEbfqHf3O/AdDumsjAAB42mNgYoAAZQYjBmyAGYQZmdhL8zLdDEydARfoAqIAAAABAAMABwAKABMAB///AA8AAQAAAAAAAAAAAAAAAAABAAAAAA==) format('woff');\n}\n\n.markdown-body {\n  -ms-text-size-adjust: 100%;\n  -webkit-text-size-adjust: 100%;\n  line-height: 1.5;\n  color: #333;\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n  font-size: 20px;\n  line-height: 1.5;\n  word-wrap: break-word;\n}\n\n.markdown-body .pl-c {\n  color: #969896;\n}\n\n.markdown-body .pl-c1,\n.markdown-body .pl-s .pl-v {\n  color: #0086b3;\n}\n\n.markdown-body .pl-e,\n.markdown-body .pl-en {\n  color: #795da3;\n}\n\n.markdown-body .pl-smi,\n.markdown-body .pl-s .pl-s1 {\n  color: #333;\n}\n\n.markdown-body .pl-ent {\n  color: #63a35c;\n}\n\n.markdown-body .pl-k {\n  color: #a71d5d;\n}\n\n.markdown-body .pl-s,\n.markdown-body .pl-pds,\n.markdown-body .pl-s .pl-pse .pl-s1,\n.markdown-body .pl-sr,\n.markdown-body .pl-sr .pl-cce,\n.markdown-body .pl-sr .pl-sre,\n.markdown-body .pl-sr .pl-sra {\n  color: #183691;\n}\n\n.markdown-body .pl-v {\n  color: #ed6a43;\n}\n\n.markdown-body .pl-id {\n  color: #b52a1d;\n}\n\n.markdown-body .pl-ii {\n  color: #f8f8f8;\n  background-color: #b52a1d;\n}\n\n.markdown-body .pl-sr .pl-cce {\n  font-weight: bold;\n  color: #63a35c;\n}\n\n.markdown-body .pl-ml {\n  color: #693a17;\n}\n\n.markdown-body .pl-mh,\n.markdown-body .pl-mh .pl-en,\n.markdown-body .pl-ms {\n  font-weight: bold;\n  color: #1d3e81;\n}\n\n.markdown-body .pl-mq {\n  color: #008080;\n}\n\n.markdown-body .pl-mi {\n  font-style: italic;\n  color: #333;\n}\n\n.markdown-body .pl-mb {\n  font-weight: bold;\n  color: #333;\n}\n\n.markdown-body .pl-md {\n  color: #bd2c00;\n  background-color: #ffecec;\n}\n\n.markdown-body .pl-mi1 {\n  color: #55a532;\n  background-color: #eaffea;\n}\n\n.markdown-body .pl-mdr {\n  font-weight: bold;\n  color: #795da3;\n}\n\n.markdown-body .pl-mo {\n  color: #1d3e81;\n}\n\n.markdown-body .octicon {\n  display: inline-block;\n  vertical-align: text-top;\n  fill: currentColor;\n}\n\n.markdown-body a {\n  background-color: transparent;\n  -webkit-text-decoration-skip: objects;\n}\n\n.markdown-body a:active,\n.markdown-body a:hover {\n  outline-width: 0;\n}\n\n.markdown-body strong {\n  font-weight: inherit;\n}\n\n.markdown-body strong {\n  font-weight: bolder;\n}\n\n.markdown-body h1 {\n  font-size: 2em;\n  margin: 0.67em 0;\n}\n\n.markdown-body img {\n  border-style: none;\n}\n\n.markdown-body svg:not(:root) {\n  overflow: hidden;\n}\n\n.markdown-body code,\n.markdown-body kbd,\n.markdown-body pre {\n  display:block;\n  font-family: monospace, monospace;\n  font-size: 1em;\n}\n\n.markdown-body hr {\n  box-sizing: content-box;\n  height: 0;\n  overflow: visible;\n}\n\n.markdown-body input {\n  font: inherit;\n  margin: 0;\n}\n\n.markdown-body input {\n  overflow: visible;\n}\n\n.markdown-body [type=\"checkbox\"] {\n  box-sizing: border-box;\n  padding: 0;\n}\n\n.markdown-body * {\n  box-sizing: border-box;\n}\n\n.markdown-body input {\n  font-family: inherit;\n  font-size: inherit;\n  line-height: inherit;\n}\n\n.markdown-body a {\n  color: #4078c0;\n  text-decoration: none;\n}\n\n.markdown-body a:hover,\n.markdown-body a:active {\n  text-decoration: underline;\n}\n\n.markdown-body strong {\n  font-weight: 600;\n}\n\n.markdown-body hr {\n  height: 0;\n  margin: 15px 0;\n  overflow: hidden;\n  background: transparent;\n  border: 0;\n  border-bottom: 1px solid #ddd;\n}\n\n.markdown-body hr::before {\n  display: table;\n  content: \"\";\n}\n\n.markdown-body hr::after {\n  display: table;\n  clear: both;\n  content: \"\";\n}\n\n.markdown-body table {\n  border-spacing: 0;\n  border-collapse: collapse;\n}\n\n.markdown-body td,\n.markdown-body th {\n  padding: 0;\n}\n\n.markdown-body h1,\n.markdown-body h2,\n.markdown-body h3,\n.markdown-body h4,\n.markdown-body h5,\n.markdown-body h6 {\n  margin-top: 0;\n  margin-bottom: 0;\n}\n\n.markdown-body h1 {\n  font-size: 32px;\n  font-weight: 600;\n}\n\n.markdown-body h2 {\n  font-size: 24px;\n  font-weight: 600;\n}\n\n.markdown-body h3 {\n  font-size: 20px;\n  font-weight: 600;\n}\n\n.markdown-body h4 {\n  font-size: 16px;\n  font-weight: 600;\n}\n\n.markdown-body h5 {\n  font-size: 14px;\n  font-weight: 600;\n}\n\n.markdown-body h6 {\n  font-size: 12px;\n  font-weight: 600;\n}\n\n.markdown-body p {\n  margin-top: 0;\n  margin-bottom: 10px;\n}\n\n.markdown-body blockquote {\n  margin: 0;\n}\n\n.markdown-body ul,\n.markdown-body ol {\n  padding-left: 0;\n  margin-top: 0;\n  margin-bottom: 0;\n}\n\n.markdown-body ol ol,\n.markdown-body ul ol {\n  list-style-type: lower-roman;\n}\n\n.markdown-body ul ul ol,\n.markdown-body ul ol ol,\n.markdown-body ol ul ol,\n.markdown-body ol ol ol {\n  list-style-type: lower-alpha;\n}\n\n.markdown-body dd {\n  margin-left: 0;\n}\n\n.markdown-body code {\n  font-family: Consolas, \"Liberation Mono\", Menlo, Courier, monospace;\n  font-size: 12px;\n}\n\n.markdown-body pre {\n  margin-top: 0;\n  margin-bottom: 0;\n  font: 12px Consolas, \"Liberation Mono\", Menlo, Courier, monospace;\n}\n\n.markdown-body .octicon {\n  vertical-align: text-bottom;\n}\n\n.markdown-body input {\n  -webkit-font-feature-settings: \"liga\" 0;\n  font-feature-settings: \"liga\" 0;\n}\n\n.markdown-body::before {\n  display: table;\n  content: \"\";\n}\n\n.markdown-body::after {\n  display: table;\n  clear: both;\n  content: \"\";\n}\n\n.markdown-body>*:first-child {\n  margin-top: 0 !important;\n}\n\n.markdown-body>*:last-child {\n  margin-bottom: 0 !important;\n}\n\n.markdown-body a:not([href]) {\n  color: inherit;\n  text-decoration: none;\n}\n\n.markdown-body .anchor {\n  float: left;\n  padding-right: 4px;\n  margin-left: -20px;\n  line-height: 1;\n}\n\n.markdown-body .anchor:focus {\n  outline: none;\n}\n\n.markdown-body p,\n.markdown-body blockquote,\n.markdown-body ul,\n.markdown-body ol,\n.markdown-body dl,\n.markdown-body table,\n.markdown-body pre {\n  margin-top: 0;\n  margin-bottom: 16px;\n}\n\n.markdown-body hr {\n  height: 0.25em;\n  padding: 0;\n  margin: 24px 0;\n  background-color: #e7e7e7;\n  border: 0;\n}\n\n.markdown-body blockquote {\n  padding: 0 1em;\n  color: #777;\n  border-left: 0.25em solid #ddd;\n}\n\n.markdown-body blockquote>:first-child {\n  margin-top: 0;\n}\n\n.markdown-body blockquote>:last-child {\n  margin-bottom: 0;\n}\n\n.markdown-body kbd {\n  display: inline-block;\n  padding: 3px 5px;\n  font-size: 11px;\n  line-height: 10px;\n  color: #555;\n  vertical-align: middle;\n  background-color: #fcfcfc;\n  border: solid 1px #ccc;\n  border-bottom-color: #bbb;\n  border-radius: 3px;\n  box-shadow: inset 0 -1px 0 #bbb;\n}\n\n.markdown-body h1,\n.markdown-body h2,\n.markdown-body h3,\n.markdown-body h4,\n.markdown-body h5,\n.markdown-body h6 {\n  margin-top: 24px;\n  margin-bottom: 16px;\n  font-weight: 600;\n  line-height: 1.25;\n}\n\n.markdown-body h1 .octicon-link,\n.markdown-body h2 .octicon-link,\n.markdown-body h3 .octicon-link,\n.markdown-body h4 .octicon-link,\n.markdown-body h5 .octicon-link,\n.markdown-body h6 .octicon-link {\n  color: #000;\n  vertical-align: middle;\n  visibility: hidden;\n}\n\n.markdown-body h1:hover .anchor,\n.markdown-body h2:hover .anchor,\n.markdown-body h3:hover .anchor,\n.markdown-body h4:hover .anchor,\n.markdown-body h5:hover .anchor,\n.markdown-body h6:hover .anchor {\n  text-decoration: none;\n}\n\n.markdown-body h1:hover .anchor .octicon-link,\n.markdown-body h2:hover .anchor .octicon-link,\n.markdown-body h3:hover .anchor .octicon-link,\n.markdown-body h4:hover .anchor .octicon-link,\n.markdown-body h5:hover .anchor .octicon-link,\n.markdown-body h6:hover .anchor .octicon-link {\n  visibility: visible;\n}\n\n.markdown-body h1 {\n  padding-bottom: 0.3em;\n  font-size: 2em;\n  border-bottom: 1px solid #eee;\n}\n\n.markdown-body h2 {\n  padding-bottom: 0.3em;\n  font-size: 1.5em;\n  border-bottom: 1px solid #eee;\n}\n\n.markdown-body h3 {\n  font-size: 1.25em;\n}\n\n.markdown-body h4 {\n  font-size: 1em;\n}\n\n.markdown-body h5 {\n  font-size: 0.875em;\n}\n\n.markdown-body h6 {\n  font-size: 0.85em;\n  color: #777;\n}\n\n.markdown-body ul,\n.markdown-body ol {\n  padding-left: 2em;\n}\n\n.markdown-body ul ul,\n.markdown-body ul ol,\n.markdown-body ol ol,\n.markdown-body ol ul {\n  margin-top: 0;\n  margin-bottom: 0;\n}\n\n.markdown-body li>p {\n  margin-top: 16px;\n}\n\n.markdown-body li+li {\n  margin-top: 0.25em;\n}\n\n.markdown-body dl {\n  padding: 0;\n}\n\n.markdown-body dl dt {\n  padding: 0;\n  margin-top: 16px;\n  font-size: 1em;\n  font-style: italic;\n  font-weight: bold;\n}\n\n.markdown-body dl dd {\n  padding: 0 16px;\n  margin-bottom: 16px;\n}\n\n.markdown-body table {\n  display: block;\n  width: 100%;\n  overflow: auto;\n}\n\n.markdown-body table th {\n  font-weight: bold;\n}\n\n.markdown-body table th,\n.markdown-body table td {\n  padding: 6px 13px;\n  border: 1px solid #ddd;\n}\n\n.markdown-body table tr {\n  background-color: #fff;\n  border-top: 1px solid #ccc;\n}\n\n.markdown-body table tr:nth-child(2n) {\n  background-color: #f8f8f8;\n}\n\n.markdown-body img {\n  max-width: 100%;\n  box-sizing: content-box;\n  background-color: #fff;\n}\n\n.markdown-body code {\n  padding: 0;\n  padding-top: 0.2em;\n  padding-bottom: 0.2em;\n  padding:0.2em;\n  margin: 10px 0;\n  font-size: 85%;\n  background-color: rgba(0,0,0,0.3);\n  border-radius: 3px;\n}\n\n.markdown-body code::before,\n.markdown-body code::after {\n  letter-spacing: -0.2em;\n  content: \"\\A0\";\n}\n\n.markdown-body pre {\n  word-wrap: normal;\n}\n\n.markdown-body pre>code {\n  padding: 0;\n  margin: 0;\n  font-size: 100%;\n  word-break: normal;\n  white-space: pre;\n  background: transparent;\n  border: 0;\n}\n\n.markdown-body .highlight {\n  margin-bottom: 16px;\n}\n\n.markdown-body .highlight pre {\n  margin-bottom: 0;\n  word-break: normal;\n}\n\n.markdown-body .highlight pre,\n.markdown-body pre {\n  padding: 16px;\n  overflow: auto;\n  font-size: 85%;\n  line-height: 1.45;\n  background-color: #f7f7f7;\n  border-radius: 3px;\n}\n\n.markdown-body pre code {\n  display: inline;\n  max-width: auto;\n  padding: 0;\n  margin: 0;\n  overflow: visible;\n  line-height: inherit;\n  word-wrap: normal;\n  background-color: transparent;\n  border: 0;\n}\n\n.markdown-body pre code::before,\n.markdown-body pre code::after {\n  content: normal;\n}\n\n.markdown-body .pl-0 {\n  padding-left: 0 !important;\n}\n\n.markdown-body .pl-1 {\n  padding-left: 3px !important;\n}\n\n.markdown-body .pl-2 {\n  padding-left: 6px !important;\n}\n\n.markdown-body .pl-3 {\n  padding-left: 12px !important;\n}\n\n.markdown-body .pl-4 {\n  padding-left: 24px !important;\n}\n\n.markdown-body .pl-5 {\n  padding-left: 36px !important;\n}\n\n.markdown-body .pl-6 {\n  padding-left: 48px !important;\n}\n\n.markdown-body .full-commit .btn-outline:not(:disabled):hover {\n  color: #4078c0;\n  border: 1px solid #4078c0;\n}\n\n.markdown-body kbd {\n  display: inline-block;\n  padding: 3px 5px;\n  font: 11px Consolas, \"Liberation Mono\", Menlo, Courier, monospace;\n  line-height: 10px;\n  color: #555;\n  vertical-align: middle;\n  background-color: #fcfcfc;\n  border: solid 1px #ccc;\n  border-bottom-color: #bbb;\n  border-radius: 3px;\n  box-shadow: inset 0 -1px 0 #bbb;\n}\n\n.markdown-body :checked+.radio-label {\n  position: relative;\n  z-index: 1;\n  border-color: #4078c0;\n}\n\n.markdown-body .task-list-item {\n  list-style-type: none;\n}\n\n.markdown-body .task-list-item+.task-list-item {\n  margin-top: 3px;\n}\n\n.markdown-body .task-list-item input {\n  margin: 0 0.2em 0.25em -1.6em;\n  vertical-align: middle;\n}\n\n.markdown-body hr {\n  border-bottom-color: #eee;\n}\n", ""]);
+	exports.push([module.id, "@font-face {\r\n  font-family: octicons-link;\r\n  src: url(data:font/woff;charset=utf-8;base64,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) format('woff');\r\n}\r\n\r\n.markdown-body {\r\n  -ms-text-size-adjust: 100%;\r\n  -webkit-text-size-adjust: 100%;\r\n  line-height: 1.5;\r\n  color: #333;\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\r\n  font-size: 20px;\r\n  line-height: 1.5;\r\n  word-wrap: break-word;\r\n}\r\n\r\n.markdown-body .pl-c {\r\n  color: #969896;\r\n}\r\n\r\n.markdown-body .pl-c1,\r\n.markdown-body .pl-s .pl-v {\r\n  color: #0086b3;\r\n}\r\n\r\n.markdown-body .pl-e,\r\n.markdown-body .pl-en {\r\n  color: #795da3;\r\n}\r\n\r\n.markdown-body .pl-smi,\r\n.markdown-body .pl-s .pl-s1 {\r\n  color: #333;\r\n}\r\n\r\n.markdown-body .pl-ent {\r\n  color: #63a35c;\r\n}\r\n\r\n.markdown-body .pl-k {\r\n  color: #a71d5d;\r\n}\r\n\r\n.markdown-body .pl-s,\r\n.markdown-body .pl-pds,\r\n.markdown-body .pl-s .pl-pse .pl-s1,\r\n.markdown-body .pl-sr,\r\n.markdown-body .pl-sr .pl-cce,\r\n.markdown-body .pl-sr .pl-sre,\r\n.markdown-body .pl-sr .pl-sra {\r\n  color: #183691;\r\n}\r\n\r\n.markdown-body .pl-v {\r\n  color: #ed6a43;\r\n}\r\n\r\n.markdown-body .pl-id {\r\n  color: #b52a1d;\r\n}\r\n\r\n.markdown-body .pl-ii {\r\n  color: #f8f8f8;\r\n  background-color: #b52a1d;\r\n}\r\n\r\n.markdown-body .pl-sr .pl-cce {\r\n  font-weight: bold;\r\n  color: #63a35c;\r\n}\r\n\r\n.markdown-body .pl-ml {\r\n  color: #693a17;\r\n}\r\n\r\n.markdown-body .pl-mh,\r\n.markdown-body .pl-mh .pl-en,\r\n.markdown-body .pl-ms {\r\n  font-weight: bold;\r\n  color: #1d3e81;\r\n}\r\n\r\n.markdown-body .pl-mq {\r\n  color: #008080;\r\n}\r\n\r\n.markdown-body .pl-mi {\r\n  font-style: italic;\r\n  color: #333;\r\n}\r\n\r\n.markdown-body .pl-mb {\r\n  font-weight: bold;\r\n  color: #333;\r\n}\r\n\r\n.markdown-body .pl-md {\r\n  color: #bd2c00;\r\n  background-color: #ffecec;\r\n}\r\n\r\n.markdown-body .pl-mi1 {\r\n  color: #55a532;\r\n  background-color: #eaffea;\r\n}\r\n\r\n.markdown-body .pl-mdr {\r\n  font-weight: bold;\r\n  color: #795da3;\r\n}\r\n\r\n.markdown-body .pl-mo {\r\n  color: #1d3e81;\r\n}\r\n\r\n.markdown-body .octicon {\r\n  display: inline-block;\r\n  vertical-align: text-top;\r\n  fill: currentColor;\r\n}\r\n\r\n.markdown-body a {\r\n  background-color: transparent;\r\n  -webkit-text-decoration-skip: objects;\r\n}\r\n\r\n.markdown-body a:active,\r\n.markdown-body a:hover {\r\n  outline-width: 0;\r\n}\r\n\r\n.markdown-body strong {\r\n  font-weight: inherit;\r\n}\r\n\r\n.markdown-body strong {\r\n  font-weight: bolder;\r\n}\r\n\r\n.markdown-body h1 {\r\n  font-size: 2em;\r\n  margin: 0.67em 0;\r\n}\r\n\r\n.markdown-body img {\r\n  border-style: none;\r\n}\r\n\r\n.markdown-body svg:not(:root) {\r\n  overflow: hidden;\r\n}\r\n\r\n.markdown-body code,\r\n.markdown-body kbd,\r\n.markdown-body pre {\r\n  display:block;\r\n  font-family: monospace, monospace;\r\n  font-size: 1em;\r\n}\r\n\r\n.markdown-body hr {\r\n  box-sizing: content-box;\r\n  height: 0;\r\n  overflow: visible;\r\n}\r\n\r\n.markdown-body input {\r\n  font: inherit;\r\n  margin: 0;\r\n}\r\n\r\n.markdown-body input {\r\n  overflow: visible;\r\n}\r\n\r\n.markdown-body [type=\"checkbox\"] {\r\n  box-sizing: border-box;\r\n  padding: 0;\r\n}\r\n\r\n.markdown-body * {\r\n  box-sizing: border-box;\r\n}\r\n\r\n.markdown-body input {\r\n  font-family: inherit;\r\n  font-size: inherit;\r\n  line-height: inherit;\r\n}\r\n\r\n.markdown-body a {\r\n  color: #4078c0;\r\n  text-decoration: none;\r\n}\r\n\r\n.markdown-body a:hover,\r\n.markdown-body a:active {\r\n  text-decoration: underline;\r\n}\r\n\r\n.markdown-body strong {\r\n  font-weight: 600;\r\n}\r\n\r\n.markdown-body hr {\r\n  height: 0;\r\n  margin: 15px 0;\r\n  overflow: hidden;\r\n  background: transparent;\r\n  border: 0;\r\n  border-bottom: 1px solid #ddd;\r\n}\r\n\r\n.markdown-body hr::before {\r\n  display: table;\r\n  content: \"\";\r\n}\r\n\r\n.markdown-body hr::after {\r\n  display: table;\r\n  clear: both;\r\n  content: \"\";\r\n}\r\n\r\n.markdown-body table {\r\n  border-spacing: 0;\r\n  border-collapse: collapse;\r\n}\r\n\r\n.markdown-body td,\r\n.markdown-body th {\r\n  padding: 0;\r\n}\r\n\r\n.markdown-body h1,\r\n.markdown-body h2,\r\n.markdown-body h3,\r\n.markdown-body h4,\r\n.markdown-body h5,\r\n.markdown-body h6 {\r\n  margin-top: 0;\r\n  margin-bottom: 0;\r\n}\r\n\r\n.markdown-body h1 {\r\n  font-size: 32px;\r\n  font-weight: 600;\r\n}\r\n\r\n.markdown-body h2 {\r\n  font-size: 24px;\r\n  font-weight: 600;\r\n}\r\n\r\n.markdown-body h3 {\r\n  font-size: 20px;\r\n  font-weight: 600;\r\n}\r\n\r\n.markdown-body h4 {\r\n  font-size: 16px;\r\n  font-weight: 600;\r\n}\r\n\r\n.markdown-body h5 {\r\n  font-size: 14px;\r\n  font-weight: 600;\r\n}\r\n\r\n.markdown-body h6 {\r\n  font-size: 12px;\r\n  font-weight: 600;\r\n}\r\n\r\n.markdown-body p {\r\n  margin-top: 0;\r\n  margin-bottom: 10px;\r\n}\r\n\r\n.markdown-body blockquote {\r\n  margin: 0;\r\n}\r\n\r\n.markdown-body ul,\r\n.markdown-body ol {\r\n  padding-left: 0;\r\n  margin-top: 0;\r\n  margin-bottom: 0;\r\n}\r\n\r\n.markdown-body ol ol,\r\n.markdown-body ul ol {\r\n  list-style-type: lower-roman;\r\n}\r\n\r\n.markdown-body ul ul ol,\r\n.markdown-body ul ol ol,\r\n.markdown-body ol ul ol,\r\n.markdown-body ol ol ol {\r\n  list-style-type: lower-alpha;\r\n}\r\n\r\n.markdown-body dd {\r\n  margin-left: 0;\r\n}\r\n\r\n.markdown-body code {\r\n  font-family: Consolas, \"Liberation Mono\", Menlo, Courier, monospace;\r\n  font-size: 12px;\r\n}\r\n\r\n.markdown-body pre {\r\n  margin-top: 0;\r\n  margin-bottom: 0;\r\n  font: 12px Consolas, \"Liberation Mono\", Menlo, Courier, monospace;\r\n}\r\n\r\n.markdown-body .octicon {\r\n  vertical-align: text-bottom;\r\n}\r\n\r\n.markdown-body input {\r\n  -webkit-font-feature-settings: \"liga\" 0;\r\n  font-feature-settings: \"liga\" 0;\r\n}\r\n\r\n.markdown-body::before {\r\n  display: table;\r\n  content: \"\";\r\n}\r\n\r\n.markdown-body::after {\r\n  display: table;\r\n  clear: both;\r\n  content: \"\";\r\n}\r\n\r\n.markdown-body>*:first-child {\r\n  margin-top: 0 !important;\r\n}\r\n\r\n.markdown-body>*:last-child {\r\n  margin-bottom: 0 !important;\r\n}\r\n\r\n.markdown-body a:not([href]) {\r\n  color: inherit;\r\n  text-decoration: none;\r\n}\r\n\r\n.markdown-body .anchor {\r\n  float: left;\r\n  padding-right: 4px;\r\n  margin-left: -20px;\r\n  line-height: 1;\r\n}\r\n\r\n.markdown-body .anchor:focus {\r\n  outline: none;\r\n}\r\n\r\n.markdown-body p,\r\n.markdown-body blockquote,\r\n.markdown-body ul,\r\n.markdown-body ol,\r\n.markdown-body dl,\r\n.markdown-body table,\r\n.markdown-body pre {\r\n  margin-top: 0;\r\n  margin-bottom: 16px;\r\n}\r\n\r\n.markdown-body hr {\r\n  height: 0.25em;\r\n  padding: 0;\r\n  margin: 24px 0;\r\n  background-color: #e7e7e7;\r\n  border: 0;\r\n}\r\n\r\n.markdown-body blockquote {\r\n  padding: 0 1em;\r\n  color: #777;\r\n  border-left: 0.25em solid #ddd;\r\n}\r\n\r\n.markdown-body blockquote>:first-child {\r\n  margin-top: 0;\r\n}\r\n\r\n.markdown-body blockquote>:last-child {\r\n  margin-bottom: 0;\r\n}\r\n\r\n.markdown-body kbd {\r\n  display: inline-block;\r\n  padding: 3px 5px;\r\n  font-size: 11px;\r\n  line-height: 10px;\r\n  color: #555;\r\n  vertical-align: middle;\r\n  background-color: #fcfcfc;\r\n  border: solid 1px #ccc;\r\n  border-bottom-color: #bbb;\r\n  border-radius: 3px;\r\n  box-shadow: inset 0 -1px 0 #bbb;\r\n}\r\n\r\n.markdown-body h1,\r\n.markdown-body h2,\r\n.markdown-body h3,\r\n.markdown-body h4,\r\n.markdown-body h5,\r\n.markdown-body h6 {\r\n  margin-top: 24px;\r\n  margin-bottom: 16px;\r\n  font-weight: 600;\r\n  line-height: 1.25;\r\n}\r\n\r\n.markdown-body h1 .octicon-link,\r\n.markdown-body h2 .octicon-link,\r\n.markdown-body h3 .octicon-link,\r\n.markdown-body h4 .octicon-link,\r\n.markdown-body h5 .octicon-link,\r\n.markdown-body h6 .octicon-link {\r\n  color: #000;\r\n  vertical-align: middle;\r\n  visibility: hidden;\r\n}\r\n\r\n.markdown-body h1:hover .anchor,\r\n.markdown-body h2:hover .anchor,\r\n.markdown-body h3:hover .anchor,\r\n.markdown-body h4:hover .anchor,\r\n.markdown-body h5:hover .anchor,\r\n.markdown-body h6:hover .anchor {\r\n  text-decoration: none;\r\n}\r\n\r\n.markdown-body h1:hover .anchor .octicon-link,\r\n.markdown-body h2:hover .anchor .octicon-link,\r\n.markdown-body h3:hover .anchor .octicon-link,\r\n.markdown-body h4:hover .anchor .octicon-link,\r\n.markdown-body h5:hover .anchor .octicon-link,\r\n.markdown-body h6:hover .anchor .octicon-link {\r\n  visibility: visible;\r\n}\r\n\r\n.markdown-body h1 {\r\n  padding-bottom: 0.3em;\r\n  font-size: 2em;\r\n  border-bottom: 1px solid #eee;\r\n}\r\n\r\n.markdown-body h2 {\r\n  padding-bottom: 0.3em;\r\n  font-size: 1.5em;\r\n  border-bottom: 1px solid #eee;\r\n}\r\n\r\n.markdown-body h3 {\r\n  font-size: 1.25em;\r\n}\r\n\r\n.markdown-body h4 {\r\n  font-size: 1em;\r\n}\r\n\r\n.markdown-body h5 {\r\n  font-size: 0.875em;\r\n}\r\n\r\n.markdown-body h6 {\r\n  font-size: 0.85em;\r\n  color: #777;\r\n}\r\n\r\n.markdown-body ul,\r\n.markdown-body ol {\r\n  padding-left: 2em;\r\n}\r\n\r\n.markdown-body ul ul,\r\n.markdown-body ul ol,\r\n.markdown-body ol ol,\r\n.markdown-body ol ul {\r\n  margin-top: 0;\r\n  margin-bottom: 0;\r\n}\r\n\r\n.markdown-body li>p {\r\n  margin-top: 16px;\r\n}\r\n\r\n.markdown-body li+li {\r\n  margin-top: 0.25em;\r\n}\r\n\r\n.markdown-body dl {\r\n  padding: 0;\r\n}\r\n\r\n.markdown-body dl dt {\r\n  padding: 0;\r\n  margin-top: 16px;\r\n  font-size: 1em;\r\n  font-style: italic;\r\n  font-weight: bold;\r\n}\r\n\r\n.markdown-body dl dd {\r\n  padding: 0 16px;\r\n  margin-bottom: 16px;\r\n}\r\n\r\n.markdown-body table {\r\n  display: block;\r\n  width: 100%;\r\n  overflow: auto;\r\n}\r\n\r\n.markdown-body table th {\r\n  font-weight: bold;\r\n}\r\n\r\n.markdown-body table th,\r\n.markdown-body table td {\r\n  padding: 6px 13px;\r\n  border: 1px solid #ddd;\r\n}\r\n\r\n.markdown-body table tr {\r\n  background-color: #fff;\r\n  border-top: 1px solid #ccc;\r\n}\r\n\r\n.markdown-body table tr:nth-child(2n) {\r\n  background-color: #f8f8f8;\r\n}\r\n\r\n.markdown-body img {\r\n  max-width: 100%;\r\n  box-sizing: content-box;\r\n  background-color: #fff;\r\n}\r\n\r\n.markdown-body code {\r\n  padding: 0;\r\n  padding-top: 0.2em;\r\n  padding-bottom: 0.2em;\r\n  padding:0.2em;\r\n  margin: 10px 0;\r\n  font-size: 85%;\r\n  background-color: rgba(0,0,0,0.3);\r\n  border-radius: 3px;\r\n}\r\n\r\n.markdown-body code::before,\r\n.markdown-body code::after {\r\n  letter-spacing: -0.2em;\r\n  content: \"\\A0\";\r\n}\r\n\r\n.markdown-body pre {\r\n  word-wrap: normal;\r\n}\r\n\r\n.markdown-body pre>code {\r\n  padding: 0;\r\n  margin: 0;\r\n  font-size: 100%;\r\n  word-break: normal;\r\n  white-space: pre;\r\n  background: transparent;\r\n  border: 0;\r\n}\r\n\r\n.markdown-body .highlight {\r\n  margin-bottom: 16px;\r\n}\r\n\r\n.markdown-body .highlight pre {\r\n  margin-bottom: 0;\r\n  word-break: normal;\r\n}\r\n\r\n.markdown-body .highlight pre,\r\n.markdown-body pre {\r\n  padding: 16px;\r\n  overflow: auto;\r\n  font-size: 85%;\r\n  line-height: 1.45;\r\n  background-color: #f7f7f7;\r\n  border-radius: 3px;\r\n}\r\n\r\n.markdown-body pre code {\r\n  display: inline;\r\n  max-width: auto;\r\n  padding: 0;\r\n  margin: 0;\r\n  overflow: visible;\r\n  line-height: inherit;\r\n  word-wrap: normal;\r\n  background-color: transparent;\r\n  border: 0;\r\n}\r\n\r\n.markdown-body pre code::before,\r\n.markdown-body pre code::after {\r\n  content: normal;\r\n}\r\n\r\n.markdown-body .pl-0 {\r\n  padding-left: 0 !important;\r\n}\r\n\r\n.markdown-body .pl-1 {\r\n  padding-left: 3px !important;\r\n}\r\n\r\n.markdown-body .pl-2 {\r\n  padding-left: 6px !important;\r\n}\r\n\r\n.markdown-body .pl-3 {\r\n  padding-left: 12px !important;\r\n}\r\n\r\n.markdown-body .pl-4 {\r\n  padding-left: 24px !important;\r\n}\r\n\r\n.markdown-body .pl-5 {\r\n  padding-left: 36px !important;\r\n}\r\n\r\n.markdown-body .pl-6 {\r\n  padding-left: 48px !important;\r\n}\r\n\r\n.markdown-body .full-commit .btn-outline:not(:disabled):hover {\r\n  color: #4078c0;\r\n  border: 1px solid #4078c0;\r\n}\r\n\r\n.markdown-body kbd {\r\n  display: inline-block;\r\n  padding: 3px 5px;\r\n  font: 11px Consolas, \"Liberation Mono\", Menlo, Courier, monospace;\r\n  line-height: 10px;\r\n  color: #555;\r\n  vertical-align: middle;\r\n  background-color: #fcfcfc;\r\n  border: solid 1px #ccc;\r\n  border-bottom-color: #bbb;\r\n  border-radius: 3px;\r\n  box-shadow: inset 0 -1px 0 #bbb;\r\n}\r\n\r\n.markdown-body :checked+.radio-label {\r\n  position: relative;\r\n  z-index: 1;\r\n  border-color: #4078c0;\r\n}\r\n\r\n.markdown-body .task-list-item {\r\n  list-style-type: none;\r\n}\r\n\r\n.markdown-body .task-list-item+.task-list-item {\r\n  margin-top: 3px;\r\n}\r\n\r\n.markdown-body .task-list-item input {\r\n  margin: 0 0.2em 0.25em -1.6em;\r\n  vertical-align: middle;\r\n}\r\n\r\n.markdown-body hr {\r\n  border-bottom-color: #eee;\r\n}\r\n", ""]);
 
 	// exports
 
@@ -45367,36 +45427,63 @@
 	    }
 	  }, [_c('div', {
 	    staticClass: "markdown_top"
-	  }, [_vm._m(0), _vm._v(" "), _c('div', {
+	  }, [_c('div', {
+	    staticClass: "markdown_head"
+	  }, [_c('input', {
+	    directives: [{
+	      name: "model",
+	      rawName: "v-model",
+	      value: (_vm.title),
+	      expression: "title"
+	    }],
+	    attrs: {
+	      "type": "text",
+	      "name": "",
+	      "placeholder": "键入标题"
+	    },
+	    domProps: {
+	      "value": _vm._s(_vm.title)
+	    },
+	    on: {
+	      "input": function($event) {
+	        if ($event.target.composing) { return; }
+	        _vm.title = $event.target.value
+	      }
+	    }
+	  }), _vm._v(" "), _c('span', {
+	    staticClass: "text_num"
+	  }, [_vm._v("当前字数 "), _c('i', [_vm._v(_vm._s(_vm.content.length))])])]), _vm._v(" "), _c('div', {
 	    staticClass: "markdown_tool clearfix"
 	  }, [_c('div', {
-	    staticClass: "save_text btn",
-	    on: {
-	      "click": _vm.run
-	    }
+	    staticClass: "save_text btn"
 	  }, [_vm._v("保存文章")]), _vm._v(" "), _c('ul', {
 	    staticClass: "markdown_menu clearfix"
 	  }, [_c('li', {
 	    on: {
 	      "click": _vm.changeEditType
 	    }
-	  }, [_vm._v("模式")]), _vm._v(" "), _c('li', [_vm._v("主题")])])])]), _vm._v(" "), _c('div', {
+	  }, [_vm._v("模式")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._m(1)])])]), _vm._v(" "), _c('div', {
 	    attrs: {
 	      "id": "markdown_edit"
 	    }
 	  }, [_c('textarea', {
+	    directives: [{
+	      name: "model",
+	      rawName: "v-model",
+	      value: (_vm.content),
+	      expression: "content"
+	    }],
 	    attrs: {
 	      "id": "edit",
 	      "placeholder": "内容区"
 	    },
+	    domProps: {
+	      "value": _vm._s(_vm.content)
+	    },
 	    on: {
-	      "keydown": function($event) {
-	        $event.stopPropagation();
-	        _vm.stop($event)
-	      },
-	      "keyup": function($event) {
-	        $event.stopPropagation();
-	        _vm.run($event)
+	      "input": function($event) {
+	        if ($event.target.composing) { return; }
+	        _vm.content = $event.target.value
 	      }
 	    }
 	  })])]), _vm._v(" "), _c('transition', {
@@ -45416,24 +45503,19 @@
 	    }
 	  })])], 1)
 	},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('div', {
-	    staticClass: "markdown_head"
-	  }, [_c('input', {
+	  return _c('li', [_c('a', {
 	    attrs: {
-	      "type": "text",
-	      "name": "",
-	      "placeholder": "键入标题",
-	      "value": ""
+	      "href": "/index"
 	    }
-	  }), _vm._v(" "), _c('span', {
-	    staticClass: "text_num"
-	  }, [_vm._v("当前字数 "), _c('i', [_vm._v("999")])])])
+	  }, [_vm._v("首页")])])
+	},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('li', [_c('a', [_vm._v("文章列表")])])
 	}]}
 	module.exports.render._withStripped = true
 	if (false) {
 	  module.hot.accept()
 	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-10d352b4", module.exports)
+	     require("vue-hot-reload-api").rerender("data-v-657a7a74", module.exports)
 	  }
 	}
 
@@ -45448,7 +45530,7 @@
 	if (false) {
 	  module.hot.accept()
 	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-65f8e855", module.exports)
+	     require("vue-hot-reload-api").rerender("data-v-3bd6d035", module.exports)
 	  }
 	}
 

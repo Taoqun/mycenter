@@ -1,60 +1,19 @@
 const mk = require('../dataModel/markdownDataModel.js').getMarkdownModel
+const userInfo = require("../dataModel/userInfoDataModel.js").userInfo
 
 const getAccount = require("./getAccount.js")
 
-
-exports.addPaper = function(req, res) {
+exports.getUserId = (req,res)=>{
     let sessions_id = req.cookies.sessions_id
-    if (!sessions_id) { return res.json({ code: 0, des: '没有session_id' }) };
-
     getAccount(sessions_id).then((account) => {
-        let obj = {}
-
-        // 验证id id规则 账户名 加 下划线 加 13位日期数字化
-        // 793264946@qq.com_1234567890123
-        if (req.body.paper_id) {
-            obj.paper_id = req.body.paper_id
-        } else {
-            res.json({ code: 0, des: '没有生成id' })
-            return
-        }
-        if (obj.paper_id.indexOf(account) === -1) {
-            res.json({ code: 0, des: 'id不正确' })
-            return
-        }
-        if (!/\d{13}/.test(obj.paper)) {
-            res.json({ code: 0, des: 'id不正确' })
-            return
-        }
-
-        let markdown = mk(account)
-
-        markdown.find({ paper_id: obj.paper_id }, (err, result) => {
-            if (err) { return console.log(err) }
-
-            if (result.length) {
-
-                res.json({ code: 2, des: 'id已存在' })
-            } else {
-
-                obj.name = req.body.name
-                obj.title = req.body.title
-                obj.date = Date.now()
-                obj.keywords = req.body.keywords
-                obj.content = req.body.content
-                obj.type = req.body.type
-
-                let md = new markdown(obj)
-
-                md.save((err) => {
-                    if (err) { return console.log(err) }
-                    res.json({ code: 1, des: 'success' })
-                })
-            }
-        })
+        let userInfo = require("../dataModel/userInfoDataModel.js").userInfo
+            userInfo.find({account:account},(err,result)=>{
+                if(err){ return console.log(err) }
+                let id = result[0]["_id"]
+                res.redirect("/getPaperList/"+id)
+            })
     })
-
-};
+}
 
 exports.getPaperList = function(req, res) {
     let id = req.params.id
@@ -102,10 +61,47 @@ exports.getPaperList = function(req, res) {
                 obj.page = Math.ceil(count / 10)
                 obj.active = page
                 obj.maxpage = page
-                res.render("paper/index.html", obj)
+                // 渲染模板
+                res.render("paperlist/index.html", obj)
             })
         })
     }
+};
+
+exports.addPaper = function(req, res) {
+    let user_id = req.params.user_id
+    let userInfo = require("../dataModel/userInfoDataModel.js").userInfo
+
+    userInfo.find({_id:user_id},(err,result)=>{
+        if(err){ return console.log(err) }
+        if(result.length){
+            let account = result[0].account
+            let name = result[0]["name"]
+            let md = require("../dataModel/markdownDataModel.js").getMarkdownModel(account)
+            let paper_id = account + '_' +  (new Date()).valueOf()
+            let date = parseInt( (new Date()).valueOf() ) + (1000*60*60*8)
+            let paper = new md({
+                account:account,
+                date:(new Date(date)).valueOf(),
+                title:"无标题文章",
+                name:name,
+                content:'暂无内容',
+                des:"暂无内容",
+                paper_id:paper_id,
+            })
+            paper.save( (err) => {
+                if(err){ return console.log(err) }
+                md.find({paper_id:paper_id},(err,result) => {
+                    if(err){ return console.log(err) }
+                    let paper_id = result[0]["_id"]
+                    let str = "/updatePaper/"+user_id +'/' +paper_id
+                    res.redirect(str)
+                })
+            })
+        }else{
+            res.end("用户不存在")
+        }
+    })
 };
 
 exports.getPaper = function(req, res) {
@@ -123,9 +119,21 @@ exports.getPaper = function(req, res) {
         let account = result[0].account
         let markdown = mk(account)
         markdown.find({ _id: paper_id }, (err, result) => {
-            // 返回文章的信息
+            // 渲染模板
             // 文章标签 关键词 标题 内容 时间 修改文章的地址 等等
-            res.end(result[0]["content"])
+            let paper = result[0]
+            let date = paper.date.getFullYear() +"-"+ (paper.date.getMonth()+1) +"-"+ paper.date.getDate()
+            let md = require("markdown").markdown
+            let content = md.toHTML( paper.content )
+            let obj = {}
+                obj.title = paper.title
+                obj.name = paper.name
+                obj.keywords = paper.keywords
+                obj.date = date
+                obj.content = content
+                obj.user_id = user_id
+                obj.paper_id = paper_id
+            res.render("paper/index.html",obj)
         })
 
     })
@@ -133,80 +141,46 @@ exports.getPaper = function(req, res) {
 
 };
 
-exports.upPaper = function(req, res) {
-    let sessions_id = req.sessions_id
-    getAccount(sessions_id).then((account) => {
-        let markdown = mk(account)
-        let obj = {}
-
-        if (req.body.paper_id) {
-            obj.paper_id = req.body.paper_id
-        } else {
-            res.json({ code: 0, des: '无id' })
-            return
-        }
-
-        obj.title = req.body.title
-        obj.keywords = req.body.keywords
-        obj.content = req.body.content
-        obj.type = req.body.type
-
-        markdown.find({ paper_id: obj.paper_id }, (err, result) => {
-            if (err) { return console.log(err) }
-
-            if (result.length === 1) {
-                markdown.update({ paper_id: obj.paper_id }, obj, (err) => {
-                    if (err) { return console.log(err) }
-                    res.json({ code: 1, des: 'success' })
+exports.updatePaper = function(req, res) {
+    let user_id = req.params.user_id
+    let paper_id = req.params.paper_id
+    userInfo.find({_id:user_id},(err,result) => {
+        if(err){ return console.log(err) }
+        if( result.length ){
+            let account = result[0]["account"]
+            let md = mk(account)
+                md.find( {_id:paper_id} , (err,result) => {
+                    if(err){ return console.log(err) }
+                    if(result.length){
+                        let obj = result[0]
+                            obj.user_id = user_id
+                        res.render("markdown/index.html",obj)
+                    }
                 })
-            } else {
-                res.json({ code: 0, des: '没有查到文章' })
-            }
-        })
+        }
     })
 };
 exports.delPaper = (req, res) => {
-    let sessions_id = req.sessions_id
-    getAccount(sessions_id).then((account) => {
-        let paper_id = req.body.paper_id
-        let markdown = mk(account)
-        let arr = []
+    let user_id = req.params.user_id
+    let paper_id = req.params.paper_id
 
-        if (paper_id instanceof String) {
-            arr.push(paper_id)
-        } else if (paper_id instanceof Array) {
-            arr = paper_id
-        }
-
-        let success = []
-        let error = []
-
-        // 从数据删除 并且判断是否全部遍历完成
-        const remove = (item) => {
-                markdown.remove({ paper_id: item }, (err) => {
-                    if (err) { return console.log(err) }
-                    if ((success.length + error.length) === arr.length || (success.length + error.length) === (arr.length - 1)) {
-                        res.json({ code: 1, success: success.length, error: error.length })
+    userInfo.find({_id:user_id},(err,result) => {
+        if(err){ return console.log(err) }
+        if( result.length ){
+            let account = result[0]["account"]
+            let md = mk(account)
+                md.find( {_id:paper_id} , (err,result) => {
+                    if(err){ return console.log(err) }
+                    if(result.length){
+                        md.remove( {_id:paper_id},(err,result) => {
+                            let str = '/getPaperList/'+user_id
+                            res.redirect(str)
+                        })
                     }
                 })
-            }
-            // 查询 判断是否查询成功 执行删除
-        const find = (item) => {
-            markdown.find({ paper_id: item }, (err, result) => {
-                if (err) { return console.log(err) }
-                if (result.length) {
-                    success.push(item)
-                    remove(item)
-                } else {
-                    error.push(item)
-                }
-
-            })
         }
-
-        arr.map((item, index) => {
-            find(item)
-        })
-
     })
+
+
+
 }

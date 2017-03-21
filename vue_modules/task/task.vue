@@ -11,7 +11,7 @@
             <h3 class="title">任务夹</h3>
             <p class="list-menu" @click="getAllTask" data-listid='all'><i class="icon iconfont icon-form_light"></i>所有任务</p>
             <p class="list-menu" @click="NoFn"><i class="icon el-icon-date"></i>日历</p>
-            <p class="list-menu" @click="getAllTask" data-listid='all'><i class="icon iconfont icon-punch_light"></i>收集箱</p>
+            <!-- <p class="list-menu" @click="getAllTask" data-listid='all'><i class="icon iconfont icon-punch_light"></i>收集箱</p> -->
             <p class="list-menu" @click="chooceAddType"><i class="icon iconfont icon-add"></i>新建</p>
 
             <s-list-group :list="list_ui_group" :groupmore="groupMore" :listmore="listMore" :tasklist="task_list" :listname="task_list_name"></s-list-group>
@@ -220,6 +220,7 @@
                 setTimeout(()=>{
                     loadscreen.close()
                     this.$message({message:'数据获取完毕！',type:'success'});
+                    this.getAllTask()
                 },500)
 
             })
@@ -414,7 +415,7 @@
                 })
             },
             delList(item){
-                if(item.group_id){
+                if(item.group_id && item.group_id !== "all"){
                     this.list_ui_group.map((i)=>{
                         if(i.group_id === item.group_id){
                             i.task_list.splice( i.task_list.indexOf(item),1 )

@@ -4,21 +4,22 @@
 
             <div class="markdown_top">
                 <div class="markdown_head">
-                    <input type="text" name="" placeholder="键入标题" value="">
-                    <span class="text_num">当前字数 <i>999</i></span>
+                    <input type="text" name="" placeholder="键入标题" v-model="title">
+                    <span class="text_num">当前字数 <i>{{ content.length }}</i></span>
                 </div>
 
                 <div class="markdown_tool clearfix">
-                    <div class="save_text btn" @click="run">保存文章</div>
+                    <div class="save_text btn">保存文章</div>
                     <ul class="markdown_menu clearfix">
                         <li @click="changeEditType">模式</li>
-                        <li>主题</li>
+                        <li><a href="/index">首页</a></li>
+                        <li><a>文章列表</a></li>
                     </ul>
                 </div>
             </div>
 
             <div id="markdown_edit">
-                <textarea id="edit" @keydown.stop="stop" @keyup.stop="run" placeholder="内容区"></textarea>
+                <textarea id="edit" placeholder="内容区" v-model="content"></textarea>
             </div>
 
         </div>
@@ -31,7 +32,7 @@
 </template>
 
 <script>
-    // import "CSS/cssreset.css"
+    import "CSS/cssreset.css"
     import "CSS/markdown.css"
     import { markdown ,parse } from 'markdown'
     import Vue from 'vue'
@@ -42,16 +43,35 @@
         data(){
             return {
                 preview_show:true,
+                title:'',
+                name:'',
+                content:'',
+                date:'',
+                user_id:'',
+                paper_id:'',
             }
+        },
+        watch:{
+            title(){
+                document.querySelector("title").innerText = this.title
+            },
+            content(){
+                let tem = this.content
+                    tem = markdown.toHTML(tem)
+                document.querySelector(".markdown-body").innerHTML = tem
+            }
+        },
+        mounted(){
+            this.title = title
+            this.name = name
+            this.date = date
+            this.user_id = user_id
+            this.paper_id = paper_id
+            this.content = document.querySelector("#content").value
         },
         methods:{
             stop(){
                 return false
-            },
-            run(){
-                let tem = document.querySelector("#markdown_edit #edit").value
-                    tem = markdown.toHTML(tem)
-                document.querySelector(".markdown-body").innerHTML = tem
             },
             changeEditType(){
                 this.preview_show = !this.preview_show
