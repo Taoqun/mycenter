@@ -137,8 +137,6 @@ exports.getPaper = function(req, res) {
         })
 
     })
-
-
 };
 
 exports.updatePaper = function(req, res) {
@@ -180,7 +178,4 @@ exports.delPaper = (req, res) => {
                 })
         }
     })
-
-
-
 }
