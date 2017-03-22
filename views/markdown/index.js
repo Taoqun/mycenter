@@ -9046,7 +9046,34 @@
 
 
 /***/ },
-/* 15 */,
+/* 15 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	// 配置文件
+	// 配置地址
+	// 配置端口
+	// 配置好  hostname 地址 和 端口号 后台node会读取此配置监听端口号
+	var port = void 0,
+	    hostname = void 0;
+
+	//port = 8081
+	//hostname = 'http://www.taoqun.com'
+
+	var obj = {
+	    port: port || 8081,
+	    hostname: hostname || 'http://localhost'
+	};
+
+	exports.obj = obj;
+
+	// 配置首页名称 地址 头部模块  方便 vue react 调用
+	var head_list = [{ name: '首页', url: '/index/' }, { name: '任务中心', url: '/task/' }, { name: '文章中心', url: '/getPaperList' }, { name: '写文章', url: '/markdown/' }, { name: '生辰', url: '/birth/index' }, { name: '个人中心', url: '/account/user_info' }, { name: '设置', url: '/account/user_info' }, { name: '关于', url: '/index' }];
+
+	exports.headList = head_list;
+
+/***/ },
 /* 16 */,
 /* 17 */,
 /* 18 */,
@@ -42608,74 +42635,3075 @@
 	/******/ });
 
 /***/ },
-/* 86 */,
-/* 87 */,
-/* 88 */,
-/* 89 */,
-/* 90 */,
-/* 91 */,
-/* 92 */,
-/* 93 */,
-/* 94 */,
-/* 95 */,
-/* 96 */,
-/* 97 */,
-/* 98 */,
-/* 99 */,
-/* 100 */,
-/* 101 */,
-/* 102 */,
-/* 103 */,
-/* 104 */,
-/* 105 */,
-/* 106 */,
-/* 107 */,
-/* 108 */,
-/* 109 */,
-/* 110 */,
-/* 111 */,
-/* 112 */,
-/* 113 */,
-/* 114 */,
-/* 115 */,
-/* 116 */,
-/* 117 */,
-/* 118 */,
-/* 119 */,
-/* 120 */,
-/* 121 */,
-/* 122 */,
-/* 123 */,
-/* 124 */,
-/* 125 */,
-/* 126 */,
-/* 127 */,
-/* 128 */,
-/* 129 */,
-/* 130 */,
-/* 131 */,
-/* 132 */,
-/* 133 */,
-/* 134 */,
-/* 135 */,
-/* 136 */,
-/* 137 */,
-/* 138 */,
-/* 139 */,
-/* 140 */,
-/* 141 */,
-/* 142 */,
-/* 143 */,
-/* 144 */,
-/* 145 */,
-/* 146 */,
-/* 147 */,
-/* 148 */,
-/* 149 */,
-/* 150 */,
-/* 151 */,
-/* 152 */,
-/* 153 */,
+/* 86 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _promise = __webpack_require__(87);
+
+	var _promise2 = _interopRequireDefault(_promise);
+
+	var _vue = __webpack_require__(1);
+
+	var _vue2 = _interopRequireDefault(_vue);
+
+	var _vueResource = __webpack_require__(152);
+
+	var _vueResource2 = _interopRequireDefault(_vueResource);
+
+	var _config = __webpack_require__(15);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	_vue2.default.use(_vueResource2.default);
+	_vue2.default.http.options.emulateJSON = true;
+
+	var host = _config.obj.hostname + ':' + _config.obj.port;
+	console.log(host);
+	exports.ajax = function (obj) {
+	    // obj.method
+	    // obj.url
+	    // obj.data
+	    obj.method = obj.method || 'get';
+
+	    if (obj && obj.method.toLowerCase() === 'get') {
+	        return new _promise2.default(function (resolve, reject) {
+	            if (obj.url[0] !== '/') {
+	                host = host + '/';
+	            }
+	            _vue2.default.http({
+	                url: host + obj.url,
+	                method: 'get',
+	                params: obj.data
+	            }).then(function (res) {
+	                resolve(res.body);
+	            }, function (res) {
+	                reject(res);
+	            });
+	        });
+	    } else if (obj && obj.method.toLowerCase() === 'post') {
+	        return new _promise2.default(function (resolve, reject) {
+	            if (obj.url[0] !== '/') {
+	                host = host + '/';
+	            }
+	            _vue2.default.http({
+	                url: host + obj.url,
+	                method: 'post',
+	                body: obj.data
+	            }).then(function (res) {
+	                resolve(res.body);
+	            }, function (res) {
+	                reject(res);
+	            });
+	        });
+	    }
+	};
+
+	exports.gotologin = function (obj) {
+	    if (obj.code === 0) {
+	        var str = location.protocol + '//' + location.hostname + ':' + location.port + '/account/login';
+	        console.log(str);
+	        location.href = str;
+	        return true;
+	    }
+	};
+
+/***/ },
+/* 87 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(88), __esModule: true };
+
+/***/ },
+/* 88 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(89);
+	__webpack_require__(90);
+	__webpack_require__(134);
+	__webpack_require__(138);
+	module.exports = __webpack_require__(98).Promise;
+
+/***/ },
+/* 89 */
+/***/ function(module, exports) {
+
+	
+
+/***/ },
+/* 90 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $at  = __webpack_require__(91)(true);
+
+	// 21.1.3.27 String.prototype[@@iterator]()
+	__webpack_require__(94)(String, 'String', function(iterated){
+	  this._t = String(iterated); // target
+	  this._i = 0;                // next index
+	// 21.1.5.2.1 %StringIteratorPrototype%.next()
+	}, function(){
+	  var O     = this._t
+	    , index = this._i
+	    , point;
+	  if(index >= O.length)return {value: undefined, done: true};
+	  point = $at(O, index);
+	  this._i += point.length;
+	  return {value: point, done: false};
+	});
+
+/***/ },
+/* 91 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var toInteger = __webpack_require__(92)
+	  , defined   = __webpack_require__(93);
+	// true  -> String#at
+	// false -> String#codePointAt
+	module.exports = function(TO_STRING){
+	  return function(that, pos){
+	    var s = String(defined(that))
+	      , i = toInteger(pos)
+	      , l = s.length
+	      , a, b;
+	    if(i < 0 || i >= l)return TO_STRING ? '' : undefined;
+	    a = s.charCodeAt(i);
+	    return a < 0xd800 || a > 0xdbff || i + 1 === l || (b = s.charCodeAt(i + 1)) < 0xdc00 || b > 0xdfff
+	      ? TO_STRING ? s.charAt(i) : a
+	      : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
+	  };
+	};
+
+/***/ },
+/* 92 */
+/***/ function(module, exports) {
+
+	// 7.1.4 ToInteger
+	var ceil  = Math.ceil
+	  , floor = Math.floor;
+	module.exports = function(it){
+	  return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
+	};
+
+/***/ },
+/* 93 */
+/***/ function(module, exports) {
+
+	// 7.2.1 RequireObjectCoercible(argument)
+	module.exports = function(it){
+	  if(it == undefined)throw TypeError("Can't call method on  " + it);
+	  return it;
+	};
+
+/***/ },
+/* 94 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var LIBRARY        = __webpack_require__(95)
+	  , $export        = __webpack_require__(96)
+	  , redefine       = __webpack_require__(111)
+	  , hide           = __webpack_require__(101)
+	  , has            = __webpack_require__(112)
+	  , Iterators      = __webpack_require__(113)
+	  , $iterCreate    = __webpack_require__(114)
+	  , setToStringTag = __webpack_require__(130)
+	  , getPrototypeOf = __webpack_require__(132)
+	  , ITERATOR       = __webpack_require__(131)('iterator')
+	  , BUGGY          = !([].keys && 'next' in [].keys()) // Safari has buggy iterators w/o `next`
+	  , FF_ITERATOR    = '@@iterator'
+	  , KEYS           = 'keys'
+	  , VALUES         = 'values';
+
+	var returnThis = function(){ return this; };
+
+	module.exports = function(Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCED){
+	  $iterCreate(Constructor, NAME, next);
+	  var getMethod = function(kind){
+	    if(!BUGGY && kind in proto)return proto[kind];
+	    switch(kind){
+	      case KEYS: return function keys(){ return new Constructor(this, kind); };
+	      case VALUES: return function values(){ return new Constructor(this, kind); };
+	    } return function entries(){ return new Constructor(this, kind); };
+	  };
+	  var TAG        = NAME + ' Iterator'
+	    , DEF_VALUES = DEFAULT == VALUES
+	    , VALUES_BUG = false
+	    , proto      = Base.prototype
+	    , $native    = proto[ITERATOR] || proto[FF_ITERATOR] || DEFAULT && proto[DEFAULT]
+	    , $default   = $native || getMethod(DEFAULT)
+	    , $entries   = DEFAULT ? !DEF_VALUES ? $default : getMethod('entries') : undefined
+	    , $anyNative = NAME == 'Array' ? proto.entries || $native : $native
+	    , methods, key, IteratorPrototype;
+	  // Fix native
+	  if($anyNative){
+	    IteratorPrototype = getPrototypeOf($anyNative.call(new Base));
+	    if(IteratorPrototype !== Object.prototype){
+	      // Set @@toStringTag to native iterators
+	      setToStringTag(IteratorPrototype, TAG, true);
+	      // fix for some old engines
+	      if(!LIBRARY && !has(IteratorPrototype, ITERATOR))hide(IteratorPrototype, ITERATOR, returnThis);
+	    }
+	  }
+	  // fix Array#{values, @@iterator}.name in V8 / FF
+	  if(DEF_VALUES && $native && $native.name !== VALUES){
+	    VALUES_BUG = true;
+	    $default = function values(){ return $native.call(this); };
+	  }
+	  // Define iterator
+	  if((!LIBRARY || FORCED) && (BUGGY || VALUES_BUG || !proto[ITERATOR])){
+	    hide(proto, ITERATOR, $default);
+	  }
+	  // Plug for library
+	  Iterators[NAME] = $default;
+	  Iterators[TAG]  = returnThis;
+	  if(DEFAULT){
+	    methods = {
+	      values:  DEF_VALUES ? $default : getMethod(VALUES),
+	      keys:    IS_SET     ? $default : getMethod(KEYS),
+	      entries: $entries
+	    };
+	    if(FORCED)for(key in methods){
+	      if(!(key in proto))redefine(proto, key, methods[key]);
+	    } else $export($export.P + $export.F * (BUGGY || VALUES_BUG), NAME, methods);
+	  }
+	  return methods;
+	};
+
+/***/ },
+/* 95 */
+/***/ function(module, exports) {
+
+	module.exports = true;
+
+/***/ },
+/* 96 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var global    = __webpack_require__(97)
+	  , core      = __webpack_require__(98)
+	  , ctx       = __webpack_require__(99)
+	  , hide      = __webpack_require__(101)
+	  , PROTOTYPE = 'prototype';
+
+	var $export = function(type, name, source){
+	  var IS_FORCED = type & $export.F
+	    , IS_GLOBAL = type & $export.G
+	    , IS_STATIC = type & $export.S
+	    , IS_PROTO  = type & $export.P
+	    , IS_BIND   = type & $export.B
+	    , IS_WRAP   = type & $export.W
+	    , exports   = IS_GLOBAL ? core : core[name] || (core[name] = {})
+	    , expProto  = exports[PROTOTYPE]
+	    , target    = IS_GLOBAL ? global : IS_STATIC ? global[name] : (global[name] || {})[PROTOTYPE]
+	    , key, own, out;
+	  if(IS_GLOBAL)source = name;
+	  for(key in source){
+	    // contains in native
+	    own = !IS_FORCED && target && target[key] !== undefined;
+	    if(own && key in exports)continue;
+	    // export native or passed
+	    out = own ? target[key] : source[key];
+	    // prevent global pollution for namespaces
+	    exports[key] = IS_GLOBAL && typeof target[key] != 'function' ? source[key]
+	    // bind timers to global for call from export context
+	    : IS_BIND && own ? ctx(out, global)
+	    // wrap global constructors for prevent change them in library
+	    : IS_WRAP && target[key] == out ? (function(C){
+	      var F = function(a, b, c){
+	        if(this instanceof C){
+	          switch(arguments.length){
+	            case 0: return new C;
+	            case 1: return new C(a);
+	            case 2: return new C(a, b);
+	          } return new C(a, b, c);
+	        } return C.apply(this, arguments);
+	      };
+	      F[PROTOTYPE] = C[PROTOTYPE];
+	      return F;
+	    // make static versions for prototype methods
+	    })(out) : IS_PROTO && typeof out == 'function' ? ctx(Function.call, out) : out;
+	    // export proto methods to core.%CONSTRUCTOR%.methods.%NAME%
+	    if(IS_PROTO){
+	      (exports.virtual || (exports.virtual = {}))[key] = out;
+	      // export proto methods to core.%CONSTRUCTOR%.prototype.%NAME%
+	      if(type & $export.R && expProto && !expProto[key])hide(expProto, key, out);
+	    }
+	  }
+	};
+	// type bitmap
+	$export.F = 1;   // forced
+	$export.G = 2;   // global
+	$export.S = 4;   // static
+	$export.P = 8;   // proto
+	$export.B = 16;  // bind
+	$export.W = 32;  // wrap
+	$export.U = 64;  // safe
+	$export.R = 128; // real proto method for `library` 
+	module.exports = $export;
+
+/***/ },
+/* 97 */
+/***/ function(module, exports) {
+
+	// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
+	var global = module.exports = typeof window != 'undefined' && window.Math == Math
+	  ? window : typeof self != 'undefined' && self.Math == Math ? self : Function('return this')();
+	if(typeof __g == 'number')__g = global; // eslint-disable-line no-undef
+
+/***/ },
+/* 98 */
+/***/ function(module, exports) {
+
+	var core = module.exports = {version: '2.4.0'};
+	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
+
+/***/ },
+/* 99 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// optional / simple context binding
+	var aFunction = __webpack_require__(100);
+	module.exports = function(fn, that, length){
+	  aFunction(fn);
+	  if(that === undefined)return fn;
+	  switch(length){
+	    case 1: return function(a){
+	      return fn.call(that, a);
+	    };
+	    case 2: return function(a, b){
+	      return fn.call(that, a, b);
+	    };
+	    case 3: return function(a, b, c){
+	      return fn.call(that, a, b, c);
+	    };
+	  }
+	  return function(/* ...args */){
+	    return fn.apply(that, arguments);
+	  };
+	};
+
+/***/ },
+/* 100 */
+/***/ function(module, exports) {
+
+	module.exports = function(it){
+	  if(typeof it != 'function')throw TypeError(it + ' is not a function!');
+	  return it;
+	};
+
+/***/ },
+/* 101 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var dP         = __webpack_require__(102)
+	  , createDesc = __webpack_require__(110);
+	module.exports = __webpack_require__(106) ? function(object, key, value){
+	  return dP.f(object, key, createDesc(1, value));
+	} : function(object, key, value){
+	  object[key] = value;
+	  return object;
+	};
+
+/***/ },
+/* 102 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var anObject       = __webpack_require__(103)
+	  , IE8_DOM_DEFINE = __webpack_require__(105)
+	  , toPrimitive    = __webpack_require__(109)
+	  , dP             = Object.defineProperty;
+
+	exports.f = __webpack_require__(106) ? Object.defineProperty : function defineProperty(O, P, Attributes){
+	  anObject(O);
+	  P = toPrimitive(P, true);
+	  anObject(Attributes);
+	  if(IE8_DOM_DEFINE)try {
+	    return dP(O, P, Attributes);
+	  } catch(e){ /* empty */ }
+	  if('get' in Attributes || 'set' in Attributes)throw TypeError('Accessors not supported!');
+	  if('value' in Attributes)O[P] = Attributes.value;
+	  return O;
+	};
+
+/***/ },
+/* 103 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var isObject = __webpack_require__(104);
+	module.exports = function(it){
+	  if(!isObject(it))throw TypeError(it + ' is not an object!');
+	  return it;
+	};
+
+/***/ },
+/* 104 */
+/***/ function(module, exports) {
+
+	module.exports = function(it){
+	  return typeof it === 'object' ? it !== null : typeof it === 'function';
+	};
+
+/***/ },
+/* 105 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = !__webpack_require__(106) && !__webpack_require__(107)(function(){
+	  return Object.defineProperty(__webpack_require__(108)('div'), 'a', {get: function(){ return 7; }}).a != 7;
+	});
+
+/***/ },
+/* 106 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// Thank's IE8 for his funny defineProperty
+	module.exports = !__webpack_require__(107)(function(){
+	  return Object.defineProperty({}, 'a', {get: function(){ return 7; }}).a != 7;
+	});
+
+/***/ },
+/* 107 */
+/***/ function(module, exports) {
+
+	module.exports = function(exec){
+	  try {
+	    return !!exec();
+	  } catch(e){
+	    return true;
+	  }
+	};
+
+/***/ },
+/* 108 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var isObject = __webpack_require__(104)
+	  , document = __webpack_require__(97).document
+	  // in old IE typeof document.createElement is 'object'
+	  , is = isObject(document) && isObject(document.createElement);
+	module.exports = function(it){
+	  return is ? document.createElement(it) : {};
+	};
+
+/***/ },
+/* 109 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 7.1.1 ToPrimitive(input [, PreferredType])
+	var isObject = __webpack_require__(104);
+	// instead of the ES6 spec version, we didn't implement @@toPrimitive case
+	// and the second argument - flag - preferred type is a string
+	module.exports = function(it, S){
+	  if(!isObject(it))return it;
+	  var fn, val;
+	  if(S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it)))return val;
+	  if(typeof (fn = it.valueOf) == 'function' && !isObject(val = fn.call(it)))return val;
+	  if(!S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it)))return val;
+	  throw TypeError("Can't convert object to primitive value");
+	};
+
+/***/ },
+/* 110 */
+/***/ function(module, exports) {
+
+	module.exports = function(bitmap, value){
+	  return {
+	    enumerable  : !(bitmap & 1),
+	    configurable: !(bitmap & 2),
+	    writable    : !(bitmap & 4),
+	    value       : value
+	  };
+	};
+
+/***/ },
+/* 111 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(101);
+
+/***/ },
+/* 112 */
+/***/ function(module, exports) {
+
+	var hasOwnProperty = {}.hasOwnProperty;
+	module.exports = function(it, key){
+	  return hasOwnProperty.call(it, key);
+	};
+
+/***/ },
+/* 113 */
+/***/ function(module, exports) {
+
+	module.exports = {};
+
+/***/ },
+/* 114 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var create         = __webpack_require__(115)
+	  , descriptor     = __webpack_require__(110)
+	  , setToStringTag = __webpack_require__(130)
+	  , IteratorPrototype = {};
+
+	// 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
+	__webpack_require__(101)(IteratorPrototype, __webpack_require__(131)('iterator'), function(){ return this; });
+
+	module.exports = function(Constructor, NAME, next){
+	  Constructor.prototype = create(IteratorPrototype, {next: descriptor(1, next)});
+	  setToStringTag(Constructor, NAME + ' Iterator');
+	};
+
+/***/ },
+/* 115 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
+	var anObject    = __webpack_require__(103)
+	  , dPs         = __webpack_require__(116)
+	  , enumBugKeys = __webpack_require__(128)
+	  , IE_PROTO    = __webpack_require__(125)('IE_PROTO')
+	  , Empty       = function(){ /* empty */ }
+	  , PROTOTYPE   = 'prototype';
+
+	// Create object with fake `null` prototype: use iframe Object with cleared prototype
+	var createDict = function(){
+	  // Thrash, waste and sodomy: IE GC bug
+	  var iframe = __webpack_require__(108)('iframe')
+	    , i      = enumBugKeys.length
+	    , lt     = '<'
+	    , gt     = '>'
+	    , iframeDocument;
+	  iframe.style.display = 'none';
+	  __webpack_require__(129).appendChild(iframe);
+	  iframe.src = 'javascript:'; // eslint-disable-line no-script-url
+	  // createDict = iframe.contentWindow.Object;
+	  // html.removeChild(iframe);
+	  iframeDocument = iframe.contentWindow.document;
+	  iframeDocument.open();
+	  iframeDocument.write(lt + 'script' + gt + 'document.F=Object' + lt + '/script' + gt);
+	  iframeDocument.close();
+	  createDict = iframeDocument.F;
+	  while(i--)delete createDict[PROTOTYPE][enumBugKeys[i]];
+	  return createDict();
+	};
+
+	module.exports = Object.create || function create(O, Properties){
+	  var result;
+	  if(O !== null){
+	    Empty[PROTOTYPE] = anObject(O);
+	    result = new Empty;
+	    Empty[PROTOTYPE] = null;
+	    // add "__proto__" for Object.getPrototypeOf polyfill
+	    result[IE_PROTO] = O;
+	  } else result = createDict();
+	  return Properties === undefined ? result : dPs(result, Properties);
+	};
+
+
+/***/ },
+/* 116 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var dP       = __webpack_require__(102)
+	  , anObject = __webpack_require__(103)
+	  , getKeys  = __webpack_require__(117);
+
+	module.exports = __webpack_require__(106) ? Object.defineProperties : function defineProperties(O, Properties){
+	  anObject(O);
+	  var keys   = getKeys(Properties)
+	    , length = keys.length
+	    , i = 0
+	    , P;
+	  while(length > i)dP.f(O, P = keys[i++], Properties[P]);
+	  return O;
+	};
+
+/***/ },
+/* 117 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.2.14 / 15.2.3.14 Object.keys(O)
+	var $keys       = __webpack_require__(118)
+	  , enumBugKeys = __webpack_require__(128);
+
+	module.exports = Object.keys || function keys(O){
+	  return $keys(O, enumBugKeys);
+	};
+
+/***/ },
+/* 118 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var has          = __webpack_require__(112)
+	  , toIObject    = __webpack_require__(119)
+	  , arrayIndexOf = __webpack_require__(122)(false)
+	  , IE_PROTO     = __webpack_require__(125)('IE_PROTO');
+
+	module.exports = function(object, names){
+	  var O      = toIObject(object)
+	    , i      = 0
+	    , result = []
+	    , key;
+	  for(key in O)if(key != IE_PROTO)has(O, key) && result.push(key);
+	  // Don't enum bug & hidden keys
+	  while(names.length > i)if(has(O, key = names[i++])){
+	    ~arrayIndexOf(result, key) || result.push(key);
+	  }
+	  return result;
+	};
+
+/***/ },
+/* 119 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// to indexed object, toObject with fallback for non-array-like ES3 strings
+	var IObject = __webpack_require__(120)
+	  , defined = __webpack_require__(93);
+	module.exports = function(it){
+	  return IObject(defined(it));
+	};
+
+/***/ },
+/* 120 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// fallback for non-array-like ES3 and non-enumerable old V8 strings
+	var cof = __webpack_require__(121);
+	module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
+	  return cof(it) == 'String' ? it.split('') : Object(it);
+	};
+
+/***/ },
+/* 121 */
+/***/ function(module, exports) {
+
+	var toString = {}.toString;
+
+	module.exports = function(it){
+	  return toString.call(it).slice(8, -1);
+	};
+
+/***/ },
+/* 122 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// false -> Array#indexOf
+	// true  -> Array#includes
+	var toIObject = __webpack_require__(119)
+	  , toLength  = __webpack_require__(123)
+	  , toIndex   = __webpack_require__(124);
+	module.exports = function(IS_INCLUDES){
+	  return function($this, el, fromIndex){
+	    var O      = toIObject($this)
+	      , length = toLength(O.length)
+	      , index  = toIndex(fromIndex, length)
+	      , value;
+	    // Array#includes uses SameValueZero equality algorithm
+	    if(IS_INCLUDES && el != el)while(length > index){
+	      value = O[index++];
+	      if(value != value)return true;
+	    // Array#toIndex ignores holes, Array#includes - not
+	    } else for(;length > index; index++)if(IS_INCLUDES || index in O){
+	      if(O[index] === el)return IS_INCLUDES || index || 0;
+	    } return !IS_INCLUDES && -1;
+	  };
+	};
+
+/***/ },
+/* 123 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 7.1.15 ToLength
+	var toInteger = __webpack_require__(92)
+	  , min       = Math.min;
+	module.exports = function(it){
+	  return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
+	};
+
+/***/ },
+/* 124 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var toInteger = __webpack_require__(92)
+	  , max       = Math.max
+	  , min       = Math.min;
+	module.exports = function(index, length){
+	  index = toInteger(index);
+	  return index < 0 ? max(index + length, 0) : min(index, length);
+	};
+
+/***/ },
+/* 125 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var shared = __webpack_require__(126)('keys')
+	  , uid    = __webpack_require__(127);
+	module.exports = function(key){
+	  return shared[key] || (shared[key] = uid(key));
+	};
+
+/***/ },
+/* 126 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var global = __webpack_require__(97)
+	  , SHARED = '__core-js_shared__'
+	  , store  = global[SHARED] || (global[SHARED] = {});
+	module.exports = function(key){
+	  return store[key] || (store[key] = {});
+	};
+
+/***/ },
+/* 127 */
+/***/ function(module, exports) {
+
+	var id = 0
+	  , px = Math.random();
+	module.exports = function(key){
+	  return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
+	};
+
+/***/ },
+/* 128 */
+/***/ function(module, exports) {
+
+	// IE 8- don't enum bug keys
+	module.exports = (
+	  'constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf'
+	).split(',');
+
+/***/ },
+/* 129 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(97).document && document.documentElement;
+
+/***/ },
+/* 130 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var def = __webpack_require__(102).f
+	  , has = __webpack_require__(112)
+	  , TAG = __webpack_require__(131)('toStringTag');
+
+	module.exports = function(it, tag, stat){
+	  if(it && !has(it = stat ? it : it.prototype, TAG))def(it, TAG, {configurable: true, value: tag});
+	};
+
+/***/ },
+/* 131 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var store      = __webpack_require__(126)('wks')
+	  , uid        = __webpack_require__(127)
+	  , Symbol     = __webpack_require__(97).Symbol
+	  , USE_SYMBOL = typeof Symbol == 'function';
+
+	var $exports = module.exports = function(name){
+	  return store[name] || (store[name] =
+	    USE_SYMBOL && Symbol[name] || (USE_SYMBOL ? Symbol : uid)('Symbol.' + name));
+	};
+
+	$exports.store = store;
+
+/***/ },
+/* 132 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
+	var has         = __webpack_require__(112)
+	  , toObject    = __webpack_require__(133)
+	  , IE_PROTO    = __webpack_require__(125)('IE_PROTO')
+	  , ObjectProto = Object.prototype;
+
+	module.exports = Object.getPrototypeOf || function(O){
+	  O = toObject(O);
+	  if(has(O, IE_PROTO))return O[IE_PROTO];
+	  if(typeof O.constructor == 'function' && O instanceof O.constructor){
+	    return O.constructor.prototype;
+	  } return O instanceof Object ? ObjectProto : null;
+	};
+
+/***/ },
+/* 133 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 7.1.13 ToObject(argument)
+	var defined = __webpack_require__(93);
+	module.exports = function(it){
+	  return Object(defined(it));
+	};
+
+/***/ },
+/* 134 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(135);
+	var global        = __webpack_require__(97)
+	  , hide          = __webpack_require__(101)
+	  , Iterators     = __webpack_require__(113)
+	  , TO_STRING_TAG = __webpack_require__(131)('toStringTag');
+
+	for(var collections = ['NodeList', 'DOMTokenList', 'MediaList', 'StyleSheetList', 'CSSRuleList'], i = 0; i < 5; i++){
+	  var NAME       = collections[i]
+	    , Collection = global[NAME]
+	    , proto      = Collection && Collection.prototype;
+	  if(proto && !proto[TO_STRING_TAG])hide(proto, TO_STRING_TAG, NAME);
+	  Iterators[NAME] = Iterators.Array;
+	}
+
+/***/ },
+/* 135 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var addToUnscopables = __webpack_require__(136)
+	  , step             = __webpack_require__(137)
+	  , Iterators        = __webpack_require__(113)
+	  , toIObject        = __webpack_require__(119);
+
+	// 22.1.3.4 Array.prototype.entries()
+	// 22.1.3.13 Array.prototype.keys()
+	// 22.1.3.29 Array.prototype.values()
+	// 22.1.3.30 Array.prototype[@@iterator]()
+	module.exports = __webpack_require__(94)(Array, 'Array', function(iterated, kind){
+	  this._t = toIObject(iterated); // target
+	  this._i = 0;                   // next index
+	  this._k = kind;                // kind
+	// 22.1.5.2.1 %ArrayIteratorPrototype%.next()
+	}, function(){
+	  var O     = this._t
+	    , kind  = this._k
+	    , index = this._i++;
+	  if(!O || index >= O.length){
+	    this._t = undefined;
+	    return step(1);
+	  }
+	  if(kind == 'keys'  )return step(0, index);
+	  if(kind == 'values')return step(0, O[index]);
+	  return step(0, [index, O[index]]);
+	}, 'values');
+
+	// argumentsList[@@iterator] is %ArrayProto_values% (9.4.4.6, 9.4.4.7)
+	Iterators.Arguments = Iterators.Array;
+
+	addToUnscopables('keys');
+	addToUnscopables('values');
+	addToUnscopables('entries');
+
+/***/ },
+/* 136 */
+/***/ function(module, exports) {
+
+	module.exports = function(){ /* empty */ };
+
+/***/ },
+/* 137 */
+/***/ function(module, exports) {
+
+	module.exports = function(done, value){
+	  return {value: value, done: !!done};
+	};
+
+/***/ },
+/* 138 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var LIBRARY            = __webpack_require__(95)
+	  , global             = __webpack_require__(97)
+	  , ctx                = __webpack_require__(99)
+	  , classof            = __webpack_require__(139)
+	  , $export            = __webpack_require__(96)
+	  , isObject           = __webpack_require__(104)
+	  , aFunction          = __webpack_require__(100)
+	  , anInstance         = __webpack_require__(140)
+	  , forOf              = __webpack_require__(141)
+	  , speciesConstructor = __webpack_require__(145)
+	  , task               = __webpack_require__(146).set
+	  , microtask          = __webpack_require__(148)()
+	  , PROMISE            = 'Promise'
+	  , TypeError          = global.TypeError
+	  , process            = global.process
+	  , $Promise           = global[PROMISE]
+	  , process            = global.process
+	  , isNode             = classof(process) == 'process'
+	  , empty              = function(){ /* empty */ }
+	  , Internal, GenericPromiseCapability, Wrapper;
+
+	var USE_NATIVE = !!function(){
+	  try {
+	    // correct subclassing with @@species support
+	    var promise     = $Promise.resolve(1)
+	      , FakePromise = (promise.constructor = {})[__webpack_require__(131)('species')] = function(exec){ exec(empty, empty); };
+	    // unhandled rejections tracking support, NodeJS Promise without it fails @@species test
+	    return (isNode || typeof PromiseRejectionEvent == 'function') && promise.then(empty) instanceof FakePromise;
+	  } catch(e){ /* empty */ }
+	}();
+
+	// helpers
+	var sameConstructor = function(a, b){
+	  // with library wrapper special case
+	  return a === b || a === $Promise && b === Wrapper;
+	};
+	var isThenable = function(it){
+	  var then;
+	  return isObject(it) && typeof (then = it.then) == 'function' ? then : false;
+	};
+	var newPromiseCapability = function(C){
+	  return sameConstructor($Promise, C)
+	    ? new PromiseCapability(C)
+	    : new GenericPromiseCapability(C);
+	};
+	var PromiseCapability = GenericPromiseCapability = function(C){
+	  var resolve, reject;
+	  this.promise = new C(function($$resolve, $$reject){
+	    if(resolve !== undefined || reject !== undefined)throw TypeError('Bad Promise constructor');
+	    resolve = $$resolve;
+	    reject  = $$reject;
+	  });
+	  this.resolve = aFunction(resolve);
+	  this.reject  = aFunction(reject);
+	};
+	var perform = function(exec){
+	  try {
+	    exec();
+	  } catch(e){
+	    return {error: e};
+	  }
+	};
+	var notify = function(promise, isReject){
+	  if(promise._n)return;
+	  promise._n = true;
+	  var chain = promise._c;
+	  microtask(function(){
+	    var value = promise._v
+	      , ok    = promise._s == 1
+	      , i     = 0;
+	    var run = function(reaction){
+	      var handler = ok ? reaction.ok : reaction.fail
+	        , resolve = reaction.resolve
+	        , reject  = reaction.reject
+	        , domain  = reaction.domain
+	        , result, then;
+	      try {
+	        if(handler){
+	          if(!ok){
+	            if(promise._h == 2)onHandleUnhandled(promise);
+	            promise._h = 1;
+	          }
+	          if(handler === true)result = value;
+	          else {
+	            if(domain)domain.enter();
+	            result = handler(value);
+	            if(domain)domain.exit();
+	          }
+	          if(result === reaction.promise){
+	            reject(TypeError('Promise-chain cycle'));
+	          } else if(then = isThenable(result)){
+	            then.call(result, resolve, reject);
+	          } else resolve(result);
+	        } else reject(value);
+	      } catch(e){
+	        reject(e);
+	      }
+	    };
+	    while(chain.length > i)run(chain[i++]); // variable length - can't use forEach
+	    promise._c = [];
+	    promise._n = false;
+	    if(isReject && !promise._h)onUnhandled(promise);
+	  });
+	};
+	var onUnhandled = function(promise){
+	  task.call(global, function(){
+	    var value = promise._v
+	      , abrupt, handler, console;
+	    if(isUnhandled(promise)){
+	      abrupt = perform(function(){
+	        if(isNode){
+	          process.emit('unhandledRejection', value, promise);
+	        } else if(handler = global.onunhandledrejection){
+	          handler({promise: promise, reason: value});
+	        } else if((console = global.console) && console.error){
+	          console.error('Unhandled promise rejection', value);
+	        }
+	      });
+	      // Browsers should not trigger `rejectionHandled` event if it was handled here, NodeJS - should
+	      promise._h = isNode || isUnhandled(promise) ? 2 : 1;
+	    } promise._a = undefined;
+	    if(abrupt)throw abrupt.error;
+	  });
+	};
+	var isUnhandled = function(promise){
+	  if(promise._h == 1)return false;
+	  var chain = promise._a || promise._c
+	    , i     = 0
+	    , reaction;
+	  while(chain.length > i){
+	    reaction = chain[i++];
+	    if(reaction.fail || !isUnhandled(reaction.promise))return false;
+	  } return true;
+	};
+	var onHandleUnhandled = function(promise){
+	  task.call(global, function(){
+	    var handler;
+	    if(isNode){
+	      process.emit('rejectionHandled', promise);
+	    } else if(handler = global.onrejectionhandled){
+	      handler({promise: promise, reason: promise._v});
+	    }
+	  });
+	};
+	var $reject = function(value){
+	  var promise = this;
+	  if(promise._d)return;
+	  promise._d = true;
+	  promise = promise._w || promise; // unwrap
+	  promise._v = value;
+	  promise._s = 2;
+	  if(!promise._a)promise._a = promise._c.slice();
+	  notify(promise, true);
+	};
+	var $resolve = function(value){
+	  var promise = this
+	    , then;
+	  if(promise._d)return;
+	  promise._d = true;
+	  promise = promise._w || promise; // unwrap
+	  try {
+	    if(promise === value)throw TypeError("Promise can't be resolved itself");
+	    if(then = isThenable(value)){
+	      microtask(function(){
+	        var wrapper = {_w: promise, _d: false}; // wrap
+	        try {
+	          then.call(value, ctx($resolve, wrapper, 1), ctx($reject, wrapper, 1));
+	        } catch(e){
+	          $reject.call(wrapper, e);
+	        }
+	      });
+	    } else {
+	      promise._v = value;
+	      promise._s = 1;
+	      notify(promise, false);
+	    }
+	  } catch(e){
+	    $reject.call({_w: promise, _d: false}, e); // wrap
+	  }
+	};
+
+	// constructor polyfill
+	if(!USE_NATIVE){
+	  // 25.4.3.1 Promise(executor)
+	  $Promise = function Promise(executor){
+	    anInstance(this, $Promise, PROMISE, '_h');
+	    aFunction(executor);
+	    Internal.call(this);
+	    try {
+	      executor(ctx($resolve, this, 1), ctx($reject, this, 1));
+	    } catch(err){
+	      $reject.call(this, err);
+	    }
+	  };
+	  Internal = function Promise(executor){
+	    this._c = [];             // <- awaiting reactions
+	    this._a = undefined;      // <- checked in isUnhandled reactions
+	    this._s = 0;              // <- state
+	    this._d = false;          // <- done
+	    this._v = undefined;      // <- value
+	    this._h = 0;              // <- rejection state, 0 - default, 1 - handled, 2 - unhandled
+	    this._n = false;          // <- notify
+	  };
+	  Internal.prototype = __webpack_require__(149)($Promise.prototype, {
+	    // 25.4.5.3 Promise.prototype.then(onFulfilled, onRejected)
+	    then: function then(onFulfilled, onRejected){
+	      var reaction    = newPromiseCapability(speciesConstructor(this, $Promise));
+	      reaction.ok     = typeof onFulfilled == 'function' ? onFulfilled : true;
+	      reaction.fail   = typeof onRejected == 'function' && onRejected;
+	      reaction.domain = isNode ? process.domain : undefined;
+	      this._c.push(reaction);
+	      if(this._a)this._a.push(reaction);
+	      if(this._s)notify(this, false);
+	      return reaction.promise;
+	    },
+	    // 25.4.5.1 Promise.prototype.catch(onRejected)
+	    'catch': function(onRejected){
+	      return this.then(undefined, onRejected);
+	    }
+	  });
+	  PromiseCapability = function(){
+	    var promise  = new Internal;
+	    this.promise = promise;
+	    this.resolve = ctx($resolve, promise, 1);
+	    this.reject  = ctx($reject, promise, 1);
+	  };
+	}
+
+	$export($export.G + $export.W + $export.F * !USE_NATIVE, {Promise: $Promise});
+	__webpack_require__(130)($Promise, PROMISE);
+	__webpack_require__(150)(PROMISE);
+	Wrapper = __webpack_require__(98)[PROMISE];
+
+	// statics
+	$export($export.S + $export.F * !USE_NATIVE, PROMISE, {
+	  // 25.4.4.5 Promise.reject(r)
+	  reject: function reject(r){
+	    var capability = newPromiseCapability(this)
+	      , $$reject   = capability.reject;
+	    $$reject(r);
+	    return capability.promise;
+	  }
+	});
+	$export($export.S + $export.F * (LIBRARY || !USE_NATIVE), PROMISE, {
+	  // 25.4.4.6 Promise.resolve(x)
+	  resolve: function resolve(x){
+	    // instanceof instead of internal slot check because we should fix it without replacement native Promise core
+	    if(x instanceof $Promise && sameConstructor(x.constructor, this))return x;
+	    var capability = newPromiseCapability(this)
+	      , $$resolve  = capability.resolve;
+	    $$resolve(x);
+	    return capability.promise;
+	  }
+	});
+	$export($export.S + $export.F * !(USE_NATIVE && __webpack_require__(151)(function(iter){
+	  $Promise.all(iter)['catch'](empty);
+	})), PROMISE, {
+	  // 25.4.4.1 Promise.all(iterable)
+	  all: function all(iterable){
+	    var C          = this
+	      , capability = newPromiseCapability(C)
+	      , resolve    = capability.resolve
+	      , reject     = capability.reject;
+	    var abrupt = perform(function(){
+	      var values    = []
+	        , index     = 0
+	        , remaining = 1;
+	      forOf(iterable, false, function(promise){
+	        var $index        = index++
+	          , alreadyCalled = false;
+	        values.push(undefined);
+	        remaining++;
+	        C.resolve(promise).then(function(value){
+	          if(alreadyCalled)return;
+	          alreadyCalled  = true;
+	          values[$index] = value;
+	          --remaining || resolve(values);
+	        }, reject);
+	      });
+	      --remaining || resolve(values);
+	    });
+	    if(abrupt)reject(abrupt.error);
+	    return capability.promise;
+	  },
+	  // 25.4.4.4 Promise.race(iterable)
+	  race: function race(iterable){
+	    var C          = this
+	      , capability = newPromiseCapability(C)
+	      , reject     = capability.reject;
+	    var abrupt = perform(function(){
+	      forOf(iterable, false, function(promise){
+	        C.resolve(promise).then(capability.resolve, reject);
+	      });
+	    });
+	    if(abrupt)reject(abrupt.error);
+	    return capability.promise;
+	  }
+	});
+
+/***/ },
+/* 139 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// getting tag from 19.1.3.6 Object.prototype.toString()
+	var cof = __webpack_require__(121)
+	  , TAG = __webpack_require__(131)('toStringTag')
+	  // ES3 wrong here
+	  , ARG = cof(function(){ return arguments; }()) == 'Arguments';
+
+	// fallback for IE11 Script Access Denied error
+	var tryGet = function(it, key){
+	  try {
+	    return it[key];
+	  } catch(e){ /* empty */ }
+	};
+
+	module.exports = function(it){
+	  var O, T, B;
+	  return it === undefined ? 'Undefined' : it === null ? 'Null'
+	    // @@toStringTag case
+	    : typeof (T = tryGet(O = Object(it), TAG)) == 'string' ? T
+	    // builtinTag case
+	    : ARG ? cof(O)
+	    // ES3 arguments fallback
+	    : (B = cof(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : B;
+	};
+
+/***/ },
+/* 140 */
+/***/ function(module, exports) {
+
+	module.exports = function(it, Constructor, name, forbiddenField){
+	  if(!(it instanceof Constructor) || (forbiddenField !== undefined && forbiddenField in it)){
+	    throw TypeError(name + ': incorrect invocation!');
+	  } return it;
+	};
+
+/***/ },
+/* 141 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var ctx         = __webpack_require__(99)
+	  , call        = __webpack_require__(142)
+	  , isArrayIter = __webpack_require__(143)
+	  , anObject    = __webpack_require__(103)
+	  , toLength    = __webpack_require__(123)
+	  , getIterFn   = __webpack_require__(144)
+	  , BREAK       = {}
+	  , RETURN      = {};
+	var exports = module.exports = function(iterable, entries, fn, that, ITERATOR){
+	  var iterFn = ITERATOR ? function(){ return iterable; } : getIterFn(iterable)
+	    , f      = ctx(fn, that, entries ? 2 : 1)
+	    , index  = 0
+	    , length, step, iterator, result;
+	  if(typeof iterFn != 'function')throw TypeError(iterable + ' is not iterable!');
+	  // fast case for arrays with default iterator
+	  if(isArrayIter(iterFn))for(length = toLength(iterable.length); length > index; index++){
+	    result = entries ? f(anObject(step = iterable[index])[0], step[1]) : f(iterable[index]);
+	    if(result === BREAK || result === RETURN)return result;
+	  } else for(iterator = iterFn.call(iterable); !(step = iterator.next()).done; ){
+	    result = call(iterator, f, step.value, entries);
+	    if(result === BREAK || result === RETURN)return result;
+	  }
+	};
+	exports.BREAK  = BREAK;
+	exports.RETURN = RETURN;
+
+/***/ },
+/* 142 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// call something on iterator step with safe closing on error
+	var anObject = __webpack_require__(103);
+	module.exports = function(iterator, fn, value, entries){
+	  try {
+	    return entries ? fn(anObject(value)[0], value[1]) : fn(value);
+	  // 7.4.6 IteratorClose(iterator, completion)
+	  } catch(e){
+	    var ret = iterator['return'];
+	    if(ret !== undefined)anObject(ret.call(iterator));
+	    throw e;
+	  }
+	};
+
+/***/ },
+/* 143 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// check on default Array iterator
+	var Iterators  = __webpack_require__(113)
+	  , ITERATOR   = __webpack_require__(131)('iterator')
+	  , ArrayProto = Array.prototype;
+
+	module.exports = function(it){
+	  return it !== undefined && (Iterators.Array === it || ArrayProto[ITERATOR] === it);
+	};
+
+/***/ },
+/* 144 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var classof   = __webpack_require__(139)
+	  , ITERATOR  = __webpack_require__(131)('iterator')
+	  , Iterators = __webpack_require__(113);
+	module.exports = __webpack_require__(98).getIteratorMethod = function(it){
+	  if(it != undefined)return it[ITERATOR]
+	    || it['@@iterator']
+	    || Iterators[classof(it)];
+	};
+
+/***/ },
+/* 145 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 7.3.20 SpeciesConstructor(O, defaultConstructor)
+	var anObject  = __webpack_require__(103)
+	  , aFunction = __webpack_require__(100)
+	  , SPECIES   = __webpack_require__(131)('species');
+	module.exports = function(O, D){
+	  var C = anObject(O).constructor, S;
+	  return C === undefined || (S = anObject(C)[SPECIES]) == undefined ? D : aFunction(S);
+	};
+
+/***/ },
+/* 146 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var ctx                = __webpack_require__(99)
+	  , invoke             = __webpack_require__(147)
+	  , html               = __webpack_require__(129)
+	  , cel                = __webpack_require__(108)
+	  , global             = __webpack_require__(97)
+	  , process            = global.process
+	  , setTask            = global.setImmediate
+	  , clearTask          = global.clearImmediate
+	  , MessageChannel     = global.MessageChannel
+	  , counter            = 0
+	  , queue              = {}
+	  , ONREADYSTATECHANGE = 'onreadystatechange'
+	  , defer, channel, port;
+	var run = function(){
+	  var id = +this;
+	  if(queue.hasOwnProperty(id)){
+	    var fn = queue[id];
+	    delete queue[id];
+	    fn();
+	  }
+	};
+	var listener = function(event){
+	  run.call(event.data);
+	};
+	// Node.js 0.9+ & IE10+ has setImmediate, otherwise:
+	if(!setTask || !clearTask){
+	  setTask = function setImmediate(fn){
+	    var args = [], i = 1;
+	    while(arguments.length > i)args.push(arguments[i++]);
+	    queue[++counter] = function(){
+	      invoke(typeof fn == 'function' ? fn : Function(fn), args);
+	    };
+	    defer(counter);
+	    return counter;
+	  };
+	  clearTask = function clearImmediate(id){
+	    delete queue[id];
+	  };
+	  // Node.js 0.8-
+	  if(__webpack_require__(121)(process) == 'process'){
+	    defer = function(id){
+	      process.nextTick(ctx(run, id, 1));
+	    };
+	  // Browsers with MessageChannel, includes WebWorkers
+	  } else if(MessageChannel){
+	    channel = new MessageChannel;
+	    port    = channel.port2;
+	    channel.port1.onmessage = listener;
+	    defer = ctx(port.postMessage, port, 1);
+	  // Browsers with postMessage, skip WebWorkers
+	  // IE8 has postMessage, but it's sync & typeof its postMessage is 'object'
+	  } else if(global.addEventListener && typeof postMessage == 'function' && !global.importScripts){
+	    defer = function(id){
+	      global.postMessage(id + '', '*');
+	    };
+	    global.addEventListener('message', listener, false);
+	  // IE8-
+	  } else if(ONREADYSTATECHANGE in cel('script')){
+	    defer = function(id){
+	      html.appendChild(cel('script'))[ONREADYSTATECHANGE] = function(){
+	        html.removeChild(this);
+	        run.call(id);
+	      };
+	    };
+	  // Rest old browsers
+	  } else {
+	    defer = function(id){
+	      setTimeout(ctx(run, id, 1), 0);
+	    };
+	  }
+	}
+	module.exports = {
+	  set:   setTask,
+	  clear: clearTask
+	};
+
+/***/ },
+/* 147 */
+/***/ function(module, exports) {
+
+	// fast apply, http://jsperf.lnkit.com/fast-apply/5
+	module.exports = function(fn, args, that){
+	  var un = that === undefined;
+	  switch(args.length){
+	    case 0: return un ? fn()
+	                      : fn.call(that);
+	    case 1: return un ? fn(args[0])
+	                      : fn.call(that, args[0]);
+	    case 2: return un ? fn(args[0], args[1])
+	                      : fn.call(that, args[0], args[1]);
+	    case 3: return un ? fn(args[0], args[1], args[2])
+	                      : fn.call(that, args[0], args[1], args[2]);
+	    case 4: return un ? fn(args[0], args[1], args[2], args[3])
+	                      : fn.call(that, args[0], args[1], args[2], args[3]);
+	  } return              fn.apply(that, args);
+	};
+
+/***/ },
+/* 148 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var global    = __webpack_require__(97)
+	  , macrotask = __webpack_require__(146).set
+	  , Observer  = global.MutationObserver || global.WebKitMutationObserver
+	  , process   = global.process
+	  , Promise   = global.Promise
+	  , isNode    = __webpack_require__(121)(process) == 'process';
+
+	module.exports = function(){
+	  var head, last, notify;
+
+	  var flush = function(){
+	    var parent, fn;
+	    if(isNode && (parent = process.domain))parent.exit();
+	    while(head){
+	      fn   = head.fn;
+	      head = head.next;
+	      try {
+	        fn();
+	      } catch(e){
+	        if(head)notify();
+	        else last = undefined;
+	        throw e;
+	      }
+	    } last = undefined;
+	    if(parent)parent.enter();
+	  };
+
+	  // Node.js
+	  if(isNode){
+	    notify = function(){
+	      process.nextTick(flush);
+	    };
+	  // browsers with MutationObserver
+	  } else if(Observer){
+	    var toggle = true
+	      , node   = document.createTextNode('');
+	    new Observer(flush).observe(node, {characterData: true}); // eslint-disable-line no-new
+	    notify = function(){
+	      node.data = toggle = !toggle;
+	    };
+	  // environments with maybe non-completely correct, but existent Promise
+	  } else if(Promise && Promise.resolve){
+	    var promise = Promise.resolve();
+	    notify = function(){
+	      promise.then(flush);
+	    };
+	  // for other environments - macrotask based on:
+	  // - setImmediate
+	  // - MessageChannel
+	  // - window.postMessag
+	  // - onreadystatechange
+	  // - setTimeout
+	  } else {
+	    notify = function(){
+	      // strange IE + webpack dev server bug - use .call(global)
+	      macrotask.call(global, flush);
+	    };
+	  }
+
+	  return function(fn){
+	    var task = {fn: fn, next: undefined};
+	    if(last)last.next = task;
+	    if(!head){
+	      head = task;
+	      notify();
+	    } last = task;
+	  };
+	};
+
+/***/ },
+/* 149 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var hide = __webpack_require__(101);
+	module.exports = function(target, src, safe){
+	  for(var key in src){
+	    if(safe && target[key])target[key] = src[key];
+	    else hide(target, key, src[key]);
+	  } return target;
+	};
+
+/***/ },
+/* 150 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var global      = __webpack_require__(97)
+	  , core        = __webpack_require__(98)
+	  , dP          = __webpack_require__(102)
+	  , DESCRIPTORS = __webpack_require__(106)
+	  , SPECIES     = __webpack_require__(131)('species');
+
+	module.exports = function(KEY){
+	  var C = typeof core[KEY] == 'function' ? core[KEY] : global[KEY];
+	  if(DESCRIPTORS && C && !C[SPECIES])dP.f(C, SPECIES, {
+	    configurable: true,
+	    get: function(){ return this; }
+	  });
+	};
+
+/***/ },
+/* 151 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var ITERATOR     = __webpack_require__(131)('iterator')
+	  , SAFE_CLOSING = false;
+
+	try {
+	  var riter = [7][ITERATOR]();
+	  riter['return'] = function(){ SAFE_CLOSING = true; };
+	  Array.from(riter, function(){ throw 2; });
+	} catch(e){ /* empty */ }
+
+	module.exports = function(exec, skipClosing){
+	  if(!skipClosing && !SAFE_CLOSING)return false;
+	  var safe = false;
+	  try {
+	    var arr  = [7]
+	      , iter = arr[ITERATOR]();
+	    iter.next = function(){ return {done: safe = true}; };
+	    arr[ITERATOR] = function(){ return iter; };
+	    exec(arr);
+	  } catch(e){ /* empty */ }
+	  return safe;
+	};
+
+/***/ },
+/* 152 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/*!
+	 * vue-resource v1.2.0
+	 * https://github.com/pagekit/vue-resource
+	 * Released under the MIT License.
+	 */
+
+	'use strict';
+
+	/**
+	 * Promises/A+ polyfill v1.1.4 (https://github.com/bramstein/promis)
+	 */
+
+	var RESOLVED = 0;
+	var REJECTED = 1;
+	var PENDING  = 2;
+
+	function Promise$1(executor) {
+
+	    this.state = PENDING;
+	    this.value = undefined;
+	    this.deferred = [];
+
+	    var promise = this;
+
+	    try {
+	        executor(function (x) {
+	            promise.resolve(x);
+	        }, function (r) {
+	            promise.reject(r);
+	        });
+	    } catch (e) {
+	        promise.reject(e);
+	    }
+	}
+
+	Promise$1.reject = function (r) {
+	    return new Promise$1(function (resolve, reject) {
+	        reject(r);
+	    });
+	};
+
+	Promise$1.resolve = function (x) {
+	    return new Promise$1(function (resolve, reject) {
+	        resolve(x);
+	    });
+	};
+
+	Promise$1.all = function all(iterable) {
+	    return new Promise$1(function (resolve, reject) {
+	        var count = 0, result = [];
+
+	        if (iterable.length === 0) {
+	            resolve(result);
+	        }
+
+	        function resolver(i) {
+	            return function (x) {
+	                result[i] = x;
+	                count += 1;
+
+	                if (count === iterable.length) {
+	                    resolve(result);
+	                }
+	            };
+	        }
+
+	        for (var i = 0; i < iterable.length; i += 1) {
+	            Promise$1.resolve(iterable[i]).then(resolver(i), reject);
+	        }
+	    });
+	};
+
+	Promise$1.race = function race(iterable) {
+	    return new Promise$1(function (resolve, reject) {
+	        for (var i = 0; i < iterable.length; i += 1) {
+	            Promise$1.resolve(iterable[i]).then(resolve, reject);
+	        }
+	    });
+	};
+
+	var p$1 = Promise$1.prototype;
+
+	p$1.resolve = function resolve(x) {
+	    var promise = this;
+
+	    if (promise.state === PENDING) {
+	        if (x === promise) {
+	            throw new TypeError('Promise settled with itself.');
+	        }
+
+	        var called = false;
+
+	        try {
+	            var then = x && x['then'];
+
+	            if (x !== null && typeof x === 'object' && typeof then === 'function') {
+	                then.call(x, function (x) {
+	                    if (!called) {
+	                        promise.resolve(x);
+	                    }
+	                    called = true;
+
+	                }, function (r) {
+	                    if (!called) {
+	                        promise.reject(r);
+	                    }
+	                    called = true;
+	                });
+	                return;
+	            }
+	        } catch (e) {
+	            if (!called) {
+	                promise.reject(e);
+	            }
+	            return;
+	        }
+
+	        promise.state = RESOLVED;
+	        promise.value = x;
+	        promise.notify();
+	    }
+	};
+
+	p$1.reject = function reject(reason) {
+	    var promise = this;
+
+	    if (promise.state === PENDING) {
+	        if (reason === promise) {
+	            throw new TypeError('Promise settled with itself.');
+	        }
+
+	        promise.state = REJECTED;
+	        promise.value = reason;
+	        promise.notify();
+	    }
+	};
+
+	p$1.notify = function notify() {
+	    var promise = this;
+
+	    nextTick(function () {
+	        if (promise.state !== PENDING) {
+	            while (promise.deferred.length) {
+	                var deferred = promise.deferred.shift(),
+	                    onResolved = deferred[0],
+	                    onRejected = deferred[1],
+	                    resolve = deferred[2],
+	                    reject = deferred[3];
+
+	                try {
+	                    if (promise.state === RESOLVED) {
+	                        if (typeof onResolved === 'function') {
+	                            resolve(onResolved.call(undefined, promise.value));
+	                        } else {
+	                            resolve(promise.value);
+	                        }
+	                    } else if (promise.state === REJECTED) {
+	                        if (typeof onRejected === 'function') {
+	                            resolve(onRejected.call(undefined, promise.value));
+	                        } else {
+	                            reject(promise.value);
+	                        }
+	                    }
+	                } catch (e) {
+	                    reject(e);
+	                }
+	            }
+	        }
+	    });
+	};
+
+	p$1.then = function then(onResolved, onRejected) {
+	    var promise = this;
+
+	    return new Promise$1(function (resolve, reject) {
+	        promise.deferred.push([onResolved, onRejected, resolve, reject]);
+	        promise.notify();
+	    });
+	};
+
+	p$1.catch = function (onRejected) {
+	    return this.then(undefined, onRejected);
+	};
+
+	/**
+	 * Promise adapter.
+	 */
+
+	if (typeof Promise === 'undefined') {
+	    window.Promise = Promise$1;
+	}
+
+	function PromiseObj(executor, context) {
+
+	    if (executor instanceof Promise) {
+	        this.promise = executor;
+	    } else {
+	        this.promise = new Promise(executor.bind(context));
+	    }
+
+	    this.context = context;
+	}
+
+	PromiseObj.all = function (iterable, context) {
+	    return new PromiseObj(Promise.all(iterable), context);
+	};
+
+	PromiseObj.resolve = function (value, context) {
+	    return new PromiseObj(Promise.resolve(value), context);
+	};
+
+	PromiseObj.reject = function (reason, context) {
+	    return new PromiseObj(Promise.reject(reason), context);
+	};
+
+	PromiseObj.race = function (iterable, context) {
+	    return new PromiseObj(Promise.race(iterable), context);
+	};
+
+	var p = PromiseObj.prototype;
+
+	p.bind = function (context) {
+	    this.context = context;
+	    return this;
+	};
+
+	p.then = function (fulfilled, rejected) {
+
+	    if (fulfilled && fulfilled.bind && this.context) {
+	        fulfilled = fulfilled.bind(this.context);
+	    }
+
+	    if (rejected && rejected.bind && this.context) {
+	        rejected = rejected.bind(this.context);
+	    }
+
+	    return new PromiseObj(this.promise.then(fulfilled, rejected), this.context);
+	};
+
+	p.catch = function (rejected) {
+
+	    if (rejected && rejected.bind && this.context) {
+	        rejected = rejected.bind(this.context);
+	    }
+
+	    return new PromiseObj(this.promise.catch(rejected), this.context);
+	};
+
+	p.finally = function (callback) {
+
+	    return this.then(function (value) {
+	            callback.call(this);
+	            return value;
+	        }, function (reason) {
+	            callback.call(this);
+	            return Promise.reject(reason);
+	        }
+	    );
+	};
+
+	/**
+	 * Utility functions.
+	 */
+
+	var debug = false;
+	var util = {};
+	var ref = {};
+	var hasOwnProperty = ref.hasOwnProperty;
+
+	var ref$1 = [];
+	var slice = ref$1.slice;
+
+	var inBrowser = typeof window !== 'undefined';
+
+	var Util = function (Vue) {
+	    util = Vue.util;
+	    debug = Vue.config.debug || !Vue.config.silent;
+	};
+
+	function warn(msg) {
+	    if (typeof console !== 'undefined' && debug) {
+	        console.warn('[VueResource warn]: ' + msg);
+	    }
+	}
+
+	function error(msg) {
+	    if (typeof console !== 'undefined') {
+	        console.error(msg);
+	    }
+	}
+
+	function nextTick(cb, ctx) {
+	    return util.nextTick(cb, ctx);
+	}
+
+	function trim(str) {
+	    return str ? str.replace(/^\s*|\s*$/g, '') : '';
+	}
+
+	function toLower(str) {
+	    return str ? str.toLowerCase() : '';
+	}
+
+	function toUpper(str) {
+	    return str ? str.toUpperCase() : '';
+	}
+
+	var isArray = Array.isArray;
+
+	function isString(val) {
+	    return typeof val === 'string';
+	}
+
+
+
+	function isFunction(val) {
+	    return typeof val === 'function';
+	}
+
+	function isObject(obj) {
+	    return obj !== null && typeof obj === 'object';
+	}
+
+	function isPlainObject(obj) {
+	    return isObject(obj) && Object.getPrototypeOf(obj) == Object.prototype;
+	}
+
+	function isBlob(obj) {
+	    return typeof Blob !== 'undefined' && obj instanceof Blob;
+	}
+
+	function isFormData(obj) {
+	    return typeof FormData !== 'undefined' && obj instanceof FormData;
+	}
+
+	function when(value, fulfilled, rejected) {
+
+	    var promise = PromiseObj.resolve(value);
+
+	    if (arguments.length < 2) {
+	        return promise;
+	    }
+
+	    return promise.then(fulfilled, rejected);
+	}
+
+	function options(fn, obj, opts) {
+
+	    opts = opts || {};
+
+	    if (isFunction(opts)) {
+	        opts = opts.call(obj);
+	    }
+
+	    return merge(fn.bind({$vm: obj, $options: opts}), fn, {$options: opts});
+	}
+
+	function each(obj, iterator) {
+
+	    var i, key;
+
+	    if (isArray(obj)) {
+	        for (i = 0; i < obj.length; i++) {
+	            iterator.call(obj[i], obj[i], i);
+	        }
+	    } else if (isObject(obj)) {
+	        for (key in obj) {
+	            if (hasOwnProperty.call(obj, key)) {
+	                iterator.call(obj[key], obj[key], key);
+	            }
+	        }
+	    }
+
+	    return obj;
+	}
+
+	var assign = Object.assign || _assign;
+
+	function merge(target) {
+
+	    var args = slice.call(arguments, 1);
+
+	    args.forEach(function (source) {
+	        _merge(target, source, true);
+	    });
+
+	    return target;
+	}
+
+	function defaults(target) {
+
+	    var args = slice.call(arguments, 1);
+
+	    args.forEach(function (source) {
+
+	        for (var key in source) {
+	            if (target[key] === undefined) {
+	                target[key] = source[key];
+	            }
+	        }
+
+	    });
+
+	    return target;
+	}
+
+	function _assign(target) {
+
+	    var args = slice.call(arguments, 1);
+
+	    args.forEach(function (source) {
+	        _merge(target, source);
+	    });
+
+	    return target;
+	}
+
+	function _merge(target, source, deep) {
+	    for (var key in source) {
+	        if (deep && (isPlainObject(source[key]) || isArray(source[key]))) {
+	            if (isPlainObject(source[key]) && !isPlainObject(target[key])) {
+	                target[key] = {};
+	            }
+	            if (isArray(source[key]) && !isArray(target[key])) {
+	                target[key] = [];
+	            }
+	            _merge(target[key], source[key], deep);
+	        } else if (source[key] !== undefined) {
+	            target[key] = source[key];
+	        }
+	    }
+	}
+
+	/**
+	 * Root Prefix Transform.
+	 */
+
+	var root = function (options$$1, next) {
+
+	    var url = next(options$$1);
+
+	    if (isString(options$$1.root) && !url.match(/^(https?:)?\//)) {
+	        url = options$$1.root + '/' + url;
+	    }
+
+	    return url;
+	};
+
+	/**
+	 * Query Parameter Transform.
+	 */
+
+	var query = function (options$$1, next) {
+
+	    var urlParams = Object.keys(Url.options.params), query = {}, url = next(options$$1);
+
+	    each(options$$1.params, function (value, key) {
+	        if (urlParams.indexOf(key) === -1) {
+	            query[key] = value;
+	        }
+	    });
+
+	    query = Url.params(query);
+
+	    if (query) {
+	        url += (url.indexOf('?') == -1 ? '?' : '&') + query;
+	    }
+
+	    return url;
+	};
+
+	/**
+	 * URL Template v2.0.6 (https://github.com/bramstein/url-template)
+	 */
+
+	function expand(url, params, variables) {
+
+	    var tmpl = parse(url), expanded = tmpl.expand(params);
+
+	    if (variables) {
+	        variables.push.apply(variables, tmpl.vars);
+	    }
+
+	    return expanded;
+	}
+
+	function parse(template) {
+
+	    var operators = ['+', '#', '.', '/', ';', '?', '&'], variables = [];
+
+	    return {
+	        vars: variables,
+	        expand: function expand(context) {
+	            return template.replace(/\{([^\{\}]+)\}|([^\{\}]+)/g, function (_, expression, literal) {
+	                if (expression) {
+
+	                    var operator = null, values = [];
+
+	                    if (operators.indexOf(expression.charAt(0)) !== -1) {
+	                        operator = expression.charAt(0);
+	                        expression = expression.substr(1);
+	                    }
+
+	                    expression.split(/,/g).forEach(function (variable) {
+	                        var tmp = /([^:\*]*)(?::(\d+)|(\*))?/.exec(variable);
+	                        values.push.apply(values, getValues(context, operator, tmp[1], tmp[2] || tmp[3]));
+	                        variables.push(tmp[1]);
+	                    });
+
+	                    if (operator && operator !== '+') {
+
+	                        var separator = ',';
+
+	                        if (operator === '?') {
+	                            separator = '&';
+	                        } else if (operator !== '#') {
+	                            separator = operator;
+	                        }
+
+	                        return (values.length !== 0 ? operator : '') + values.join(separator);
+	                    } else {
+	                        return values.join(',');
+	                    }
+
+	                } else {
+	                    return encodeReserved(literal);
+	                }
+	            });
+	        }
+	    };
+	}
+
+	function getValues(context, operator, key, modifier) {
+
+	    var value = context[key], result = [];
+
+	    if (isDefined(value) && value !== '') {
+	        if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
+	            value = value.toString();
+
+	            if (modifier && modifier !== '*') {
+	                value = value.substring(0, parseInt(modifier, 10));
+	            }
+
+	            result.push(encodeValue(operator, value, isKeyOperator(operator) ? key : null));
+	        } else {
+	            if (modifier === '*') {
+	                if (Array.isArray(value)) {
+	                    value.filter(isDefined).forEach(function (value) {
+	                        result.push(encodeValue(operator, value, isKeyOperator(operator) ? key : null));
+	                    });
+	                } else {
+	                    Object.keys(value).forEach(function (k) {
+	                        if (isDefined(value[k])) {
+	                            result.push(encodeValue(operator, value[k], k));
+	                        }
+	                    });
+	                }
+	            } else {
+	                var tmp = [];
+
+	                if (Array.isArray(value)) {
+	                    value.filter(isDefined).forEach(function (value) {
+	                        tmp.push(encodeValue(operator, value));
+	                    });
+	                } else {
+	                    Object.keys(value).forEach(function (k) {
+	                        if (isDefined(value[k])) {
+	                            tmp.push(encodeURIComponent(k));
+	                            tmp.push(encodeValue(operator, value[k].toString()));
+	                        }
+	                    });
+	                }
+
+	                if (isKeyOperator(operator)) {
+	                    result.push(encodeURIComponent(key) + '=' + tmp.join(','));
+	                } else if (tmp.length !== 0) {
+	                    result.push(tmp.join(','));
+	                }
+	            }
+	        }
+	    } else {
+	        if (operator === ';') {
+	            result.push(encodeURIComponent(key));
+	        } else if (value === '' && (operator === '&' || operator === '?')) {
+	            result.push(encodeURIComponent(key) + '=');
+	        } else if (value === '') {
+	            result.push('');
+	        }
+	    }
+
+	    return result;
+	}
+
+	function isDefined(value) {
+	    return value !== undefined && value !== null;
+	}
+
+	function isKeyOperator(operator) {
+	    return operator === ';' || operator === '&' || operator === '?';
+	}
+
+	function encodeValue(operator, value, key) {
+
+	    value = (operator === '+' || operator === '#') ? encodeReserved(value) : encodeURIComponent(value);
+
+	    if (key) {
+	        return encodeURIComponent(key) + '=' + value;
+	    } else {
+	        return value;
+	    }
+	}
+
+	function encodeReserved(str) {
+	    return str.split(/(%[0-9A-Fa-f]{2})/g).map(function (part) {
+	        if (!/%[0-9A-Fa-f]/.test(part)) {
+	            part = encodeURI(part);
+	        }
+	        return part;
+	    }).join('');
+	}
+
+	/**
+	 * URL Template (RFC 6570) Transform.
+	 */
+
+	var template = function (options) {
+
+	    var variables = [], url = expand(options.url, options.params, variables);
+
+	    variables.forEach(function (key) {
+	        delete options.params[key];
+	    });
+
+	    return url;
+	};
+
+	/**
+	 * Service for URL templating.
+	 */
+
+	function Url(url, params) {
+
+	    var self = this || {}, options$$1 = url, transform;
+
+	    if (isString(url)) {
+	        options$$1 = {url: url, params: params};
+	    }
+
+	    options$$1 = merge({}, Url.options, self.$options, options$$1);
+
+	    Url.transforms.forEach(function (handler) {
+	        transform = factory(handler, transform, self.$vm);
+	    });
+
+	    return transform(options$$1);
+	}
+
+	/**
+	 * Url options.
+	 */
+
+	Url.options = {
+	    url: '',
+	    root: null,
+	    params: {}
+	};
+
+	/**
+	 * Url transforms.
+	 */
+
+	Url.transforms = [template, query, root];
+
+	/**
+	 * Encodes a Url parameter string.
+	 *
+	 * @param {Object} obj
+	 */
+
+	Url.params = function (obj) {
+
+	    var params = [], escape = encodeURIComponent;
+
+	    params.add = function (key, value) {
+
+	        if (isFunction(value)) {
+	            value = value();
+	        }
+
+	        if (value === null) {
+	            value = '';
+	        }
+
+	        this.push(escape(key) + '=' + escape(value));
+	    };
+
+	    serialize(params, obj);
+
+	    return params.join('&').replace(/%20/g, '+');
+	};
+
+	/**
+	 * Parse a URL and return its components.
+	 *
+	 * @param {String} url
+	 */
+
+	Url.parse = function (url) {
+
+	    var el = document.createElement('a');
+
+	    if (document.documentMode) {
+	        el.href = url;
+	        url = el.href;
+	    }
+
+	    el.href = url;
+
+	    return {
+	        href: el.href,
+	        protocol: el.protocol ? el.protocol.replace(/:$/, '') : '',
+	        port: el.port,
+	        host: el.host,
+	        hostname: el.hostname,
+	        pathname: el.pathname.charAt(0) === '/' ? el.pathname : '/' + el.pathname,
+	        search: el.search ? el.search.replace(/^\?/, '') : '',
+	        hash: el.hash ? el.hash.replace(/^#/, '') : ''
+	    };
+	};
+
+	function factory(handler, next, vm) {
+	    return function (options$$1) {
+	        return handler.call(vm, options$$1, next);
+	    };
+	}
+
+	function serialize(params, obj, scope) {
+
+	    var array = isArray(obj), plain = isPlainObject(obj), hash;
+
+	    each(obj, function (value, key) {
+
+	        hash = isObject(value) || isArray(value);
+
+	        if (scope) {
+	            key = scope + '[' + (plain || hash ? key : '') + ']';
+	        }
+
+	        if (!scope && array) {
+	            params.add(value.name, value.value);
+	        } else if (hash) {
+	            serialize(params, value, key);
+	        } else {
+	            params.add(key, value);
+	        }
+	    });
+	}
+
+	/**
+	 * XDomain client (Internet Explorer).
+	 */
+
+	var xdrClient = function (request) {
+	    return new PromiseObj(function (resolve) {
+
+	        var xdr = new XDomainRequest(), handler = function (ref) {
+	            var type = ref.type;
+
+
+	            var status = 0;
+
+	            if (type === 'load') {
+	                status = 200;
+	            } else if (type === 'error') {
+	                status = 500;
+	            }
+
+	            resolve(request.respondWith(xdr.responseText, {status: status}));
+	        };
+
+	        request.abort = function () { return xdr.abort(); };
+
+	        xdr.open(request.method, request.getUrl());
+
+	        if (request.timeout) {
+	            xdr.timeout = request.timeout;
+	        }
+
+	        xdr.onload = handler;
+	        xdr.onabort = handler;
+	        xdr.onerror = handler;
+	        xdr.ontimeout = handler;
+	        xdr.onprogress = function () {};
+	        xdr.send(request.getBody());
+	    });
+	};
+
+	/**
+	 * CORS Interceptor.
+	 */
+
+	var SUPPORTS_CORS = inBrowser && 'withCredentials' in new XMLHttpRequest();
+
+	var cors = function (request, next) {
+
+	    if (inBrowser) {
+
+	        var orgUrl = Url.parse(location.href);
+	        var reqUrl = Url.parse(request.getUrl());
+
+	        if (reqUrl.protocol !== orgUrl.protocol || reqUrl.host !== orgUrl.host) {
+
+	            request.crossOrigin = true;
+	            request.emulateHTTP = false;
+
+	            if (!SUPPORTS_CORS) {
+	                request.client = xdrClient;
+	            }
+	        }
+	    }
+
+	    next();
+	};
+
+	/**
+	 * Body Interceptor.
+	 */
+
+	var body = function (request, next) {
+
+	    if (isFormData(request.body)) {
+
+	        request.headers.delete('Content-Type');
+
+	    } else if (isObject(request.body) || isArray(request.body)) {
+
+	        if (request.emulateJSON) {
+	            request.body = Url.params(request.body);
+	            request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
+	        } else {
+	            request.body = JSON.stringify(request.body);
+	        }
+	    }
+
+	    next(function (response) {
+
+	        Object.defineProperty(response, 'data', {
+
+	            get: function get() {
+	                return this.body;
+	            },
+
+	            set: function set(body) {
+	                this.body = body;
+	            }
+
+	        });
+
+	        return response.bodyText ? when(response.text(), function (text) {
+
+	            var type = response.headers.get('Content-Type') || '';
+
+	            if (type.indexOf('application/json') === 0 || isJson(text)) {
+
+	                try {
+	                    response.body = JSON.parse(text);
+	                } catch (e) {
+	                    response.body = null;
+	                }
+
+	            } else {
+	                response.body = text;
+	            }
+
+	            return response;
+
+	        }) : response;
+
+	    });
+	};
+
+	function isJson(str) {
+
+	    var start = str.match(/^\[|^\{(?!\{)/), end = {'[': /]$/, '{': /}$/};
+
+	    return start && end[start[0]].test(str);
+	}
+
+	/**
+	 * JSONP client (Browser).
+	 */
+
+	var jsonpClient = function (request) {
+	    return new PromiseObj(function (resolve) {
+
+	        var name = request.jsonp || 'callback', callback = request.jsonpCallback || '_jsonp' + Math.random().toString(36).substr(2), body = null, handler, script;
+
+	        handler = function (ref) {
+	            var type = ref.type;
+
+
+	            var status = 0;
+
+	            if (type === 'load' && body !== null) {
+	                status = 200;
+	            } else if (type === 'error') {
+	                status = 500;
+	            }
+
+	            if (status && window[callback]) {
+	                delete window[callback];
+	                document.body.removeChild(script);
+	            }
+
+	            resolve(request.respondWith(body, {status: status}));
+	        };
+
+	        window[callback] = function (result) {
+	            body = JSON.stringify(result);
+	        };
+
+	        request.abort = function () {
+	            handler({type: 'abort'});
+	        };
+
+	        request.params[name] = callback;
+
+	        if (request.timeout) {
+	            setTimeout(request.abort, request.timeout);
+	        }
+
+	        script = document.createElement('script');
+	        script.src = request.getUrl();
+	        script.type = 'text/javascript';
+	        script.async = true;
+	        script.onload = handler;
+	        script.onerror = handler;
+
+	        document.body.appendChild(script);
+	    });
+	};
+
+	/**
+	 * JSONP Interceptor.
+	 */
+
+	var jsonp = function (request, next) {
+
+	    if (request.method == 'JSONP') {
+	        request.client = jsonpClient;
+	    }
+
+	    next();
+	};
+
+	/**
+	 * Before Interceptor.
+	 */
+
+	var before = function (request, next) {
+
+	    if (isFunction(request.before)) {
+	        request.before.call(this, request);
+	    }
+
+	    next();
+	};
+
+	/**
+	 * HTTP method override Interceptor.
+	 */
+
+	var method = function (request, next) {
+
+	    if (request.emulateHTTP && /^(PUT|PATCH|DELETE)$/i.test(request.method)) {
+	        request.headers.set('X-HTTP-Method-Override', request.method);
+	        request.method = 'POST';
+	    }
+
+	    next();
+	};
+
+	/**
+	 * Header Interceptor.
+	 */
+
+	var header = function (request, next) {
+
+	    var headers = assign({}, Http.headers.common,
+	        !request.crossOrigin ? Http.headers.custom : {},
+	        Http.headers[toLower(request.method)]
+	    );
+
+	    each(headers, function (value, name) {
+	        if (!request.headers.has(name)) {
+	            request.headers.set(name, value);
+	        }
+	    });
+
+	    next();
+	};
+
+	/**
+	 * XMLHttp client (Browser).
+	 */
+
+	var SUPPORTS_BLOB = typeof Blob !== 'undefined' && typeof FileReader !== 'undefined';
+
+	var xhrClient = function (request) {
+	    return new PromiseObj(function (resolve) {
+
+	        var xhr = new XMLHttpRequest(), handler = function (event) {
+
+	            var response = request.respondWith(
+	                'response' in xhr ? xhr.response : xhr.responseText, {
+	                    status: xhr.status === 1223 ? 204 : xhr.status, // IE9 status bug
+	                    statusText: xhr.status === 1223 ? 'No Content' : trim(xhr.statusText)
+	                }
+	            );
+
+	            each(trim(xhr.getAllResponseHeaders()).split('\n'), function (row) {
+	                response.headers.append(row.slice(0, row.indexOf(':')), row.slice(row.indexOf(':') + 1));
+	            });
+
+	            resolve(response);
+	        };
+
+	        request.abort = function () { return xhr.abort(); };
+
+	        if (request.progress) {
+	            if (request.method === 'GET') {
+	                xhr.addEventListener('progress', request.progress);
+	            } else if (/^(POST|PUT)$/i.test(request.method)) {
+	                xhr.upload.addEventListener('progress', request.progress);
+	            }
+	        }
+
+	        xhr.open(request.method, request.getUrl(), true);
+
+	        if (request.timeout) {
+	            xhr.timeout = request.timeout;
+	        }
+
+	        if (request.credentials === true) {
+	            xhr.withCredentials = true;
+	        }
+
+	        if (!request.crossOrigin) {
+	            request.headers.set('X-Requested-With', 'XMLHttpRequest');
+	        }
+
+	        if ('responseType' in xhr && SUPPORTS_BLOB) {
+	            xhr.responseType = 'blob';
+	        }
+
+	        request.headers.forEach(function (value, name) {
+	            xhr.setRequestHeader(name, value);
+	        });
+
+	        xhr.onload = handler;
+	        xhr.onabort = handler;
+	        xhr.onerror = handler;
+	        xhr.ontimeout = handler;
+	        xhr.send(request.getBody());
+	    });
+	};
+
+	/**
+	 * Http client (Node).
+	 */
+
+	var nodeClient = function (request) {
+
+	    var client = __webpack_require__(153);
+
+	    return new PromiseObj(function (resolve) {
+
+	        var url = request.getUrl();
+	        var body = request.getBody();
+	        var method = request.method;
+	        var headers = {}, handler;
+
+	        request.headers.forEach(function (value, name) {
+	            headers[name] = value;
+	        });
+
+	        client(url, {body: body, method: method, headers: headers}).then(handler = function (resp) {
+
+	            var response = request.respondWith(resp.body, {
+	                    status: resp.statusCode,
+	                    statusText: trim(resp.statusMessage)
+	                }
+	            );
+
+	            each(resp.headers, function (value, name) {
+	                response.headers.set(name, value);
+	            });
+
+	            resolve(response);
+
+	        }, function (error$$1) { return handler(error$$1.response); });
+	    });
+	};
+
+	/**
+	 * Base client.
+	 */
+
+	var Client = function (context) {
+
+	    var reqHandlers = [sendRequest], resHandlers = [], handler;
+
+	    if (!isObject(context)) {
+	        context = null;
+	    }
+
+	    function Client(request) {
+	        return new PromiseObj(function (resolve) {
+
+	            function exec() {
+
+	                handler = reqHandlers.pop();
+
+	                if (isFunction(handler)) {
+	                    handler.call(context, request, next);
+	                } else {
+	                    warn(("Invalid interceptor of type " + (typeof handler) + ", must be a function"));
+	                    next();
+	                }
+	            }
+
+	            function next(response) {
+
+	                if (isFunction(response)) {
+
+	                    resHandlers.unshift(response);
+
+	                } else if (isObject(response)) {
+
+	                    resHandlers.forEach(function (handler) {
+	                        response = when(response, function (response) {
+	                            return handler.call(context, response) || response;
+	                        });
+	                    });
+
+	                    when(response, resolve);
+
+	                    return;
+	                }
+
+	                exec();
+	            }
+
+	            exec();
+
+	        }, context);
+	    }
+
+	    Client.use = function (handler) {
+	        reqHandlers.push(handler);
+	    };
+
+	    return Client;
+	};
+
+	function sendRequest(request, resolve) {
+
+	    var client = request.client || (inBrowser ? xhrClient : nodeClient);
+
+	    resolve(client(request));
+	}
+
+	/**
+	 * HTTP Headers.
+	 */
+
+	var Headers = function Headers(headers) {
+	    var this$1 = this;
+
+
+	    this.map = {};
+
+	    each(headers, function (value, name) { return this$1.append(name, value); });
+	};
+
+	Headers.prototype.has = function has (name) {
+	    return getName(this.map, name) !== null;
+	};
+
+	Headers.prototype.get = function get (name) {
+
+	    var list = this.map[getName(this.map, name)];
+
+	    return list ? list[0] : null;
+	};
+
+	Headers.prototype.getAll = function getAll (name) {
+	    return this.map[getName(this.map, name)] || [];
+	};
+
+	Headers.prototype.set = function set (name, value) {
+	    this.map[normalizeName(getName(this.map, name) || name)] = [trim(value)];
+	};
+
+	Headers.prototype.append = function append (name, value){
+
+	    var list = this.getAll(name);
+
+	    if (list.length) {
+	        list.push(trim(value));
+	    } else {
+	        this.set(name, value);
+	    }
+	};
+
+	Headers.prototype.delete = function delete$1 (name){
+	    delete this.map[getName(this.map, name)];
+	};
+
+	Headers.prototype.deleteAll = function deleteAll (){
+	    this.map = {};
+	};
+
+	Headers.prototype.forEach = function forEach (callback, thisArg) {
+	        var this$1 = this;
+
+	    each(this.map, function (list, name) {
+	        each(list, function (value) { return callback.call(thisArg, value, name, this$1); });
+	    });
+	};
+
+	function getName(map, name) {
+	    return Object.keys(map).reduce(function (prev, curr) {
+	        return toLower(name) === toLower(curr) ? curr : prev;
+	    }, null);
+	}
+
+	function normalizeName(name) {
+
+	    if (/[^a-z0-9\-#$%&'*+.\^_`|~]/i.test(name)) {
+	        throw new TypeError('Invalid character in header field name');
+	    }
+
+	    return trim(name);
+	}
+
+	/**
+	 * HTTP Response.
+	 */
+
+	var Response = function Response(body, ref) {
+	    var url = ref.url;
+	    var headers = ref.headers;
+	    var status = ref.status;
+	    var statusText = ref.statusText;
+
+
+	    this.url = url;
+	    this.ok = status >= 200 && status < 300;
+	    this.status = status || 0;
+	    this.statusText = statusText || '';
+	    this.headers = new Headers(headers);
+	    this.body = body;
+
+	    if (isString(body)) {
+
+	        this.bodyText = body;
+
+	    } else if (isBlob(body)) {
+
+	        this.bodyBlob = body;
+
+	        if (isBlobText(body)) {
+	            this.bodyText = blobText(body);
+	        }
+	    }
+	};
+
+	Response.prototype.blob = function blob () {
+	    return when(this.bodyBlob);
+	};
+
+	Response.prototype.text = function text () {
+	    return when(this.bodyText);
+	};
+
+	Response.prototype.json = function json () {
+	    return when(this.text(), function (text) { return JSON.parse(text); });
+	};
+
+	function blobText(body) {
+	    return new PromiseObj(function (resolve) {
+
+	        var reader = new FileReader();
+
+	        reader.readAsText(body);
+	        reader.onload = function () {
+	            resolve(reader.result);
+	        };
+
+	    });
+	}
+
+	function isBlobText(body) {
+	    return body.type.indexOf('text') === 0 || body.type.indexOf('json') !== -1;
+	}
+
+	/**
+	 * HTTP Request.
+	 */
+
+	var Request = function Request(options$$1) {
+
+	    this.body = null;
+	    this.params = {};
+
+	    assign(this, options$$1, {
+	        method: toUpper(options$$1.method || 'GET')
+	    });
+
+	    if (!(this.headers instanceof Headers)) {
+	        this.headers = new Headers(this.headers);
+	    }
+	};
+
+	Request.prototype.getUrl = function getUrl (){
+	    return Url(this);
+	};
+
+	Request.prototype.getBody = function getBody (){
+	    return this.body;
+	};
+
+	Request.prototype.respondWith = function respondWith (body, options$$1) {
+	    return new Response(body, assign(options$$1 || {}, {url: this.getUrl()}));
+	};
+
+	/**
+	 * Service for sending network requests.
+	 */
+
+	var COMMON_HEADERS = {'Accept': 'application/json, text/plain, */*'};
+	var JSON_CONTENT_TYPE = {'Content-Type': 'application/json;charset=utf-8'};
+
+	function Http(options$$1) {
+
+	    var self = this || {}, client = Client(self.$vm);
+
+	    defaults(options$$1 || {}, self.$options, Http.options);
+
+	    Http.interceptors.forEach(function (handler) {
+	        client.use(handler);
+	    });
+
+	    return client(new Request(options$$1)).then(function (response) {
+
+	        return response.ok ? response : PromiseObj.reject(response);
+
+	    }, function (response) {
+
+	        if (response instanceof Error) {
+	            error(response);
+	        }
+
+	        return PromiseObj.reject(response);
+	    });
+	}
+
+	Http.options = {};
+
+	Http.headers = {
+	    put: JSON_CONTENT_TYPE,
+	    post: JSON_CONTENT_TYPE,
+	    patch: JSON_CONTENT_TYPE,
+	    delete: JSON_CONTENT_TYPE,
+	    common: COMMON_HEADERS,
+	    custom: {}
+	};
+
+	Http.interceptors = [before, method, body, jsonp, header, cors];
+
+	['get', 'delete', 'head', 'jsonp'].forEach(function (method$$1) {
+
+	    Http[method$$1] = function (url, options$$1) {
+	        return this(assign(options$$1 || {}, {url: url, method: method$$1}));
+	    };
+
+	});
+
+	['post', 'put', 'patch'].forEach(function (method$$1) {
+
+	    Http[method$$1] = function (url, body$$1, options$$1) {
+	        return this(assign(options$$1 || {}, {url: url, method: method$$1, body: body$$1}));
+	    };
+
+	});
+
+	/**
+	 * Service for interacting with RESTful services.
+	 */
+
+	function Resource(url, params, actions, options$$1) {
+
+	    var self = this || {}, resource = {};
+
+	    actions = assign({},
+	        Resource.actions,
+	        actions
+	    );
+
+	    each(actions, function (action, name) {
+
+	        action = merge({url: url, params: assign({}, params)}, options$$1, action);
+
+	        resource[name] = function () {
+	            return (self.$http || Http)(opts(action, arguments));
+	        };
+	    });
+
+	    return resource;
+	}
+
+	function opts(action, args) {
+
+	    var options$$1 = assign({}, action), params = {}, body;
+
+	    switch (args.length) {
+
+	        case 2:
+
+	            params = args[0];
+	            body = args[1];
+
+	            break;
+
+	        case 1:
+
+	            if (/^(POST|PUT|PATCH)$/i.test(options$$1.method)) {
+	                body = args[0];
+	            } else {
+	                params = args[0];
+	            }
+
+	            break;
+
+	        case 0:
+
+	            break;
+
+	        default:
+
+	            throw 'Expected up to 2 arguments [params, body], got ' + args.length + ' arguments';
+	    }
+
+	    options$$1.body = body;
+	    options$$1.params = assign({}, options$$1.params, params);
+
+	    return options$$1;
+	}
+
+	Resource.actions = {
+
+	    get: {method: 'GET'},
+	    save: {method: 'POST'},
+	    query: {method: 'GET'},
+	    update: {method: 'PUT'},
+	    remove: {method: 'DELETE'},
+	    delete: {method: 'DELETE'}
+
+	};
+
+	/**
+	 * Install plugin.
+	 */
+
+	function plugin(Vue) {
+
+	    if (plugin.installed) {
+	        return;
+	    }
+
+	    Util(Vue);
+
+	    Vue.url = Url;
+	    Vue.http = Http;
+	    Vue.resource = Resource;
+	    Vue.Promise = PromiseObj;
+
+	    Object.defineProperties(Vue.prototype, {
+
+	        $url: {
+	            get: function get() {
+	                return options(Vue.url, this, this.$options.url);
+	            }
+	        },
+
+	        $http: {
+	            get: function get() {
+	                return options(Vue.http, this, this.$options.http);
+	            }
+	        },
+
+	        $resource: {
+	            get: function get() {
+	                return Vue.resource.bind(this);
+	            }
+	        },
+
+	        $promise: {
+	            get: function get() {
+	                var this$1 = this;
+
+	                return function (executor) { return new Vue.Promise(executor, this$1); };
+	            }
+	        }
+
+	    });
+	}
+
+	if (typeof window !== 'undefined' && window.Vue) {
+	    window.Vue.use(plugin);
+	}
+
+	module.exports = plugin;
+
+
+/***/ },
+/* 153 */
+/***/ function(module, exports) {
+
+	/* (ignored) */
+
+/***/ },
 /* 154 */,
 /* 155 */,
 /* 156 */,
@@ -42722,7 +45750,7 @@
 	  /* script */
 	  __webpack_require__(192),
 	  /* template */
-	  __webpack_require__(205),
+	  __webpack_require__(202),
 	  /* scopeId */
 	  null,
 	  /* cssModules */
@@ -42825,7 +45853,7 @@
 	  /* script */
 	  __webpack_require__(196),
 	  /* template */
-	  __webpack_require__(204),
+	  __webpack_require__(201),
 	  /* scopeId */
 	  null,
 	  /* cssModules */
@@ -42886,7 +45914,7 @@
 
 
 	// module
-	exports.push([module.id, "\n@charset \"UTF-8\";\nhtml, body, #app, .markdown {\n  width: 100%;\n  height: 100%;\n  margin: 0;\n  padding: 0;\n  overflow: hidden;\n  font-family: \"Helvetica Neue\",Helvetica,\"PingFang SC\",\"Hiragino Sans GB\",\"Microsoft YaHei\",\"\\5FAE\\8F6F\\96C5\\9ED1\",Arial,sans-serif;\n}\n.clearfix {\n  zoom: 1;\n}\n.clearfix:after {\n  content: '';\n  display: block;\n  width: 0px;\n  height: 0px;\n  clear: both;\n  overflow: hidden;\n}\n.markdown {\n  display: flex;\n  background-color: #fff;\n  transition: all 0.5s linear 1.5s;\n}\n.dark_bg {\n  background-color: #324057;\n}\n.markdown_head {\n  height: 60px;\n  position: relative;\n}\n.markdown_head input {\n    display: block;\n    width: 100%;\n    height: 100%;\n    font-size: 20px;\n    padding: 20px;\n    box-sizing: border-box;\n    color: #475669;\n    border: 1px solid #EFF2F7;\n    outline: none;\n}\n.markdown_head .text_num {\n    position: absolute;\n    top: 0px;\n    bottom: 0px;\n    margin: auto;\n    right: 20px;\n    height: 15px;\n    line-height: 1.5em;\n    display: inline-block;\n    vertical-align: bottom;\n    font-size: 12px;\n    color: #ddd;\n    z-index: 999;\n}\n.markdown_tool {\n  width: 100%;\n  background-color: #fff;\n}\n.markdown_menu, .markdown_menu li {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n  vertical-align: middle;\n}\n.markdown_menu li, .btn {\n  line-height: 36px;\n  padding: 0 10px;\n  background-color: #D3DCE6;\n  float: left;\n  cursor: pointer;\n  vertical-align: bottom;\n  transition: all 0.3s linear 0s;\n  color: #475669;\n  opacity: 0.5;\n}\n.markdown_menu li:hover, .btn:hover {\n    opacity: 1;\n    background-color: #99A9BF;\n}\n.markdown_menu {\n  background-color: #EFF2F7;\n  position: relative;\n  overflow: hidden;\n}\n.markdown_main {\n  width: 50%;\n  display: flex;\n  flex-direction: column;\n  flex-grow: 1;\n  transition: all 0.5s linear 0.7s;\n}\n.markdown_center {\n  width: 800px;\n  flex-grow: 0;\n  margin: 50px auto 10px;\n}\n.markdown_edit {\n  width: 50%;\n  flex-grow: 1;\n}\n#markdown_edit {\n  flex-grow: 1;\n  width: 100%;\n  height: 100%;\n}\n.save_text {\n  float: right;\n}\n#edit {\n  width: 100%;\n  height: 100%;\n  padding: 25px 20px;\n  box-sizing: border-box;\n  border: 1px solid #EFF2F7;\n  outline: none;\n  font-size: 18px;\n  line-height: 1.5em;\n  color: #475669;\n  background-color: #F9FAFC;\n  resize: none;\n  font-family: \"Helvetica Neue\",Helvetica,\"PingFang SC\",\"Hiragino Sans GB\",\"Microsoft YaHei\",\"\\5FAE\\8F6F\\96C5\\9ED1\",Arial,sans-serif;\n}\n.markdown_preview {\n  width: 50%;\n  padding: 20px;\n  box-sizing: border-box;\n  background-color: #fcfcf2;\n  font-size: 20px;\n  font-family: \"Helvetica Neue\",Helvetica,\"PingFang SC\",\"Hiragino Sans GB\",\"Microsoft YaHei\",\"\\5FAE\\8F6F\\96C5\\9ED1\",Arial,sans-serif;\n  transition: all 0.5s linear 0s;\n}\n.right-enter-active, .right-leave-active {\n  transition: all .5s linear 0s;\n}\n.right-enter, .right-leave-active {\n  width: 0;\n}\n", ""]);
+	exports.push([module.id, "\n@charset \"UTF-8\";\nhtml, body, #app, .markdown {\n  width: 100%;\n  height: 100%;\n  margin: 0;\n  padding: 0;\n  overflow: hidden;\n  font-family: \"Helvetica Neue\",Helvetica,\"PingFang SC\",\"Hiragino Sans GB\",\"Microsoft YaHei\",\"\\5FAE\\8F6F\\96C5\\9ED1\",Arial,sans-serif;\n}\n.clearfix {\n  zoom: 1;\n}\n.clearfix:after {\n  content: '';\n  display: block;\n  width: 0px;\n  height: 0px;\n  clear: both;\n  overflow: hidden;\n}\n.markdown {\n  display: flex;\n  background-color: #fff;\n  transition: all 0.5s linear 1.5s;\n}\n.dark_bg {\n  background-color: #324057;\n}\n.markdown_head {\n  height: 60px;\n  position: relative;\n}\n.markdown_head input {\n    display: block;\n    width: 100%;\n    height: 100%;\n    font-size: 20px;\n    padding: 20px;\n    box-sizing: border-box;\n    color: #475669;\n    border: 1px solid #EFF2F7;\n    outline: none;\n}\n.markdown_head .text_num {\n    position: absolute;\n    top: 0px;\n    bottom: 0px;\n    margin: auto;\n    right: 20px;\n    height: 15px;\n    line-height: 1.5em;\n    display: inline-block;\n    vertical-align: bottom;\n    font-size: 12px;\n    color: #ddd;\n    z-index: 999;\n}\n.markdown_tool {\n  width: 100%;\n  background-color: #fff;\n}\n.markdown_menu, .markdown_menu li {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n  vertical-align: middle;\n}\n.markdown_menu li, .btn {\n  line-height: 36px;\n  padding: 0 10px;\n  background-color: #D3DCE6;\n  float: left;\n  cursor: pointer;\n  vertical-align: bottom;\n  transition: all 0.3s linear 0s;\n  color: #475669;\n  opacity: 0.5;\n}\n.markdown_menu li:hover, .btn:hover {\n    opacity: 1;\n    background-color: #99A9BF;\n}\n.markdown_menu {\n  background-color: #EFF2F7;\n  position: relative;\n  overflow: hidden;\n}\n.markdown_main {\n  width: 50%;\n  display: flex;\n  flex-direction: column;\n  flex-grow: 1;\n  transition: all 0.5s linear 0.7s;\n}\n.markdown_center {\n  width: 800px;\n  flex-grow: 0;\n  margin: 50px auto 10px;\n}\n.markdown_edit {\n  width: 50%;\n  flex-grow: 1;\n}\n#markdown_edit {\n  flex-grow: 1;\n  width: 100%;\n  height: 100%;\n}\n.save_text {\n  float: right;\n}\n#edit {\n  width: 100%;\n  height: 100%;\n  padding: 25px 20px;\n  box-sizing: border-box;\n  border: 1px solid #EFF2F7;\n  outline: none;\n  font-size: 18px;\n  line-height: 1.5em;\n  color: #475669;\n  background-color: #F9FAFC;\n  resize: none;\n  font-family: \"Helvetica Neue\",Helvetica,\"PingFang SC\",\"Hiragino Sans GB\",\"Microsoft YaHei\",\"\\5FAE\\8F6F\\96C5\\9ED1\",Arial,sans-serif;\n}\n.markdown_preview {\n  width: 50%;\n  padding: 20px;\n  box-sizing: border-box;\n  background-color: #fcfcf2;\n  font-size: 20px;\n  font-family: \"Helvetica Neue\",Helvetica,\"PingFang SC\",\"Hiragino Sans GB\",\"Microsoft YaHei\",\"\\5FAE\\8F6F\\96C5\\9ED1\",Arial,sans-serif;\n  transition: all 0.5s linear 0s;\n  overflow: auto;\n}\n.right-enter-active, .right-leave-active {\n  transition: all .5s linear 0s;\n}\n.right-enter, .right-leave-active {\n  width: 0;\n}\n@media screen and (max-width: 1000px) {\n.markdown_preview {\n    display: none;\n}\n}\n", ""]);
 
 	// exports
 
@@ -42913,7 +45941,11 @@
 
 	__webpack_require__(197);
 
-	var _markdown = __webpack_require__(199);
+	var _hyperdown = __webpack_require__(199);
+
+	var _hyperdown2 = _interopRequireDefault(_hyperdown);
+
+	var _ajax = __webpack_require__(86);
 
 	var _vue = __webpack_require__(1);
 
@@ -42921,7 +45953,6 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	_vue2.default.use(_elementUi2.default); //
 	//
 	//
 	//
@@ -42954,6 +45985,10 @@
 	//
 	//
 	//
+	//
+	//
+
+	_vue2.default.use(_elementUi2.default);
 
 	exports.default = {
 	    data: function data() {
@@ -42974,7 +46009,9 @@
 	        },
 	        content: function content() {
 	            var tem = this.content;
-	            tem = _markdown.markdown.toHTML(tem);
+	            // tem = markdown.toHTML(tem)
+	            var parse = new _hyperdown2.default();
+	            tem = parse.makeHtml(tem);
 	            document.querySelector(".markdown-body").innerHTML = tem;
 	        }
 	    },
@@ -42993,6 +46030,33 @@
 	        },
 	        changeEditType: function changeEditType() {
 	            this.preview_show = !this.preview_show;
+	        },
+	        saveContent: function saveContent() {
+	            var _this = this;
+
+	            var obj = {};
+	            obj.title = this.title;
+	            obj.content = this.content;
+	            obj.user_id = this.user_id;
+	            obj.paper_id = this.paper_id;
+
+	            (0, _ajax.ajax)({
+	                url: "/paper/savePaper",
+	                method: "post",
+	                data: obj
+	            }).then(function (data) {
+	                if (data.code) {
+	                    _this.$message({
+	                        message: '保存成功',
+	                        type: 'success'
+	                    });
+	                } else {
+	                    _this.$message({
+	                        message: '保存失败',
+	                        type: 'error'
+	                    });
+	                }
+	            });
 	        }
 	    }
 	};
@@ -43041,2377 +46105,996 @@
 /* 199 */
 /***/ function(module, exports, __webpack_require__) {
 
-	// super simple module for the most common nodejs use case.
-	exports.markdown = __webpack_require__(200);
-	exports.parse = exports.markdown.toHTML;
+	/* WEBPACK VAR INJECTION */(function(module) {// Generated by CoffeeScript 1.12.1
+	(function() {
+	  var Parser,
+	    slice = [].slice;
 
+	  Parser = (function() {
+	    var array_keys, array_values, htmlspecialchars, preg_quote, str_replace, trim, ucfirst;
+
+	    ucfirst = function(str) {
+	      return (str.charAt(0)).toUpperCase() + str.substring(1);
+	    };
+
+	    preg_quote = function(str) {
+	      return str.replace(/[-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+	    };
+
+	    str_replace = function(search, replace, str) {
+	      var i, j, l, len, len1, val;
+	      if (search instanceof Array) {
+	        if (replace instanceof Array) {
+	          for (i = j = 0, len = search.length; j < len; i = ++j) {
+	            val = search[i];
+	            str = str_replace(val, replace[i], str);
+	          }
+	        } else {
+	          for (l = 0, len1 = search.length; l < len1; l++) {
+	            val = search[l];
+	            str = str_replace(val, replace, str);
+	          }
+	        }
+	      } else {
+	        search = preg_quote(search);
+	        str = str.replace(new RegExp(search, 'g'), replace);
+	      }
+	      return str;
+	    };
+
+	    htmlspecialchars = function(str) {
+	      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+	    };
+
+	    trim = function(str, ch) {
+	      var c, i, j, ref, search;
+	      if (ch == null) {
+	        ch = null;
+	      }
+	      if (ch != null) {
+	        search = '';
+	        for (i = j = 0, ref = ch.length - 1; 0 <= ref ? j <= ref : j >= ref; i = 0 <= ref ? ++j : --j) {
+	          c = ch[i];
+	          c = preg_quote(c);
+	          search += c;
+	        }
+	        search = '[' + search + ']*';
+	        return str.replace(new RegExp('^' + search), '').replace(new RegExp(search + '$'), '');
+	      } else {
+	        return str.replace(/^\s*/, '').replace(/\s*$/, '');
+	      }
+	    };
+
+	    array_keys = function(arr) {
+	      var _, j, k, len, result;
+	      result = [];
+	      if (arr instanceof Array) {
+	        for (k = j = 0, len = arr.length; j < len; k = ++j) {
+	          _ = arr[k];
+	          result.push(k);
+	        }
+	      } else {
+	        for (k in arr) {
+	          result.push(k);
+	        }
+	      }
+	      return result;
+	    };
+
+	    array_values = function(arr) {
+	      var _, j, len, result, v;
+	      result = [];
+	      if (arr instanceof Array) {
+	        for (j = 0, len = arr.length; j < len; j++) {
+	          v = arr[j];
+	          result.push(v);
+	        }
+	      } else {
+	        for (_ in arr) {
+	          v = arr[_];
+	          result.push(v);
+	        }
+	      }
+	      return result;
+	    };
+
+	    function Parser() {
+	      this.commonWhiteList = 'kbd|b|i|strong|em|sup|sub|br|code|del|a|hr|small';
+	      this.specialWhiteList = {
+	        table: 'table|tbody|thead|tfoot|tr|td|th'
+	      };
+	      this.hooks = {};
+	    }
+
+	    Parser.prototype.makeHtml = function(text) {
+	      var html;
+	      this.footnotes = [];
+	      this.definitions = {};
+	      this.holders = {};
+	      this.uniqid = (Math.ceil(Math.random() * 10000000)) + (Math.ceil(Math.random() * 10000000));
+	      this.id = 0;
+	      text = this.initText(text);
+	      html = this.parse(text);
+	      html = this.makeFootnotes(html);
+	      return this.call('makeHtml', html);
+	    };
+
+	    Parser.prototype.hook = function(type, cb) {
+	      if (this.hooks[type] == null) {
+	        this.hooks[type] = [];
+	      }
+	      return this.hooks[type].push(cb);
+	    };
+
+	    Parser.prototype.makeHolder = function(str) {
+	      var key;
+	      key = "|\r" + this.uniqid + this.id + "\r|";
+	      this.id += 1;
+	      this.holders[key] = str;
+	      return key;
+	    };
+
+	    Parser.prototype.initText = function(text) {
+	      return text.replace(/\t/g, '    ').replace(/\r/g, '');
+	    };
+
+	    Parser.prototype.makeFootnotes = function(html) {
+	      var index, val;
+	      if (this.footnotes.length > 0) {
+	        html += '<div class="footnotes"><hr><ol>';
+	        index = 1;
+	        while (val = this.footnotes.shift()) {
+	          if (typeof val === 'string') {
+	            val += " <a href=\"#fnref-" + index + "\" class=\"footnote-backref\">&#8617;</a>";
+	          } else {
+	            val[val.length - 1] += " <a href=\"#fnref-" + index + "\" class=\"footnote-backref\">&#8617;</a>";
+	            val = val.length > 1 ? this.parse(val.join("\n")) : this.parseInline(val[0]);
+	          }
+	          html += "<li id=\"fn-" + index + "\">" + val + "</li>";
+	          index += 1;
+	        }
+	        html += '</ol></div>';
+	      }
+	      return html;
+	    };
+
+	    Parser.prototype.parse = function(text) {
+	      var block, blocks, end, extract, html, j, len, lines, method, result, start, type, value;
+	      lines = [];
+	      blocks = this.parseBlock(text, lines);
+	      html = '';
+	      for (j = 0, len = blocks.length; j < len; j++) {
+	        block = blocks[j];
+	        type = block[0], start = block[1], end = block[2], value = block[3];
+	        extract = lines.slice(start, end + 1);
+	        method = 'parse' + ucfirst(type);
+	        extract = this.call('before' + ucfirst(method), extract, value);
+	        result = this[method](extract, value);
+	        result = this.call('after' + ucfirst(method), result, value);
+	        html += result;
+	      }
+	      return html;
+	    };
+
+	    Parser.prototype.call = function() {
+	      var args, callback, j, len, ref, type, value;
+	      type = arguments[0], args = 2 <= arguments.length ? slice.call(arguments, 1) : [];
+	      value = args[0];
+	      if (this.hooks[type] == null) {
+	        return value;
+	      }
+	      ref = this.hooks[type];
+	      for (j = 0, len = ref.length; j < len; j++) {
+	        callback = ref[j];
+	        value = callback.apply(this, args);
+	        args[0] = value;
+	      }
+	      return value;
+	    };
+
+	    Parser.prototype.releaseHolder = function(text, clearHolders) {
+	      var deep;
+	      if (clearHolders == null) {
+	        clearHolders = true;
+	      }
+	      deep = 0;
+	      while ((text.indexOf("\r")) >= 0 && deep < 10) {
+	        text = str_replace(array_keys(this.holders), array_values(this.holders), text);
+	        deep += 1;
+	      }
+	      if (clearHolders) {
+	        this.holders = {};
+	      }
+	      return text;
+	    };
+
+	    Parser.prototype.parseInline = function(text, whiteList, clearHolders, enableAutoLink) {
+	      if (whiteList == null) {
+	        whiteList = '';
+	      }
+	      if (clearHolders == null) {
+	        clearHolders = true;
+	      }
+	      if (enableAutoLink == null) {
+	        enableAutoLink = true;
+	      }
+	      text = this.call('beforeParseInline', text);
+	      text = text.replace(/(^|[^\\])(`+)(.+?)\2/mg, (function(_this) {
+	        return function() {
+	          var matches;
+	          matches = 1 <= arguments.length ? slice.call(arguments, 0) : [];
+	          return matches[1] + _this.makeHolder('<code>' + (htmlspecialchars(matches[3])) + '</code>');
+	        };
+	      })(this));
+	      text = text.replace(/\\(.)/g, (function(_this) {
+	        return function() {
+	          var escaped, matches;
+	          matches = 1 <= arguments.length ? slice.call(arguments, 0) : [];
+	          escaped = htmlspecialchars(matches[1]);
+	          escaped = escaped.replace(/\$/g, '&dollar;');
+	          return _this.makeHolder(escaped);
+	        };
+	      })(this));
+	      text = text.replace(/<(https?:\/\/.+)>/ig, (function(_this) {
+	        return function() {
+	          var link, matches, url;
+	          matches = 1 <= arguments.length ? slice.call(arguments, 0) : [];
+	          url = _this.cleanUrl(matches[1]);
+	          link = _this.call('parseLink', matches[1]);
+	          return _this.makeHolder("<a href=\"" + url + "\">" + link + "</a>");
+	        };
+	      })(this));
+	      text = text.replace(/<(\/?)([a-z0-9-]+)(\s+[^>]*)?>/ig, (function(_this) {
+	        return function() {
+	          var matches;
+	          matches = 1 <= arguments.length ? slice.call(arguments, 0) : [];
+	          if ((('|' + _this.commonWhiteList + '|' + whiteList + '|').indexOf('|' + matches[2].toLowerCase() + '|')) >= 0) {
+	            return _this.makeHolder(matches[0]);
+	          } else {
+	            return htmlspecialchars(matches[0]);
+	          }
+	        };
+	      })(this));
+	      text = str_replace(['<', '>'], ['&lt;', '&gt;'], text);
+	      text = text.replace(/\[\^((?:[^\]]|\\\]|\\\[)+?)\]/g, (function(_this) {
+	        return function() {
+	          var id, matches;
+	          matches = 1 <= arguments.length ? slice.call(arguments, 0) : [];
+	          id = _this.footnotes.indexOf(matches[1]);
+	          if (id < 0) {
+	            id = _this.footnotes.length + 1;
+	            _this.footnotes.push(_this.parseInline(matches[1], '', false));
+	          }
+	          return _this.makeHolder("<sup id=\"fnref-" + id + "\"><a href=\"#fn-" + id + "\" class=\"footnote-ref\">" + id + "</a></sup>");
+	        };
+	      })(this));
+	      text = text.replace(/!\[((?:[^\]]|\\\]|\\\[)*?)\]\(((?:[^\)]|\\\)|\\\()+?)\)/g, (function(_this) {
+	        return function() {
+	          var escaped, matches, url;
+	          matches = 1 <= arguments.length ? slice.call(arguments, 0) : [];
+	          escaped = _this.escapeBracket(matches[1]);
+	          url = _this.escapeBracket(matches[2]);
+	          url = _this.cleanUrl(url);
+	          return _this.makeHolder("<img src=\"" + url + "\" alt=\"" + escaped + "\" title=\"" + escaped + "\">");
+	        };
+	      })(this));
+	      text = text.replace(/!\[((?:[^\]]|\\\]|\\\[)*?)\]\[((?:[^\]]|\\\]|\\\[)+?)\]/g, (function(_this) {
+	        return function() {
+	          var escaped, matches, result;
+	          matches = 1 <= arguments.length ? slice.call(arguments, 0) : [];
+	          escaped = _this.escapeBracket(matches[1]);
+	          result = _this.definitions[matches[2]] != null ? "<img src=\"" + _this.definitions[matches[2]] + "\" alt=\"" + escaped + "\" title=\"" + escaped + "\">" : escaped;
+	          return _this.makeHolder(result);
+	        };
+	      })(this));
+	      text = text.replace(/\[((?:[^\]]|\\\]|\\\[)+?)\]\(((?:[^\)]|\\\)|\\\()+?)\)/g, (function(_this) {
+	        return function() {
+	          var escaped, matches, url;
+	          matches = 1 <= arguments.length ? slice.call(arguments, 0) : [];
+	          escaped = _this.parseInline(_this.escapeBracket(matches[1]), '', false, false);
+	          url = _this.escapeBracket(matches[2]);
+	          url = _this.cleanUrl(url);
+	          return _this.makeHolder("<a href=\"" + url + "\">" + escaped + "</a>");
+	        };
+	      })(this));
+	      text = text.replace(/\[((?:[^\]]|\\\]|\\\[)+?)\]\[((?:[^\]]|\\\]|\\\[)+?)\]/g, (function(_this) {
+	        return function() {
+	          var escaped, matches, result;
+	          matches = 1 <= arguments.length ? slice.call(arguments, 0) : [];
+	          escaped = _this.parseInline(_this.escapeBracket(matches[1]), '', false, false);
+	          result = _this.definitions[matches[2]] != null ? "<a href=\"" + _this.definitions[matches[2]] + "\">" + escaped + "</a>" : escaped;
+	          return _this.makeHolder(result);
+	        };
+	      })(this));
+	      text = this.parseInlineCallback(text);
+	      text = text.replace(/<([_a-z0-9-\.\+]+@[^@]+\.[a-z]{2,})>/ig, '<a href="mailto:$1">$1</a>');
+	      if (enableAutoLink) {
+	        text = text.replace(/(^|[^"])((https?):[x80-xff_a-z0-9-\.\/%#!@\?\+=~\|\,&\(\)]+)($|[^"])/ig, (function(_this) {
+	          return function() {
+	            var link, matches;
+	            matches = 1 <= arguments.length ? slice.call(arguments, 0) : [];
+	            link = _this.call('parseLink', matches[2]);
+	            return matches[1] + "<a href=\"" + matches[2] + "\">" + link + "</a>" + matches[4];
+	          };
+	        })(this));
+	      }
+	      text = this.call('afterParseInlineBeforeRelease', text);
+	      text = this.releaseHolder(text, clearHolders);
+	      text = this.call('afterParseInline', text);
+	      return text;
+	    };
+
+	    Parser.prototype.parseInlineCallback = function(text) {
+	      text = text.replace(/(\*{3})((?:.|\r)+?)\1/mg, (function(_this) {
+	        return function() {
+	          var matches;
+	          matches = 1 <= arguments.length ? slice.call(arguments, 0) : [];
+	          return '<strong><em>' + (_this.parseInlineCallback(matches[2])) + '</em></strong>';
+	        };
+	      })(this));
+	      text = text.replace(/(\*{2})((?:.|\r)+?)\1/mg, (function(_this) {
+	        return function() {
+	          var matches;
+	          matches = 1 <= arguments.length ? slice.call(arguments, 0) : [];
+	          return '<strong>' + (_this.parseInlineCallback(matches[2])) + '</strong>';
+	        };
+	      })(this));
+	      text = text.replace(/(\*)((?:.|\r)+?)\1/mg, (function(_this) {
+	        return function() {
+	          var matches;
+	          matches = 1 <= arguments.length ? slice.call(arguments, 0) : [];
+	          return '<em>' + (_this.parseInlineCallback(matches[2])) + '</em>';
+	        };
+	      })(this));
+	      text = text.replace(/(\s+|^)(_{3})((?:.|\r)+?)\2(\s+|$)/mg, (function(_this) {
+	        return function() {
+	          var matches;
+	          matches = 1 <= arguments.length ? slice.call(arguments, 0) : [];
+	          return matches[1] + '<strong><em>' + (_this.parseInlineCallback(matches[3])) + '</em></strong>' + matches[4];
+	        };
+	      })(this));
+	      text = text.replace(/(\s+|^)(_{2})((?:.|\r)+?)\2(\s+|$)/mg, (function(_this) {
+	        return function() {
+	          var matches;
+	          matches = 1 <= arguments.length ? slice.call(arguments, 0) : [];
+	          return matches[1] + '<strong>' + (_this.parseInlineCallback(matches[3])) + '</strong>' + matches[4];
+	        };
+	      })(this));
+	      text = text.replace(/(\s+|^)(_)((?:.|\r)+?)\2(\s+|$)/mg, (function(_this) {
+	        return function() {
+	          var matches;
+	          matches = 1 <= arguments.length ? slice.call(arguments, 0) : [];
+	          return matches[1] + '<em>' + (_this.parseInlineCallback(matches[3])) + '</em>' + matches[4];
+	        };
+	      })(this));
+	      text = text.replace(/(~{2})((?:.|\r)+?)\1/mg, (function(_this) {
+	        return function() {
+	          var matches;
+	          matches = 1 <= arguments.length ? slice.call(arguments, 0) : [];
+	          return '<del>' + (_this.parseInlineCallback(matches[2])) + '</del>';
+	        };
+	      })(this));
+	      return text;
+	    };
+
+	    Parser.prototype.parseBlock = function(text, lines) {
+	      var align, aligns, block, emptyCount, head, isAfterList, j, key, l, len, len1, len2, line, m, matches, num, ref, row, rows, space, special, tag;
+	      ref = text.split("\n");
+	      for (j = 0, len = ref.length; j < len; j++) {
+	        line = ref[j];
+	        lines.push(line);
+	      }
+	      this.blocks = [];
+	      this.current = 'normal';
+	      this.pos = -1;
+	      special = (array_keys(this.specialWhiteList)).join('|');
+	      emptyCount = 0;
+	      for (key = l = 0, len1 = lines.length; l < len1; key = ++l) {
+	        line = lines[key];
+	        block = this.getBlock();
+	        if (block != null) {
+	          block = block.slice(0);
+	        }
+	        if (!!(matches = line.match(/^(\s*)(~|`){3,}([^`~]*)$/i))) {
+	          if (this.isBlock('code')) {
+	            isAfterList = block[3][2];
+	            if (isAfterList) {
+	              this.combineBlock().setBlock(key);
+	            } else {
+	              (this.setBlock(key)).endBlock();
+	            }
+	          } else {
+	            isAfterList = false;
+	            if (this.isBlock('list')) {
+	              space = block[3];
+	              isAfterList = (space > 0 && matches[1].length >= space) || matches[1].length > space;
+	            }
+	            this.startBlock('code', key, [matches[1], matches[3], isAfterList]);
+	          }
+	          continue;
+	        } else if (this.isBlock('code')) {
+	          this.setBlock(key);
+	          continue;
+	        }
+	        if (!!(matches = line.match(new RegExp("^\\s*<(" + special + ")(\\s+[^>]*)?>", 'i')))) {
+	          tag = matches[1].toLowerCase();
+	          if (!(this.isBlock('html', tag)) && !(this.isBlock('pre'))) {
+	            this.startBlock('html', key, tag);
+	          }
+	          continue;
+	        } else if (!!(matches = line.match(new RegExp("</(" + special + ")>\\s*$", 'i')))) {
+	          tag = matches[1].toLowerCase();
+	          if (this.isBlock('html', tag)) {
+	            this.setBlock(key).endBlock();
+	          }
+	          continue;
+	        } else if (this.isBlock('html')) {
+	          this.setBlock(key);
+	          continue;
+	        }
+	        switch (true) {
+	          case !!(line.match(/^ {4}/)):
+	            emptyCount = 0;
+	            if ((this.isBlock('pre')) || this.isBlock('list')) {
+	              this.setBlock(key);
+	            } else {
+	              this.startBlock('pre', key);
+	            }
+	            break;
+	          case !!(matches = line.match(/^(\s*)((?:[0-9a-z]+\.)|\-|\+|\*)\s+/)):
+	            space = matches[1].length;
+	            emptyCount = 0;
+	            if (this.isBlock('list')) {
+	              this.setBlock(key, space);
+	            } else {
+	              this.startBlock('list', key, space);
+	            }
+	            break;
+	          case !!(matches = line.match(/^\[\^((?:[^\]]|\]|\[)+?)\]:/)):
+	            space = matches[0].length - 1;
+	            this.startBlock('footnote', key, [space, matches[1]]);
+	            break;
+	          case !!(matches = line.match(/^\s*\[((?:[^\]]|\]|\[)+?)\]:\s*(.+)$/)):
+	            this.definitions[matches[1]] = this.cleanUrl(matches[2]);
+	            this.startBlock('definition', key).endBlock();
+	            break;
+	          case !!(line.match(/^\s*>/)):
+	            if (this.isBlock('quote')) {
+	              this.setBlock(key);
+	            } else {
+	              this.startBlock('quote', key);
+	            }
+	            break;
+	          case !!(matches = line.match(/^((?:(?:(?:[ :]*\-[ :]*)+(?:\||\+))|(?:(?:\||\+)(?:[ :]*\-[ :]*)+)|(?:(?:[ :]*\-[ :]*)+(?:\||\+)(?:[ :]*\-[ :]*)+))+)$/)):
+	            if (this.isBlock('table')) {
+	              block[3][0].push(block[3][2]);
+	              block[3][2] += 1;
+	              this.setBlock(key, block[3]);
+	            } else {
+	              head = 0;
+	              if ((block == null) || block[0] !== 'normal' || lines[block[2]].match(/^\s*$/)) {
+	                this.startBlock('table', key);
+	              } else {
+	                head = 1;
+	                this.backBlock(1, 'table');
+	              }
+	              if (matches[1][0] === '|') {
+	                matches[1] = matches[1].substring(1);
+	                if (matches[1][matches[1].length - 1] === '|') {
+	                  matches[1] = matches[1].substring(0, matches[1].length - 1);
+	                }
+	              }
+	              rows = matches[1].split(/\+|\|/);
+	              aligns = [];
+	              for (m = 0, len2 = rows.length; m < len2; m++) {
+	                row = rows[m];
+	                align = 'none';
+	                if (!!(matches = row.match(/^\s*(:?)\-+(:?)\s*$/))) {
+	                  if (!!matches[1] && !!matches[2]) {
+	                    align = 'center';
+	                  } else if (!!matches[1]) {
+	                    align = 'left';
+	                  } else if (!!matches[2]) {
+	                    align = 'right';
+	                  }
+	                }
+	                aligns.push(align);
+	              }
+	              this.setBlock(key, [[head], aligns, head + 1]);
+	            }
+	            break;
+	          case !!(matches = line.match(/^(#+)(.*)$/)):
+	            num = Math.min(matches[1].length, 6);
+	            this.startBlock('sh', key, num).endBlock();
+	            break;
+	          case !!(matches = line.match(/^\s*((=|-){2,})\s*$/)) && ((block != null) && block[0] === 'normal' && !lines[block[2]].match(/^\s*$/)):
+	            if (this.isBlock('normal')) {
+	              this.backBlock(1, 'mh', matches[1][0] === '=' ? 1 : 2).setBlock(key).endBlock();
+	            } else {
+	              this.startBlock('normal', key);
+	            }
+	            break;
+	          case !!(line.match(/^[-\*]{3,}\s*$/)):
+	            this.startBlock('hr', key).endBlock();
+	            break;
+	          default:
+	            if (this.isBlock('list')) {
+	              if (line.match(/^(\s*)/)) {
+	                if (emptyCount > 0) {
+	                  this.startBlock('normal', key);
+	                } else {
+	                  this.setBlock(key);
+	                }
+	                emptyCount += 1;
+	              } else if (emptyCount === 0) {
+	                this.setBlock(key);
+	              } else {
+	                this.startBlock('normal', key);
+	              }
+	            } else if (this.isBlock('footnote')) {
+	              matches = line.match(/^(\s*)/);
+	              if (matches[1].length >= block[3][0]) {
+	                this.setBlock(key);
+	              } else {
+	                this.startBlock('normal', key);
+	              }
+	            } else if (this.isBlock('table')) {
+	              if (0 <= line.indexOf('|')) {
+	                block[3][2] += 1;
+	                this.setBlock(key, block[3]);
+	              } else {
+	                this.startBlock('normal', key);
+	              }
+	            } else if (this.isBlock('pre')) {
+	              if (line.match(/^\s*$/)) {
+	                if (emptyCount > 0) {
+	                  this.startBlock('normal', key);
+	                } else {
+	                  this.setBlock(key);
+	                }
+	                emptyCount += 1;
+	              } else {
+	                this.startBlock('normal', key);
+	              }
+	            } else if (this.isBlock('quote')) {
+	              if (line.match(/^(\s*)/)) {
+	                if (emptyCount > 0) {
+	                  this.startBlock('normal', key);
+	                } else {
+	                  this.setBlock(key);
+	                }
+	                emptyCount += 1;
+	              } else if (emptyCount === 0) {
+	                this.setBlock(key);
+	              } else {
+	                this.startBlock('normal', key);
+	              }
+	            } else {
+	              if ((block == null) || block[0] !== 'normal') {
+	                this.startBlock('normal', key);
+	              } else {
+	                this.setBlock(key);
+	              }
+	            }
+	        }
+	      }
+	      return this.optimizeBlocks(this.blocks, lines);
+	    };
+
+	    Parser.prototype.optimizeBlocks = function(_blocks, _lines) {
+	      var block, blocks, from, isEmpty, key, lines, moved, nextBlock, prevBlock, to, type, types;
+	      blocks = _blocks.slice(0);
+	      lines = _lines.slice(0);
+	      blocks = this.call('beforeOptimizeBlocks', blocks, lines);
+	      key = 0;
+	      while (blocks[key] != null) {
+	        moved = false;
+	        block = blocks[key];
+	        prevBlock = blocks[key - 1] != null ? blocks[key - 1] : null;
+	        nextBlock = blocks[key + 1] != null ? blocks[key + 1] : null;
+	        type = block[0], from = block[1], to = block[2];
+	        if ('pre' === type) {
+	          isEmpty = lines.reduce(function(result, line) {
+	            return (line.match(/^\s*$/)) && result;
+	          }, true);
+	          if (isEmpty) {
+	            block[0] = type = 'normal';
+	          }
+	        }
+	        if ('normal' === type) {
+	          types = ['list', 'quote'];
+	          if (from === to && (lines[from].match(/^\s*$/)) && (prevBlock != null) && (nextBlock != null)) {
+	            if (prevBlock[0] === nextBlock[0] && (types.indexOf(prevBlock[0])) >= 0) {
+	              blocks[key - 1] = [prevBlock[0], prevBlock[1], nextBlock[2], null];
+	              blocks.splice(key, 2);
+	              moved = true;
+	            }
+	          }
+	        }
+	        if (!moved) {
+	          key += 1;
+	        }
+	      }
+	      return this.call('afterOptimizeBlocks', blocks, lines);
+	    };
+
+	    Parser.prototype.parseCode = function(lines, parts) {
+	      var blank, count, lang, rel, str;
+	      blank = parts[0], lang = parts[1];
+	      lang = trim(lang);
+	      count = blank.length;
+	      if (!lang.match(/^[_a-z0-9-\+\#\:\.]+$/i)) {
+	        lang = null;
+	      } else {
+	        parts = lang.split(':');
+	        if (parts.length > 1) {
+	          lang = parts[0], rel = parts[1];
+	          lang = trim(lang);
+	          rel = trim(rel);
+	        }
+	      }
+	      lines = lines.slice(1, -1).map(function(line) {
+	        return line.replace(new RegExp("/^[ ]{" + count + "}/"), '');
+	      });
+	      str = lines.join("\n");
+	      if (str.match(/^\s*$/)) {
+	        return '';
+	      } else {
+	        return '<pre><code' + (!!lang ? " class=\"" + lang + "\"" : '') + (!!rel ? " rel=\"" + rel + "\"" : '') + '>' + (htmlspecialchars(str)) + '</code></pre>';
+	      }
+	    };
+
+	    Parser.prototype.parsePre = function(lines) {
+	      var str;
+	      lines = lines.map(function(line) {
+	        return htmlspecialchars(line.substring(4));
+	      });
+	      str = lines.join("\n");
+	      if (str.match(/^\s*$/)) {
+	        return '';
+	      } else {
+	        return '<pre><code>' + str + '</code></pre>';
+	      }
+	    };
+
+	    Parser.prototype.parseSh = function(lines, num) {
+	      var line;
+	      line = this.parseInline(trim(lines[0], '# '));
+	      if (line.match(/^\s*$/)) {
+	        return '';
+	      } else {
+	        return "<h" + num + ">" + line + "</h" + num + ">";
+	      }
+	    };
+
+	    Parser.prototype.parseMh = function(lines, num) {
+	      return this.parseSh(lines, num);
+	    };
+
+	    Parser.prototype.parseQuote = function(lines) {
+	      var str;
+	      lines = lines.map(function(line) {
+	        return line.replace(/^\s*> ?/, '');
+	      });
+	      str = lines.join("\n");
+	      if (str.match(/^\s*$/)) {
+	        return '';
+	      } else {
+	        return '<blockquote>' + (this.parse(str)) + '</blockquote>';
+	      }
+	    };
+
+	    Parser.prototype.parseList = function(lines) {
+	      var found, html, j, key, l, lastType, leftLines, len, len1, len2, line, m, matches, minSpace, row, rows, secondMinSpace, space, text, type;
+	      html = '';
+	      minSpace = 99999;
+	      rows = [];
+	      for (key = j = 0, len = lines.length; j < len; key = ++j) {
+	        line = lines[key];
+	        if (matches = line.match(/^(\s*)((?:[0-9a-z]+\.?)|\-|\+|\*)(\s+)(.*)$/)) {
+	          space = matches[1].length;
+	          type = 0 <= '+-*'.indexOf(matches[2]) ? 'ul' : 'ol';
+	          minSpace = Math.min(space, minSpace);
+	          rows.push([space, type, line, matches[4]]);
+	        } else {
+	          rows.push(line);
+	        }
+	      }
+	      found = false;
+	      secondMinSpace = 99999;
+	      for (l = 0, len1 = rows.length; l < len1; l++) {
+	        row = rows[l];
+	        if (row instanceof Array && row[0] !== minSpace) {
+	          secondMinSpace = Math.min(secondMinSpace, row[0]);
+	          found = true;
+	        }
+	      }
+	      secondMinSpace = found ? secondMinSpace : minSpace;
+	      lastType = '';
+	      leftLines = [];
+	      for (m = 0, len2 = rows.length; m < len2; m++) {
+	        row = rows[m];
+	        if (row instanceof Array) {
+	          space = row[0], type = row[1], line = row[2], text = row[3];
+	          if (space !== minSpace) {
+	            leftLines.push(line.replace(new RegExp("^\\s{" + secondMinSpace + "}"), ''));
+	          } else {
+	            if (leftLines.length > 0) {
+	              html += '<li>' + (this.parse(leftLines.join("\n"))) + '</li>';
+	            }
+	            if (lastType !== type) {
+	              if (!!lastType) {
+	                html += "</" + lastType + ">";
+	              }
+	              html += "<" + type + ">";
+	            }
+	            leftLines = [text];
+	            lastType = type;
+	          }
+	        } else {
+	          leftLines.push(row.replace(new RegExp("^\\s{" + secondMinSpace + "}"), ''));
+	        }
+	      }
+	      if (leftLines.length > 0) {
+	        html += '<li>' + (this.parse(leftLines.join("\n"))) + ("</li></" + lastType + ">");
+	      }
+	      return html;
+	    };
+
+	    Parser.prototype.parseTable = function(lines, value) {
+	      var aligns, body, column, columns, head, html, ignores, j, key, l, last, len, len1, line, num, output, row, rows, tag, text;
+	      ignores = value[0], aligns = value[1];
+	      head = ignores.length > 0 && (ignores.reduce(function(prev, curr) {
+	        return curr + prev;
+	      })) > 0;
+	      html = '<table>';
+	      body = head ? null : true;
+	      output = false;
+	      for (key = j = 0, len = lines.length; j < len; key = ++j) {
+	        line = lines[key];
+	        if (0 <= ignores.indexOf(key)) {
+	          if (head && output) {
+	            head = false;
+	            body = true;
+	          }
+	          continue;
+	        }
+	        line = trim(line);
+	        output = true;
+	        if (line[0] === '|') {
+	          line = line.substring(1);
+	          if (line[line.length - 1] === '|') {
+	            line = line.substring(0, line.length - 1);
+	          }
+	        }
+	        rows = line.split('|').map(function(row) {
+	          if (row.match(/^\s+$/)) {
+	            return '';
+	          } else {
+	            return trim(row);
+	          }
+	        });
+	        columns = {};
+	        last = -1;
+	        for (l = 0, len1 = rows.length; l < len1; l++) {
+	          row = rows[l];
+	          if (row.length > 0) {
+	            last += 1;
+	            columns[last] = [(columns[last] != null ? columns[last][0] + 1 : 1), row];
+	          } else if (columns[last] != null) {
+	            columns[last][0] += 1;
+	          } else {
+	            columns[0] = [1, row];
+	          }
+	        }
+	        if (head) {
+	          html += '<thead>';
+	        } else if (body) {
+	          html += '<tbody>';
+	        }
+	        html += '<tr>';
+	        for (key in columns) {
+	          column = columns[key];
+	          num = column[0], text = column[1];
+	          tag = head ? 'th' : 'td';
+	          html += "<" + tag;
+	          if (num > 1) {
+	            html += " colspan=\"" + num + "\"";
+	          }
+	          if ((aligns[key] != null) && aligns[key] !== 'none') {
+	            html += " align=\"" + aligns[key] + "\"";
+	          }
+	          html += '>' + (this.parseInline(text)) + ("</" + tag + ">");
+	        }
+	        html += '</tr>';
+	        if (head) {
+	          html += '</thead>';
+	        } else if (body) {
+	          body = false;
+	        }
+	      }
+	      if (body !== null) {
+	        html += '</tbody>';
+	      }
+	      return html += '</table>';
+	    };
+
+	    Parser.prototype.parseHr = function() {
+	      return '<hr>';
+	    };
+
+	    Parser.prototype.parseNormal = function(lines) {
+	      var str;
+	      lines = lines.map((function(_this) {
+	        return function(line) {
+	          return _this.parseInline(line);
+	        };
+	      })(this));
+	      str = trim(lines.join("\n"));
+	      str = str.replace(/(\n\s*){2,}/g, '</p><p>');
+	      str = str.replace(/\n/g, '<br>');
+	      if (str.match(/^\s*$/)) {
+	        return '';
+	      } else {
+	        return "<p>" + str + "</p>";
+	      }
+	    };
+
+	    Parser.prototype.parseFootnote = function(lines, value) {
+	      var index, note, space;
+	      space = value[0], note = value[1];
+	      index = this.footnotes.indexOf(note);
+	      if (index >= 0) {
+	        lines = lines.slice(0);
+	        lines[0] = lines[0].replace(/^\[\^((?:[^\]]|\]|\[)+?)\]:/, '');
+	        this.footnotes[index] = lines;
+	      }
+	      return '';
+	    };
+
+	    Parser.prototype.parseDefinition = function() {
+	      return '';
+	    };
+
+	    Parser.prototype.parseHtml = function(lines, type) {
+	      lines = lines.map((function(_this) {
+	        return function(line) {
+	          return _this.parseInline(line, _this.specialWhiteList[type] != null ? _this.specialWhiteList[type] : '');
+	        };
+	      })(this));
+	      return lines.join("\n");
+	    };
+
+	    Parser.prototype.cleanUrl = function(url) {
+	      var matches;
+	      if (!!(matches = url.match(/^\s*((http|https|ftp|mailto):[x80-xff_a-z0-9-\.\/%#@\?\+=~\|\,&\(\)]+)/i))) {
+	        matches[1];
+	      }
+	      if (!!(matches = url.match(/^\s*([x80-xff_a-z0-9-\.\/%#@\?\+=~\|\,&]+)/i))) {
+	        return matches[1];
+	      } else {
+	        return '#';
+	      }
+	    };
+
+	    Parser.prototype.escapeBracket = function(str) {
+	      return str_replace(['\\[', '\\]', '\\(', '\\)'], ['[', ']', '(', ')'], str);
+	    };
+
+	    Parser.prototype.startBlock = function(type, start, value) {
+	      if (value == null) {
+	        value = null;
+	      }
+	      this.pos += 1;
+	      this.current = type;
+	      this.blocks.push([type, start, start, value]);
+	      return this;
+	    };
+
+	    Parser.prototype.endBlock = function() {
+	      this.current = 'normal';
+	      return this;
+	    };
+
+	    Parser.prototype.isBlock = function(type, value) {
+	      if (value == null) {
+	        value = null;
+	      }
+	      return this.current === type && (null === value ? true : this.blocks[this.pos][3] === value);
+	    };
+
+	    Parser.prototype.getBlock = function() {
+	      if (this.blocks[this.pos] != null) {
+	        return this.blocks[this.pos];
+	      } else {
+	        return null;
+	      }
+	    };
+
+	    Parser.prototype.setBlock = function(to, value) {
+	      if (to == null) {
+	        to = null;
+	      }
+	      if (value == null) {
+	        value = null;
+	      }
+	      if (to !== null) {
+	        this.blocks[this.pos][2] = to;
+	      }
+	      if (value !== null) {
+	        this.blocks[this.pos][3] = value;
+	      }
+	      return this;
+	    };
+
+	    Parser.prototype.backBlock = function(step, type, value) {
+	      var item, last;
+	      if (value == null) {
+	        value = null;
+	      }
+	      if (this.pos < 0) {
+	        return this.startBlock(type, 0, value);
+	      }
+	      last = this.blocks[this.pos][2];
+	      this.blocks[this.pos][2] = last - step;
+	      item = [type, last - step + 1, last, value];
+	      if (this.blocks[this.pos][1] <= this.blocks[this.pos][2]) {
+	        this.pos += 1;
+	        this.blocks.push(item);
+	      } else {
+	        this.blocks[this.pos] = item;
+	      }
+	      this.current = type;
+	      return this;
+	    };
+
+	    Parser.prototype.combineBlock = function() {
+	      var current, prev;
+	      if (this.pos < 1) {
+	        return this;
+	      }
+	      prev = this.blocks[this.pos - 1].slice(0);
+	      current = this.blocks[this.pos].slice(0);
+	      prev[2] = current[2];
+	      this.blocks[this.pos - 1] = prev;
+	      this.current = prev[0];
+	      this.blocks = this.blocks.slice(0, -1);
+	      this.pos -= 1;
+	      return this;
+	    };
+
+	    return Parser;
+
+	  })();
+
+	  if (typeof module !== "undefined" && module !== null) {
+	    module.exports = Parser;
+	  } else if (typeof window !== "undefined" && window !== null) {
+	    window.HyperDown = Parser;
+	  }
+
+	}).call(this);
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(200)(module)))
 
 /***/ },
 /* 200 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	// Released under MIT license
-	// Copyright (c) 2009-2010 Dominic Baggott
-	// Copyright (c) 2009-2010 Ash Berlin
-	// Copyright (c) 2011 Christoph Dorn <christoph@christophdorn.com> (http://www.christophdorn.com)
-
-	/*jshint browser:true, devel:true */
-
-	(function( expose ) {
-
-	/**
-	 *  class Markdown
-	 *
-	 *  Markdown processing in Javascript done right. We have very particular views
-	 *  on what constitutes 'right' which include:
-	 *
-	 *  - produces well-formed HTML (this means that em and strong nesting is
-	 *    important)
-	 *
-	 *  - has an intermediate representation to allow processing of parsed data (We
-	 *    in fact have two, both as [JsonML]: a markdown tree and an HTML tree).
-	 *
-	 *  - is easily extensible to add new dialects without having to rewrite the
-	 *    entire parsing mechanics
-	 *
-	 *  - has a good test suite
-	 *
-	 *  This implementation fulfills all of these (except that the test suite could
-	 *  do with expanding to automatically run all the fixtures from other Markdown
-	 *  implementations.)
-	 *
-	 *  ##### Intermediate Representation
-	 *
-	 *  *TODO* Talk about this :) Its JsonML, but document the node names we use.
-	 *
-	 *  [JsonML]: http://jsonml.org/ "JSON Markup Language"
-	 **/
-	var Markdown = expose.Markdown = function(dialect) {
-	  switch (typeof dialect) {
-	    case "undefined":
-	      this.dialect = Markdown.dialects.Gruber;
-	      break;
-	    case "object":
-	      this.dialect = dialect;
-	      break;
-	    default:
-	      if ( dialect in Markdown.dialects ) {
-	        this.dialect = Markdown.dialects[dialect];
-	      }
-	      else {
-	        throw new Error("Unknown Markdown dialect '" + String(dialect) + "'");
-	      }
-	      break;
-	  }
-	  this.em_state = [];
-	  this.strong_state = [];
-	  this.debug_indent = "";
-	};
-
-	/**
-	 *  parse( markdown, [dialect] ) -> JsonML
-	 *  - markdown (String): markdown string to parse
-	 *  - dialect (String | Dialect): the dialect to use, defaults to gruber
-	 *
-	 *  Parse `markdown` and return a markdown document as a Markdown.JsonML tree.
-	 **/
-	expose.parse = function( source, dialect ) {
-	  // dialect will default if undefined
-	  var md = new Markdown( dialect );
-	  return md.toTree( source );
-	};
-
-	/**
-	 *  toHTML( markdown, [dialect]  ) -> String
-	 *  toHTML( md_tree ) -> String
-	 *  - markdown (String): markdown string to parse
-	 *  - md_tree (Markdown.JsonML): parsed markdown tree
-	 *
-	 *  Take markdown (either as a string or as a JsonML tree) and run it through
-	 *  [[toHTMLTree]] then turn it into a well-formated HTML fragment.
-	 **/
-	expose.toHTML = function toHTML( source , dialect , options ) {
-	  var input = expose.toHTMLTree( source , dialect , options );
-
-	  return expose.renderJsonML( input );
-	};
-
-	/**
-	 *  toHTMLTree( markdown, [dialect] ) -> JsonML
-	 *  toHTMLTree( md_tree ) -> JsonML
-	 *  - markdown (String): markdown string to parse
-	 *  - dialect (String | Dialect): the dialect to use, defaults to gruber
-	 *  - md_tree (Markdown.JsonML): parsed markdown tree
-	 *
-	 *  Turn markdown into HTML, represented as a JsonML tree. If a string is given
-	 *  to this function, it is first parsed into a markdown tree by calling
-	 *  [[parse]].
-	 **/
-	expose.toHTMLTree = function toHTMLTree( input, dialect , options ) {
-	  // convert string input to an MD tree
-	  if ( typeof input ==="string" ) input = this.parse( input, dialect );
-
-	  // Now convert the MD tree to an HTML tree
-
-	  // remove references from the tree
-	  var attrs = extract_attr( input ),
-	      refs = {};
-
-	  if ( attrs && attrs.references ) {
-	    refs = attrs.references;
-	  }
-
-	  var html = convert_tree_to_html( input, refs , options );
-	  merge_text_nodes( html );
-	  return html;
-	};
-
-	// For Spidermonkey based engines
-	function mk_block_toSource() {
-	  return "Markdown.mk_block( " +
-	          uneval(this.toString()) +
-	          ", " +
-	          uneval(this.trailing) +
-	          ", " +
-	          uneval(this.lineNumber) +
-	          " )";
+	module.exports = function(module) {
+		if(!module.webpackPolyfill) {
+			module.deprecate = function() {};
+			module.paths = [];
+			// module.parent = undefined by default
+			module.children = [];
+			module.webpackPolyfill = 1;
+		}
+		return module;
 	}
-
-	// node
-	function mk_block_inspect() {
-	  var util = __webpack_require__(201);
-	  return "Markdown.mk_block( " +
-	          util.inspect(this.toString()) +
-	          ", " +
-	          util.inspect(this.trailing) +
-	          ", " +
-	          util.inspect(this.lineNumber) +
-	          " )";
-
-	}
-
-	var mk_block = Markdown.mk_block = function(block, trail, line) {
-	  // Be helpful for default case in tests.
-	  if ( arguments.length == 1 ) trail = "\n\n";
-
-	  var s = new String(block);
-	  s.trailing = trail;
-	  // To make it clear its not just a string
-	  s.inspect = mk_block_inspect;
-	  s.toSource = mk_block_toSource;
-
-	  if ( line != undefined )
-	    s.lineNumber = line;
-
-	  return s;
-	};
-
-	function count_lines( str ) {
-	  var n = 0, i = -1;
-	  while ( ( i = str.indexOf("\n", i + 1) ) !== -1 ) n++;
-	  return n;
-	}
-
-	// Internal - split source into rough blocks
-	Markdown.prototype.split_blocks = function splitBlocks( input, startLine ) {
-	  input = input.replace(/(\r\n|\n|\r)/g, "\n");
-	  // [\s\S] matches _anything_ (newline or space)
-	  // [^] is equivalent but doesn't work in IEs.
-	  var re = /([\s\S]+?)($|\n#|\n(?:\s*\n|$)+)/g,
-	      blocks = [],
-	      m;
-
-	  var line_no = 1;
-
-	  if ( ( m = /^(\s*\n)/.exec(input) ) != null ) {
-	    // skip (but count) leading blank lines
-	    line_no += count_lines( m[0] );
-	    re.lastIndex = m[0].length;
-	  }
-
-	  while ( ( m = re.exec(input) ) !== null ) {
-	    if (m[2] == "\n#") {
-	      m[2] = "\n";
-	      re.lastIndex--;
-	    }
-	    blocks.push( mk_block( m[1], m[2], line_no ) );
-	    line_no += count_lines( m[0] );
-	  }
-
-	  return blocks;
-	};
-
-	/**
-	 *  Markdown#processBlock( block, next ) -> undefined | [ JsonML, ... ]
-	 *  - block (String): the block to process
-	 *  - next (Array): the following blocks
-	 *
-	 * Process `block` and return an array of JsonML nodes representing `block`.
-	 *
-	 * It does this by asking each block level function in the dialect to process
-	 * the block until one can. Succesful handling is indicated by returning an
-	 * array (with zero or more JsonML nodes), failure by a false value.
-	 *
-	 * Blocks handlers are responsible for calling [[Markdown#processInline]]
-	 * themselves as appropriate.
-	 *
-	 * If the blocks were split incorrectly or adjacent blocks need collapsing you
-	 * can adjust `next` in place using shift/splice etc.
-	 *
-	 * If any of this default behaviour is not right for the dialect, you can
-	 * define a `__call__` method on the dialect that will get invoked to handle
-	 * the block processing.
-	 */
-	Markdown.prototype.processBlock = function processBlock( block, next ) {
-	  var cbs = this.dialect.block,
-	      ord = cbs.__order__;
-
-	  if ( "__call__" in cbs ) {
-	    return cbs.__call__.call(this, block, next);
-	  }
-
-	  for ( var i = 0; i < ord.length; i++ ) {
-	    //D:this.debug( "Testing", ord[i] );
-	    var res = cbs[ ord[i] ].call( this, block, next );
-	    if ( res ) {
-	      //D:this.debug("  matched");
-	      if ( !isArray(res) || ( res.length > 0 && !( isArray(res[0]) ) ) )
-	        this.debug(ord[i], "didn't return a proper array");
-	      //D:this.debug( "" );
-	      return res;
-	    }
-	  }
-
-	  // Uhoh! no match! Should we throw an error?
-	  return [];
-	};
-
-	Markdown.prototype.processInline = function processInline( block ) {
-	  return this.dialect.inline.__call__.call( this, String( block ) );
-	};
-
-	/**
-	 *  Markdown#toTree( source ) -> JsonML
-	 *  - source (String): markdown source to parse
-	 *
-	 *  Parse `source` into a JsonML tree representing the markdown document.
-	 **/
-	// custom_tree means set this.tree to `custom_tree` and restore old value on return
-	Markdown.prototype.toTree = function toTree( source, custom_root ) {
-	  var blocks = source instanceof Array ? source : this.split_blocks( source );
-
-	  // Make tree a member variable so its easier to mess with in extensions
-	  var old_tree = this.tree;
-	  try {
-	    this.tree = custom_root || this.tree || [ "markdown" ];
-
-	    blocks:
-	    while ( blocks.length ) {
-	      var b = this.processBlock( blocks.shift(), blocks );
-
-	      // Reference blocks and the like won't return any content
-	      if ( !b.length ) continue blocks;
-
-	      this.tree.push.apply( this.tree, b );
-	    }
-	    return this.tree;
-	  }
-	  finally {
-	    if ( custom_root ) {
-	      this.tree = old_tree;
-	    }
-	  }
-	};
-
-	// Noop by default
-	Markdown.prototype.debug = function () {
-	  var args = Array.prototype.slice.call( arguments);
-	  args.unshift(this.debug_indent);
-	  if ( typeof print !== "undefined" )
-	      print.apply( print, args );
-	  if ( typeof console !== "undefined" && typeof console.log !== "undefined" )
-	      console.log.apply( null, args );
-	}
-
-	Markdown.prototype.loop_re_over_block = function( re, block, cb ) {
-	  // Dont use /g regexps with this
-	  var m,
-	      b = block.valueOf();
-
-	  while ( b.length && (m = re.exec(b) ) != null ) {
-	    b = b.substr( m[0].length );
-	    cb.call(this, m);
-	  }
-	  return b;
-	};
-
-	/**
-	 * Markdown.dialects
-	 *
-	 * Namespace of built-in dialects.
-	 **/
-	Markdown.dialects = {};
-
-	/**
-	 * Markdown.dialects.Gruber
-	 *
-	 * The default dialect that follows the rules set out by John Gruber's
-	 * markdown.pl as closely as possible. Well actually we follow the behaviour of
-	 * that script which in some places is not exactly what the syntax web page
-	 * says.
-	 **/
-	Markdown.dialects.Gruber = {
-	  block: {
-	    atxHeader: function atxHeader( block, next ) {
-	      var m = block.match( /^(#{1,6})\s*(.*?)\s*#*\s*(?:\n|$)/ );
-
-	      if ( !m ) return undefined;
-
-	      var header = [ "header", { level: m[ 1 ].length } ];
-	      Array.prototype.push.apply(header, this.processInline(m[ 2 ]));
-
-	      if ( m[0].length < block.length )
-	        next.unshift( mk_block( block.substr( m[0].length ), block.trailing, block.lineNumber + 2 ) );
-
-	      return [ header ];
-	    },
-
-	    setextHeader: function setextHeader( block, next ) {
-	      var m = block.match( /^(.*)\n([-=])\2\2+(?:\n|$)/ );
-
-	      if ( !m ) return undefined;
-
-	      var level = ( m[ 2 ] === "=" ) ? 1 : 2;
-	      var header = [ "header", { level : level }, m[ 1 ] ];
-
-	      if ( m[0].length < block.length )
-	        next.unshift( mk_block( block.substr( m[0].length ), block.trailing, block.lineNumber + 2 ) );
-
-	      return [ header ];
-	    },
-
-	    code: function code( block, next ) {
-	      // |    Foo
-	      // |bar
-	      // should be a code block followed by a paragraph. Fun
-	      //
-	      // There might also be adjacent code block to merge.
-
-	      var ret = [],
-	          re = /^(?: {0,3}\t| {4})(.*)\n?/,
-	          lines;
-
-	      // 4 spaces + content
-	      if ( !block.match( re ) ) return undefined;
-
-	      block_search:
-	      do {
-	        // Now pull out the rest of the lines
-	        var b = this.loop_re_over_block(
-	                  re, block.valueOf(), function( m ) { ret.push( m[1] ); } );
-
-	        if ( b.length ) {
-	          // Case alluded to in first comment. push it back on as a new block
-	          next.unshift( mk_block(b, block.trailing) );
-	          break block_search;
-	        }
-	        else if ( next.length ) {
-	          // Check the next block - it might be code too
-	          if ( !next[0].match( re ) ) break block_search;
-
-	          // Pull how how many blanks lines follow - minus two to account for .join
-	          ret.push ( block.trailing.replace(/[^\n]/g, "").substring(2) );
-
-	          block = next.shift();
-	        }
-	        else {
-	          break block_search;
-	        }
-	      } while ( true );
-
-	      return [ [ "code_block", ret.join("\n") ] ];
-	    },
-
-	    horizRule: function horizRule( block, next ) {
-	      // this needs to find any hr in the block to handle abutting blocks
-	      var m = block.match( /^(?:([\s\S]*?)\n)?[ \t]*([-_*])(?:[ \t]*\2){2,}[ \t]*(?:\n([\s\S]*))?$/ );
-
-	      if ( !m ) {
-	        return undefined;
-	      }
-
-	      var jsonml = [ [ "hr" ] ];
-
-	      // if there's a leading abutting block, process it
-	      if ( m[ 1 ] ) {
-	        jsonml.unshift.apply( jsonml, this.processBlock( m[ 1 ], [] ) );
-	      }
-
-	      // if there's a trailing abutting block, stick it into next
-	      if ( m[ 3 ] ) {
-	        next.unshift( mk_block( m[ 3 ] ) );
-	      }
-
-	      return jsonml;
-	    },
-
-	    // There are two types of lists. Tight and loose. Tight lists have no whitespace
-	    // between the items (and result in text just in the <li>) and loose lists,
-	    // which have an empty line between list items, resulting in (one or more)
-	    // paragraphs inside the <li>.
-	    //
-	    // There are all sorts weird edge cases about the original markdown.pl's
-	    // handling of lists:
-	    //
-	    // * Nested lists are supposed to be indented by four chars per level. But
-	    //   if they aren't, you can get a nested list by indenting by less than
-	    //   four so long as the indent doesn't match an indent of an existing list
-	    //   item in the 'nest stack'.
-	    //
-	    // * The type of the list (bullet or number) is controlled just by the
-	    //    first item at the indent. Subsequent changes are ignored unless they
-	    //    are for nested lists
-	    //
-	    lists: (function( ) {
-	      // Use a closure to hide a few variables.
-	      var any_list = "[*+-]|\\d+\\.",
-	          bullet_list = /[*+-]/,
-	          number_list = /\d+\./,
-	          // Capture leading indent as it matters for determining nested lists.
-	          is_list_re = new RegExp( "^( {0,3})(" + any_list + ")[ \t]+" ),
-	          indent_re = "(?: {0,3}\\t| {4})";
-
-	      // TODO: Cache this regexp for certain depths.
-	      // Create a regexp suitable for matching an li for a given stack depth
-	      function regex_for_depth( depth ) {
-
-	        return new RegExp(
-	          // m[1] = indent, m[2] = list_type
-	          "(?:^(" + indent_re + "{0," + depth + "} {0,3})(" + any_list + ")\\s+)|" +
-	          // m[3] = cont
-	          "(^" + indent_re + "{0," + (depth-1) + "}[ ]{0,4})"
-	        );
-	      }
-	      function expand_tab( input ) {
-	        return input.replace( / {0,3}\t/g, "    " );
-	      }
-
-	      // Add inline content `inline` to `li`. inline comes from processInline
-	      // so is an array of content
-	      function add(li, loose, inline, nl) {
-	        if ( loose ) {
-	          li.push( [ "para" ].concat(inline) );
-	          return;
-	        }
-	        // Hmmm, should this be any block level element or just paras?
-	        var add_to = li[li.length -1] instanceof Array && li[li.length - 1][0] == "para"
-	                   ? li[li.length -1]
-	                   : li;
-
-	        // If there is already some content in this list, add the new line in
-	        if ( nl && li.length > 1 ) inline.unshift(nl);
-
-	        for ( var i = 0; i < inline.length; i++ ) {
-	          var what = inline[i],
-	              is_str = typeof what == "string";
-	          if ( is_str && add_to.length > 1 && typeof add_to[add_to.length-1] == "string" ) {
-	            add_to[ add_to.length-1 ] += what;
-	          }
-	          else {
-	            add_to.push( what );
-	          }
-	        }
-	      }
-
-	      // contained means have an indent greater than the current one. On
-	      // *every* line in the block
-	      function get_contained_blocks( depth, blocks ) {
-
-	        var re = new RegExp( "^(" + indent_re + "{" + depth + "}.*?\\n?)*$" ),
-	            replace = new RegExp("^" + indent_re + "{" + depth + "}", "gm"),
-	            ret = [];
-
-	        while ( blocks.length > 0 ) {
-	          if ( re.exec( blocks[0] ) ) {
-	            var b = blocks.shift(),
-	                // Now remove that indent
-	                x = b.replace( replace, "");
-
-	            ret.push( mk_block( x, b.trailing, b.lineNumber ) );
-	          }
-	          else {
-	            break;
-	          }
-	        }
-	        return ret;
-	      }
-
-	      // passed to stack.forEach to turn list items up the stack into paras
-	      function paragraphify(s, i, stack) {
-	        var list = s.list;
-	        var last_li = list[list.length-1];
-
-	        if ( last_li[1] instanceof Array && last_li[1][0] == "para" ) {
-	          return;
-	        }
-	        if ( i + 1 == stack.length ) {
-	          // Last stack frame
-	          // Keep the same array, but replace the contents
-	          last_li.push( ["para"].concat( last_li.splice(1, last_li.length - 1) ) );
-	        }
-	        else {
-	          var sublist = last_li.pop();
-	          last_li.push( ["para"].concat( last_li.splice(1, last_li.length - 1) ), sublist );
-	        }
-	      }
-
-	      // The matcher function
-	      return function( block, next ) {
-	        var m = block.match( is_list_re );
-	        if ( !m ) return undefined;
-
-	        function make_list( m ) {
-	          var list = bullet_list.exec( m[2] )
-	                   ? ["bulletlist"]
-	                   : ["numberlist"];
-
-	          stack.push( { list: list, indent: m[1] } );
-	          return list;
-	        }
-
-
-	        var stack = [], // Stack of lists for nesting.
-	            list = make_list( m ),
-	            last_li,
-	            loose = false,
-	            ret = [ stack[0].list ],
-	            i;
-
-	        // Loop to search over block looking for inner block elements and loose lists
-	        loose_search:
-	        while ( true ) {
-	          // Split into lines preserving new lines at end of line
-	          var lines = block.split( /(?=\n)/ );
-
-	          // We have to grab all lines for a li and call processInline on them
-	          // once as there are some inline things that can span lines.
-	          var li_accumulate = "";
-
-	          // Loop over the lines in this block looking for tight lists.
-	          tight_search:
-	          for ( var line_no = 0; line_no < lines.length; line_no++ ) {
-	            var nl = "",
-	                l = lines[line_no].replace(/^\n/, function(n) { nl = n; return ""; });
-
-	            // TODO: really should cache this
-	            var line_re = regex_for_depth( stack.length );
-
-	            m = l.match( line_re );
-	            //print( "line:", uneval(l), "\nline match:", uneval(m) );
-
-	            // We have a list item
-	            if ( m[1] !== undefined ) {
-	              // Process the previous list item, if any
-	              if ( li_accumulate.length ) {
-	                add( last_li, loose, this.processInline( li_accumulate ), nl );
-	                // Loose mode will have been dealt with. Reset it
-	                loose = false;
-	                li_accumulate = "";
-	              }
-
-	              m[1] = expand_tab( m[1] );
-	              var wanted_depth = Math.floor(m[1].length/4)+1;
-	              //print( "want:", wanted_depth, "stack:", stack.length);
-	              if ( wanted_depth > stack.length ) {
-	                // Deep enough for a nested list outright
-	                //print ( "new nested list" );
-	                list = make_list( m );
-	                last_li.push( list );
-	                last_li = list[1] = [ "listitem" ];
-	              }
-	              else {
-	                // We aren't deep enough to be strictly a new level. This is
-	                // where Md.pl goes nuts. If the indent matches a level in the
-	                // stack, put it there, else put it one deeper then the
-	                // wanted_depth deserves.
-	                var found = false;
-	                for ( i = 0; i < stack.length; i++ ) {
-	                  if ( stack[ i ].indent != m[1] ) continue;
-	                  list = stack[ i ].list;
-	                  stack.splice( i+1, stack.length - (i+1) );
-	                  found = true;
-	                  break;
-	                }
-
-	                if (!found) {
-	                  //print("not found. l:", uneval(l));
-	                  wanted_depth++;
-	                  if ( wanted_depth <= stack.length ) {
-	                    stack.splice(wanted_depth, stack.length - wanted_depth);
-	                    //print("Desired depth now", wanted_depth, "stack:", stack.length);
-	                    list = stack[wanted_depth-1].list;
-	                    //print("list:", uneval(list) );
-	                  }
-	                  else {
-	                    //print ("made new stack for messy indent");
-	                    list = make_list(m);
-	                    last_li.push(list);
-	                  }
-	                }
-
-	                //print( uneval(list), "last", list === stack[stack.length-1].list );
-	                last_li = [ "listitem" ];
-	                list.push(last_li);
-	              } // end depth of shenegains
-	              nl = "";
-	            }
-
-	            // Add content
-	            if ( l.length > m[0].length ) {
-	              li_accumulate += nl + l.substr( m[0].length );
-	            }
-	          } // tight_search
-
-	          if ( li_accumulate.length ) {
-	            add( last_li, loose, this.processInline( li_accumulate ), nl );
-	            // Loose mode will have been dealt with. Reset it
-	            loose = false;
-	            li_accumulate = "";
-	          }
-
-	          // Look at the next block - we might have a loose list. Or an extra
-	          // paragraph for the current li
-	          var contained = get_contained_blocks( stack.length, next );
-
-	          // Deal with code blocks or properly nested lists
-	          if ( contained.length > 0 ) {
-	            // Make sure all listitems up the stack are paragraphs
-	            forEach( stack, paragraphify, this);
-
-	            last_li.push.apply( last_li, this.toTree( contained, [] ) );
-	          }
-
-	          var next_block = next[0] && next[0].valueOf() || "";
-
-	          if ( next_block.match(is_list_re) || next_block.match( /^ / ) ) {
-	            block = next.shift();
-
-	            // Check for an HR following a list: features/lists/hr_abutting
-	            var hr = this.dialect.block.horizRule( block, next );
-
-	            if ( hr ) {
-	              ret.push.apply(ret, hr);
-	              break;
-	            }
-
-	            // Make sure all listitems up the stack are paragraphs
-	            forEach( stack, paragraphify, this);
-
-	            loose = true;
-	            continue loose_search;
-	          }
-	          break;
-	        } // loose_search
-
-	        return ret;
-	      };
-	    })(),
-
-	    blockquote: function blockquote( block, next ) {
-	      if ( !block.match( /^>/m ) )
-	        return undefined;
-
-	      var jsonml = [];
-
-	      // separate out the leading abutting block, if any. I.e. in this case:
-	      //
-	      //  a
-	      //  > b
-	      //
-	      if ( block[ 0 ] != ">" ) {
-	        var lines = block.split( /\n/ ),
-	            prev = [],
-	            line_no = block.lineNumber;
-
-	        // keep shifting lines until you find a crotchet
-	        while ( lines.length && lines[ 0 ][ 0 ] != ">" ) {
-	            prev.push( lines.shift() );
-	            line_no++;
-	        }
-
-	        var abutting = mk_block( prev.join( "\n" ), "\n", block.lineNumber );
-	        jsonml.push.apply( jsonml, this.processBlock( abutting, [] ) );
-	        // reassemble new block of just block quotes!
-	        block = mk_block( lines.join( "\n" ), block.trailing, line_no );
-	      }
-
-
-	      // if the next block is also a blockquote merge it in
-	      while ( next.length && next[ 0 ][ 0 ] == ">" ) {
-	        var b = next.shift();
-	        block = mk_block( block + block.trailing + b, b.trailing, block.lineNumber );
-	      }
-
-	      // Strip off the leading "> " and re-process as a block.
-	      var input = block.replace( /^> ?/gm, "" ),
-	          old_tree = this.tree,
-	          processedBlock = this.toTree( input, [ "blockquote" ] ),
-	          attr = extract_attr( processedBlock );
-
-	      // If any link references were found get rid of them
-	      if ( attr && attr.references ) {
-	        delete attr.references;
-	        // And then remove the attribute object if it's empty
-	        if ( isEmpty( attr ) ) {
-	          processedBlock.splice( 1, 1 );
-	        }
-	      }
-
-	      jsonml.push( processedBlock );
-	      return jsonml;
-	    },
-
-	    referenceDefn: function referenceDefn( block, next) {
-	      var re = /^\s*\[(.*?)\]:\s*(\S+)(?:\s+(?:(['"])(.*?)\3|\((.*?)\)))?\n?/;
-	      // interesting matches are [ , ref_id, url, , title, title ]
-
-	      if ( !block.match(re) )
-	        return undefined;
-
-	      // make an attribute node if it doesn't exist
-	      if ( !extract_attr( this.tree ) ) {
-	        this.tree.splice( 1, 0, {} );
-	      }
-
-	      var attrs = extract_attr( this.tree );
-
-	      // make a references hash if it doesn't exist
-	      if ( attrs.references === undefined ) {
-	        attrs.references = {};
-	      }
-
-	      var b = this.loop_re_over_block(re, block, function( m ) {
-
-	        if ( m[2] && m[2][0] == "<" && m[2][m[2].length-1] == ">" )
-	          m[2] = m[2].substring( 1, m[2].length - 1 );
-
-	        var ref = attrs.references[ m[1].toLowerCase() ] = {
-	          href: m[2]
-	        };
-
-	        if ( m[4] !== undefined )
-	          ref.title = m[4];
-	        else if ( m[5] !== undefined )
-	          ref.title = m[5];
-
-	      } );
-
-	      if ( b.length )
-	        next.unshift( mk_block( b, block.trailing ) );
-
-	      return [];
-	    },
-
-	    para: function para( block, next ) {
-	      // everything's a para!
-	      return [ ["para"].concat( this.processInline( block ) ) ];
-	    }
-	  }
-	};
-
-	Markdown.dialects.Gruber.inline = {
-
-	    __oneElement__: function oneElement( text, patterns_or_re, previous_nodes ) {
-	      var m,
-	          res,
-	          lastIndex = 0;
-
-	      patterns_or_re = patterns_or_re || this.dialect.inline.__patterns__;
-	      var re = new RegExp( "([\\s\\S]*?)(" + (patterns_or_re.source || patterns_or_re) + ")" );
-
-	      m = re.exec( text );
-	      if (!m) {
-	        // Just boring text
-	        return [ text.length, text ];
-	      }
-	      else if ( m[1] ) {
-	        // Some un-interesting text matched. Return that first
-	        return [ m[1].length, m[1] ];
-	      }
-
-	      var res;
-	      if ( m[2] in this.dialect.inline ) {
-	        res = this.dialect.inline[ m[2] ].call(
-	                  this,
-	                  text.substr( m.index ), m, previous_nodes || [] );
-	      }
-	      // Default for now to make dev easier. just slurp special and output it.
-	      res = res || [ m[2].length, m[2] ];
-	      return res;
-	    },
-
-	    __call__: function inline( text, patterns ) {
-
-	      var out = [],
-	          res;
-
-	      function add(x) {
-	        //D:self.debug("  adding output", uneval(x));
-	        if ( typeof x == "string" && typeof out[out.length-1] == "string" )
-	          out[ out.length-1 ] += x;
-	        else
-	          out.push(x);
-	      }
-
-	      while ( text.length > 0 ) {
-	        res = this.dialect.inline.__oneElement__.call(this, text, patterns, out );
-	        text = text.substr( res.shift() );
-	        forEach(res, add )
-	      }
-
-	      return out;
-	    },
-
-	    // These characters are intersting elsewhere, so have rules for them so that
-	    // chunks of plain text blocks don't include them
-	    "]": function () {},
-	    "}": function () {},
-
-	    __escape__ : /^\\[\\`\*_{}\[\]()#\+.!\-]/,
-
-	    "\\": function escaped( text ) {
-	      // [ length of input processed, node/children to add... ]
-	      // Only esacape: \ ` * _ { } [ ] ( ) # * + - . !
-	      if ( this.dialect.inline.__escape__.exec( text ) )
-	        return [ 2, text.charAt( 1 ) ];
-	      else
-	        // Not an esacpe
-	        return [ 1, "\\" ];
-	    },
-
-	    "![": function image( text ) {
-
-	      // Unlike images, alt text is plain text only. no other elements are
-	      // allowed in there
-
-	      // ![Alt text](/path/to/img.jpg "Optional title")
-	      //      1          2            3       4         <--- captures
-	      var m = text.match( /^!\[(.*?)\][ \t]*\([ \t]*([^")]*?)(?:[ \t]+(["'])(.*?)\3)?[ \t]*\)/ );
-
-	      if ( m ) {
-	        if ( m[2] && m[2][0] == "<" && m[2][m[2].length-1] == ">" )
-	          m[2] = m[2].substring( 1, m[2].length - 1 );
-
-	        m[2] = this.dialect.inline.__call__.call( this, m[2], /\\/ )[0];
-
-	        var attrs = { alt: m[1], href: m[2] || "" };
-	        if ( m[4] !== undefined)
-	          attrs.title = m[4];
-
-	        return [ m[0].length, [ "img", attrs ] ];
-	      }
-
-	      // ![Alt text][id]
-	      m = text.match( /^!\[(.*?)\][ \t]*\[(.*?)\]/ );
-
-	      if ( m ) {
-	        // We can't check if the reference is known here as it likely wont be
-	        // found till after. Check it in md tree->hmtl tree conversion
-	        return [ m[0].length, [ "img_ref", { alt: m[1], ref: m[2].toLowerCase(), original: m[0] } ] ];
-	      }
-
-	      // Just consume the '!['
-	      return [ 2, "![" ];
-	    },
-
-	    "[": function link( text ) {
-
-	      var orig = String(text);
-	      // Inline content is possible inside `link text`
-	      var res = Markdown.DialectHelpers.inline_until_char.call( this, text.substr(1), "]" );
-
-	      // No closing ']' found. Just consume the [
-	      if ( !res ) return [ 1, "[" ];
-
-	      var consumed = 1 + res[ 0 ],
-	          children = res[ 1 ],
-	          link,
-	          attrs;
-
-	      // At this point the first [...] has been parsed. See what follows to find
-	      // out which kind of link we are (reference or direct url)
-	      text = text.substr( consumed );
-
-	      // [link text](/path/to/img.jpg "Optional title")
-	      //                 1            2       3         <--- captures
-	      // This will capture up to the last paren in the block. We then pull
-	      // back based on if there a matching ones in the url
-	      //    ([here](/url/(test))
-	      // The parens have to be balanced
-	      var m = text.match( /^\s*\([ \t]*([^"']*)(?:[ \t]+(["'])(.*?)\2)?[ \t]*\)/ );
-	      if ( m ) {
-	        var url = m[1];
-	        consumed += m[0].length;
-
-	        if ( url && url[0] == "<" && url[url.length-1] == ">" )
-	          url = url.substring( 1, url.length - 1 );
-
-	        // If there is a title we don't have to worry about parens in the url
-	        if ( !m[3] ) {
-	          var open_parens = 1; // One open that isn't in the capture
-	          for ( var len = 0; len < url.length; len++ ) {
-	            switch ( url[len] ) {
-	            case "(":
-	              open_parens++;
-	              break;
-	            case ")":
-	              if ( --open_parens == 0) {
-	                consumed -= url.length - len;
-	                url = url.substring(0, len);
-	              }
-	              break;
-	            }
-	          }
-	        }
-
-	        // Process escapes only
-	        url = this.dialect.inline.__call__.call( this, url, /\\/ )[0];
-
-	        attrs = { href: url || "" };
-	        if ( m[3] !== undefined)
-	          attrs.title = m[3];
-
-	        link = [ "link", attrs ].concat( children );
-	        return [ consumed, link ];
-	      }
-
-	      // [Alt text][id]
-	      // [Alt text] [id]
-	      m = text.match( /^\s*\[(.*?)\]/ );
-
-	      if ( m ) {
-
-	        consumed += m[ 0 ].length;
-
-	        // [links][] uses links as its reference
-	        attrs = { ref: ( m[ 1 ] || String(children) ).toLowerCase(),  original: orig.substr( 0, consumed ) };
-
-	        link = [ "link_ref", attrs ].concat( children );
-
-	        // We can't check if the reference is known here as it likely wont be
-	        // found till after. Check it in md tree->hmtl tree conversion.
-	        // Store the original so that conversion can revert if the ref isn't found.
-	        return [ consumed, link ];
-	      }
-
-	      // [id]
-	      // Only if id is plain (no formatting.)
-	      if ( children.length == 1 && typeof children[0] == "string" ) {
-
-	        attrs = { ref: children[0].toLowerCase(),  original: orig.substr( 0, consumed ) };
-	        link = [ "link_ref", attrs, children[0] ];
-	        return [ consumed, link ];
-	      }
-
-	      // Just consume the "["
-	      return [ 1, "[" ];
-	    },
-
-
-	    "<": function autoLink( text ) {
-	      var m;
-
-	      if ( ( m = text.match( /^<(?:((https?|ftp|mailto):[^>]+)|(.*?@.*?\.[a-zA-Z]+))>/ ) ) != null ) {
-	        if ( m[3] ) {
-	          return [ m[0].length, [ "link", { href: "mailto:" + m[3] }, m[3] ] ];
-
-	        }
-	        else if ( m[2] == "mailto" ) {
-	          return [ m[0].length, [ "link", { href: m[1] }, m[1].substr("mailto:".length ) ] ];
-	        }
-	        else
-	          return [ m[0].length, [ "link", { href: m[1] }, m[1] ] ];
-	      }
-
-	      return [ 1, "<" ];
-	    },
-
-	    "`": function inlineCode( text ) {
-	      // Inline code block. as many backticks as you like to start it
-	      // Always skip over the opening ticks.
-	      var m = text.match( /(`+)(([\s\S]*?)\1)/ );
-
-	      if ( m && m[2] )
-	        return [ m[1].length + m[2].length, [ "inlinecode", m[3] ] ];
-	      else {
-	        // TODO: No matching end code found - warn!
-	        return [ 1, "`" ];
-	      }
-	    },
-
-	    "  \n": function lineBreak( text ) {
-	      return [ 3, [ "linebreak" ] ];
-	    }
-
-	};
-
-	// Meta Helper/generator method for em and strong handling
-	function strong_em( tag, md ) {
-
-	  var state_slot = tag + "_state",
-	      other_slot = tag == "strong" ? "em_state" : "strong_state";
-
-	  function CloseTag(len) {
-	    this.len_after = len;
-	    this.name = "close_" + md;
-	  }
-
-	  return function ( text, orig_match ) {
-
-	    if ( this[state_slot][0] == md ) {
-	      // Most recent em is of this type
-	      //D:this.debug("closing", md);
-	      this[state_slot].shift();
-
-	      // "Consume" everything to go back to the recrusion in the else-block below
-	      return[ text.length, new CloseTag(text.length-md.length) ];
-	    }
-	    else {
-	      // Store a clone of the em/strong states
-	      var other = this[other_slot].slice(),
-	          state = this[state_slot].slice();
-
-	      this[state_slot].unshift(md);
-
-	      //D:this.debug_indent += "  ";
-
-	      // Recurse
-	      var res = this.processInline( text.substr( md.length ) );
-	      //D:this.debug_indent = this.debug_indent.substr(2);
-
-	      var last = res[res.length - 1];
-
-	      //D:this.debug("processInline from", tag + ": ", uneval( res ) );
-
-	      var check = this[state_slot].shift();
-	      if ( last instanceof CloseTag ) {
-	        res.pop();
-	        // We matched! Huzzah.
-	        var consumed = text.length - last.len_after;
-	        return [ consumed, [ tag ].concat(res) ];
-	      }
-	      else {
-	        // Restore the state of the other kind. We might have mistakenly closed it.
-	        this[other_slot] = other;
-	        this[state_slot] = state;
-
-	        // We can't reuse the processed result as it could have wrong parsing contexts in it.
-	        return [ md.length, md ];
-	      }
-	    }
-	  }; // End returned function
-	}
-
-	Markdown.dialects.Gruber.inline["**"] = strong_em("strong", "**");
-	Markdown.dialects.Gruber.inline["__"] = strong_em("strong", "__");
-	Markdown.dialects.Gruber.inline["*"]  = strong_em("em", "*");
-	Markdown.dialects.Gruber.inline["_"]  = strong_em("em", "_");
-
-
-	// Build default order from insertion order.
-	Markdown.buildBlockOrder = function(d) {
-	  var ord = [];
-	  for ( var i in d ) {
-	    if ( i == "__order__" || i == "__call__" ) continue;
-	    ord.push( i );
-	  }
-	  d.__order__ = ord;
-	};
-
-	// Build patterns for inline matcher
-	Markdown.buildInlinePatterns = function(d) {
-	  var patterns = [];
-
-	  for ( var i in d ) {
-	    // __foo__ is reserved and not a pattern
-	    if ( i.match( /^__.*__$/) ) continue;
-	    var l = i.replace( /([\\.*+?|()\[\]{}])/g, "\\$1" )
-	             .replace( /\n/, "\\n" );
-	    patterns.push( i.length == 1 ? l : "(?:" + l + ")" );
-	  }
-
-	  patterns = patterns.join("|");
-	  d.__patterns__ = patterns;
-	  //print("patterns:", uneval( patterns ) );
-
-	  var fn = d.__call__;
-	  d.__call__ = function(text, pattern) {
-	    if ( pattern != undefined ) {
-	      return fn.call(this, text, pattern);
-	    }
-	    else
-	    {
-	      return fn.call(this, text, patterns);
-	    }
-	  };
-	};
-
-	Markdown.DialectHelpers = {};
-	Markdown.DialectHelpers.inline_until_char = function( text, want ) {
-	  var consumed = 0,
-	      nodes = [];
-
-	  while ( true ) {
-	    if ( text.charAt( consumed ) == want ) {
-	      // Found the character we were looking for
-	      consumed++;
-	      return [ consumed, nodes ];
-	    }
-
-	    if ( consumed >= text.length ) {
-	      // No closing char found. Abort.
-	      return null;
-	    }
-
-	    var res = this.dialect.inline.__oneElement__.call(this, text.substr( consumed ) );
-	    consumed += res[ 0 ];
-	    // Add any returned nodes.
-	    nodes.push.apply( nodes, res.slice( 1 ) );
-	  }
-	}
-
-	// Helper function to make sub-classing a dialect easier
-	Markdown.subclassDialect = function( d ) {
-	  function Block() {}
-	  Block.prototype = d.block;
-	  function Inline() {}
-	  Inline.prototype = d.inline;
-
-	  return { block: new Block(), inline: new Inline() };
-	};
-
-	Markdown.buildBlockOrder ( Markdown.dialects.Gruber.block );
-	Markdown.buildInlinePatterns( Markdown.dialects.Gruber.inline );
-
-	Markdown.dialects.Maruku = Markdown.subclassDialect( Markdown.dialects.Gruber );
-
-	Markdown.dialects.Maruku.processMetaHash = function processMetaHash( meta_string ) {
-	  var meta = split_meta_hash( meta_string ),
-	      attr = {};
-
-	  for ( var i = 0; i < meta.length; ++i ) {
-	    // id: #foo
-	    if ( /^#/.test( meta[ i ] ) ) {
-	      attr.id = meta[ i ].substring( 1 );
-	    }
-	    // class: .foo
-	    else if ( /^\./.test( meta[ i ] ) ) {
-	      // if class already exists, append the new one
-	      if ( attr["class"] ) {
-	        attr["class"] = attr["class"] + meta[ i ].replace( /./, " " );
-	      }
-	      else {
-	        attr["class"] = meta[ i ].substring( 1 );
-	      }
-	    }
-	    // attribute: foo=bar
-	    else if ( /\=/.test( meta[ i ] ) ) {
-	      var s = meta[ i ].split( /\=/ );
-	      attr[ s[ 0 ] ] = s[ 1 ];
-	    }
-	  }
-
-	  return attr;
-	}
-
-	function split_meta_hash( meta_string ) {
-	  var meta = meta_string.split( "" ),
-	      parts = [ "" ],
-	      in_quotes = false;
-
-	  while ( meta.length ) {
-	    var letter = meta.shift();
-	    switch ( letter ) {
-	      case " " :
-	        // if we're in a quoted section, keep it
-	        if ( in_quotes ) {
-	          parts[ parts.length - 1 ] += letter;
-	        }
-	        // otherwise make a new part
-	        else {
-	          parts.push( "" );
-	        }
-	        break;
-	      case "'" :
-	      case '"' :
-	        // reverse the quotes and move straight on
-	        in_quotes = !in_quotes;
-	        break;
-	      case "\\" :
-	        // shift off the next letter to be used straight away.
-	        // it was escaped so we'll keep it whatever it is
-	        letter = meta.shift();
-	      default :
-	        parts[ parts.length - 1 ] += letter;
-	        break;
-	    }
-	  }
-
-	  return parts;
-	}
-
-	Markdown.dialects.Maruku.block.document_meta = function document_meta( block, next ) {
-	  // we're only interested in the first block
-	  if ( block.lineNumber > 1 ) return undefined;
-
-	  // document_meta blocks consist of one or more lines of `Key: Value\n`
-	  if ( ! block.match( /^(?:\w+:.*\n)*\w+:.*$/ ) ) return undefined;
-
-	  // make an attribute node if it doesn't exist
-	  if ( !extract_attr( this.tree ) ) {
-	    this.tree.splice( 1, 0, {} );
-	  }
-
-	  var pairs = block.split( /\n/ );
-	  for ( p in pairs ) {
-	    var m = pairs[ p ].match( /(\w+):\s*(.*)$/ ),
-	        key = m[ 1 ].toLowerCase(),
-	        value = m[ 2 ];
-
-	    this.tree[ 1 ][ key ] = value;
-	  }
-
-	  // document_meta produces no content!
-	  return [];
-	};
-
-	Markdown.dialects.Maruku.block.block_meta = function block_meta( block, next ) {
-	  // check if the last line of the block is an meta hash
-	  var m = block.match( /(^|\n) {0,3}\{:\s*((?:\\\}|[^\}])*)\s*\}$/ );
-	  if ( !m ) return undefined;
-
-	  // process the meta hash
-	  var attr = this.dialect.processMetaHash( m[ 2 ] );
-
-	  var hash;
-
-	  // if we matched ^ then we need to apply meta to the previous block
-	  if ( m[ 1 ] === "" ) {
-	    var node = this.tree[ this.tree.length - 1 ];
-	    hash = extract_attr( node );
-
-	    // if the node is a string (rather than JsonML), bail
-	    if ( typeof node === "string" ) return undefined;
-
-	    // create the attribute hash if it doesn't exist
-	    if ( !hash ) {
-	      hash = {};
-	      node.splice( 1, 0, hash );
-	    }
-
-	    // add the attributes in
-	    for ( a in attr ) {
-	      hash[ a ] = attr[ a ];
-	    }
-
-	    // return nothing so the meta hash is removed
-	    return [];
-	  }
-
-	  // pull the meta hash off the block and process what's left
-	  var b = block.replace( /\n.*$/, "" ),
-	      result = this.processBlock( b, [] );
-
-	  // get or make the attributes hash
-	  hash = extract_attr( result[ 0 ] );
-	  if ( !hash ) {
-	    hash = {};
-	    result[ 0 ].splice( 1, 0, hash );
-	  }
-
-	  // attach the attributes to the block
-	  for ( a in attr ) {
-	    hash[ a ] = attr[ a ];
-	  }
-
-	  return result;
-	};
-
-	Markdown.dialects.Maruku.block.definition_list = function definition_list( block, next ) {
-	  // one or more terms followed by one or more definitions, in a single block
-	  var tight = /^((?:[^\s:].*\n)+):\s+([\s\S]+)$/,
-	      list = [ "dl" ],
-	      i, m;
-
-	  // see if we're dealing with a tight or loose block
-	  if ( ( m = block.match( tight ) ) ) {
-	    // pull subsequent tight DL blocks out of `next`
-	    var blocks = [ block ];
-	    while ( next.length && tight.exec( next[ 0 ] ) ) {
-	      blocks.push( next.shift() );
-	    }
-
-	    for ( var b = 0; b < blocks.length; ++b ) {
-	      var m = blocks[ b ].match( tight ),
-	          terms = m[ 1 ].replace( /\n$/, "" ).split( /\n/ ),
-	          defns = m[ 2 ].split( /\n:\s+/ );
-
-	      // print( uneval( m ) );
-
-	      for ( i = 0; i < terms.length; ++i ) {
-	        list.push( [ "dt", terms[ i ] ] );
-	      }
-
-	      for ( i = 0; i < defns.length; ++i ) {
-	        // run inline processing over the definition
-	        list.push( [ "dd" ].concat( this.processInline( defns[ i ].replace( /(\n)\s+/, "$1" ) ) ) );
-	      }
-	    }
-	  }
-	  else {
-	    return undefined;
-	  }
-
-	  return [ list ];
-	};
-
-	// splits on unescaped instances of @ch. If @ch is not a character the result
-	// can be unpredictable
-
-	Markdown.dialects.Maruku.block.table = function table (block, next) {
-
-	    var _split_on_unescaped = function(s, ch) {
-	        ch = ch || '\\s';
-	        if (ch.match(/^[\\|\[\]{}?*.+^$]$/)) { ch = '\\' + ch; }
-	        var res = [ ],
-	            r = new RegExp('^((?:\\\\.|[^\\\\' + ch + '])*)' + ch + '(.*)'),
-	            m;
-	        while(m = s.match(r)) {
-	            res.push(m[1]);
-	            s = m[2];
-	        }
-	        res.push(s);
-	        return res;
-	    }
-
-	    var leading_pipe = /^ {0,3}\|(.+)\n {0,3}\|\s*([\-:]+[\-| :]*)\n((?:\s*\|.*(?:\n|$))*)(?=\n|$)/,
-	        // find at least an unescaped pipe in each line
-	        no_leading_pipe = /^ {0,3}(\S(?:\\.|[^\\|])*\|.*)\n {0,3}([\-:]+\s*\|[\-| :]*)\n((?:(?:\\.|[^\\|])*\|.*(?:\n|$))*)(?=\n|$)/,
-	        i, m;
-	    if (m = block.match(leading_pipe)) {
-	        // remove leading pipes in contents
-	        // (header and horizontal rule already have the leading pipe left out)
-	        m[3] = m[3].replace(/^\s*\|/gm, '');
-	    } else if (! ( m = block.match(no_leading_pipe))) {
-	        return undefined;
-	    }
-
-	    var table = [ "table", [ "thead", [ "tr" ] ], [ "tbody" ] ];
-
-	    // remove trailing pipes, then split on pipes
-	    // (no escaped pipes are allowed in horizontal rule)
-	    m[2] = m[2].replace(/\|\s*$/, '').split('|');
-
-	    // process alignment
-	    var html_attrs = [ ];
-	    forEach (m[2], function (s) {
-	        if (s.match(/^\s*-+:\s*$/))       html_attrs.push({align: "right"});
-	        else if (s.match(/^\s*:-+\s*$/))  html_attrs.push({align: "left"});
-	        else if (s.match(/^\s*:-+:\s*$/)) html_attrs.push({align: "center"});
-	        else                              html_attrs.push({});
-	    });
-
-	    // now for the header, avoid escaped pipes
-	    m[1] = _split_on_unescaped(m[1].replace(/\|\s*$/, ''), '|');
-	    for (i = 0; i < m[1].length; i++) {
-	        table[1][1].push(['th', html_attrs[i] || {}].concat(
-	            this.processInline(m[1][i].trim())));
-	    }
-
-	    // now for body contents
-	    forEach (m[3].replace(/\|\s*$/mg, '').split('\n'), function (row) {
-	        var html_row = ['tr'];
-	        row = _split_on_unescaped(row, '|');
-	        for (i = 0; i < row.length; i++) {
-	            html_row.push(['td', html_attrs[i] || {}].concat(this.processInline(row[i].trim())));
-	        }
-	        table[2].push(html_row);
-	    }, this);
-
-	    return [table];
-	}
-
-	Markdown.dialects.Maruku.inline[ "{:" ] = function inline_meta( text, matches, out ) {
-	  if ( !out.length ) {
-	    return [ 2, "{:" ];
-	  }
-
-	  // get the preceeding element
-	  var before = out[ out.length - 1 ];
-
-	  if ( typeof before === "string" ) {
-	    return [ 2, "{:" ];
-	  }
-
-	  // match a meta hash
-	  var m = text.match( /^\{:\s*((?:\\\}|[^\}])*)\s*\}/ );
-
-	  // no match, false alarm
-	  if ( !m ) {
-	    return [ 2, "{:" ];
-	  }
-
-	  // attach the attributes to the preceeding element
-	  var meta = this.dialect.processMetaHash( m[ 1 ] ),
-	      attr = extract_attr( before );
-
-	  if ( !attr ) {
-	    attr = {};
-	    before.splice( 1, 0, attr );
-	  }
-
-	  for ( var k in meta ) {
-	    attr[ k ] = meta[ k ];
-	  }
-
-	  // cut out the string and replace it with nothing
-	  return [ m[ 0 ].length, "" ];
-	};
-
-	Markdown.dialects.Maruku.inline.__escape__ = /^\\[\\`\*_{}\[\]()#\+.!\-|:]/;
-
-	Markdown.buildBlockOrder ( Markdown.dialects.Maruku.block );
-	Markdown.buildInlinePatterns( Markdown.dialects.Maruku.inline );
-
-	var isArray = Array.isArray || function(obj) {
-	  return Object.prototype.toString.call(obj) == "[object Array]";
-	};
-
-	var forEach;
-	// Don't mess with Array.prototype. Its not friendly
-	if ( Array.prototype.forEach ) {
-	  forEach = function( arr, cb, thisp ) {
-	    return arr.forEach( cb, thisp );
-	  };
-	}
-	else {
-	  forEach = function(arr, cb, thisp) {
-	    for (var i = 0; i < arr.length; i++) {
-	      cb.call(thisp || arr, arr[i], i, arr);
-	    }
-	  }
-	}
-
-	var isEmpty = function( obj ) {
-	  for ( var key in obj ) {
-	    if ( hasOwnProperty.call( obj, key ) ) {
-	      return false;
-	    }
-	  }
-
-	  return true;
-	}
-
-	function extract_attr( jsonml ) {
-	  return isArray(jsonml)
-	      && jsonml.length > 1
-	      && typeof jsonml[ 1 ] === "object"
-	      && !( isArray(jsonml[ 1 ]) )
-	      ? jsonml[ 1 ]
-	      : undefined;
-	}
-
-
-
-	/**
-	 *  renderJsonML( jsonml[, options] ) -> String
-	 *  - jsonml (Array): JsonML array to render to XML
-	 *  - options (Object): options
-	 *
-	 *  Converts the given JsonML into well-formed XML.
-	 *
-	 *  The options currently understood are:
-	 *
-	 *  - root (Boolean): wether or not the root node should be included in the
-	 *    output, or just its children. The default `false` is to not include the
-	 *    root itself.
-	 */
-	expose.renderJsonML = function( jsonml, options ) {
-	  options = options || {};
-	  // include the root element in the rendered output?
-	  options.root = options.root || false;
-
-	  var content = [];
-
-	  if ( options.root ) {
-	    content.push( render_tree( jsonml ) );
-	  }
-	  else {
-	    jsonml.shift(); // get rid of the tag
-	    if ( jsonml.length && typeof jsonml[ 0 ] === "object" && !( jsonml[ 0 ] instanceof Array ) ) {
-	      jsonml.shift(); // get rid of the attributes
-	    }
-
-	    while ( jsonml.length ) {
-	      content.push( render_tree( jsonml.shift() ) );
-	    }
-	  }
-
-	  return content.join( "\n\n" );
-	};
-
-	function escapeHTML( text ) {
-	  return text.replace( /&/g, "&amp;" )
-	             .replace( /</g, "&lt;" )
-	             .replace( />/g, "&gt;" )
-	             .replace( /"/g, "&quot;" )
-	             .replace( /'/g, "&#39;" );
-	}
-
-	function render_tree( jsonml ) {
-	  // basic case
-	  if ( typeof jsonml === "string" ) {
-	    return escapeHTML( jsonml );
-	  }
-
-	  var tag = jsonml.shift(),
-	      attributes = {},
-	      content = [];
-
-	  if ( jsonml.length && typeof jsonml[ 0 ] === "object" && !( jsonml[ 0 ] instanceof Array ) ) {
-	    attributes = jsonml.shift();
-	  }
-
-	  while ( jsonml.length ) {
-	    content.push( render_tree( jsonml.shift() ) );
-	  }
-
-	  var tag_attrs = "";
-	  for ( var a in attributes ) {
-	    tag_attrs += " " + a + '="' + escapeHTML( attributes[ a ] ) + '"';
-	  }
-
-	  // be careful about adding whitespace here for inline elements
-	  if ( tag == "img" || tag == "br" || tag == "hr" ) {
-	    return "<"+ tag + tag_attrs + "/>";
-	  }
-	  else {
-	    return "<"+ tag + tag_attrs + ">" + content.join( "" ) + "</" + tag + ">";
-	  }
-	}
-
-	function convert_tree_to_html( tree, references, options ) {
-	  var i;
-	  options = options || {};
-
-	  // shallow clone
-	  var jsonml = tree.slice( 0 );
-
-	  if ( typeof options.preprocessTreeNode === "function" ) {
-	      jsonml = options.preprocessTreeNode(jsonml, references);
-	  }
-
-	  // Clone attributes if they exist
-	  var attrs = extract_attr( jsonml );
-	  if ( attrs ) {
-	    jsonml[ 1 ] = {};
-	    for ( i in attrs ) {
-	      jsonml[ 1 ][ i ] = attrs[ i ];
-	    }
-	    attrs = jsonml[ 1 ];
-	  }
-
-	  // basic case
-	  if ( typeof jsonml === "string" ) {
-	    return jsonml;
-	  }
-
-	  // convert this node
-	  switch ( jsonml[ 0 ] ) {
-	    case "header":
-	      jsonml[ 0 ] = "h" + jsonml[ 1 ].level;
-	      delete jsonml[ 1 ].level;
-	      break;
-	    case "bulletlist":
-	      jsonml[ 0 ] = "ul";
-	      break;
-	    case "numberlist":
-	      jsonml[ 0 ] = "ol";
-	      break;
-	    case "listitem":
-	      jsonml[ 0 ] = "li";
-	      break;
-	    case "para":
-	      jsonml[ 0 ] = "p";
-	      break;
-	    case "markdown":
-	      jsonml[ 0 ] = "html";
-	      if ( attrs ) delete attrs.references;
-	      break;
-	    case "code_block":
-	      jsonml[ 0 ] = "pre";
-	      i = attrs ? 2 : 1;
-	      var code = [ "code" ];
-	      code.push.apply( code, jsonml.splice( i, jsonml.length - i ) );
-	      jsonml[ i ] = code;
-	      break;
-	    case "inlinecode":
-	      jsonml[ 0 ] = "code";
-	      break;
-	    case "img":
-	      jsonml[ 1 ].src = jsonml[ 1 ].href;
-	      delete jsonml[ 1 ].href;
-	      break;
-	    case "linebreak":
-	      jsonml[ 0 ] = "br";
-	    break;
-	    case "link":
-	      jsonml[ 0 ] = "a";
-	      break;
-	    case "link_ref":
-	      jsonml[ 0 ] = "a";
-
-	      // grab this ref and clean up the attribute node
-	      var ref = references[ attrs.ref ];
-
-	      // if the reference exists, make the link
-	      if ( ref ) {
-	        delete attrs.ref;
-
-	        // add in the href and title, if present
-	        attrs.href = ref.href;
-	        if ( ref.title ) {
-	          attrs.title = ref.title;
-	        }
-
-	        // get rid of the unneeded original text
-	        delete attrs.original;
-	      }
-	      // the reference doesn't exist, so revert to plain text
-	      else {
-	        return attrs.original;
-	      }
-	      break;
-	    case "img_ref":
-	      jsonml[ 0 ] = "img";
-
-	      // grab this ref and clean up the attribute node
-	      var ref = references[ attrs.ref ];
-
-	      // if the reference exists, make the link
-	      if ( ref ) {
-	        delete attrs.ref;
-
-	        // add in the href and title, if present
-	        attrs.src = ref.href;
-	        if ( ref.title ) {
-	          attrs.title = ref.title;
-	        }
-
-	        // get rid of the unneeded original text
-	        delete attrs.original;
-	      }
-	      // the reference doesn't exist, so revert to plain text
-	      else {
-	        return attrs.original;
-	      }
-	      break;
-	  }
-
-	  // convert all the children
-	  i = 1;
-
-	  // deal with the attribute node, if it exists
-	  if ( attrs ) {
-	    // if there are keys, skip over it
-	    for ( var key in jsonml[ 1 ] ) {
-	        i = 2;
-	        break;
-	    }
-	    // if there aren't, remove it
-	    if ( i === 1 ) {
-	      jsonml.splice( i, 1 );
-	    }
-	  }
-
-	  for ( ; i < jsonml.length; ++i ) {
-	    jsonml[ i ] = convert_tree_to_html( jsonml[ i ], references, options );
-	  }
-
-	  return jsonml;
-	}
-
-
-	// merges adjacent text nodes into a single node
-	function merge_text_nodes( jsonml ) {
-	  // skip the tag name and attribute hash
-	  var i = extract_attr( jsonml ) ? 2 : 1;
-
-	  while ( i < jsonml.length ) {
-	    // if it's a string check the next item too
-	    if ( typeof jsonml[ i ] === "string" ) {
-	      if ( i + 1 < jsonml.length && typeof jsonml[ i + 1 ] === "string" ) {
-	        // merge the second string into the first and remove it
-	        jsonml[ i ] += jsonml.splice( i + 1, 1 )[ 0 ];
-	      }
-	      else {
-	        ++i;
-	      }
-	    }
-	    // if it's not a string recurse
-	    else {
-	      merge_text_nodes( jsonml[ i ] );
-	      ++i;
-	    }
-	  }
-	}
-
-	} )( (function() {
-	  if ( false ) {
-	    window.markdown = {};
-	    return window.markdown;
-	  }
-	  else {
-	    return exports;
-	  }
-	} )() );
 
 
 /***/ },
 /* 201 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(global, process) {// Copyright Joyent, Inc. and other Node contributors.
-	//
-	// Permission is hereby granted, free of charge, to any person obtaining a
-	// copy of this software and associated documentation files (the
-	// "Software"), to deal in the Software without restriction, including
-	// without limitation the rights to use, copy, modify, merge, publish,
-	// distribute, sublicense, and/or sell copies of the Software, and to permit
-	// persons to whom the Software is furnished to do so, subject to the
-	// following conditions:
-	//
-	// The above copyright notice and this permission notice shall be included
-	// in all copies or substantial portions of the Software.
-	//
-	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-	// USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-	var formatRegExp = /%[sdj%]/g;
-	exports.format = function(f) {
-	  if (!isString(f)) {
-	    var objects = [];
-	    for (var i = 0; i < arguments.length; i++) {
-	      objects.push(inspect(arguments[i]));
-	    }
-	    return objects.join(' ');
-	  }
-
-	  var i = 1;
-	  var args = arguments;
-	  var len = args.length;
-	  var str = String(f).replace(formatRegExp, function(x) {
-	    if (x === '%%') return '%';
-	    if (i >= len) return x;
-	    switch (x) {
-	      case '%s': return String(args[i++]);
-	      case '%d': return Number(args[i++]);
-	      case '%j':
-	        try {
-	          return JSON.stringify(args[i++]);
-	        } catch (_) {
-	          return '[Circular]';
-	        }
-	      default:
-	        return x;
-	    }
-	  });
-	  for (var x = args[i]; i < len; x = args[++i]) {
-	    if (isNull(x) || !isObject(x)) {
-	      str += ' ' + x;
-	    } else {
-	      str += ' ' + inspect(x);
-	    }
-	  }
-	  return str;
-	};
-
-
-	// Mark that a method should not be used.
-	// Returns a modified function which warns once by default.
-	// If --no-deprecation is set, then it is a no-op.
-	exports.deprecate = function(fn, msg) {
-	  // Allow for deprecating things in the process of starting up.
-	  if (isUndefined(global.process)) {
-	    return function() {
-	      return exports.deprecate(fn, msg).apply(this, arguments);
-	    };
-	  }
-
-	  if (process.noDeprecation === true) {
-	    return fn;
-	  }
-
-	  var warned = false;
-	  function deprecated() {
-	    if (!warned) {
-	      if (process.throwDeprecation) {
-	        throw new Error(msg);
-	      } else if (process.traceDeprecation) {
-	        console.trace(msg);
-	      } else {
-	        console.error(msg);
-	      }
-	      warned = true;
-	    }
-	    return fn.apply(this, arguments);
-	  }
-
-	  return deprecated;
-	};
-
-
-	var debugs = {};
-	var debugEnviron;
-	exports.debuglog = function(set) {
-	  if (isUndefined(debugEnviron))
-	    debugEnviron = process.env.NODE_DEBUG || '';
-	  set = set.toUpperCase();
-	  if (!debugs[set]) {
-	    if (new RegExp('\\b' + set + '\\b', 'i').test(debugEnviron)) {
-	      var pid = process.pid;
-	      debugs[set] = function() {
-	        var msg = exports.format.apply(exports, arguments);
-	        console.error('%s %d: %s', set, pid, msg);
-	      };
-	    } else {
-	      debugs[set] = function() {};
-	    }
-	  }
-	  return debugs[set];
-	};
-
-
-	/**
-	 * Echos the value of a value. Trys to print the value out
-	 * in the best way possible given the different types.
-	 *
-	 * @param {Object} obj The object to print out.
-	 * @param {Object} opts Optional options object that alters the output.
-	 */
-	/* legacy: obj, showHidden, depth, colors*/
-	function inspect(obj, opts) {
-	  // default options
-	  var ctx = {
-	    seen: [],
-	    stylize: stylizeNoColor
-	  };
-	  // legacy...
-	  if (arguments.length >= 3) ctx.depth = arguments[2];
-	  if (arguments.length >= 4) ctx.colors = arguments[3];
-	  if (isBoolean(opts)) {
-	    // legacy...
-	    ctx.showHidden = opts;
-	  } else if (opts) {
-	    // got an "options" object
-	    exports._extend(ctx, opts);
-	  }
-	  // set default options
-	  if (isUndefined(ctx.showHidden)) ctx.showHidden = false;
-	  if (isUndefined(ctx.depth)) ctx.depth = 2;
-	  if (isUndefined(ctx.colors)) ctx.colors = false;
-	  if (isUndefined(ctx.customInspect)) ctx.customInspect = true;
-	  if (ctx.colors) ctx.stylize = stylizeWithColor;
-	  return formatValue(ctx, obj, ctx.depth);
-	}
-	exports.inspect = inspect;
-
-
-	// http://en.wikipedia.org/wiki/ANSI_escape_code#graphics
-	inspect.colors = {
-	  'bold' : [1, 22],
-	  'italic' : [3, 23],
-	  'underline' : [4, 24],
-	  'inverse' : [7, 27],
-	  'white' : [37, 39],
-	  'grey' : [90, 39],
-	  'black' : [30, 39],
-	  'blue' : [34, 39],
-	  'cyan' : [36, 39],
-	  'green' : [32, 39],
-	  'magenta' : [35, 39],
-	  'red' : [31, 39],
-	  'yellow' : [33, 39]
-	};
-
-	// Don't use 'blue' not visible on cmd.exe
-	inspect.styles = {
-	  'special': 'cyan',
-	  'number': 'yellow',
-	  'boolean': 'yellow',
-	  'undefined': 'grey',
-	  'null': 'bold',
-	  'string': 'green',
-	  'date': 'magenta',
-	  // "name": intentionally not styling
-	  'regexp': 'red'
-	};
-
-
-	function stylizeWithColor(str, styleType) {
-	  var style = inspect.styles[styleType];
-
-	  if (style) {
-	    return '\u001b[' + inspect.colors[style][0] + 'm' + str +
-	           '\u001b[' + inspect.colors[style][1] + 'm';
-	  } else {
-	    return str;
-	  }
-	}
-
-
-	function stylizeNoColor(str, styleType) {
-	  return str;
-	}
-
-
-	function arrayToHash(array) {
-	  var hash = {};
-
-	  array.forEach(function(val, idx) {
-	    hash[val] = true;
-	  });
-
-	  return hash;
-	}
-
-
-	function formatValue(ctx, value, recurseTimes) {
-	  // Provide a hook for user-specified inspect functions.
-	  // Check that value is an object with an inspect function on it
-	  if (ctx.customInspect &&
-	      value &&
-	      isFunction(value.inspect) &&
-	      // Filter out the util module, it's inspect function is special
-	      value.inspect !== exports.inspect &&
-	      // Also filter out any prototype objects using the circular check.
-	      !(value.constructor && value.constructor.prototype === value)) {
-	    var ret = value.inspect(recurseTimes, ctx);
-	    if (!isString(ret)) {
-	      ret = formatValue(ctx, ret, recurseTimes);
-	    }
-	    return ret;
-	  }
-
-	  // Primitive types cannot have properties
-	  var primitive = formatPrimitive(ctx, value);
-	  if (primitive) {
-	    return primitive;
-	  }
-
-	  // Look up the keys of the object.
-	  var keys = Object.keys(value);
-	  var visibleKeys = arrayToHash(keys);
-
-	  if (ctx.showHidden) {
-	    keys = Object.getOwnPropertyNames(value);
-	  }
-
-	  // IE doesn't make error fields non-enumerable
-	  // http://msdn.microsoft.com/en-us/library/ie/dww52sbt(v=vs.94).aspx
-	  if (isError(value)
-	      && (keys.indexOf('message') >= 0 || keys.indexOf('description') >= 0)) {
-	    return formatError(value);
-	  }
-
-	  // Some type of object without properties can be shortcutted.
-	  if (keys.length === 0) {
-	    if (isFunction(value)) {
-	      var name = value.name ? ': ' + value.name : '';
-	      return ctx.stylize('[Function' + name + ']', 'special');
-	    }
-	    if (isRegExp(value)) {
-	      return ctx.stylize(RegExp.prototype.toString.call(value), 'regexp');
-	    }
-	    if (isDate(value)) {
-	      return ctx.stylize(Date.prototype.toString.call(value), 'date');
-	    }
-	    if (isError(value)) {
-	      return formatError(value);
-	    }
-	  }
-
-	  var base = '', array = false, braces = ['{', '}'];
-
-	  // Make Array say that they are Array
-	  if (isArray(value)) {
-	    array = true;
-	    braces = ['[', ']'];
-	  }
-
-	  // Make functions say that they are functions
-	  if (isFunction(value)) {
-	    var n = value.name ? ': ' + value.name : '';
-	    base = ' [Function' + n + ']';
-	  }
-
-	  // Make RegExps say that they are RegExps
-	  if (isRegExp(value)) {
-	    base = ' ' + RegExp.prototype.toString.call(value);
-	  }
-
-	  // Make dates with properties first say the date
-	  if (isDate(value)) {
-	    base = ' ' + Date.prototype.toUTCString.call(value);
-	  }
-
-	  // Make error with message first say the error
-	  if (isError(value)) {
-	    base = ' ' + formatError(value);
-	  }
-
-	  if (keys.length === 0 && (!array || value.length == 0)) {
-	    return braces[0] + base + braces[1];
-	  }
-
-	  if (recurseTimes < 0) {
-	    if (isRegExp(value)) {
-	      return ctx.stylize(RegExp.prototype.toString.call(value), 'regexp');
-	    } else {
-	      return ctx.stylize('[Object]', 'special');
-	    }
-	  }
-
-	  ctx.seen.push(value);
-
-	  var output;
-	  if (array) {
-	    output = formatArray(ctx, value, recurseTimes, visibleKeys, keys);
-	  } else {
-	    output = keys.map(function(key) {
-	      return formatProperty(ctx, value, recurseTimes, visibleKeys, key, array);
-	    });
-	  }
-
-	  ctx.seen.pop();
-
-	  return reduceToSingleString(output, base, braces);
-	}
-
-
-	function formatPrimitive(ctx, value) {
-	  if (isUndefined(value))
-	    return ctx.stylize('undefined', 'undefined');
-	  if (isString(value)) {
-	    var simple = '\'' + JSON.stringify(value).replace(/^"|"$/g, '')
-	                                             .replace(/'/g, "\\'")
-	                                             .replace(/\\"/g, '"') + '\'';
-	    return ctx.stylize(simple, 'string');
-	  }
-	  if (isNumber(value))
-	    return ctx.stylize('' + value, 'number');
-	  if (isBoolean(value))
-	    return ctx.stylize('' + value, 'boolean');
-	  // For some reason typeof null is "object", so special case here.
-	  if (isNull(value))
-	    return ctx.stylize('null', 'null');
-	}
-
-
-	function formatError(value) {
-	  return '[' + Error.prototype.toString.call(value) + ']';
-	}
-
-
-	function formatArray(ctx, value, recurseTimes, visibleKeys, keys) {
-	  var output = [];
-	  for (var i = 0, l = value.length; i < l; ++i) {
-	    if (hasOwnProperty(value, String(i))) {
-	      output.push(formatProperty(ctx, value, recurseTimes, visibleKeys,
-	          String(i), true));
-	    } else {
-	      output.push('');
-	    }
-	  }
-	  keys.forEach(function(key) {
-	    if (!key.match(/^\d+$/)) {
-	      output.push(formatProperty(ctx, value, recurseTimes, visibleKeys,
-	          key, true));
-	    }
-	  });
-	  return output;
-	}
-
-
-	function formatProperty(ctx, value, recurseTimes, visibleKeys, key, array) {
-	  var name, str, desc;
-	  desc = Object.getOwnPropertyDescriptor(value, key) || { value: value[key] };
-	  if (desc.get) {
-	    if (desc.set) {
-	      str = ctx.stylize('[Getter/Setter]', 'special');
-	    } else {
-	      str = ctx.stylize('[Getter]', 'special');
-	    }
-	  } else {
-	    if (desc.set) {
-	      str = ctx.stylize('[Setter]', 'special');
-	    }
-	  }
-	  if (!hasOwnProperty(visibleKeys, key)) {
-	    name = '[' + key + ']';
-	  }
-	  if (!str) {
-	    if (ctx.seen.indexOf(desc.value) < 0) {
-	      if (isNull(recurseTimes)) {
-	        str = formatValue(ctx, desc.value, null);
-	      } else {
-	        str = formatValue(ctx, desc.value, recurseTimes - 1);
-	      }
-	      if (str.indexOf('\n') > -1) {
-	        if (array) {
-	          str = str.split('\n').map(function(line) {
-	            return '  ' + line;
-	          }).join('\n').substr(2);
-	        } else {
-	          str = '\n' + str.split('\n').map(function(line) {
-	            return '   ' + line;
-	          }).join('\n');
-	        }
-	      }
-	    } else {
-	      str = ctx.stylize('[Circular]', 'special');
-	    }
-	  }
-	  if (isUndefined(name)) {
-	    if (array && key.match(/^\d+$/)) {
-	      return str;
-	    }
-	    name = JSON.stringify('' + key);
-	    if (name.match(/^"([a-zA-Z_][a-zA-Z_0-9]*)"$/)) {
-	      name = name.substr(1, name.length - 2);
-	      name = ctx.stylize(name, 'name');
-	    } else {
-	      name = name.replace(/'/g, "\\'")
-	                 .replace(/\\"/g, '"')
-	                 .replace(/(^"|"$)/g, "'");
-	      name = ctx.stylize(name, 'string');
-	    }
-	  }
-
-	  return name + ': ' + str;
-	}
-
-
-	function reduceToSingleString(output, base, braces) {
-	  var numLinesEst = 0;
-	  var length = output.reduce(function(prev, cur) {
-	    numLinesEst++;
-	    if (cur.indexOf('\n') >= 0) numLinesEst++;
-	    return prev + cur.replace(/\u001b\[\d\d?m/g, '').length + 1;
-	  }, 0);
-
-	  if (length > 60) {
-	    return braces[0] +
-	           (base === '' ? '' : base + '\n ') +
-	           ' ' +
-	           output.join(',\n  ') +
-	           ' ' +
-	           braces[1];
-	  }
-
-	  return braces[0] + base + ' ' + output.join(', ') + ' ' + braces[1];
-	}
-
-
-	// NOTE: These type checking functions intentionally don't use `instanceof`
-	// because it is fragile and can be easily faked with `Object.create()`.
-	function isArray(ar) {
-	  return Array.isArray(ar);
-	}
-	exports.isArray = isArray;
-
-	function isBoolean(arg) {
-	  return typeof arg === 'boolean';
-	}
-	exports.isBoolean = isBoolean;
-
-	function isNull(arg) {
-	  return arg === null;
-	}
-	exports.isNull = isNull;
-
-	function isNullOrUndefined(arg) {
-	  return arg == null;
-	}
-	exports.isNullOrUndefined = isNullOrUndefined;
-
-	function isNumber(arg) {
-	  return typeof arg === 'number';
-	}
-	exports.isNumber = isNumber;
-
-	function isString(arg) {
-	  return typeof arg === 'string';
-	}
-	exports.isString = isString;
-
-	function isSymbol(arg) {
-	  return typeof arg === 'symbol';
-	}
-	exports.isSymbol = isSymbol;
-
-	function isUndefined(arg) {
-	  return arg === void 0;
-	}
-	exports.isUndefined = isUndefined;
-
-	function isRegExp(re) {
-	  return isObject(re) && objectToString(re) === '[object RegExp]';
-	}
-	exports.isRegExp = isRegExp;
-
-	function isObject(arg) {
-	  return typeof arg === 'object' && arg !== null;
-	}
-	exports.isObject = isObject;
-
-	function isDate(d) {
-	  return isObject(d) && objectToString(d) === '[object Date]';
-	}
-	exports.isDate = isDate;
-
-	function isError(e) {
-	  return isObject(e) &&
-	      (objectToString(e) === '[object Error]' || e instanceof Error);
-	}
-	exports.isError = isError;
-
-	function isFunction(arg) {
-	  return typeof arg === 'function';
-	}
-	exports.isFunction = isFunction;
-
-	function isPrimitive(arg) {
-	  return arg === null ||
-	         typeof arg === 'boolean' ||
-	         typeof arg === 'number' ||
-	         typeof arg === 'string' ||
-	         typeof arg === 'symbol' ||  // ES6 symbol
-	         typeof arg === 'undefined';
-	}
-	exports.isPrimitive = isPrimitive;
-
-	exports.isBuffer = __webpack_require__(202);
-
-	function objectToString(o) {
-	  return Object.prototype.toString.call(o);
-	}
-
-
-	function pad(n) {
-	  return n < 10 ? '0' + n.toString(10) : n.toString(10);
-	}
-
-
-	var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
-	              'Oct', 'Nov', 'Dec'];
-
-	// 26 Feb 16:19:34
-	function timestamp() {
-	  var d = new Date();
-	  var time = [pad(d.getHours()),
-	              pad(d.getMinutes()),
-	              pad(d.getSeconds())].join(':');
-	  return [d.getDate(), months[d.getMonth()], time].join(' ');
-	}
-
-
-	// log is just a thin wrapper to console.log that prepends a timestamp
-	exports.log = function() {
-	  console.log('%s - %s', timestamp(), exports.format.apply(exports, arguments));
-	};
-
-
-	/**
-	 * Inherit the prototype methods from one constructor into another.
-	 *
-	 * The Function.prototype.inherits from lang.js rewritten as a standalone
-	 * function (not on Function.prototype). NOTE: If this file is to be loaded
-	 * during bootstrapping this function needs to be rewritten using some native
-	 * functions as prototype setup using normal JavaScript does not work as
-	 * expected during bootstrapping (see mirror.js in r114903).
-	 *
-	 * @param {function} ctor Constructor function which needs to inherit the
-	 *     prototype.
-	 * @param {function} superCtor Constructor function to inherit prototype from.
-	 */
-	exports.inherits = __webpack_require__(203);
-
-	exports._extend = function(origin, add) {
-	  // Don't do anything if add isn't an object
-	  if (!add || !isObject(add)) return origin;
-
-	  var keys = Object.keys(add);
-	  var i = keys.length;
-	  while (i--) {
-	    origin[keys[i]] = add[keys[i]];
-	  }
-	  return origin;
-	};
-
-	function hasOwnProperty(obj, prop) {
-	  return Object.prototype.hasOwnProperty.call(obj, prop);
-	}
-
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(58)))
-
-/***/ },
-/* 202 */
-/***/ function(module, exports) {
-
-	module.exports = function isBuffer(arg) {
-	  return arg && typeof arg === 'object'
-	    && typeof arg.copy === 'function'
-	    && typeof arg.fill === 'function'
-	    && typeof arg.readUInt8 === 'function';
-	}
-
-/***/ },
-/* 203 */
-/***/ function(module, exports) {
-
-	if (typeof Object.create === 'function') {
-	  // implementation from standard node.js 'util' module
-	  module.exports = function inherits(ctor, superCtor) {
-	    ctor.super_ = superCtor
-	    ctor.prototype = Object.create(superCtor.prototype, {
-	      constructor: {
-	        value: ctor,
-	        enumerable: false,
-	        writable: true,
-	        configurable: true
-	      }
-	    });
-	  };
-	} else {
-	  // old school shim for old browsers
-	  module.exports = function inherits(ctor, superCtor) {
-	    ctor.super_ = superCtor
-	    var TempCtor = function () {}
-	    TempCtor.prototype = superCtor.prototype
-	    ctor.prototype = new TempCtor()
-	    ctor.prototype.constructor = ctor
-	  }
-	}
-
-
-/***/ },
-/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -45455,14 +47138,22 @@
 	  }, [_vm._v("当前字数 "), _c('i', [_vm._v(_vm._s(_vm.content.length))])])]), _vm._v(" "), _c('div', {
 	    staticClass: "markdown_tool clearfix"
 	  }, [_c('div', {
-	    staticClass: "save_text btn"
+	    staticClass: "save_text btn",
+	    on: {
+	      "click": _vm.saveContent
+	    }
 	  }, [_vm._v("保存文章")]), _vm._v(" "), _c('ul', {
 	    staticClass: "markdown_menu clearfix"
 	  }, [_c('li', {
 	    on: {
 	      "click": _vm.changeEditType
 	    }
-	  }, [_vm._v("模式")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._m(1)])])]), _vm._v(" "), _c('div', {
+	  }, [_vm._v("模式")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('li', [_c('a', {
+	    attrs: {
+	      "target": "_blank",
+	      "href": '/paper/' + _vm.user_id + '/' + _vm.paper_id
+	    }
+	  }, [_vm._v("查看本文")])])])])]), _vm._v(" "), _c('div', {
 	    attrs: {
 	      "id": "markdown_edit"
 	    }
@@ -45509,7 +47200,11 @@
 	    }
 	  }, [_vm._v("首页")])])
 	},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('li', [_c('a', [_vm._v("文章列表")])])
+	  return _c('li', [_c('a', {
+	    attrs: {
+	      "href": "/getPaperList"
+	    }
+	  }, [_vm._v("文章列表")])])
 	}]}
 	module.exports.render._withStripped = true
 	if (false) {
@@ -45520,7 +47215,7 @@
 	}
 
 /***/ },
-/* 205 */
+/* 202 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;

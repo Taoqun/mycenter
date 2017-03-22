@@ -19,12 +19,13 @@
         <div class="paper_right_menu">
             <a href="/addPaper/<%= user_id %>">新文章</a>
             <a href="/updatePaper/<%= user_id %>/<%= paper_id %>">编辑</a>
-            <a href="/delPaper/<%= user_id %>/<%= paper_id %>">删除</a>
+            <a class="delete_paper" href="/delPaper/<%= user_id %>/<%= paper_id %>">删除</a>
         </div>
         <h3 class="paper_title"><%= title %></h3>
         <p class="paper_account">
-            <a href="/getPaperList/<%= user_id %>"><%= name %></a>
-            <span><%= date %></span>
+            <a href="/getPaperList/<%= user_id %>">作者：<%= name %></a>
+            <span>字数：<%= length %> </span>
+            <span>日期：<%= date %></span>
         </p>
         <p class="paper_keywords">
             <% keywords.forEach(function(item){ %>
@@ -32,7 +33,37 @@
             <% }) %>
         </p>
         <div class="markdown-body"><%- content %></div>
-        <p class="copyright">版权归作者所有，转载请注明出处</p>
+        <p class="copyright">©版权归作者所有，转载请注明出处</p>
     </div>
+
+    <div class="dialog_wrap">
+        <div class="dialog_body">
+            <h6 class="dialog_title">确定要删除此篇文章吗？</h6>
+            <p class="dialog_content">注意哦，后台没有做备份，删除了是彻底找不回来的！</p>
+            <p class="dialog_line">
+                <span class="dialog_cancel">取消</span>
+                <span class="dialog_confirm">确定</span>
+            </p>
+        </div>
+    </div>
+    <script>
+        var control = true
+        document.querySelector(".delete_paper").addEventListener("click",function(event){
+            if(control){
+                event.stopPropagation()
+                event.preventDefault()
+                document.querySelector(".dialog_wrap").style.display = 'block'
+            }
+        })
+        document.querySelector(".dialog_cancel").addEventListener("click",function(){
+            document.querySelector(".dialog_wrap").style.display = 'none'
+        })
+        document.querySelector(".dialog_confirm").addEventListener("click",function(){
+            document.querySelector(".dialog_wrap").style.display = 'none'
+            control = false
+            document.querySelector(".delete_paper").click()
+        })
+
+    </script>
 </body>
 </html>

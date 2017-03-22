@@ -9,11 +9,12 @@
                 </div>
 
                 <div class="markdown_tool clearfix">
-                    <div class="save_text btn">保存文章</div>
+                    <div class="save_text btn" @click="saveContent">保存文章</div>
                     <ul class="markdown_menu clearfix">
                         <li @click="changeEditType">模式</li>
                         <li><a href="/index">首页</a></li>
-                        <li><a>文章列表</a></li>
+                        <li><a href="/getPaperList">文章列表</a></li>
+                        <li><a target="_blank" :href="'/paper/' + user_id +'/'+paper_id ">查看本文</a></li>
                     </ul>
                 </div>
             </div>
@@ -34,7 +35,8 @@
 <script>
     import "CSS/cssreset.css"
     import "CSS/markdown.css"
-    import { markdown ,parse } from 'markdown'
+    import hyperdown from 'hyperdown'
+    import { ajax } from "JS/ajax.js"
     import Vue from 'vue'
     import ElementUI from "element-ui"
     Vue.use(ElementUI)
@@ -57,7 +59,9 @@
             },
             content(){
                 let tem = this.content
-                    tem = markdown.toHTML(tem)
+                    // tem = markdown.toHTML(tem)
+                let parse = new hyperdown()
+                    tem = parse.makeHtml(tem)
                 document.querySelector(".markdown-body").innerHTML = tem
             }
         },
@@ -75,7 +79,32 @@
             },
             changeEditType(){
                 this.preview_show = !this.preview_show
-            }
+            },
+            saveContent(){
+                let obj = {}
+                    obj.title = this.title
+                    obj.content = this.content
+                    obj.user_id = this.user_id
+                    obj.paper_id = this.paper_id
+
+                    ajax({
+                        url:"/paper/savePaper",
+                        method:"post",
+                        data:obj
+                    }).then( (data)=>{
+                        if(data.code){
+                            this.$message({
+                                 message: '保存成功',
+                                 type: 'success'
+                             });
+                        }else{
+                            this.$message({
+                                 message: '保存失败',
+                                 type: 'error'
+                             });
+                        }
+                    })
+            },
         }
     }
 </script>
@@ -212,11 +241,18 @@
         font-size:20px;
         font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
         transition:all 0.5s linear 0s;
+        overflow: auto;
     }
     .right-enter-active,.right-leave-active {
         transition: all .5s linear 0s;
     }
     .right-enter, .right-leave-active {
       width:0;
+    }
+
+    @media screen and (max-width:1000px){
+        .markdown_preview{
+            display:none;
+        }
     }
 </style>

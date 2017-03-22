@@ -6,21 +6,19 @@ const getAccount = require("./getAccount.js")
 exports.getUserId = (req,res)=>{
     let sessions_id = req.cookies.sessions_id
     getAccount(sessions_id).then((account) => {
-        let userInfo = require("../dataModel/userInfoDataModel.js").userInfo
             userInfo.find({account:account},(err,result)=>{
                 if(err){ return console.log(err) }
                 let id = result[0]["_id"]
                 res.redirect("/getPaperList/"+id)
             })
     })
-}
+};
 
 exports.getPaperList = function(req, res) {
     let id = req.params.id
     let page = req.query.page || 1
-    let userList = require("../dataModel/userInfoDataModel").userInfo
 
-    userList.find({ _id: id }, (err, result) => {
+    userInfo.find({ _id: id }, (err, result) => {
         if (err) {
             console.log(err);
             res.end("服务器错误，查询账户失败!")
@@ -70,14 +68,13 @@ exports.getPaperList = function(req, res) {
 
 exports.addPaper = function(req, res) {
     let user_id = req.params.user_id
-    let userInfo = require("../dataModel/userInfoDataModel.js").userInfo
 
     userInfo.find({_id:user_id},(err,result)=>{
         if(err){ return console.log(err) }
         if(result.length){
             let account = result[0].account
             let name = result[0]["name"]
-            let md = require("../dataModel/markdownDataModel.js").getMarkdownModel(account)
+            let md = mk(account)
             let paper_id = account + '_' +  (new Date()).valueOf()
             let date = parseInt( (new Date()).valueOf() ) + (1000*60*60*8)
             let paper = new md({
@@ -108,9 +105,8 @@ exports.getPaper = function(req, res) {
 
     let user_id = req.params.user_id
     let paper_id = req.params.paper_id
-    let userList = require("../dataModel/userInfoDataModel").userInfo
 
-    userList.find({ _id: user_id }, (err, result) => {
+    userInfo.find({ _id: user_id }, (err, result) => {
         if (err) {
             console.log(err)
             res.end("error,查找用户id错误")
@@ -123,14 +119,16 @@ exports.getPaper = function(req, res) {
             // 文章标签 关键词 标题 内容 时间 修改文章的地址 等等
             let paper = result[0]
             let date = paper.date.getFullYear() +"-"+ (paper.date.getMonth()+1) +"-"+ paper.date.getDate()
-            let md = require("markdown").markdown
-            let content = md.toHTML( paper.content )
+            let hyperdown = require("hyperdown")
+            let parse =  new hyperdown()
+            let content = parse.makeHtml( paper.content )
             let obj = {}
                 obj.title = paper.title
                 obj.name = paper.name
                 obj.keywords = paper.keywords
                 obj.date = date
                 obj.content = content
+                obj.length = paper.content.length
                 obj.user_id = user_id
                 obj.paper_id = paper_id
             res.render("paper/index.html",obj)
@@ -158,6 +156,31 @@ exports.updatePaper = function(req, res) {
         }
     })
 };
+exports.savePaper = (req,res)=>{
+    let title = req.body.title
+    let content = req.body.content
+    let user_id = req.body.user_id
+    let paper_id = req.body.paper_id
+    let sessions_id = req.cookies.sessions_id
+
+    getAccount(sessions_id).then((account) => {
+        let md = mk(account)
+        let obj = {}
+            obj.title = title
+            obj.content = content
+            obj.des = content.substr(0,500).replace( /[\#\-\*\>\``]/gi,'')
+        md.update({_id:paper_id},obj,(err,result)=>{
+            if(err){
+                console.log(err)
+                res.json({code:0,des:"error"})
+                return
+            }
+            res.json({code:1,des:"success"})
+        })
+    })
+
+
+};
 exports.delPaper = (req, res) => {
     let user_id = req.params.user_id
     let paper_id = req.params.paper_id
@@ -178,4 +201,4 @@ exports.delPaper = (req, res) => {
                 })
         }
     })
-}
+};
