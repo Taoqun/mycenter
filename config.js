@@ -23,7 +23,7 @@ const head_list = [
       {name:'生辰',url:'/birth/index'},
       {name:'个人中心',url:'/account/user_info'},
       {name:'设置',url:'/account/user_info'},
-      {name:'关于',url:'/index'},
+      {name:'关于',url:'/about'},
     ];
 
 exports.headList = head_list

@@ -4,9 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/css/cssreset.css">
+    <link rel="stylesheet" href="/css/404.css">
+    <script type="text/javascript" src="http://cdn.webfont.youziku.com/wwwroot/js/wf/youziku.api.min.js"></script>
     <title>404</title>
 </head>
 <body>
-
+    <script type="text/javascript">
+       $youziku.load("body", "a72109851d9243e7a1ef2b44378e85cc", "HiraginoGBW3");
+       $youziku.draw();
+    </script>
+    <div class="error_wrap">
+        <div class="error_body">
+            <% if(tips){%>
+                <h6 class="error_title">提示！ </h6>
+                <p class="text"><%= tips %></p>
+                <p class="text"><a href="/account/login">登录</a></p>
+            <% }else{ %>
+                <h6 class="error_title">啊~哦~ 404 了 ~ ~ </h6>
+                <p class="text">404啥意思？</p>
+                <p class="text">就是这个页面不能为您提供信息！</p>
+                <p class="text">走嘞，您呐！</p>
+            <% } %>
+            <p class="text">↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓</p>
+            <p class="text">↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓</p>
+            <p class="text">↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓</p>
+            <p class="text">↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓</p>
+            <ul class="menu">
+                <li><a href="/index">首页</a></li>
+                <li><a href="/task">任务中心</a></li>
+                <li><a href="/getPaperList">文章列表</a></li>
+                <li><a href="/account/user_info">设置</a></li>
+                <li><a href="/about">关于</a></li>
+            </ul>
+        </div>
+    </div>
 </body>
 </html>

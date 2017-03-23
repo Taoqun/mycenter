@@ -17,6 +17,8 @@
         var date = <%= date.valueOf() %>
         var user_id = '<%= user_id %>'
         var paper_id = '<%= _id %>'
+        var keywords = '<%= keywords.join(",") %>'
+            keywords = keywords.split(",")
     </script>
     <script src="/markdown/index.js"></script>
 </body>

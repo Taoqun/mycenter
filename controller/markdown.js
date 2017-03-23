@@ -1,6 +1,5 @@
 const mk = require('../dataModel/markdownDataModel.js').getMarkdownModel
 const userInfo = require("../dataModel/userInfoDataModel.js").userInfo
-
 const getAccount = require("./getAccount.js")
 
 exports.getUserId = (req,res)=>{
@@ -68,7 +67,6 @@ exports.getPaperList = function(req, res) {
 
 exports.addPaper = function(req, res) {
     let user_id = req.params.user_id
-
     userInfo.find({_id:user_id},(err,result)=>{
         if(err){ return console.log(err) }
         if(result.length){
@@ -105,15 +103,22 @@ exports.getPaper = function(req, res) {
 
     let user_id = req.params.user_id
     let paper_id = req.params.paper_id
+    let sessions_id = req.cookies.sessions_id
 
-    userInfo.find({ _id: user_id }, (err, result) => {
-        if (err) {
-            console.log(err)
-            res.end("error,查找用户id错误")
-            return
-        }
-        let account = result[0].account
-        let markdown = mk(account)
+    getAccount(sessions_id).then((account)=>{
+        userInfo.find({ _id: user_id }, (err, result) => {
+            if (err) {
+                console.log(err)
+                res.end("error,查找用户id错误")
+                return
+            }
+            let Paper_account = result[0].account
+            let author = (account === Paper_account)
+            verifyAccount(author,Paper_account)
+        })
+    })
+    function verifyAccount(author,Paper_account){
+        let markdown = mk(Paper_account)
         markdown.find({ _id: paper_id }, (err, result) => {
             // 渲染模板
             // 文章标签 关键词 标题 内容 时间 修改文章的地址 等等
@@ -131,10 +136,10 @@ exports.getPaper = function(req, res) {
                 obj.length = paper.content.length
                 obj.user_id = user_id
                 obj.paper_id = paper_id
+                obj.author = author
             res.render("paper/index.html",obj)
         })
-
-    })
+    }
 };
 
 exports.updatePaper = function(req, res) {
@@ -159,6 +164,7 @@ exports.updatePaper = function(req, res) {
 exports.savePaper = (req,res)=>{
     let title = req.body.title
     let content = req.body.content
+    let keywords = req.body.keywords
     let user_id = req.body.user_id
     let paper_id = req.body.paper_id
     let sessions_id = req.cookies.sessions_id
@@ -168,6 +174,9 @@ exports.savePaper = (req,res)=>{
         let obj = {}
             obj.title = title
             obj.content = content
+            if( keywords && Array.isArray(keywords) ){
+                obj.keywords = keywords
+            }
             obj.des = content.substr(0,500).replace( /[\#\-\*\>\``]/gi,'')
         md.update({_id:paper_id},obj,(err,result)=>{
             if(err){
@@ -184,7 +193,6 @@ exports.savePaper = (req,res)=>{
 exports.delPaper = (req, res) => {
     let user_id = req.params.user_id
     let paper_id = req.params.paper_id
-
     userInfo.find({_id:user_id},(err,result) => {
         if(err){ return console.log(err) }
         if( result.length ){

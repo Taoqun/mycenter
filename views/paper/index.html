@@ -17,9 +17,11 @@
     <script src="/paper/index.js"></script>
     <div class="paper_wrap">
         <div class="paper_right_menu">
+            <% if( author ){ %>
             <a href="/addPaper/<%= user_id %>">新文章</a>
             <a href="/updatePaper/<%= user_id %>/<%= paper_id %>">编辑</a>
             <a class="delete_paper" href="/delPaper/<%= user_id %>/<%= paper_id %>">删除</a>
+            <% } %>
         </div>
         <h3 class="paper_title"><%= title %></h3>
         <p class="paper_account">

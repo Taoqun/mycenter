@@ -4,10 +4,15 @@
 
             <div class="markdown_top">
                 <div class="markdown_head">
-                    <input type="text" name="" placeholder="键入标题" v-model="title">
+                    <input  type="text" name="" placeholder="键入标题" v-model="title">
                     <span class="text_num">当前字数 <i>{{ content.length }}</i></span>
                 </div>
-
+                <div class="keywords">
+                    <input @keyup.enter="setKeyword" type="text" name="" value="" placeholder="输入关键词标签,回车保存" >
+                    <ul>
+                        <li v-for="item in keywords"><span>x</span>{{item}}</li>
+                    </ul>
+                </div>
                 <div class="markdown_tool clearfix">
                     <div class="save_text btn" @click="saveContent">保存文章</div>
                     <ul class="markdown_menu clearfix">
@@ -51,6 +56,7 @@
                 date:'',
                 user_id:'',
                 paper_id:'',
+                keywords:[],
             }
         },
         watch:{
@@ -71,6 +77,7 @@
             this.date = date
             this.user_id = user_id
             this.paper_id = paper_id
+            this.keywords = keywords
             this.content = document.querySelector("#content").value
         },
         methods:{
@@ -86,6 +93,7 @@
                     obj.content = this.content
                     obj.user_id = this.user_id
                     obj.paper_id = this.paper_id
+                    obj.keywords = this.keywords
 
                     ajax({
                         url:"/paper/savePaper",
@@ -104,6 +112,31 @@
                              });
                         }
                     })
+            },
+            setKeyword(event){
+                console.log(111)
+                if( !event.target.value ){
+                    this.$message({
+                         message: '请输入关键词！',
+                         type: 'error'
+                     });
+                     return
+                }
+                if( event.target.value.length > 10 ){
+                    this.$message({
+                         message: '关键词长度不能大于10位',
+                         type: 'error'
+                     });
+                    return
+                }
+                if(this.keywords.length < 5 ){
+                    this.keywords.push( event.target.value )
+                }else{
+                    this.$message({
+                         message: '关键词不能超过5个',
+                         type: 'error'
+                     });
+                }
             },
         }
     }
@@ -202,6 +235,51 @@
         flex-grow:1;
         transition:all 0.5s linear 0.7s;
     }
+    .keywords{
+        font-size:0px;
+        padding:10px 20px;
+        border-right:1px solid #EFF2F7;
+        text-align:right;
+        ul{
+            display: inline-block;
+            vertical-align: middle;
+            margin-left:10px;
+        }
+        ::-webkit-input-placeholder{
+            color:#99A9BF;
+        }
+        input{
+            height:25px;
+            width:180px;
+            vertical-align: middle;
+            font-size:12px;
+            padding:5px;
+            line-height:1.5em;
+            border:none;
+            border-bottom:1px solid rgba(153,169,191,0.5);
+            color:#99A9BF;
+        }
+        li{
+            vertical-align: middle;
+            font-size:12px;
+            padding:5px;
+            display:inline-block;
+            color:#99A9BF;
+            transition: all 0.3s linear 0s;
+            cursor:pointer;
+            span{
+                display:inline-block;
+                padding:5px 2px 5px 5px;
+                transition: all 0.5s linear 0s;
+            }
+            &:hover{
+                background-color:#EFF2F7;
+            }
+            &:hover span{
+                color:#324057;
+            }
+        }
+    }
     .markdown_center{
         width:800px;
         flex-grow:0;
@@ -249,7 +327,6 @@
     .right-enter, .right-leave-active {
       width:0;
     }
-
     @media screen and (max-width:1000px){
         .markdown_preview{
             display:none;

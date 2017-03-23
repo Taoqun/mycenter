@@ -1,0 +1,51 @@
+body,html,.error_wrap{
+    width:100%;
+    height:100%;
+    background-color: #e8e8e8;
+    overflow:hidden;
+    position:relative;
+}
+
+.error_body{
+    position:absolute;
+    top:20%;
+    left:50%;
+    transform:translateX(-50%);
+    width:600px;
+    background-color:#F9FAFC;
+    padding:20px;
+}
+.error_title{
+    font-size:30px;
+    line-height: 2em;
+    border-bottom:1px solid #ddd;
+    margin-bottom:20px;
+}
+.text{
+    text-align:center;
+    font-size:15px;
+    line-height:2em;
+}
+.menu{
+    font-size:0px;
+    display:flex;
+    margin:50px 0 0;
+}
+.menu li{
+    flex-grow:1;
+}
+.menu a{
+    width:100%;
+    display:inline-block;
+    box-sizing:border-box;
+    text-align:center;
+    padding:5px 20px;
+    font-size:15px;
+    line-height:2em;
+    color:#324057;
+    background-color: #F9FAFC;
+    transition:all 0.3s linear 0s;
+}
+.menu a:hover{
+    background-color: #EFF2F7;
+}

@@ -6,7 +6,11 @@ module.exports = function(session_id){
     return new Promise(function(resolve,reject){
         session.find({session_id:session_id},(err,result)=>{
             if(err){ return console.log(err) }
-            resolve( result[0].account )
+            if(result.length){
+                resolve( result[0].account )
+            }else{
+                resolve('')
+            }
         })
     })
 }

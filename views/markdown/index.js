@@ -9069,7 +9069,7 @@
 	exports.obj = obj;
 
 	// 配置首页名称 地址 头部模块  方便 vue react 调用
-	var head_list = [{ name: '首页', url: '/index/' }, { name: '任务中心', url: '/task/' }, { name: '文章中心', url: '/getPaperList' }, { name: '写文章', url: '/markdown/' }, { name: '生辰', url: '/birth/index' }, { name: '个人中心', url: '/account/user_info' }, { name: '设置', url: '/account/user_info' }, { name: '关于', url: '/index' }];
+	var head_list = [{ name: '首页', url: '/index/' }, { name: '任务中心', url: '/task/' }, { name: '文章中心', url: '/getPaperList' }, { name: '写文章', url: '/markdown/' }, { name: '生辰', url: '/birth/index' }, { name: '个人中心', url: '/account/user_info' }, { name: '设置', url: '/account/user_info' }, { name: '关于', url: '/about' }];
 
 	exports.headList = head_list;
 
@@ -45914,7 +45914,7 @@
 
 
 	// module
-	exports.push([module.id, "\n@charset \"UTF-8\";\nhtml, body, #app, .markdown {\n  width: 100%;\n  height: 100%;\n  margin: 0;\n  padding: 0;\n  overflow: hidden;\n  font-family: \"Helvetica Neue\",Helvetica,\"PingFang SC\",\"Hiragino Sans GB\",\"Microsoft YaHei\",\"\\5FAE\\8F6F\\96C5\\9ED1\",Arial,sans-serif;\n}\n.clearfix {\n  zoom: 1;\n}\n.clearfix:after {\n  content: '';\n  display: block;\n  width: 0px;\n  height: 0px;\n  clear: both;\n  overflow: hidden;\n}\n.markdown {\n  display: flex;\n  background-color: #fff;\n  transition: all 0.5s linear 1.5s;\n}\n.dark_bg {\n  background-color: #324057;\n}\n.markdown_head {\n  height: 60px;\n  position: relative;\n}\n.markdown_head input {\n    display: block;\n    width: 100%;\n    height: 100%;\n    font-size: 20px;\n    padding: 20px;\n    box-sizing: border-box;\n    color: #475669;\n    border: 1px solid #EFF2F7;\n    outline: none;\n}\n.markdown_head .text_num {\n    position: absolute;\n    top: 0px;\n    bottom: 0px;\n    margin: auto;\n    right: 20px;\n    height: 15px;\n    line-height: 1.5em;\n    display: inline-block;\n    vertical-align: bottom;\n    font-size: 12px;\n    color: #ddd;\n    z-index: 999;\n}\n.markdown_tool {\n  width: 100%;\n  background-color: #fff;\n}\n.markdown_menu, .markdown_menu li {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n  vertical-align: middle;\n}\n.markdown_menu li, .btn {\n  line-height: 36px;\n  padding: 0 10px;\n  background-color: #D3DCE6;\n  float: left;\n  cursor: pointer;\n  vertical-align: bottom;\n  transition: all 0.3s linear 0s;\n  color: #475669;\n  opacity: 0.5;\n}\n.markdown_menu li:hover, .btn:hover {\n    opacity: 1;\n    background-color: #99A9BF;\n}\n.markdown_menu {\n  background-color: #EFF2F7;\n  position: relative;\n  overflow: hidden;\n}\n.markdown_main {\n  width: 50%;\n  display: flex;\n  flex-direction: column;\n  flex-grow: 1;\n  transition: all 0.5s linear 0.7s;\n}\n.markdown_center {\n  width: 800px;\n  flex-grow: 0;\n  margin: 50px auto 10px;\n}\n.markdown_edit {\n  width: 50%;\n  flex-grow: 1;\n}\n#markdown_edit {\n  flex-grow: 1;\n  width: 100%;\n  height: 100%;\n}\n.save_text {\n  float: right;\n}\n#edit {\n  width: 100%;\n  height: 100%;\n  padding: 25px 20px;\n  box-sizing: border-box;\n  border: 1px solid #EFF2F7;\n  outline: none;\n  font-size: 18px;\n  line-height: 1.5em;\n  color: #475669;\n  background-color: #F9FAFC;\n  resize: none;\n  font-family: \"Helvetica Neue\",Helvetica,\"PingFang SC\",\"Hiragino Sans GB\",\"Microsoft YaHei\",\"\\5FAE\\8F6F\\96C5\\9ED1\",Arial,sans-serif;\n}\n.markdown_preview {\n  width: 50%;\n  padding: 20px;\n  box-sizing: border-box;\n  background-color: #fcfcf2;\n  font-size: 20px;\n  font-family: \"Helvetica Neue\",Helvetica,\"PingFang SC\",\"Hiragino Sans GB\",\"Microsoft YaHei\",\"\\5FAE\\8F6F\\96C5\\9ED1\",Arial,sans-serif;\n  transition: all 0.5s linear 0s;\n  overflow: auto;\n}\n.right-enter-active, .right-leave-active {\n  transition: all .5s linear 0s;\n}\n.right-enter, .right-leave-active {\n  width: 0;\n}\n@media screen and (max-width: 1000px) {\n.markdown_preview {\n    display: none;\n}\n}\n", ""]);
+	exports.push([module.id, "\n@charset \"UTF-8\";\nhtml, body, #app, .markdown {\n  width: 100%;\n  height: 100%;\n  margin: 0;\n  padding: 0;\n  overflow: hidden;\n  font-family: \"Helvetica Neue\",Helvetica,\"PingFang SC\",\"Hiragino Sans GB\",\"Microsoft YaHei\",\"\\5FAE\\8F6F\\96C5\\9ED1\",Arial,sans-serif;\n}\n.clearfix {\n  zoom: 1;\n}\n.clearfix:after {\n  content: '';\n  display: block;\n  width: 0px;\n  height: 0px;\n  clear: both;\n  overflow: hidden;\n}\n.markdown {\n  display: flex;\n  background-color: #fff;\n  transition: all 0.5s linear 1.5s;\n}\n.dark_bg {\n  background-color: #324057;\n}\n.markdown_head {\n  height: 60px;\n  position: relative;\n}\n.markdown_head input {\n    display: block;\n    width: 100%;\n    height: 100%;\n    font-size: 20px;\n    padding: 20px;\n    box-sizing: border-box;\n    color: #475669;\n    border: 1px solid #EFF2F7;\n    outline: none;\n}\n.markdown_head .text_num {\n    position: absolute;\n    top: 0px;\n    bottom: 0px;\n    margin: auto;\n    right: 20px;\n    height: 15px;\n    line-height: 1.5em;\n    display: inline-block;\n    vertical-align: bottom;\n    font-size: 12px;\n    color: #ddd;\n    z-index: 999;\n}\n.markdown_tool {\n  width: 100%;\n  background-color: #fff;\n}\n.markdown_menu, .markdown_menu li {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n  vertical-align: middle;\n}\n.markdown_menu li, .btn {\n  line-height: 36px;\n  padding: 0 10px;\n  background-color: #D3DCE6;\n  float: left;\n  cursor: pointer;\n  vertical-align: bottom;\n  transition: all 0.3s linear 0s;\n  color: #475669;\n  opacity: 0.5;\n}\n.markdown_menu li:hover, .btn:hover {\n    opacity: 1;\n    background-color: #99A9BF;\n}\n.markdown_menu {\n  background-color: #EFF2F7;\n  position: relative;\n  overflow: hidden;\n}\n.markdown_main {\n  width: 50%;\n  display: flex;\n  flex-direction: column;\n  flex-grow: 1;\n  transition: all 0.5s linear 0.7s;\n}\n.keywords {\n  font-size: 0px;\n  padding: 10px 20px;\n  border-right: 1px solid #EFF2F7;\n  text-align: right;\n}\n.keywords ul {\n    display: inline-block;\n    vertical-align: middle;\n    margin-left: 10px;\n}\n.keywords ::-webkit-input-placeholder {\n    color: #99A9BF;\n}\n.keywords input {\n    height: 25px;\n    width: 180px;\n    vertical-align: middle;\n    font-size: 12px;\n    padding: 5px;\n    line-height: 1.5em;\n    border: none;\n    border-bottom: 1px solid rgba(153, 169, 191, 0.5);\n    color: #99A9BF;\n}\n.keywords li {\n    vertical-align: middle;\n    font-size: 12px;\n    padding: 5px;\n    display: inline-block;\n    color: #99A9BF;\n    transition: all 0.3s linear 0s;\n    cursor: pointer;\n}\n.keywords li span {\n      display: inline-block;\n      padding: 5px 2px 5px 5px;\n      transition: all 0.5s linear 0s;\n}\n.keywords li:hover {\n      background-color: #EFF2F7;\n}\n.keywords li:hover span {\n      color: #324057;\n}\n.markdown_center {\n  width: 800px;\n  flex-grow: 0;\n  margin: 50px auto 10px;\n}\n.markdown_edit {\n  width: 50%;\n  flex-grow: 1;\n}\n#markdown_edit {\n  flex-grow: 1;\n  width: 100%;\n  height: 100%;\n}\n.save_text {\n  float: right;\n}\n#edit {\n  width: 100%;\n  height: 100%;\n  padding: 25px 20px;\n  box-sizing: border-box;\n  border: 1px solid #EFF2F7;\n  outline: none;\n  font-size: 18px;\n  line-height: 1.5em;\n  color: #475669;\n  background-color: #F9FAFC;\n  resize: none;\n  font-family: \"Helvetica Neue\",Helvetica,\"PingFang SC\",\"Hiragino Sans GB\",\"Microsoft YaHei\",\"\\5FAE\\8F6F\\96C5\\9ED1\",Arial,sans-serif;\n}\n.markdown_preview {\n  width: 50%;\n  padding: 20px;\n  box-sizing: border-box;\n  background-color: #fcfcf2;\n  font-size: 20px;\n  font-family: \"Helvetica Neue\",Helvetica,\"PingFang SC\",\"Hiragino Sans GB\",\"Microsoft YaHei\",\"\\5FAE\\8F6F\\96C5\\9ED1\",Arial,sans-serif;\n  transition: all 0.5s linear 0s;\n  overflow: auto;\n}\n.right-enter-active, .right-leave-active {\n  transition: all .5s linear 0s;\n}\n.right-enter, .right-leave-active {\n  width: 0;\n}\n@media screen and (max-width: 1000px) {\n.markdown_preview {\n    display: none;\n}\n}\n", ""]);
 
 	// exports
 
@@ -45987,6 +45987,11 @@
 	//
 	//
 	//
+	//
+	//
+	//
+	//
+	//
 
 	_vue2.default.use(_elementUi2.default);
 
@@ -45999,7 +46004,8 @@
 	            content: '',
 	            date: '',
 	            user_id: '',
-	            paper_id: ''
+	            paper_id: '',
+	            keywords: []
 	        };
 	    },
 
@@ -46021,6 +46027,7 @@
 	        this.date = date;
 	        this.user_id = user_id;
 	        this.paper_id = paper_id;
+	        this.keywords = keywords;
 	        this.content = document.querySelector("#content").value;
 	    },
 
@@ -46039,6 +46046,7 @@
 	            obj.content = this.content;
 	            obj.user_id = this.user_id;
 	            obj.paper_id = this.paper_id;
+	            obj.keywords = this.keywords;
 
 	            (0, _ajax.ajax)({
 	                url: "/paper/savePaper",
@@ -46057,6 +46065,31 @@
 	                    });
 	                }
 	            });
+	        },
+	        setKeyword: function setKeyword(event) {
+	            console.log(111);
+	            if (!event.target.value) {
+	                this.$message({
+	                    message: '请输入关键词！',
+	                    type: 'error'
+	                });
+	                return;
+	            }
+	            if (event.target.value.length > 10) {
+	                this.$message({
+	                    message: '关键词长度不能大于10位',
+	                    type: 'error'
+	                });
+	                return;
+	            }
+	            if (this.keywords.length < 5) {
+	                this.keywords.push(event.target.value);
+	            } else {
+	                this.$message({
+	                    message: '关键词不能超过5个',
+	                    type: 'error'
+	                });
+	            }
 	        }
 	    }
 	};
@@ -47136,6 +47169,23 @@
 	  }), _vm._v(" "), _c('span', {
 	    staticClass: "text_num"
 	  }, [_vm._v("当前字数 "), _c('i', [_vm._v(_vm._s(_vm.content.length))])])]), _vm._v(" "), _c('div', {
+	    staticClass: "keywords"
+	  }, [_c('input', {
+	    attrs: {
+	      "type": "text",
+	      "name": "",
+	      "value": "",
+	      "placeholder": "输入关键词标签,回车保存"
+	    },
+	    on: {
+	      "keyup": function($event) {
+	        if (_vm._k($event.keyCode, "enter", 13)) { return; }
+	        _vm.setKeyword($event)
+	      }
+	    }
+	  }), _vm._v(" "), _c('ul', _vm._l((_vm.keywords), function(item) {
+	    return _c('li', [_c('span', [_vm._v("x")]), _vm._v(_vm._s(item))])
+	  }))]), _vm._v(" "), _c('div', {
 	    staticClass: "markdown_tool clearfix"
 	  }, [_c('div', {
 	    staticClass: "save_text btn",
