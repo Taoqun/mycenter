@@ -82,3 +82,4 @@ node app.js
 ![文章](http://ocrcrbkp1.bkt.clouddn.com/myCenter/%E6%96%87%E7%AB%A0.png)
 ![文章夜间模式](http://ocrcrbkp1.bkt.clouddn.com/myCenter/%E6%96%87%E7%AB%A0%E5%A4%9C%E9%97%B4%E6%A8%A1%E5%BC%8F.png)
 ![文章列表](http://ocrcrbkp1.bkt.clouddn.com/myCenter/%E6%96%87%E7%AB%A0%E5%88%97%E8%A1%A8.png)
+![文章查看](http://ocrcrbkp1.bkt.clouddn.com/myCenter/paper.png)
