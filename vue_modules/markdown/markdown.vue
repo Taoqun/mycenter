@@ -231,6 +231,10 @@
         transition:all 0.3s linear 0s;
         color:#475669;
         opacity:0.5;
+        a{
+            display:block;
+            height:100%;
+        }
         &:hover{
             opacity:1;
             background-color:#99A9BF;
@@ -254,7 +258,7 @@
         padding:5px 20px;
         border-right:1px solid #EFF2F7;
         text-align:right;
-        background-color: #fff;
+        background-color: #D3DCE6;
         transition:all 0.5s linear 0s;
         ul{
             display: inline-block;
@@ -273,6 +277,7 @@
             line-height:1.5em;
             border:none;
             transition:all 0.5s linear 0s;
+            background-color: #D3DCE6;
             border-bottom:1px solid rgba(153,169,191,0.5);
             color:#99A9BF;
         }

@@ -906,6 +906,7 @@
                     border-bottom:1px solid #EFF2F7;
                     display:flex;
                     transition:all 0.3s ease-in 0s;
+                    position:relative;
                     i{
                         font-size:15px;
                         height:40px;
@@ -930,14 +931,36 @@
                         background-color:transparent;
                         cursor:pointer;
                     }
+                    &:after{
+                        content:'';
+                        width:1px;
+                        height:100%;
+                        position:absolute;
+                        top:0;
+                        left:0;
+                        background-color:#fff;
+                        transition:all 0.3s linear 0s;
+                    }
+                    &:hover:after{
+                        background-color:#666;
+                        border-top-right-radius:5px;
+                        border-bottom-right-radius:5px;
+                        width:5px;
+                    }
                     &:hover{
                         background-color:#EFF2F7;
+                        color:#666;
                     }
+
                 }
             }
             .task-list-off{
                 li input,li .iconfont,.task-list-show-name{
                     color:#ccc;
+                    transition:all 0.5s linear 0s;
+                    &:hover{
+                        color:#666;
+                    }
                 }
             }
         }

@@ -18,7 +18,8 @@
         var user_id = '<%= user_id %>'
         var paper_id = '<%= _id %>'
         var keywords = '<%= keywords.join(",") %>'
-            keywords = keywords.split(",")
+            keywords =  keywords ? keywords.split(",") : [] ;
+
     </script>
     <script src="/markdown/index.js"></script>
 </body>
