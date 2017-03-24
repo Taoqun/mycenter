@@ -1,5 +1,5 @@
 <template lang="html">
-    <div class="markdown" :class="{'dark_bg':!preview_show}">
+    <div class="markdown " :class="{'dark_bg':!preview_show,'markdown_night_mode':night_mode}">
         <div class="markdown_main" :class="{'markdown_center':!preview_show}">
 
             <div class="markdown_top">
@@ -10,16 +10,17 @@
                 <div class="keywords">
                     <input @keyup.enter="setKeyword" type="text" name="" value="" placeholder="输入关键词标签,回车保存" >
                     <ul>
-                        <li v-for="item in keywords"><span>x</span>{{item}}</li>
+                        <li v-for="item in keywords"><span @click="delKeywrods(item)" class="iconfont icon-close"></span>{{item}}</li>
                     </ul>
                 </div>
                 <div class="markdown_tool clearfix">
                     <div class="save_text btn" @click="saveContent">保存文章</div>
                     <ul class="markdown_menu clearfix">
-                        <li @click="changeEditType">模式</li>
+                        <li @click="changeEditType">写作模式</li>
+                        <li @click="changeNightMode">夜间模式</li>
                         <li><a href="/index">首页</a></li>
                         <li><a href="/getPaperList">文章列表</a></li>
-                        <li><a target="_blank" :href="'/paper/' + user_id +'/'+paper_id ">查看本文</a></li>
+                        <li><a :href="'/paper/' + user_id +'/'+paper_id ">查看本文</a></li>
                     </ul>
                 </div>
             </div>
@@ -40,6 +41,7 @@
 <script>
     import "CSS/cssreset.css"
     import "CSS/markdown.css"
+    import "CSS/ali/iconfont.css"
     import hyperdown from 'hyperdown'
     import { ajax } from "JS/ajax.js"
     import Vue from 'vue'
@@ -50,6 +52,7 @@
         data(){
             return {
                 preview_show:true,
+                night_mode:false,
                 title:'',
                 name:'',
                 content:'',
@@ -87,6 +90,9 @@
             changeEditType(){
                 this.preview_show = !this.preview_show
             },
+            changeNightMode(){
+                this.night_mode = !this.night_mode
+            },
             saveContent(){
                 let obj = {}
                     obj.title = this.title
@@ -114,7 +120,6 @@
                     })
             },
             setKeyword(event){
-                console.log(111)
                 if( !event.target.value ){
                     this.$message({
                          message: '请输入关键词！',
@@ -131,11 +136,17 @@
                 }
                 if(this.keywords.length < 5 ){
                     this.keywords.push( event.target.value )
+                    event.target.value = ''
                 }else{
                     this.$message({
                          message: '关键词不能超过5个',
                          type: 'error'
                      });
+                }
+            },
+            delKeywrods(obj){
+                if(obj){
+                    this.keywords.splice( this.keywords.indexOf(obj),1 )
                 }
             },
         }
@@ -179,8 +190,10 @@
             padding:20px;
             box-sizing:border-box;
             color:#475669 ;
-            border:1px solid #EFF2F7;
+            border:none;
+            border-right:1px solid #EFF2F7;
             outline:none;
+            transition:all 0.5s linear 0s;
         }
         .text_num{
             position:absolute;
@@ -200,6 +213,7 @@
     .markdown_tool{
         width:100%;
         background-color: #fff;
+        transition:all 0.5s linear 0s;
     }
     .markdown_menu,.markdown_menu li{
         list-style:none;
@@ -226,8 +240,8 @@
         background-color: #EFF2F7;
         position:relative;
         overflow:hidden;
+        transition:all 0.5s linear 0s;
     }
-
     .markdown_main{
         width:50%;
         display: flex;
@@ -237,9 +251,11 @@
     }
     .keywords{
         font-size:0px;
-        padding:10px 20px;
+        padding:5px 20px;
         border-right:1px solid #EFF2F7;
         text-align:right;
+        background-color: #fff;
+        transition:all 0.5s linear 0s;
         ul{
             display: inline-block;
             vertical-align: middle;
@@ -256,6 +272,7 @@
             padding:5px;
             line-height:1.5em;
             border:none;
+            transition:all 0.5s linear 0s;
             border-bottom:1px solid rgba(153,169,191,0.5);
             color:#99A9BF;
         }
@@ -268,14 +285,18 @@
             transition: all 0.3s linear 0s;
             cursor:pointer;
             span{
+                vertical-align: middle;
                 display:inline-block;
-                padding:5px 2px 5px 5px;
+                opacity:0;
+                padding:5px 0;
                 transition: all 0.5s linear 0s;
             }
             &:hover{
                 background-color:#EFF2F7;
             }
             &:hover span{
+                opacity:1;
+                padding:5px 2px 5px 5px;
                 color:#324057;
             }
         }
@@ -293,6 +314,7 @@
         flex-grow:1;
         width:100%;
         height:100%;
+        margin-right:-15px;
     }
     .save_text{
         float:right;
@@ -302,13 +324,15 @@
         height:100%;
         padding:25px 20px;
         box-sizing:border-box;
-        border:1px solid #EFF2F7;
+        border:none;
+        border-right:1px solid #EFF2F7;
         outline:none;
         font-size:18px;
         line-height:1.5em;
         color:#475669;
         background-color:#F9FAFC;
         resize:none;
+        transition:all 0.3s linear 0s;
         font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
     }
     .markdown_preview{
@@ -326,6 +350,66 @@
     }
     .right-enter, .right-leave-active {
       width:0;
+    }
+
+    .markdown_night_mode{
+        background-color:#3f3f3f;
+        .markdown_head{
+            input{
+                background-color: #3f3f3f;
+                color:#adb1b1;
+                border-right:1px solid #2f2f2f;
+            }
+        }
+        .keywords{
+            background-color: #4c4c4c;
+            color:#b1b1b1;
+            border-right:1px solid #2f2f2f;
+            input{
+                background-color: #4c4c4c;
+                color:#b1b1b1;
+                border-color:#3f3f3f;
+            }
+            li:hover{
+                background-color:#4c4c4c;
+                color:#6ec0ff;
+                span{
+                    color:#6ec0ff;
+                }
+            }
+        }
+        .markdown_tool{
+            background-color: #3f3f3f;
+            color:#adb1b1;
+            box-sizing: border-box;
+            border-right:1px solid #2f2f2f;
+        }
+        .markdown_menu{
+            background-color: #2f2f2f;
+        }
+        .markdown_menu li,.btn{
+            background-color: #2f2f2f;
+            color:#adb1b1;
+            a{
+                color:#adb1b1;
+            }
+            &:hover{
+                background-color: #4c4c4c;
+                color:#ff716d;
+            }
+        }
+        .btn:hover{
+            background-color: #2f2f2f;
+        }
+        #edit{
+            background-color:#3f3f3f;
+            color:#adb1b1;
+            border-right:1px solid #2f2f2f;
+        }
+        .markdown_preview{
+            background-color:#3f3f3f;
+            color:#adb1b1;
+        }
     }
     @media screen and (max-width:1000px){
         .markdown_preview{

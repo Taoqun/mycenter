@@ -8,6 +8,9 @@
                 <p class="name" @click.stop="showDropList">{{user_info.name}}</p>
                 <s-drop-menu :list="drop_list" :show="drop_list_show"></s-drop-menu>
             </div>
+            <h3 class="title"><a href="/index">首页</a></h3>
+            <h3 class="title"><a href="/getPaperList">文章列表</a></h3>
+            <h3 class="title"><a href="/account/user_info/">设置</a></h3>
             <h3 class="title">任务夹</h3>
             <p class="list-menu" @click="getAllTask" data-listid='all'><i class="icon iconfont icon-form_light"></i>所有任务</p>
             <p class="list-menu" @click="NoFn"><i class="icon el-icon-date"></i>日历</p>
@@ -106,6 +109,7 @@
                 drop_list:[
                     // {name:'同步',event:this.stopEvent},
                     {name:'首页',event:this.gotoIndex},
+                    {name:'文章',event:this.gotoPaper},
                     {name:'设置',event:this.gotoSetting},
                     {name:'退出',event:this.exitAccount},
                 ],
@@ -674,6 +678,9 @@
             gotoIndex(){
                 location.href = location.protocol + '//' + location.hostname + ':' + location.port+ '/index/'
             },
+            gotoPaper(){
+                location.href = location.protocol + '//' + location.hostname + ':' + location.port+ '/getPaperList'
+            },
             gotoSetting(){
                 location.href = location.protocol + '//' + location.hostname + ':' + location.port+ '/account/user_info'
             },
@@ -745,11 +752,14 @@
         .title{
             line-height:20px;
             padding:10px 0 ;
-            background-color:#324057;
+            background-color:#313643;
             text-indent:20px;
             transition:all 0.2s linear 0s;
             color:#fff;
             box-sizing:border-box;
+            a{
+                color:#fff;
+            }
             &:hover{
                 background-color:#475669;
             }

@@ -164,7 +164,7 @@ exports.updatePaper = function(req, res) {
 exports.savePaper = (req,res)=>{
     let title = req.body.title
     let content = req.body.content
-    let keywords = req.body.keywords
+    let keywords = req.body['keywords[]']
     let user_id = req.body.user_id
     let paper_id = req.body.paper_id
     let sessions_id = req.cookies.sessions_id
