@@ -1,0 +1,116 @@
+#main{
+    margin-top:20px;
+    display:flex;
+}
+#right_body{
+    flex-grow:1;
+}
+// 定义变量
+$api_bg_Color: #282c34;
+$api_font_color:#a7b2bf;
+$api_bg_list_color:#3e4451;
+$api_list_border:#282c34;
+$api_input_border_color:#568af2;
+
+.right_body{
+    padding:20px;
+    height:100%;
+    background-color: $api_bg_list_color ;
+    color: $api_font_color;
+
+    .api_title{
+        ul{
+            border-bottom:1px solid $api_font_color;
+        }
+        li{
+            display:inline-block;
+            padding:10px 10px 10px 20px ;
+            font-size:15px;
+            line-height:1em;
+            margin-right:5px;
+            margin-bottom:-1px;
+            background-color:$api_bg_list_color;
+            border:1px solid $api_font_color;
+            border-bottom:0px;
+            transition:all 0.3s ease-in 0s;
+            cursor:pointer;
+            span{
+                display:inline-block;
+                vertical-align: middle;
+                margin-left:10px;
+                transition:all 0.3s ease-in 0s;
+            }
+            span:hover{
+                transform:rotate(180deg);
+            }
+        }
+        .active,li:hover{
+            color:$api_input_border_color;
+            background-color:$api_bg_Color;
+        }
+    }
+
+    .api_url{
+        display:flex;
+        height:100%;
+        box-sizing: border-box;
+        padding:20px 30px;
+        background-color: #475669;
+    }
+    .chose_type{
+        width:150px;
+        display:inline-block;
+        position:relative;
+        height:40px;
+        background-color:$api_input_border_color;
+        color:#fff;
+        border-radius:20px;
+        span{
+            display:block;
+            height:100%;
+            font-size:16px;
+            line-height:40px;
+            text-align:center;
+        }
+        ul{
+            display:none;
+            width:100%;
+            position:absolute;
+            left:0;
+            right:0;
+            top:100%;
+        }
+        li{
+            text-align:center;
+            font-size:16px;
+            line-height:1.5em;
+            padding:5px 10px;
+            box-sizing:border-box;
+        }
+    }
+    .api_url_input,.api_btn{
+        box-sizing:border-box;
+        height:40px;
+        font-size:16px;
+        line-height:40px;
+        &:hover{
+            box-shadow:0 0 5px $api_input_border_color;
+        }
+    }
+    .api_url_input{
+        flex-grow:1;
+        margin:0 20px;
+        text-indent:20px;
+        border:1px solid $api_input_border_color;
+        border-radius:5px;
+    }
+    .api_btn{
+        width:80px;
+        color:#fff;
+        margin-left:15px;
+        border:1px solid $api_input_border_color;
+        border-radius:20px;
+        background-color:$api_input_border_color;
+    }
+
+}

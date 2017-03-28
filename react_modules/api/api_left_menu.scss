@@ -1,0 +1,95 @@
+
+// 定义变量
+$api_bg_Color: #282c34;
+$api_font_color:#a7b2bf;
+$api_bg_list_color:#3e4451;
+$api_list_border:#282c34;
+$api_input_border_color:#568af2;
+
+
+.left_menu{
+    width:250px;
+    .search_btn{
+        display: flex;
+        padding:10px;
+        background-color: $api_bg_list_color;
+        input{
+            flex-grow:1;
+            height:30px;
+            text-indent:10px;
+            color:$api_font_color;
+            background-color: #202634;
+            border:1px solid #568af2;
+            border-radius:5px;
+            border-top-right-radius:0px;
+            border-bottom-right-radius:0px;
+            border-right:0px;
+            box-sizing: border-box;
+            transition:all 0.3s linear 0s;
+            &:focus{
+                box-shadow: 0 0 3px #568af2;
+            }
+        }
+        button{
+            width:70px;
+            height:30px;
+            color:#eff3fb;
+            background-color:#568af2;
+            border:1px solid #568af2;
+            border-radius:0px;
+            border-top-right-radius:5px;
+            border-bottom-right-radius:5px;
+            transition:all 0.5s linear 0s;
+            &:hover{
+                opacity:0.8;
+            }
+        }
+    }
+    .group{
+        background-color:$api_bg_Color;
+        color:$api_font_color;
+        h6{
+            font-size:16px;
+            line-height:1em;
+            padding:12px 20px;
+            letter-spacing: 1px;
+            font-weight:normal;
+            border-bottom:1px solid $api_list_border;
+            transition: all 0.3s linear 0s;
+            cursor:pointer;
+            vertical-align: middle;
+            span{
+                vertical-align: middle;
+                display:inline-block;
+                padding:0 5px;
+                font-size:20px;
+                transition: all 0.3s linear 0s;
+            }
+            &:hover{
+                color:$api_input_border_color;
+                background-color:$api_list_border;
+                span{
+                    color:$api_input_border_color;
+                }
+            }
+        }
+        ul{
+            background-color:$api_bg_list_color;
+            overflow:hidden;
+        }
+        li{
+            text-indent:20px;
+            padding:10px;
+            font-size:15px;
+            line-height:1em;
+            letter-spacing: 1px;
+            border-bottom:1px solid $api_list_border;
+            transition: all 0.3s linear 0s;
+            cursor:pointer;
+            &:hover{
+                color:$api_input_border_color;
+                background-color:$api_bg_Color;
+            }
+        }
+    }
+}

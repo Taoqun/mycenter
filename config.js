@@ -20,6 +20,7 @@ const head_list = [
       {name:'我的任务',url:'/task/'},
       {name:'文章中心',url:'/getPaperList'},
       {name:'写文章',url:'/addPaper/'},
+      {name:'API文档',url:'/api/'},
       {name:'个人中心',url:'/account/user_info'},
       {name:'设置',url:'/account/user_info'},
       {name:'关于',url:'/about'},
