@@ -18,6 +18,7 @@ exports.obj = obj
 const head_list = [
       {name:'首页',url:'/index/'},
       {name:'我的任务',url:'/task/'},
+      {name:'配色表',url:'/colors/'},
       {name:'文章中心',url:'/getPaperList'},
       {name:'写文章',url:'/addPaper/'},
       {name:'API文档',url:'/api/'},

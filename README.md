@@ -81,12 +81,32 @@ node app.js
 - markdown 写作（仿简书）
 - api文档管理中心 (仿apizza postman 暂时不做请求功能 只做文档的增查改删)
 
+![配色参考](http://ocrcrbkp1.bkt.clouddn.com/myCenter/color.jpg)
+[配色参考](http://ocrcrbkp1.bkt.clouddn.com/myCenter/color.jpg)
+
 ![登录](http://ocrcrbkp1.bkt.clouddn.com/myCenter/login.png)
+[登录](http://ocrcrbkp1.bkt.clouddn.com/myCenter/login.png)
+
 ![注册](http://ocrcrbkp1.bkt.clouddn.com/myCenter/register.png)
+[注册](http://ocrcrbkp1.bkt.clouddn.com/myCenter/register.png)
+
 ![todo list](http://ocrcrbkp1.bkt.clouddn.com/myCenter/todo_list.png)
+[todo list](http://ocrcrbkp1.bkt.clouddn.com/myCenter/todo_list.png)
+
 ![设置中心](http://ocrcrbkp1.bkt.clouddn.com/myCenter/setting.png)
+[设置中心](http://ocrcrbkp1.bkt.clouddn.com/myCenter/setting.png)
+
 ![写作模式切换](http://ocrcrbkp1.bkt.clouddn.com/myCenter/%E6%96%87%E7%AB%A0-%E5%86%99%E4%BD%9C%E6%A8%A1%E5%BC%8F%E5%88%87%E6%8D%A2.png)
+[写作模式切换](http://ocrcrbkp1.bkt.clouddn.com/myCenter/%E6%96%87%E7%AB%A0-%E5%86%99%E4%BD%9C%E6%A8%A1%E5%BC%8F%E5%88%87%E6%8D%A2.png)
+
 ![文章](http://ocrcrbkp1.bkt.clouddn.com/myCenter/%E6%96%87%E7%AB%A0.png)
+[文章](http://ocrcrbkp1.bkt.clouddn.com/myCenter/%E6%96%87%E7%AB%A0.png)
+
 ![文章夜间模式](http://ocrcrbkp1.bkt.clouddn.com/myCenter/%E6%96%87%E7%AB%A0%E5%A4%9C%E9%97%B4%E6%A8%A1%E5%BC%8F.png)
+[文章夜间模式](http://ocrcrbkp1.bkt.clouddn.com/myCenter/%E6%96%87%E7%AB%A0%E5%A4%9C%E9%97%B4%E6%A8%A1%E5%BC%8F.png)
+
 ![文章列表](http://ocrcrbkp1.bkt.clouddn.com/myCenter/%E6%96%87%E7%AB%A0%E5%88%97%E8%A1%A8.png)
+[文章列表](http://ocrcrbkp1.bkt.clouddn.com/myCenter/%E6%96%87%E7%AB%A0%E5%88%97%E8%A1%A8.png)
+
 ![文章查看](http://ocrcrbkp1.bkt.clouddn.com/myCenter/paper.png)
+[文章查看](http://ocrcrbkp1.bkt.clouddn.com/myCenter/paper.png)

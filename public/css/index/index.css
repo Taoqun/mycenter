@@ -1,0 +1,23 @@
+.header {
+  width: 1000px;
+  margin: 0 auto;
+  font-size: 20px;
+  line-height: 2em;
+  padding: 10px 20px;
+  box-sizing: border-box; }
+
+.main {
+  width: 1000px;
+  margin: 0 auto; }
+  .main li {
+    font-size: 20px;
+    line-height: 2em; }
+    .main li a {
+      display: block;
+      height: 100%;
+      padding: 10px 20px;
+      transition: all 0.3s linear 0s; }
+    .main li a:hover {
+      background-color: #D3DCE6; }
+
+/*# sourceMappingURL=index.css.map */

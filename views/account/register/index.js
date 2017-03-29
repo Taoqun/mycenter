@@ -9181,7 +9181,7 @@
 	exports.obj = obj;
 
 	// 配置首页名称 地址 头部模块  方便 vue react 调用
-	var head_list = [{ name: '首页', url: '/index/' }, { name: '我的任务', url: '/task/' }, { name: '文章中心', url: '/getPaperList' }, { name: '写文章', url: '/addPaper/' }, { name: 'API文档', url: '/api/' }, { name: '个人中心', url: '/account/user_info' }, { name: '设置', url: '/account/user_info' }, { name: '关于', url: '/about' }];
+	var head_list = [{ name: '首页', url: '/index/' }, { name: '我的任务', url: '/task/' }, { name: '配色表', url: '/colors/' }, { name: '文章中心', url: '/getPaperList' }, { name: '写文章', url: '/addPaper/' }, { name: 'API文档', url: '/api/' }, { name: '个人中心', url: '/account/user_info' }, { name: '设置', url: '/account/user_info' }, { name: '关于', url: '/about' }];
 
 	exports.headList = head_list;
 
