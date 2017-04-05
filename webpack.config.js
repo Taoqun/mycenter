@@ -16,7 +16,8 @@ var entryObj = {
     "markdown/index": "./src/markdown/index.js",
     "paperlist/index":"./src/paperlist/index.js",
     "paper/index":"./src/paper/index.js",
-    "api/index":"./src/api/index.js",
+    "api/apiList/index":"./src/api/apiList/index.js",
+    "api/apiDetail/index":"./src/api/apiDetail/index.js",
 }
 module.exports = {
     entry: entryObj,

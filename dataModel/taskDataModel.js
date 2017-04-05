@@ -81,7 +81,6 @@ run.prototype.init = function(account, res) {
         }
         res.json({ register: true })
     })
-
 }
 exports.run = new run()
 exports.tasklist = taskList
