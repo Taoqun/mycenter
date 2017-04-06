@@ -1,7 +1,7 @@
 <template lang="html">
     <div class="header_data">
         <span class="control_edit" :class="{'check':!control_data_edit}" @click="change_data_edit">
-            <i class="iconfont" :class='{"icon-unlock":!control_data_edit,"icon-lock":control_data_edit}'></i>
+            <i class="iconfont" :class='{"icon-weisuo":!control_data_edit,"icon-locked":control_data_edit}'></i>
             {{control_data_str}}
         </span>
         <p class="title">{{title}}</p>
@@ -77,12 +77,14 @@
         margin-top:40px;
         padding:20px;
         position:relative;
+        transition:all 0.5s linear 0s;
         li{
             display:flex;
         }
         .input{
             flex-grow:1;
             margin:10px 10px;
+            transition:all 0.3s linear 0s;
             i{
                 font-size:12px;
                 line-height:1em;
@@ -108,8 +110,7 @@
             display:inline-block;
             text-align:center;
             color:#8492A6;
-            background-color:#fff;
-            border-bottom:1px solid #EFF2F7;
+            background-color:#D3DCE6;
             border-top-left:5px;
             border-top-right:5px;
             transition:all 0.3s linear 0s;

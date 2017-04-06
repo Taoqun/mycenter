@@ -2,11 +2,11 @@
 <template lang="html">
     <div class="type_url">
         <span class="control_edit" :class="{'check':!control_type_edit}" @click="change_type_edit">
-            <i class="iconfont" :class='{"icon-unlock":!control_type_edit,"icon-lock":control_type_edit}'></i>
+            <i class="iconfont" :class='{"icon-weisuo":!control_type_edit,"icon-locked":control_type_edit}'></i>
             {{control_type_str}}
         </span>
         <p class="title">请求类型 / 接口地址</p>
-        <el-select v-model="type" :disabled="control_type_edit" @change="change" placeholder="请选择" class="select">
+        <el-select v-model="type.type" :disabled="control_type_edit" @change="change" placeholder="请选择" class="select">
            <el-option
              v-for="item in options"
              :label="item.label"
@@ -26,6 +26,7 @@
 
     export default {
         props:{
+            type:Object,
         },
         data(){
             return {
@@ -36,7 +37,6 @@
                     {label:'PUT',value:'put'},
                     {label:'DELETE',value:'delete'},
                 ],
-                type:'get',
                 control_type_edit:true,
             }
         },
@@ -77,8 +77,7 @@
             display:inline-block;
             text-align:center;
             color:#8492A6;
-            background-color:#fff;
-            border-bottom:1px solid #EFF2F7;
+            background-color:#D3DCE6;
             border-top-left:5px;
             border-top-right:5px;
             transition:all 0.3s linear 0s;
