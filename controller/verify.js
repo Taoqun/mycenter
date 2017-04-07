@@ -1,6 +1,6 @@
 const session = require('../dataModel/sessionDataModel.js').session
 
-exports.run = function(req,res,next){
+module.exports = function(req,res,next){
     res.header('Access-Control-Allow-Origin', '*')
     if(req.cookies && req.cookies.sessions_id){
         let id = req.cookies.sessions_id

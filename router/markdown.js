@@ -1,5 +1,5 @@
 const markdown = require("../controller/markdown.js")
-const verify = require('../controller/verify.js').run
+const verify = require('../controller/verify.js')
 const renderVerify = require("../controller/renderVerify.js")
 const bodyParser = require('body-parser');
 const urlencodedParser = bodyParser.urlencoded({ extended: false })

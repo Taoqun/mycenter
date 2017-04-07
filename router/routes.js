@@ -4,11 +4,12 @@ const Login = require('../controller/login.js')
 const Task = require('../controller/task.js')
 
 
-const verify = require('../controller/verify.js').run
+const verify = require('../controller/verify.js')
 
 // 引入路由
 const birth_router = require("./birth_router.js")
 const markdown_router = require("./markdown.js")
+const api_router = require("./api_router.js")
 // 插件类
 const bodyParser = require('body-parser');
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
@@ -21,6 +22,7 @@ module.exports = function(app){
     // 执行其他路由
     birth_router(app);
     markdown_router(app);
+    api_router(app);
 
     app.get('/test',function(req,res){
         res.render('test/test.ejs', {json:'{name:[1,2,3]}'} )
@@ -34,6 +36,7 @@ module.exports = function(app){
     app.get('/login', Login.login)
     app.post('/account/sendRegister',urlencodedParser,Login.register)
     app.get('/account/exit',Login.exit)
+
     // 获取更新个人资料
     app.get('/account/getUserInfo',verify,Login.getUserInfo)
     app.post('/account/updateUserInfo',urlencodedParser,verify,Login.updateUserInfo)

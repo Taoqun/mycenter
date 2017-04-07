@@ -8,14 +8,14 @@ var REACTMODULES = path.resolve(__dirname,'react_modules')
 var ROOT = path.resolve(__dirname)
 
 var entryObj = {
-    "account/login/index": './src/account/login/index.js',
-    "account/register/index": './src/account/register/index.js',
-    "birth/index": './src/index/index.js',
-    "task/index": "./src/task/index.js",
-    "account/user_info/index": "./src/account/user_info/index.js",
-    "markdown/index": "./src/markdown/index.js",
-    "paperlist/index":"./src/paperlist/index.js",
-    "paper/index":"./src/paper/index.js",
+    // "account/login/index": './src/account/login/index.js',
+    // "account/register/index": './src/account/register/index.js',
+    // "birth/index": './src/index/index.js',
+    // "task/index": "./src/task/index.js",
+    // "account/user_info/index": "./src/account/user_info/index.js",
+    // "markdown/index": "./src/markdown/index.js",
+    // "paperlist/index":"./src/paperlist/index.js",
+    // "paper/index":"./src/paper/index.js",
     "api/apiList/index":"./src/api/apiList/index.js",
     "api/apiDetail/index":"./src/api/apiDetail/index.js",
 }

@@ -12,6 +12,12 @@
             <s-keyvalue title="get / post 请求参数"></s-keyvalue>
             <s-view></s-view>
             <s-markd></s-markd>
+            <div class="btn_center">
+                <el-button type="danger" class="delete">删除</el-button>
+                <el-tooltip class="success" content="Ctrl + S 快捷保存" effect="dark">
+                    <el-button type="success">保存</el-button>
+                </el-tooltip>
+            </div>
         </div>
     </div>
 </template>
@@ -25,6 +31,7 @@
     import Markd from './markdown_view.vue'
     import Vue from 'vue'
     import Element from 'element-ui'
+    import {ajax} from "JS/ajax.js"
     Vue.use(Element)
 
     export default {
@@ -90,7 +97,12 @@
 
         },
         created(){
-
+            ajax({
+                url:'/api/getApiProject',
+                method:'get'
+            }).then((data)=>{
+                console.log(data)
+            })
         },
         mounted(){
             document.addEventListener('keydown',(event)=>{
@@ -124,6 +136,12 @@
             padding-bottom:200px;
             flex-grow:1;
             background-color:#EFF2F7;
+        }
+        .btn_center{
+            text-align:center;
+            .delete{
+                margin-right:30px;
+            }
         }
     }
 </style>

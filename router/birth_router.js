@@ -8,7 +8,7 @@
 
 
 const birth = require("../controller/birth.js")
-const verify = require('../controller/verify.js').run
+const verify = require('../controller/verify.js')
 
 const bodyParser = require('body-parser');
 const urlencodedParser = bodyParser.urlencoded({ extended: false })

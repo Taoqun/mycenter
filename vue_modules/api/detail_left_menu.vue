@@ -37,6 +37,12 @@
                     }
                 }
         },
+        mounted(){
+            let list = document.querySelectorAll(".api_module_menu h6")
+            Array.prototype.map.call(list,function(item,index){
+                item.click()
+            })
+        },
     }
 </script>
 
@@ -45,11 +51,12 @@
         font-size:15px;
         line-height:1em;
         h6{
-            padding: 20px;
+            padding:10px 20px;
             background-color:#324057;
             color:#F9FAFC;
-            font-size:20px;
+            font-size:16px;
             cursor:pointer;
+            border-bottom:1px solid #1F2D3D;
         }
         ul{
             overflow:hidden;
