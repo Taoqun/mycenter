@@ -44,7 +44,7 @@ github : [https://github.com/Taoqun/mycenter](https://github.com/Taoqun/mycenter
 
 
 ###### 想法
-- 看一席[《中国美色》](http://v.youku.com/v_show/id_XMjUzMDE4OTU4OA==.html?spm=a2h0z.8244218.2371631.5&from=y1.9-3.1)，想做一个颜色标识的网站，现在经常查颜色用千图网的配色表，但感觉还不够。
+- [ ] 看一席[《中国美色》](http://v.youku.com/v_show/id_XMjUzMDE4OTU4OA==.html?spm=a2h0z.8244218.2371631.5&from=y1.9-3.1)，想做一个颜色标识的网站，现在经常查颜色用千图网的配色表，但感觉还不够。
 - [ ] 买一台服务器啊~~
 - [ ] 写个微信小程序啊~~
 
