@@ -26,6 +26,10 @@ exports.moduleList = mongoose.model('apiModelList',api_module_type)
 const api_type = new mongoose.Schema({
     account:String,
     account_name:String,
+    project_name:String,
+    project_id:String,
+    module_name:String,
+    module_id:String,
     api_name:String,
     api_id:String,
     create_date:Date,
