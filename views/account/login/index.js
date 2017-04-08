@@ -8654,7 +8654,7 @@
 	  /* cssModules */
 	  null
 	)
-	Component.options.__file = "F:\\myCode\\src\\account\\login\\index.vue"
+	Component.options.__file = "/Users/taoqun/webProject/mycode/src/account/login/index.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -8665,9 +8665,9 @@
 	  if (!hotAPI.compatible) return
 	  module.hot.accept()
 	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-401bc357", Component.options)
+	    hotAPI.createRecord("data-v-4623bf37", Component.options)
 	  } else {
-	    hotAPI.reload("data-v-401bc357", Component.options)
+	    hotAPI.reload("data-v-4623bf37", Component.options)
 	  }
 	})()}
 
@@ -8690,8 +8690,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-401bc357!./../../../node_modules/sass-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-401bc357!./../../../node_modules/sass-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-4623bf37!./../../../node_modules/sass-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-4623bf37!./../../../node_modules/sass-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -9128,7 +9128,7 @@
 	  /* cssModules */
 	  null
 	)
-	Component.options.__file = "F:\\myCode\\vue_modules\\common\\head.vue"
+	Component.options.__file = "/Users/taoqun/webProject/mycode/vue_modules/common/head.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] head.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -9139,9 +9139,9 @@
 	  if (!hotAPI.compatible) return
 	  module.hot.accept()
 	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-6ec454fb", Component.options)
+	    hotAPI.createRecord("data-v-74cc50db", Component.options)
 	  } else {
-	    hotAPI.reload("data-v-6ec454fb", Component.options)
+	    hotAPI.reload("data-v-74cc50db", Component.options)
 	  }
 	})()}
 
@@ -9164,8 +9164,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-6ec454fb!./../../node_modules/sass-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./head.vue", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-6ec454fb!./../../node_modules/sass-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./head.vue");
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-74cc50db!./../../node_modules/sass-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./head.vue", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-74cc50db!./../../node_modules/sass-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./head.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -9261,7 +9261,7 @@
 
 
 	// module
-	exports.push([module.id, "/* reset */\r\nhtml,body,h1,h2,h3,h4,h5,h6,div,dl,dt,dd,ul,ol,li,p,blockquote,pre,hr,figure,table,caption,th,td,form,fieldset,legend,input,button,textarea,menu{margin:0;padding:0;}\r\nheader,footer,section,article,aside,nav,hgroup,address,figure,figcaption,menu,details{display:block;}\r\ntable{border-collapse:collapse;border-spacing:0;}\r\ncaption,th{text-align:left;font-weight:normal;}\r\nhtml,body,fieldset,img,iframe,abbr{border:0;}\r\ni,cite,em,var,address,dfn{font-style:normal;}\r\n[hidefocus],summary{outline:0;}\r\nli{list-style:none;}\r\nh1,h2,h3,h4,h5,h6,small{font-size:100%;}\r\nsup,sub{font-size:83%;}\r\npre,code,kbd,samp{font-family:inherit;}\r\nq:before,q:after{content:none;}\r\ntextarea{overflow:auto;resize:none;}\r\nlabel,summary{cursor:default;}\r\na,button{cursor:pointer;}\r\nh1,h2,h3,h4,h5,h6,em,strong,b{font-weight:bold;}\r\ndel,ins,u,s,a,a:hover{text-decoration:none;}\r\nbody,textarea,input,button,select,keygen,legend{font:12px/1.14 arial,\\5b8b\\4f53;color:#333;outline:0;}\r\nbody{background:#fff;}\r\na,a:hover{color:#333;}\r\n\r\n.clearfix{zoom:1}\r\n.clearfix:after{\r\n    content:'';\r\n    display:block;\r\n    width:0;\r\n    height:0;\r\n    clear:both;\r\n    overflow:hidden;\r\n}\r\n", ""]);
+	exports.push([module.id, "/* reset */\nhtml,body,h1,h2,h3,h4,h5,h6,div,dl,dt,dd,ul,ol,li,p,blockquote,pre,hr,figure,table,caption,th,td,form,fieldset,legend,input,button,textarea,menu{margin:0;padding:0;}\nheader,footer,section,article,aside,nav,hgroup,address,figure,figcaption,menu,details{display:block;}\ntable{border-collapse:collapse;border-spacing:0;}\ncaption,th{text-align:left;font-weight:normal;}\nhtml,body,fieldset,img,iframe,abbr{border:0;}\ni,cite,em,var,address,dfn{font-style:normal;}\n[hidefocus],summary{outline:0;}\nli{list-style:none;}\nh1,h2,h3,h4,h5,h6,small{font-size:100%;}\nsup,sub{font-size:83%;}\npre,code,kbd,samp{font-family:inherit;}\nq:before,q:after{content:none;}\ntextarea{overflow:auto;resize:none;}\nlabel,summary{cursor:default;}\na,button{cursor:pointer;}\nh1,h2,h3,h4,h5,h6,em,strong,b{font-weight:bold;}\ndel,ins,u,s,a,a:hover{text-decoration:none;}\nbody,textarea,input,button,select,keygen,legend{font:12px/1.14 arial,\\5b8b\\4f53;color:#333;outline:0;}\nbody{background:#fff;}\na,a:hover{color:#333;}\n\n.clearfix{zoom:1}\n.clearfix:after{\n    content:'';\n    display:block;\n    width:0;\n    height:0;\n    clear:both;\n    overflow:hidden;\n}\n", ""]);
 
 	// exports
 
@@ -9283,8 +9283,8 @@
 	//hostname = 'http://www.taoqun.com'
 
 	var obj = {
-	    port: port || 8081,
-	    hostname: hostname || 'http://localhost'
+	    port: port || 80,
+	    hostname: hostname || 'http://182.61.49.55'
 	};
 
 	exports.obj = obj;
@@ -9315,7 +9315,7 @@
 	if (false) {
 	  module.hot.accept()
 	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-6ec454fb", module.exports)
+	     require("vue-hot-reload-api").rerender("data-v-74cc50db", module.exports)
 	  }
 	}
 
@@ -9337,7 +9337,7 @@
 	  /* cssModules */
 	  null
 	)
-	Component.options.__file = "F:\\myCode\\vue_modules\\account\\login.vue"
+	Component.options.__file = "/Users/taoqun/webProject/mycode/vue_modules/account/login.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] login.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -9348,9 +9348,9 @@
 	  if (!hotAPI.compatible) return
 	  module.hot.accept()
 	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-21444d84", Component.options)
+	    hotAPI.createRecord("data-v-d95345c4", Component.options)
 	  } else {
-	    hotAPI.reload("data-v-21444d84", Component.options)
+	    hotAPI.reload("data-v-d95345c4", Component.options)
 	  }
 	})()}
 
@@ -9373,8 +9373,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-21444d84!./../../node_modules/sass-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./login.vue", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-21444d84!./../../node_modules/sass-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./login.vue");
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-d95345c4!./../../node_modules/sass-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./login.vue", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-d95345c4!./../../node_modules/sass-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./login.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -46265,7 +46265,7 @@
 	if (false) {
 	  module.hot.accept()
 	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-21444d84", module.exports)
+	     require("vue-hot-reload-api").rerender("data-v-d95345c4", module.exports)
 	  }
 	}
 
@@ -46284,7 +46284,7 @@
 	if (false) {
 	  module.hot.accept()
 	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-401bc357", module.exports)
+	     require("vue-hot-reload-api").rerender("data-v-4623bf37", module.exports)
 	  }
 	}
 

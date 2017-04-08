@@ -419,7 +419,7 @@
 
 
 	// module
-	exports.push([module.id, "/* reset */\r\nhtml,body,h1,h2,h3,h4,h5,h6,div,dl,dt,dd,ul,ol,li,p,blockquote,pre,hr,figure,table,caption,th,td,form,fieldset,legend,input,button,textarea,menu{margin:0;padding:0;}\r\nheader,footer,section,article,aside,nav,hgroup,address,figure,figcaption,menu,details{display:block;}\r\ntable{border-collapse:collapse;border-spacing:0;}\r\ncaption,th{text-align:left;font-weight:normal;}\r\nhtml,body,fieldset,img,iframe,abbr{border:0;}\r\ni,cite,em,var,address,dfn{font-style:normal;}\r\n[hidefocus],summary{outline:0;}\r\nli{list-style:none;}\r\nh1,h2,h3,h4,h5,h6,small{font-size:100%;}\r\nsup,sub{font-size:83%;}\r\npre,code,kbd,samp{font-family:inherit;}\r\nq:before,q:after{content:none;}\r\ntextarea{overflow:auto;resize:none;}\r\nlabel,summary{cursor:default;}\r\na,button{cursor:pointer;}\r\nh1,h2,h3,h4,h5,h6,em,strong,b{font-weight:bold;}\r\ndel,ins,u,s,a,a:hover{text-decoration:none;}\r\nbody,textarea,input,button,select,keygen,legend{font:12px/1.14 arial,\\5b8b\\4f53;color:#333;outline:0;}\r\nbody{background:#fff;}\r\na,a:hover{color:#333;}\r\n\r\n.clearfix{zoom:1}\r\n.clearfix:after{\r\n    content:'';\r\n    display:block;\r\n    width:0;\r\n    height:0;\r\n    clear:both;\r\n    overflow:hidden;\r\n}\r\n", ""]);
+	exports.push([module.id, "/* reset */\nhtml,body,h1,h2,h3,h4,h5,h6,div,dl,dt,dd,ul,ol,li,p,blockquote,pre,hr,figure,table,caption,th,td,form,fieldset,legend,input,button,textarea,menu{margin:0;padding:0;}\nheader,footer,section,article,aside,nav,hgroup,address,figure,figcaption,menu,details{display:block;}\ntable{border-collapse:collapse;border-spacing:0;}\ncaption,th{text-align:left;font-weight:normal;}\nhtml,body,fieldset,img,iframe,abbr{border:0;}\ni,cite,em,var,address,dfn{font-style:normal;}\n[hidefocus],summary{outline:0;}\nli{list-style:none;}\nh1,h2,h3,h4,h5,h6,small{font-size:100%;}\nsup,sub{font-size:83%;}\npre,code,kbd,samp{font-family:inherit;}\nq:before,q:after{content:none;}\ntextarea{overflow:auto;resize:none;}\nlabel,summary{cursor:default;}\na,button{cursor:pointer;}\nh1,h2,h3,h4,h5,h6,em,strong,b{font-weight:bold;}\ndel,ins,u,s,a,a:hover{text-decoration:none;}\nbody,textarea,input,button,select,keygen,legend{font:12px/1.14 arial,\\5b8b\\4f53;color:#333;outline:0;}\nbody{background:#fff;}\na,a:hover{color:#333;}\n\n.clearfix{zoom:1}\n.clearfix:after{\n    content:'';\n    display:block;\n    width:0;\n    height:0;\n    clear:both;\n    overflow:hidden;\n}\n", ""]);
 
 	// exports
 
@@ -441,8 +441,8 @@
 	//hostname = 'http://www.taoqun.com'
 
 	var obj = {
-	    port: port || 8081,
-	    hostname: hostname || 'http://localhost'
+	    port: port || 80,
+	    hostname: hostname || 'http://182.61.49.55'
 	};
 
 	exports.obj = obj;

@@ -8,8 +8,8 @@ let port ,hostname;
     //hostname = 'http://www.taoqun.com'
 
 const obj = {
-    port: port || 8081,
-    hostname: hostname || 'http://localhost'
+    port: port || 80,
+    hostname: hostname || 'http://182.61.49.55'
 }
 
 exports.obj = obj
