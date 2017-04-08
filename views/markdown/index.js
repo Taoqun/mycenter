@@ -9058,8 +9058,8 @@
 	var port = void 0,
 	    hostname = void 0;
 
-	//port = 8081
-	//hostname = 'http://www.taoqun.com'
+	port = 80;
+	hostname = 'http://182.61.49.55';
 
 	var obj = {
 	    port: port || 80,

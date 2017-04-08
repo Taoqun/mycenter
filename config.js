@@ -4,8 +4,8 @@
 // 配置好  hostname 地址 和 端口号 后台node会读取此配置监听端口号
 let port ,hostname;
 
-    //port = 8081
-    //hostname = 'http://www.taoqun.com'
+    port = 80
+    hostname = 'http://182.61.49.55'
 
 const obj = {
     port: port || 80,
