@@ -18,7 +18,7 @@ export default {
 
 <style lang="scss">
     .drop-down{
-        width:50%;
+        // width:50%;
         position:absolute;
         top:100%;
         right:0;

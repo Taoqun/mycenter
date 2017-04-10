@@ -59,7 +59,7 @@
                             let data = res
                             if(data.verify){
                                 setTimeout(()=>{
-                                    location.href = location.protocol + '//'+location.hostname+':'+location.port+"/task"
+                                    location.href = location.protocol + '//'+location.hostname+':'+location.port+"/index"
                                 },1000)
                             }else if( !data.verify && data.account ){
                                 this.dialog_text='密码错误！'

@@ -176,7 +176,7 @@
                               localStorage.password = this.password
                               this.loading = true
                               setTimeout(()=>{
-                                  location.href = location.protocol + '//'+location.hostname+':'+location.port+"/task"
+                                  location.href = location.protocol + '//'+location.hostname+':'+location.port+"/index"
                               },1000)
                           }else if(!result.register){
                               this.alertText = '账号已存在，请更换后重试！'

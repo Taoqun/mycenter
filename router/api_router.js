@@ -22,7 +22,7 @@ module.exports = (app)=>{
     app.post("/api/deleteModule",parser,verify,Api.deleteModule)
 
     // api增查改删
-
+    app.get("/api/getApiList",verify,Api.getApiList)
     app.get("/api/getApi",verify,Api.getApi)
     app.post("/api/addApi",parser,verify,Api.addApi)
     app.post("/api/updateApi",parser,verify,Api.updateApi)

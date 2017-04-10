@@ -14,8 +14,8 @@ exports.projectList = mongoose.model("apiProjectList",project_list_type)
 const api_module_type = new mongoose.Schema({
     account:String,
     account_name:String,
-    list_name:String,
-    list_id:String,
+    project_name:String,
+    project_id:String,
     module_name:String,
     module_id:String,
     create_date:Date,
@@ -42,4 +42,4 @@ const api_type = new mongoose.Schema({
     api_markdown:String,
 })
 
-exports.api = mongoose.model("apiList",api_type)
+exports.apiList = mongoose.model("apiList",api_type)

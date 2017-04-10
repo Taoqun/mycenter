@@ -132,10 +132,12 @@ exports.addModule = (req,res) => {
                 let module = new moduleList(obj)
                 module.save((err)=>{
                     if(err){ return error(err,res) }
-                    moduleList.find(obj,(err,result)=>{
-                        if(err){ return error(err,res) }
-                        res.json({code:1,result:result})
-                    })
+                    let obj = {}
+                        obj.module_name = module["module_name"]
+                        obj.module_id = module["_id"]
+                        obj.show = false
+                        obj.project_id = module["project_id"]
+                    res.json({code:1,obj})
                 })
             }else{
                 res.json({code:0,dis:"名称已存在"})
@@ -146,9 +148,18 @@ exports.addModule = (req,res) => {
 exports.getModules = (req,res)=>{
     let sessions_id = req.cookies.sessions_id
     getAccount(sessions_id).then((account)=>{
-        moduleList.find({account},(err,result)=>{
+        let project_id = req.query.project_id
+        moduleList.find({account,project_id},(err,result)=>{
             if(err){ return error(err,res) }
-            res.json({code:1,result})
+            let list = []
+            result.map((item)=>{
+                let obj = {}
+                    obj.project_id = item.project_id
+                    obj.module_name = item.module_name
+                    obj.module_id = item["_id"]
+                list.push(obj)
+            })
+            res.json({code:1,result:list})
         })
     })
 }
@@ -177,7 +188,10 @@ exports.deleteModule = (req,res)=>{
         }
         moduleList.remove({_id:module_id},(err,result)=>{
             if(err){ return error(err,res) }
-            res.json({code:1})
+            apiList.remove({account,module_id},(err,result)=>{
+                if(err){ return error(err,res) }
+                res.json({code:1})
+            })
         })
     })
 }
@@ -189,7 +203,7 @@ exports.addApi = (req,res)=>{
             obj.project_id = req.body.project_id
             obj.module_id = req.body.module_id
             obj.api_name = req.body.api_name
-            obj.account = acount
+            obj.account = account
             obj.create_date = Date.now() + (1000*60*60*8)
         if( !obj.project_id || !obj.module_id || !obj.api_name ){
             res.json({code:0,dis:"project_id or module_id or api_name is null"})
@@ -200,8 +214,32 @@ exports.addApi = (req,res)=>{
             if(err){return error(err,res)}
             apiList.find(obj,(err,result)=>{
                 if(err){return error(err,res)}
-                res.json({code:1,result})
+                let obj = {}
+                    obj.api_name = api["api_name"]
+                    obj.api_id = api["_id"]
+                    obj.module_id = api["module_id"]
+                res.json({code:1,obj})
             })
+        })
+
+    })
+}
+exports.getApiList = (req,res)=>{
+    let sessions_id = req.cookies.sessions_id
+    getAccount(sessions_id).then((account)=>{
+        apiList.find({account},(err,result)=>{
+            if(err){ return error(err,res)}
+            let list = []
+            if(result.length){
+                result.map((item,index)=>{
+                    let obj = {}
+                        obj.api_id = item["_id"]
+                        obj.api_name = item.api_name
+                        obj.module_id = item.module_id
+                    list.push(obj)
+                })
+            }
+            res.json({code:1,result:list})
         })
     })
 }
@@ -223,7 +261,7 @@ exports.updateApi = (req,res)=>{
     let sessions_id = req.cookies.sessions_id
     getAccount(sessions_id).then((account)=>{
         let find = {}
-            find.account = acount
+            find.account = account
             find.api_id = req.body.api_id
         if(!find.api_id){
             res.json({code:0,dis:"api_id is undefined"})
@@ -231,19 +269,17 @@ exports.updateApi = (req,res)=>{
         }
         let obj = {}
             obj.update_date = Date.now() + (1000*60*60*8)
+            req.body.api_name ? obj.api_name = req.body.api_name :''
             req.body.api_type ? obj.api_type = req.body.api_type : ''
             req.body.api_url ? obj.api_url = req.body.api_url : ''
             req.body.api_header ? obj.api_header = req.body.api_header : ''
             req.body.api_request_data ? obj.api_request_data = req.body.api_request_data : ''
             req.body.api_response_data ? obj.api_response_data = req.body.api_response_data : ''
             req.body.api_markdown ? obj.api_markdown = req.body.api_markdown : ''
-
-        apiList.update(find,obj,(err,result)=>{
-            if(err){ return error(err,res) }
+        apiList.update({_id:find.api_id},obj,(err,result)=>{
+            if(err){ return error(err,res)}
             res.json({code:1})
         })
-
-
     })
 }
 exports.deleteApi = (req,res)=>{
@@ -255,7 +291,7 @@ exports.deleteApi = (req,res)=>{
                 res.json({code:0,dis:"api_id is null"})
                 return
             }
-            apiList.remove(obj,(err,result)=>{
+            apiList.remove({_id:obj.api_id},(err,result)=>{
                 if(err){ return error(err,res) }
                 res.json({code:1})
             })

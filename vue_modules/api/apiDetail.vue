@@ -1,6 +1,12 @@
 <template lang="html">
     <div class="api_detail">
-        <s-left-menu :menuList="menulist"></s-left-menu>
+        <s-left-menu
+            :menuList="menulist"
+            :modulelist="moduleList"
+            :modulemore="module_more"
+            :apilist="apiList"
+            :apimore="api_more" >
+        </s-left-menu>
         <div class="right_body">
             <!-- 面包屑导航 -->
             <!-- 请求地址 -->
@@ -45,26 +51,16 @@
         },
         data(){
             return{
-                menulist:[
-                    {name:"头部模块",list:[
-                        {name:'获取用户信息',url:'#'},
-                        {name:'修改用户信息',url:'#'},
-                        {name:'删除用户',url:'#'},
-                        {name:'文档',url:'#'},
-                        {name:'文档',url:'#'},
-                    ]},
-                    {name:"模块1",list:[
-                        {name:'文档',url:'#'},
-                        {name:'文档',url:'#'},
-                        {name:'文档',url:'#'},
-                        {name:'文档',url:'#'},
-                    ]},
-                    {name:"模块1",list:[
-                        {name:'文档',url:'#'},
-                        {name:'文档',url:'#'},
-                        {name:'文档',url:'#'},
-                        {name:'文档',url:'#'},
-                    ]},
+                moduleList:[],
+                apiList:[],
+                module_more:[
+                    {name:"添加api",event:this.addApi},
+                    {name:"重命名",event:this.updateModule},
+                    {name:"删除",event:this.delModule},
+                ],
+                api_more:[
+                    {name:"重命名",event:this.updateApi},
+                    {name:"删除",event:this.delApi},
                 ],
                 type:{type:'get'},
                 location:[
@@ -94,16 +90,22 @@
             }
         },
         computed:{
-
+            menulist(){
+                let list = []
+                this.moduleList.map((module,index)=>{
+                    let obj = {}
+                        obj.module_name = module.module_name
+                        obj.module_id = module.module_id
+                        obj.show = module.show
+                        obj.list = this.apiList.filter((api)=>{
+                            return obj.module_id === api.module_id
+                        })
+                    list.push(obj)
+                })
+                return list
+            }
         },
-        created(){
-            ajax({
-                url:'/api/getApiProject',
-                method:'get'
-            }).then((data)=>{
-                console.log(data)
-            })
-        },
+        created(){},
         mounted(){
             document.addEventListener('keydown',(event)=>{
                 if( event.keyCode === 83 && event.ctrlKey ){
@@ -115,9 +117,189 @@
                     event.stopPropagation()
                 }
             })
+            document.addEventListener("click",()=>{
+                this.moduleList.map((item)=>{
+                    item.show = false
+                })
+                this.apiList.map((item)=>{
+                    item.show = false
+                })
+            })
+            this.getModules()
+            this.getApiList()
         },
         methods:{
-
+            getModules(){
+                let project_id = window.project_id
+                ajax({
+                    method:'get',
+                    url:"/api/getModules",
+                    data:{project_id:project_id}
+                }).then((data)=>{
+                    if(data.code){
+                        data.result.map((item)=>{
+                            item.show = false
+                        })
+                        this.moduleList = data.result
+                    }else{
+                        this.$message.error("获取失败"+ data.dis )
+                    }
+                })
+            },
+            getApiList(){
+                ajax({
+                    method:"get",
+                    url:"/api/getApiList",
+                }).then((data)=>{
+                    if(data.code === 1){
+                        data.result.map((item)=>{
+                            item.show = false
+                        })
+                        this.apiList = data.result
+                    }
+                })
+            },
+            addModule(){
+                this.$prompt("请输入你需要创建的模块名称","添加模块",{
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                }).then(({value})=>{
+                    if(!value){return}
+                    let obj = {}
+                        obj.project_id = window.project_id
+                        obj.module_name = value
+                    ajax({
+                        url:"/api/addModule",
+                        method:"post",
+                        data:obj
+                    }).then((data)=>{
+                        if(data.code === 1){
+                            this.moduleList.push(data.obj)
+                        }else{
+                            this.$message.error("添加失败:"+data.dis)
+                        }
+                    })
+                },()=>{})
+            },
+            addApi(item,list){
+                let module_id = item.module_id
+                let obj ={}
+                    obj.module_id = module_id
+                    obj.project_id = window.project_id
+                this.$prompt("请输入你要添加的api名称","添加api",{
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                }).then(({value})=>{
+                    if(!value){return}
+                    obj.api_name = value
+                    ajax({
+                        method:"post",
+                        url:"/api/addApi",
+                        data:obj
+                    }).then((data)=>{
+                        if(data.code === 1){
+                            this.apiList.push( data.obj )
+                        }
+                    },()=>{})
+                },()=>{})
+            },
+            updateModule(item,list){
+                let obj ={}
+                    obj.module_id = item.module_id
+                    obj.project_id = window.project_id
+                this.$prompt("输入模块的新名称","修改模块名称",{
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                }).then(({value})=>{
+                    obj.module_name = value
+                    ajax({
+                        method:"post",
+                        url:"/api/updateModule",
+                        data:obj
+                    }).then((data)=>{
+                        if(data.code === 1){
+                            this.$message("修改成功")
+                            list.map((item)=>{
+                                if(item.module_id === obj.module_id ){
+                                    item.module_name = value
+                                }
+                            })
+                        }else{
+                            this.$message.error("修改失败")
+                        }
+                    })
+                },()=>{})
+            },
+            delModule(item,list){
+                let module_id = item.module_id
+                this.$confirm(`确定删除${item.module_name}吗？`,{
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                }).then(()=>{
+                    ajax({
+                        method:"post",
+                        url:"/api/deleteModule",
+                        data:{module_id}
+                    }).then((data)=>{
+                        if(data.code === 1){
+                            list.map((item,index)=>{
+                                if( item.module_id === module_id ){
+                                    list.splice(index,1)
+                                }
+                            })
+                        }
+                    })
+                },()=>{})
+            },
+            updateApi(item,list){
+                let obj ={}
+                    obj.api_id = item.api_id
+                this.$prompt(`请输入你需要修改${item.api_name}的名称`,"修改名称",{
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                }).then(({value})=>{
+                    obj.api_name = value
+                    ajax({
+                        url:"/api/updateApi",
+                        method:"post",
+                        data:obj
+                    }).then((data)=>{
+                        if(data.code){
+                            list.map((i)=>{
+                                if(i.api_id === item.api_id){
+                                    i.api_name = value
+                                }
+                            })
+                        }else{
+                            this.$message.error("修改错误")
+                        }
+                    })
+                })
+            },
+            delApi(item,list){
+                let api_id = item.api_id
+                this.$confirm(`确认删除${item.api_name}吗？`,"删除",{
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                }).then(()=>{
+                    ajax({
+                        method:"post",
+                        url:"/api/deleteApi",
+                        data:{api_id}
+                    }).then((data)=>{
+                        if(data.code){
+                            list.map((i,index)=>{
+                                if(i.api_id === item.api_id ){
+                                    list.splice(index,1)
+                                }
+                            })
+                            this.$message("删除成功")
+                        }else{
+                            this.$message.error("删除失败")
+                        }
+                    })
+                },()=>{})
+            },
         },
     }
 </script>
