@@ -14,14 +14,14 @@
             <!-- 请求get/post 参数 -->
             <s-nav :location="location"></s-nav>
             <s-header :type="type"></s-header>
-            <s-keyvalue title="header 请求参数" :keyvalue="header_key_value"></s-keyvalue>
-            <s-keyvalue title="get / post 请求参数"></s-keyvalue>
-            <s-view></s-view>
-            <s-markd></s-markd>
+            <s-keyvalue title="header 请求参数" :keyvalue="api_header"></s-keyvalue>
+            <s-keyvalue title="get / post 请求参数" :keyvalue="api_request_data"></s-keyvalue>
+            <s-view :result="api_response_data"></s-view>
+            <s-markd :result="markd"></s-markd>
             <div class="btn_center">
-                <el-button type="danger" class="delete">删除</el-button>
+                <el-button type="danger" class="delete" @click="delApiControl">删除</el-button>
                 <el-tooltip class="success" content="Ctrl + S 快捷保存" effect="dark">
-                    <el-button type="success">保存</el-button>
+                    <el-button type="success" @click="updateApi">保存</el-button>
                 </el-tooltip>
             </div>
         </div>
@@ -39,6 +39,7 @@
     import Element from 'element-ui'
     import {ajax} from "JS/ajax.js"
     Vue.use(Element)
+    import { mapGetters } from 'vuex'
 
     export default {
         components:{
@@ -59,34 +60,26 @@
                     {name:"删除",event:this.delModule},
                 ],
                 api_more:[
-                    {name:"重命名",event:this.updateApi},
+                    {name:"重命名",event:this.updateApiName},
                     {name:"删除",event:this.delApi},
                 ],
-                type:{type:'get'},
+                type:{
+                    type:'get',
+                    url:'',
+                },
                 location:[
-                    {name:'项目',url:''},
-                    {name:'模块',url:'#'},
-                    {name:'文档',url:'#'},
+                    {name:''},
+                    {name:''},
+                    {name:''},
                 ],
-                header_key_value:[
-                    {
-                        key:'这里是key值',
-                        value:'这里是value',
-                        dis:'这里是描述',
-                    },
-                    {
-                        key:'这里是key值',
-                        value:'这里是value',
-                        dis:'这里是描述',
-                    },
-                ],
-                data_key_value:[
-                    {
-                        key:'这里是key值',
-                        value:'这里是value',
-                        dis:'这里是描述',
-                    },
-                ],
+                api_header:{list:[]},
+                api_request_data:{list:[]},
+                api_response_data:{
+                    result:''
+                },
+                markd:{
+                    result:''
+                },
             }
         },
         computed:{
@@ -103,16 +96,27 @@
                     list.push(obj)
                 })
                 return list
+            },
+            ...mapGetters(["api_id"])
+        },
+        watch:{
+            api_id(){
+                console.log(this.api_id)
+                this.type.type = ''
+                this.type.url = ''
+                this.api_header = {list:[]}
+                this.api_request_data = {list:[]}
+                this.api_response_data.result = ''
+                this.markd.result = ''
+                this.getApi()
             }
         },
         created(){},
         mounted(){
             document.addEventListener('keydown',(event)=>{
                 if( event.keyCode === 83 && event.ctrlKey ){
-                    this.$message({
-                        type:"success",
-                        message:"保存成功",
-                    })
+                    this.updateApi()
+
                     event.preventDefault()
                     event.stopPropagation()
                 }
@@ -251,7 +255,7 @@
                     })
                 },()=>{})
             },
-            updateApi(item,list){
+            updateApiName(item,list){
                 let obj ={}
                     obj.api_id = item.api_id
                 this.$prompt(`请输入你需要修改${item.api_name}的名称`,"修改名称",{
@@ -300,6 +304,64 @@
                     })
                 },()=>{})
             },
+            getApi(){
+                let api_id = this.api_id
+                ajax({
+                    url:"/api/getApi",
+                    method:"get",
+                    data:{api_id}
+                }).then((data)=>{
+                    if(data.code === 1 ){
+                        let obj = data.result
+                        this.type.type = obj.type || 'get'
+                        this.type.url = obj.api_url || ''
+                        this.location = []
+                        this.location.push({name:window.project_name})
+                        this.moduleList.map((item)=>{
+                            if(item.module_id === obj.module_id ){
+                                this.location.push({name:item.module_name})
+                            }
+                        })
+                        this.location.push({name:obj.api_name})
+                        this.api_header.list = obj.api_header  || [{key:'',value:'',dis:''}]
+                        this.api_request_data.list = obj.api_request_data  || [{key:'',value:'',dis:''}]
+                        this.api_response_data.result = obj.api_response_data || ''
+                        this.markd.result = obj.api_markdown || ''
+                    }
+                })
+            },
+            updateApi(){
+                let obj = {}
+                    obj.api_id = this.api_id
+                    obj.api_type = this.type.type
+                    obj.api_url = this.type.url
+                    obj.api_header = JSON.stringify(this.api_header.list)
+                    obj.api_request_data = JSON.stringify(this.api_request_data.list)
+                    obj.api_response_data = this.api_response_data.result
+                    obj.api_markdown = this.markd.result
+                ajax({
+                    method:'post',
+                    url:'/api/updateApi',
+                    data:obj
+                }).then((data)=>{
+                    if(data.code === 1){
+                        this.$message({
+                            type:"success",
+                            message:"保存成功",
+                        })
+                    }
+                })
+            },
+            delApiControl(){
+                let obj = {}
+                    obj.api_id = this.api_id
+                this.apiList.map((i)=>{
+                    if(this.api_id === i.api_id){
+                        obj.api_name = i.api_name
+                    }
+                })
+                this.delApi(obj,this.apiList)
+            }
         },
     }
 </script>

@@ -253,7 +253,7 @@ exports.getApi = (req,res)=>{
         }
         apiList.find({account,_id:api_id},(err,result)=>{
             if(err){ return error(err,res) }
-            res.json({code:1,result})
+            res.json({code:1,result:result[0]})
         })
     })
 }
@@ -272,8 +272,8 @@ exports.updateApi = (req,res)=>{
             req.body.api_name ? obj.api_name = req.body.api_name :''
             req.body.api_type ? obj.api_type = req.body.api_type : ''
             req.body.api_url ? obj.api_url = req.body.api_url : ''
-            req.body.api_header ? obj.api_header = req.body.api_header : ''
-            req.body.api_request_data ? obj.api_request_data = req.body.api_request_data : ''
+            req.body.api_header && JSON.parse(req.body.api_header) instanceof Array ? obj.api_header = JSON.parse(req.body.api_header) : ''
+            req.body.api_request_data && JSON.parse(req.body.api_request_data) instanceof Array ? obj.api_request_data = JSON.parse(req.body.api_request_data) : ''
             req.body.api_response_data ? obj.api_response_data = req.body.api_response_data : ''
             req.body.api_markdown ? obj.api_markdown = req.body.api_markdown : ''
         apiList.update({_id:find.api_id},obj,(err,result)=>{

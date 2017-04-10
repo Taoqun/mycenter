@@ -13,7 +13,7 @@
             crumbs(){
                 let str = ''
                     this.location.forEach((item,index)=>{
-                        str += `<a href=${item.url}>${item.name}</a>`
+                        str += `${item.name}`
                         if( index !== this.location.length -1 ){
                             str += ' / '
                         }

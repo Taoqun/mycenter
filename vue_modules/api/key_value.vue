@@ -6,7 +6,7 @@
         </span>
         <p class="title">{{title}}</p>
         <ul class="clearfix">
-            <li v-for="item in keyvalue">
+            <li v-for="item in keyvalue.list">
                 <el-input class="input" v-model="item.key" :readonly="control_data_edit" placeholder="key"></el-input>
                 <el-input class="input" v-model="item.value" :readonly="control_data_edit" placeholder="value"></el-input>
                 <el-input class="input" v-model="item.dis" :readonly="control_data_edit" placeholder="描述"></el-input>
@@ -23,15 +23,7 @@
                 type:String,
                 default:' ',
             },
-            keyvalue:{
-                type:Array,
-                default:function(){
-                    return [{
-                            key:'',
-                            value:'',
-                            dis:''}]
-                }
-            }
+            keyvalue:Object,
         },
         data(){
             return {
@@ -48,16 +40,17 @@
                 this.control_data_edit = !this.control_data_edit
             },
             delItem(item){
-                this.keyvalue.splice( this.keyvalue.indexOf(item),1)
+                this.keyvalue.list.splice( this.keyvalue.list.indexOf(item),1)
             },
             add_data(){
-                if(this.keyvalue.length === 0 || this.keyvalue[this.keyvalue.length-1].key ){
+                console.log(this.keyvalue.list)
+                if(this.keyvalue.list.length === 0 || this.keyvalue.list[this.keyvalue.list.length-1].key ){
                     let obj = {
                         key:'',
                         value:'',
                         dis:'',
                     }
-                    this.keyvalue.push(obj)
+                    this.keyvalue.list.push(obj)
                 }else{
                     this.$message({
                         type:'error',

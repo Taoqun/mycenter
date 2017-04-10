@@ -4,6 +4,7 @@ var webpack = require('webpack')
 var VUEMODULES = path.resolve(__dirname, 'vue_modules')
 var CSS = path.resolve(__dirname, 'public/css')
 var JS = path.resolve(__dirname, 'public/js')
+var Store = path.resolve(__dirname,"vue_store")
 var REACTMODULES = path.resolve(__dirname,'react_modules')
 var ROOT = path.resolve(__dirname)
 
@@ -58,6 +59,7 @@ module.exports = {
             JS: JS,
             ROOT: ROOT,
             REACTMODULES:REACTMODULES,
+            Store:Store,
         }
     },
     devServer: {

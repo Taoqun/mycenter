@@ -1,7 +1,7 @@
 <template lang="html">
     <div class="drop-down" v-show="show">
         <i class="drop-down-icon iconfont icon-triangleupfill"></i>
-        <p v-for="item in list"  @click="item.event(obj,listgroup)">{{item.name}}</p>
+        <p v-for="item in list"  @click.stop="item.event(obj,listgroup)">{{item.name}}</p>
     </div>
 </template>
 
@@ -30,7 +30,7 @@ export default {
             width:20px;
             height:20px;
             position:absolute;
-            top:-3px;
+            top:0px;
             right:20px;
             font-size:16px;
             text-align: center;

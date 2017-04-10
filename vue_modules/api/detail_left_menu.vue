@@ -1,12 +1,13 @@
 <template lang="html">
     <div class="left_menu">
+        <h6 class="addModule" @click="addModule" >添加模块</h6>
         <div class="api_module_menu" v-for="item in menuList">
             <h6 @click="toogle_list">{{item.module_name}}
                 <i class="more iconfont icon-more" :data-moduleid="item.module_id" @click.stop="ModuleshowMore(item)"></i>
                 <s-dropdown :show="item.show" :listgroup="modulelist" :obj="item" :list="modulemore"></s-dropdown>
             </h6>
             <ul>
-                <li v-for="menu in item.list" :data-apiid="menu.api_id">{{menu.api_name}}
+                <li v-for="menu in item.list" :data-apiid="menu.api_id" @click="getApi">{{menu.api_name}}
                     <i class="more iconfont icon-more"  @click.stop="ApiShowMore(menu)"></i>
                     <s-dropdown :show="menu.show" :listgroup="apilist" :obj="menu" :list="apimore"></s-dropdown>
                 </li>
@@ -22,9 +23,11 @@
 <script>
     import Vue from 'vue'
     import Element from 'element-ui'
+    import vuex from 'vuex'
     import {ajax} from "JS/ajax.js"
     import Dropdown from "VUEMODULES/common/drop-down.vue"
     Vue.use(Element)
+    Vue.use(vuex)
     export default {
         components:{
             "s-dropdown":Dropdown,
@@ -129,12 +132,12 @@
                         },()=>{})
                     })
                 },
+                getApi(event){
+                    let api_id = event.target.dataset.apiid
+                    this.$store.commit("getApi",api_id)
+                },
         },
         mounted(){
-            let list = document.querySelectorAll(".api_module_menu h6")
-            Array.prototype.map.call(list,function(item,index){
-                item.click()
-            })
         },
     }
 </script>
@@ -164,7 +167,6 @@
             color:#F9FAFC;
         }
         ul{
-            // overflow:hidden;
             transition:all 0.5s linear 0s;
         }
         li{
@@ -175,12 +177,15 @@
             background-color: #475669;
             color:#F9FAFC;
             position:relative;
+            cursor:pointer;
         }
     }
     .addModule{
         padding:10px 20px;
         background-color:#324057;
         color:#F9FAFC;
+        border-bottom:1px solid #333;
+        cursor:pointer;
     }
 }
 </style>

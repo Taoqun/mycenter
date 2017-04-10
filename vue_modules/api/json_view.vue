@@ -10,16 +10,18 @@
           title="json解析错误，请检查!"
           type="error">
         </el-alert>
-        <textarea class="data_result" :readonly="control_edit" v-model="result"></textarea>
+        <textarea class="data_result" :readonly="control_edit" v-model="result.result"></textarea>
     </div>
 </template>
 
 <script>
     import "CSS/ali/iconfont.css"
     export default {
+        props:{
+            result:Object,
+        },
         data(){
             return {
-                result:'',
                 control_edit:true,
                 error:false,
             }
@@ -35,12 +37,7 @@
             }
         },
         mounted(){
-            let obj = {}
-                obj.name = 'taoqun'
-                obj.age = 25
-                obj.sex = 'man'
-            let str = JSON.stringify(obj)
-            this.result = JSON.parse(str,null,4)
+
         }
     }
 </script>

@@ -5,7 +5,7 @@
             <i class="iconfont" :class='{"icon-weisuo":!control_edit,"icon-locked":control_edit}'></i>
             {{control_str}}
         </span>
-        <textarea class="result" v-show="!control_edit" v-model="result" :readonly="control_edit"></textarea>
+        <textarea class="result" v-show="!control_edit" v-model="result.result" :readonly="control_edit"></textarea>
         <div class="preview markdown-body" v-show="control_edit" v-html="html"></div>
     </div>
 </template>
@@ -14,9 +14,11 @@
     import hyperdown from 'hyperdown'
     import "CSS/markdown.css"
     export default {
+        props:{
+            result:Object,
+        },
         data(){
             return {
-                result:'',
                 html:'',
                 control_edit:true,
                 error:false,

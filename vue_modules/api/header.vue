@@ -13,7 +13,7 @@
              :value="item.value">
            </el-option>
          </el-select>
-         <el-input v-model="url" :readonly="control_type_edit" class="input"></el-input>
+         <el-input v-model="type.url" :readonly="control_type_edit" class="input"></el-input>
          <el-button class="btn" :disabled="control_type_edit" type="info">发送</el-button>
     </div>
 </template>
@@ -30,7 +30,6 @@
         },
         data(){
             return {
-                url:'http://www.baidu.com',
                 options:[
                     {label:'GET',value:'get'},
                     {label:'POST',value:'post'},
