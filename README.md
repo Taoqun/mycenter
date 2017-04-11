@@ -32,20 +32,21 @@ github : [https://github.com/Taoqun/mycenter](https://github.com/Taoqun/mycenter
 - [x] 404 页面 [ `加上各种问题提示` ]
 - [x] markdown 局部优化 删除文章时 需要用户确认
 - [x] markdown 关键词 填写
+- [x] 仿照apizaa 写一个api接口管理的页面 满足自己前后端展示浏览的需求 [`自己想了一种样式布局`]
 
 ###### 正在完成
 - [ ] ~~暂时偷懒...~~
-- [ ] 仿照apizaa 写一个api接口管理的页面 满足自己前后端展示浏览的需求 [`这个感觉想提前做` `仿apizza postman 暂时不做请求功能 只做文档查看的增查改删`]
+- [ ] 关于本站
+- [ ] 首页
 
 ###### 待完成
 - [ ] 后台批量管理文章，修改、删除等操作 [`延后...`]
-- [ ] 关于本站的介绍页面
 - [ ] echarts 图表 统计清单，api，人生进度等数据可视化的需求 [ `这个放到最后做，毕竟得有数据，才能可视化啊！！` ]
 
 
 ###### 想法
 - [ ] 看一席[《中国美色》](http://v.youku.com/v_show/id_XMjUzMDE4OTU4OA==.html?spm=a2h0z.8244218.2371631.5&from=y1.9-3.1)，想做一个颜色标识的网站，现在经常查颜色用千图网的配色表，但感觉还不够。
-- [ ] 买一台服务器啊~~
+- [x] 买一台服务器啊~~ [`182.61.49.55` `已经购买，部署完成，大家访问ip即可访问`]
 - [ ] 写个微信小程序啊~~
 
 ######  已放弃的想法和功能
@@ -63,7 +64,13 @@ node app.js
 
 说明:
 - 需要本地启动 `mongoDB`
-- `config.js` 可以修改 端口号和配置域名
+- `config.js` 可以修改 端口号和配置域名,修改后前端需要重新编译，然后重启node
+
+```
+change config.js pros hostname // 改变端口和域名
+webpack -p // 重新编译 -p 去除无用代码 减少js文件大小
+node app.js // 重新启动node服务器
+```
 
 ###### 图片预览（还没有全部完成）
 
@@ -103,3 +110,9 @@ node app.js
 
 ![文章查看](http://ocrcrbkp1.bkt.clouddn.com/myCenter/paper.png)
 [文章查看](http://ocrcrbkp1.bkt.clouddn.com/myCenter/paper.png)
+
+![api列表](http://ocrcrbkp1.bkt.clouddn.com/apilist.png)
+[api列表](http://ocrcrbkp1.bkt.clouddn.com/apilist.png)
+
+![api详情](http://ocrcrbkp1.bkt.clouddn.com/api.png)
+[api详情](http://ocrcrbkp1.bkt.clouddn.com/api.png)

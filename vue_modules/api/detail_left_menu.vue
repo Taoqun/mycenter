@@ -144,7 +144,7 @@
 
 <style lang="scss">
 .left_menu{
-
+    background-color:#324057;
     .api_module_menu{
         font-size:15px;
         line-height:1em;

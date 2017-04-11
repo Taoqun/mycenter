@@ -297,6 +297,7 @@
                                     list.splice(index,1)
                                 }
                             })
+                            this.api_id = ''
                             this.$message("删除成功")
                         }else{
                             this.$message.error("删除失败")
@@ -331,6 +332,10 @@
                 })
             },
             updateApi(){
+                if(!this.api_id){
+                    this.$message.error("请选择api")
+                    return
+                }
                 let obj = {}
                     obj.api_id = this.api_id
                     obj.api_type = this.type.type
@@ -339,6 +344,7 @@
                     obj.api_request_data = JSON.stringify(this.api_request_data.list)
                     obj.api_response_data = this.api_response_data.result
                     obj.api_markdown = this.markd.result
+
                 ajax({
                     method:'post',
                     url:'/api/updateApi',
@@ -349,6 +355,8 @@
                             type:"success",
                             message:"保存成功",
                         })
+                    }else{
+                        this.$message.error("保存失败")
                     }
                 })
             },

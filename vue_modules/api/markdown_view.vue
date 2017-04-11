@@ -33,7 +33,7 @@
             change_control_edit(){
                 this.control_edit = !this.control_edit
                 if( this.control_edit ){
-                    let tem = this.result
+                    let tem = this.result.result
                     let parse = new hyperdown()
                         tem = parse.makeHtml(tem)
                     this.html = tem
