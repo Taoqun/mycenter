@@ -19,6 +19,7 @@ var entryObj = {
     "paper/index":"./src/paper/index.js",
     "api/apiList/index":"./src/api/apiList/index.js",
     "api/apiDetail/index":"./src/api/apiDetail/index.js",
+    "about/index":"./src/about/index.js",
 }
 module.exports = {
     entry: entryObj,
