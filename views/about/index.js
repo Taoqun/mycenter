@@ -40,9 +40,8 @@
 /******/ 	return __webpack_require__(0);
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ 0:
+/******/ ([
+/* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -51,11 +50,11 @@
 
 	var _vue2 = _interopRequireDefault(_vue);
 
-	var _index = __webpack_require__(495);
+	var _index = __webpack_require__(2);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _router = __webpack_require__(507);
+	var _router = __webpack_require__(26);
 
 	var _router2 = _interopRequireDefault(_router);
 
@@ -68,8 +67,7 @@
 	});
 
 /***/ },
-
-/***/ 1:
+/* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/*!
@@ -8644,8 +8642,85 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
+/* 2 */
+/***/ function(module, exports, __webpack_require__) {
 
-/***/ 5:
+	
+	/* styles */
+	__webpack_require__(3)
+
+	var Component = __webpack_require__(7)(
+	  /* script */
+	  __webpack_require__(8),
+	  /* template */
+	  __webpack_require__(25),
+	  /* scopeId */
+	  null,
+	  /* cssModules */
+	  null
+	)
+	Component.options.__file = "F:\\myCode\\src\\about\\index.vue"
+	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+	if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
+
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-7aa5935d", Component.options)
+	  } else {
+	    hotAPI.reload("data-v-7aa5935d", Component.options)
+	  }
+	})()}
+
+	module.exports = Component.exports
+
+
+/***/ },
+/* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(4);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(6)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-7aa5935d!./../../node_modules/sass-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-7aa5935d!./../../node_modules/sass-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(5)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 5 */
 /***/ function(module, exports) {
 
 	/*
@@ -8701,8 +8776,7 @@
 
 
 /***/ },
-
-/***/ 6:
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -8954,8 +9028,7 @@
 
 
 /***/ },
-
-/***/ 7:
+/* 7 */
 /***/ function(module, exports) {
 
 	module.exports = function normalizeComponent (
@@ -9008,8 +9081,42 @@
 
 
 /***/ },
+/* 8 */
+/***/ function(module, exports, __webpack_require__) {
 
-/***/ 9:
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _head = __webpack_require__(9);
+
+	var _head2 = _interopRequireDefault(_head);
+
+	var _about = __webpack_require__(18);
+
+	var _about2 = _interopRequireDefault(_about);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+
+	exports.default = {
+	    components: {
+	        "s-head": _head2.default,
+	        "s-about": _about2.default
+	    }
+	};
+
+/***/ },
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -9020,7 +9127,7 @@
 	  /* script */
 	  __webpack_require__(12),
 	  /* template */
-	  __webpack_require__(16),
+	  __webpack_require__(17),
 	  /* scopeId */
 	  null,
 	  /* cssModules */
@@ -9047,8 +9154,7 @@
 
 
 /***/ },
-
-/***/ 10:
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
@@ -9074,8 +9180,7 @@
 	}
 
 /***/ },
-
-/***/ 11:
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(5)();
@@ -9083,53 +9188,72 @@
 
 
 	// module
-	exports.push([module.id, "\n@charset \"UTF-8\";\nbody {\n  font-family: \"Helvetica Neue\",Helvetica,\"PingFang SC\",\"Hiragino Sans GB\",\"Microsoft YaHei\",\"\\5FAE\\8F6F\\96C5\\9ED1\",Arial,sans-serif;\n}\n.head {\n  padding: 30px 0;\n  background-color: #324057;\n  color: #20A0FF;\n  font-family: \"Helvetica Neue\",Helvetica,\"PingFang SC\",\"Hiragino Sans GB\",\"Microsoft YaHei\",\"\\5FAE\\8F6F\\96C5\\9ED1\",Arial,sans-serif;\n}\n.head h1 {\n    width: 1000px;\n    margin: 20px auto;\n    font-size: 20px;\n    line-height: 1.5;\n}\n.head .nav-list {\n    width: 1000px;\n    margin: 0 auto;\n    font-size: 0px;\n}\n.head .nav-list li {\n      display: inline-block;\n}\n.head .nav-list li a {\n        display: block;\n        height: 100%;\n        padding: 10px 15px;\n        font-size: 15px;\n        color: #fff;\n        background-color: #475669;\n        transition: all 0.2s linear 0s;\n}\n.head .nav-list li a:hover {\n        background-color: #1F2D3D;\n}\n", ""]);
+	exports.push([module.id, "\n@charset \"UTF-8\";\nbody {\n  font-family: \"Helvetica Neue\",Helvetica,\"PingFang SC\",\"Hiragino Sans GB\",\"Microsoft YaHei\",\"\\5FAE\\8F6F\\96C5\\9ED1\",Arial,sans-serif;\n}\n.head {\n  padding: 30px 0;\n  box-sizing: border-box;\n  background-color: #324057;\n  color: #20A0FF;\n  position: relative;\n  font-family: \"Helvetica Neue\",Helvetica,\"PingFang SC\",\"Hiragino Sans GB\",\"Microsoft YaHei\",\"\\5FAE\\8F6F\\96C5\\9ED1\",Arial,sans-serif;\n}\n.head #canvas {\n    position: absolute;\n    top: 0;\n    left: 0;\n}\n.head h1 {\n    width: 1000px;\n    margin: 20px auto;\n    font-size: 20px;\n    line-height: 1.5;\n    position: relative;\n}\n.head .nav-list {\n    width: 1000px;\n    margin: 0 auto;\n    font-size: 0px;\n    position: relative;\n}\n.head .nav-list li {\n      display: inline-block;\n}\n.head .nav-list li a {\n        display: block;\n        height: 100%;\n        padding: 10px 15px;\n        font-size: 15px;\n        color: #fff;\n        background-color: #475669;\n        transition: all 0.2s linear 0s;\n}\n.head .nav-list li a:hover {\n        background-color: #1F2D3D;\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
-
-/***/ 12:
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 
 	__webpack_require__(13);
 
-	var _config = __webpack_require__(15);
+	var _CanvasAnimate = __webpack_require__(15);
 
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
+	var _CanvasAnimate2 = _interopRequireDefault(_CanvasAnimate);
+
+	var _config = __webpack_require__(16);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = {
-	  props: {
-	    text: {
-	      type: String,
-	      default: '测试'
+	    props: {
+	        text: {
+	            type: String,
+	            default: '测试'
+	        }
+	    },
+	    data: function data() {
+	        return {
+	            head_list: _config.headList
+	        };
+	    },
+	    mounted: function mounted() {
+	        var a = window.getComputedStyle(document.querySelector(".head"));
+	        var cvs = document.querySelector("#canvas");
+	        cvs.width = parseInt(a.width);
+	        cvs.height = parseInt(a.height);
+	        var options = {
+	            length: 50,
+	            RoundColor: '#1D8CE0',
+	            LineColor: '#475669',
+	            moveon: true,
+	            clicked: true
+	        };
+	        var new_cvs = new _CanvasAnimate2.default(cvs, options);
+	        new_cvs.Run();
 	    }
-	  },
-	  data: function data() {
-	    return {
-	      head_list: _config.headList
-	    };
-	  }
-	};
+	}; //
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
 
 /***/ },
-
-/***/ 13:
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
@@ -9155,8 +9279,7 @@
 	}
 
 /***/ },
-
-/***/ 14:
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(5)();
@@ -9170,8 +9293,186 @@
 
 
 /***/ },
+/* 15 */
+/***/ function(module, exports) {
 
-/***/ 15:
+	"use strict";
+
+	function CanvasAnimate(Dom, options) {
+	    options = options || {};
+	    this.Element = Dom;
+	    this.cvs = Dom.getContext("2d");
+	    this.off_cvs = document.createElement("canvas");
+	    this.off_cvs.width = Dom.width;
+	    this.off_cvs.height = Dom.height;
+	    this.Dom = this.off_cvs.getContext("2d");
+	    this.width = Dom.width;
+	    this.height = Dom.height;
+	    this.length = options.length || 100;
+	    this.RoundColor = options.RoundColor || "#999";
+	    this.RoundDiameter = options.RoundDiameter || 2;
+	    this.LineColor = options.LineColor || "#ccc";
+	    this.LineWeight = options.LineWeight || 1;
+	    this.clicked = options.clicked || false;
+	    this.moveon = options.moveon || false;
+	    this.list = [];
+	}
+	CanvasAnimate.prototype.Run = function () {
+	    if (this.clicked) {
+	        this.Element.addEventListener("click", this.Clicked.bind(this));
+	    }
+	    if (this.moveon) {
+	        this.Element.addEventListener("mousemove", this.moveXY.bind(this));
+	        this.Element.addEventListener("mouseout", this.moveoutXY.bind(this));
+	    }
+	    this.Draw(this.getLength());
+	};
+	CanvasAnimate.prototype.getLength = function () {
+	    var arr = [];
+	    for (var i = 0; i < this.length; i++) {
+	        var obj = {};
+	        obj.x = parseInt(Math.random() * this.width);
+	        obj.y = parseInt(Math.random() * this.height);
+	        obj.r = parseInt(Math.random() * 10);
+	        obj.controlX = parseInt(Math.random() * 10) > 5 ? "left" : "right";
+	        obj.controlY = parseInt(Math.random() * 10) > 5 ? "bottom" : "top";
+	        arr.push(obj);
+	    }
+	    return arr;
+	};
+	CanvasAnimate.prototype.Draw = function (list) {
+	    var _this = this;
+
+	    var new_arr = [];
+	    var line_arr = [];
+
+	    list.map(function (item, index) {
+	        var xy = _this.ControlXY(item);
+	        var obj = _this.ControlRound(xy);
+	        new_arr.push(obj);
+	    });
+
+	    new_arr.map(function (item1, index1) {
+	        new_arr.map(function (item2, index2) {
+	            if (item1 !== item2) {
+	                var x = item1.x - item2.x;
+	                var y = item1.y - item2.y;
+	                if (Math.abs(x) < 100 && Math.abs(y) < 100) {
+	                    var obj = {
+	                        x1: item1.x,
+	                        y1: item1.y,
+	                        x2: item2.x,
+	                        y2: item2.y
+	                    };
+	                    line_arr.push(obj);
+	                }
+	            }
+	        });
+	    });
+
+	    this.drawLine(line_arr);
+
+	    new_arr.map(function (item) {
+	        _this.drawRound(item);
+	    });
+
+	    this.list = new_arr;
+
+	    this.cvs.drawImage(this.off_cvs, 0, 0, this.width, this.height);
+
+	    setTimeout(function () {
+	        _this.cvs.clearRect(0, 0, _this.width, _this.height);
+	        _this.Dom.clearRect(0, 0, _this.width, _this.height);
+	        _this.Draw(new_arr);
+	    }, 50);
+	};
+	CanvasAnimate.prototype.drawRound = function (obj) {
+	    var x = obj.x,
+	        y = obj.y,
+	        r = obj.r;
+
+	    this.Dom.beginPath();
+	    this.Dom.arc(x, y, r, 0, 2 * Math.PI);
+	    this.Dom.fillStyle = this.RoundColor;
+	    this.Dom.fill();
+	    this.Dom.closePath();
+	};
+	CanvasAnimate.prototype.drawLine = function (list) {
+	    var _this2 = this;
+
+	    list.map(function (item) {
+	        _this2.Dom.beginPath();
+	        _this2.Dom.moveTo(item.x1, item.y1);
+	        _this2.Dom.lineTo(item.x2, item.y2);
+	        _this2.Dom.lineWidth = _this2.LineWeight;
+	        _this2.Dom.strokeStyle = _this2.LineColor;
+	        _this2.Dom.stroke();
+	        _this2.Dom.closePath();
+	    });
+	};
+	CanvasAnimate.prototype.ControlXY = function (obj) {
+	    if (obj.x >= this.width) {
+	        obj.controlX = 'left';
+	    } else if (obj.x <= 0) {
+	        obj.controlX = "right";
+	    }
+
+	    if (obj.y >= this.height) {
+	        obj.controlY = "bottom";
+	    } else if (obj.y <= 0) {
+	        obj.controlY = "top";
+	    }
+	    return obj;
+	};
+	CanvasAnimate.prototype.ControlRound = function (obj) {
+	    switch (obj.controlX) {
+	        case "right":
+	            obj.x++;
+	            break;
+	        case "left":
+	            obj.x--;
+	            break;
+	    }
+	    switch (obj.controlY) {
+	        case "top":
+	            obj.y++;
+	            break;
+	        case "bottom":
+	            obj.y--;
+	            break;
+	    }
+	    return obj;
+	};
+	CanvasAnimate.prototype.Clicked = function (event) {
+	    var obj = {};
+	    obj.x = event.clientX;
+	    obj.y = event.clientY;
+	    obj.r = parseInt(Math.random() * 10);
+	    obj.controlX = parseInt(Math.random() * 10) > 5 ? 'left' : 'right';
+	    obj.controlY = parseInt(Math.random() * 10) > 5 ? 'bottom' : 'top';
+	    this.list.push(obj);
+	};
+	CanvasAnimate.prototype.moveXY = function (event) {
+	    var obj = {};
+	    obj.x = event.clientX;
+	    obj.y = event.clientY;
+	    obj.r = 0;
+	    obj.move = true;
+	    if (this.list[0]["move"]) {
+	        this.list[0]["x"] = obj.x;
+	        this.list[0]["y"] = obj.y;
+	        this.list[0]["r"] = 1;
+	    } else {
+	        this.list.unshift(obj);
+	    }
+	};
+	CanvasAnimate.prototype.moveoutXY = function () {
+	    this.list.shift();
+	};
+	module.exports = CanvasAnimate;
+
+/***/ },
+/* 16 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -9199,14 +9500,17 @@
 	exports.headList = head_list;
 
 /***/ },
-
-/***/ 16:
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _c('div', {
 	    staticClass: "head"
-	  }, [_c('h1', [_vm._v("私人助理 · " + _vm._s(_vm.text))]), _vm._v(" "), _c('ul', {
+	  }, [_c('canvas', {
+	    attrs: {
+	      "id": "canvas"
+	    }
+	  }), _vm._v(" "), _c('h1', [_vm._v("私人助理 · " + _vm._s(_vm.text))]), _vm._v(" "), _c('ul', {
 	    staticClass: "nav-list"
 	  }, _vm._l((_vm.head_list), function(item) {
 	    return _c('li', [_c('a', {
@@ -9225,323 +9529,18 @@
 	}
 
 /***/ },
-
-/***/ 58:
-/***/ function(module, exports) {
-
-	// shim for using process in browser
-	var process = module.exports = {};
-
-	// cached from whatever global is present so that test runners that stub it
-	// don't break things.  But we need to wrap it in a try catch in case it is
-	// wrapped in strict mode code which doesn't define any globals.  It's inside a
-	// function because try/catches deoptimize in certain engines.
-
-	var cachedSetTimeout;
-	var cachedClearTimeout;
-
-	function defaultSetTimout() {
-	    throw new Error('setTimeout has not been defined');
-	}
-	function defaultClearTimeout () {
-	    throw new Error('clearTimeout has not been defined');
-	}
-	(function () {
-	    try {
-	        if (typeof setTimeout === 'function') {
-	            cachedSetTimeout = setTimeout;
-	        } else {
-	            cachedSetTimeout = defaultSetTimout;
-	        }
-	    } catch (e) {
-	        cachedSetTimeout = defaultSetTimout;
-	    }
-	    try {
-	        if (typeof clearTimeout === 'function') {
-	            cachedClearTimeout = clearTimeout;
-	        } else {
-	            cachedClearTimeout = defaultClearTimeout;
-	        }
-	    } catch (e) {
-	        cachedClearTimeout = defaultClearTimeout;
-	    }
-	} ())
-	function runTimeout(fun) {
-	    if (cachedSetTimeout === setTimeout) {
-	        //normal enviroments in sane situations
-	        return setTimeout(fun, 0);
-	    }
-	    // if setTimeout wasn't available but was latter defined
-	    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-	        cachedSetTimeout = setTimeout;
-	        return setTimeout(fun, 0);
-	    }
-	    try {
-	        // when when somebody has screwed with setTimeout but no I.E. maddness
-	        return cachedSetTimeout(fun, 0);
-	    } catch(e){
-	        try {
-	            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-	            return cachedSetTimeout.call(null, fun, 0);
-	        } catch(e){
-	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-	            return cachedSetTimeout.call(this, fun, 0);
-	        }
-	    }
-
-
-	}
-	function runClearTimeout(marker) {
-	    if (cachedClearTimeout === clearTimeout) {
-	        //normal enviroments in sane situations
-	        return clearTimeout(marker);
-	    }
-	    // if clearTimeout wasn't available but was latter defined
-	    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-	        cachedClearTimeout = clearTimeout;
-	        return clearTimeout(marker);
-	    }
-	    try {
-	        // when when somebody has screwed with setTimeout but no I.E. maddness
-	        return cachedClearTimeout(marker);
-	    } catch (e){
-	        try {
-	            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-	            return cachedClearTimeout.call(null, marker);
-	        } catch (e){
-	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-	            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-	            return cachedClearTimeout.call(this, marker);
-	        }
-	    }
-
-
-
-	}
-	var queue = [];
-	var draining = false;
-	var currentQueue;
-	var queueIndex = -1;
-
-	function cleanUpNextTick() {
-	    if (!draining || !currentQueue) {
-	        return;
-	    }
-	    draining = false;
-	    if (currentQueue.length) {
-	        queue = currentQueue.concat(queue);
-	    } else {
-	        queueIndex = -1;
-	    }
-	    if (queue.length) {
-	        drainQueue();
-	    }
-	}
-
-	function drainQueue() {
-	    if (draining) {
-	        return;
-	    }
-	    var timeout = runTimeout(cleanUpNextTick);
-	    draining = true;
-
-	    var len = queue.length;
-	    while(len) {
-	        currentQueue = queue;
-	        queue = [];
-	        while (++queueIndex < len) {
-	            if (currentQueue) {
-	                currentQueue[queueIndex].run();
-	            }
-	        }
-	        queueIndex = -1;
-	        len = queue.length;
-	    }
-	    currentQueue = null;
-	    draining = false;
-	    runClearTimeout(timeout);
-	}
-
-	process.nextTick = function (fun) {
-	    var args = new Array(arguments.length - 1);
-	    if (arguments.length > 1) {
-	        for (var i = 1; i < arguments.length; i++) {
-	            args[i - 1] = arguments[i];
-	        }
-	    }
-	    queue.push(new Item(fun, args));
-	    if (queue.length === 1 && !draining) {
-	        runTimeout(drainQueue);
-	    }
-	};
-
-	// v8 likes predictible objects
-	function Item(fun, array) {
-	    this.fun = fun;
-	    this.array = array;
-	}
-	Item.prototype.run = function () {
-	    this.fun.apply(null, this.array);
-	};
-	process.title = 'browser';
-	process.browser = true;
-	process.env = {};
-	process.argv = [];
-	process.version = ''; // empty string to avoid regexp issues
-	process.versions = {};
-
-	function noop() {}
-
-	process.on = noop;
-	process.addListener = noop;
-	process.once = noop;
-	process.off = noop;
-	process.removeListener = noop;
-	process.removeAllListeners = noop;
-	process.emit = noop;
-
-	process.binding = function (name) {
-	    throw new Error('process.binding is not supported');
-	};
-
-	process.cwd = function () { return '/' };
-	process.chdir = function (dir) {
-	    throw new Error('process.chdir is not supported');
-	};
-	process.umask = function() { return 0; };
-
-
-/***/ },
-
-/***/ 495:
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
 	/* styles */
-	__webpack_require__(496)
+	__webpack_require__(19)
 
 	var Component = __webpack_require__(7)(
 	  /* script */
-	  __webpack_require__(498),
+	  __webpack_require__(21),
 	  /* template */
-	  __webpack_require__(504),
-	  /* scopeId */
-	  null,
-	  /* cssModules */
-	  null
-	)
-	Component.options.__file = "F:\\myCode\\src\\about\\index.vue"
-	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-	if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
-
-	/* hot reload */
-	if (false) {(function () {
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  module.hot.accept()
-	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-7aa5935d", Component.options)
-	  } else {
-	    hotAPI.reload("data-v-7aa5935d", Component.options)
-	  }
-	})()}
-
-	module.exports = Component.exports
-
-
-/***/ },
-
-/***/ 496:
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(497);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(6)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-7aa5935d!./../../node_modules/sass-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-7aa5935d!./../../node_modules/sass-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-
-/***/ 497:
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(5)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
-
-	// exports
-
-
-/***/ },
-
-/***/ 498:
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _head = __webpack_require__(9);
-
-	var _head2 = _interopRequireDefault(_head);
-
-	var _about = __webpack_require__(499);
-
-	var _about2 = _interopRequireDefault(_about);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-
-	exports.default = {
-	    components: {
-	        "s-head": _head2.default,
-	        "s-about": _about2.default
-	    }
-	};
-
-/***/ },
-
-/***/ 499:
-/***/ function(module, exports, __webpack_require__) {
-
-	
-	/* styles */
-	__webpack_require__(500)
-
-	var Component = __webpack_require__(7)(
-	  /* script */
-	  __webpack_require__(502),
-	  /* template */
-	  __webpack_require__(503),
+	  __webpack_require__(24),
 	  /* scopeId */
 	  null,
 	  /* cssModules */
@@ -9568,14 +9567,13 @@
 
 
 /***/ },
-
-/***/ 500:
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(501);
+	var content = __webpack_require__(20);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(6)(content, {});
@@ -9595,8 +9593,7 @@
 	}
 
 /***/ },
-
-/***/ 501:
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(5)();
@@ -9610,8 +9607,7 @@
 
 
 /***/ },
-
-/***/ 502:
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -9624,7 +9620,7 @@
 
 	var _vue2 = _interopRequireDefault(_vue);
 
-	var _vueRouter = __webpack_require__(505);
+	var _vueRouter = __webpack_require__(22);
 
 	var _vueRouter2 = _interopRequireDefault(_vueRouter);
 
@@ -9649,58 +9645,7 @@
 	exports.default = {};
 
 /***/ },
-
-/***/ 503:
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('div', {
-	    staticClass: "about_wrap"
-	  }, [_c('div', {
-	    staticClass: "left_menu"
-	  }, [_c('ul', [_c('li', [_c('router-link', {
-	    attrs: {
-	      "to": "about"
-	    }
-	  }, [_vm._v("关于本站")])], 1), _vm._v(" "), _c('li', [_c('router-link', {
-	    attrs: {
-	      "to": "me"
-	    }
-	  }, [_vm._v("关于我")])], 1)])]), _vm._v(" "), _c('div', {
-	    staticClass: "right_body"
-	  }, [_c('router-view')], 1)])
-	},staticRenderFns: []}
-	module.exports.render._withStripped = true
-	if (false) {
-	  module.hot.accept()
-	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-3c4d0efc", module.exports)
-	  }
-	}
-
-/***/ },
-
-/***/ 504:
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('div', {}, [_c('s-head', {
-	    attrs: {
-	      "text": "关于本站"
-	    }
-	  }), _vm._v(" "), _c('s-about')], 1)
-	},staticRenderFns: []}
-	module.exports.render._withStripped = true
-	if (false) {
-	  module.hot.accept()
-	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-7aa5935d", module.exports)
-	  }
-	}
-
-/***/ },
-
-/***/ 505:
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -11983,24 +11928,257 @@
 
 	module.exports = VueRouter;
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(58)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(23)))
 
 /***/ },
+/* 23 */
+/***/ function(module, exports) {
 
-/***/ 507:
+	// shim for using process in browser
+	var process = module.exports = {};
+
+	// cached from whatever global is present so that test runners that stub it
+	// don't break things.  But we need to wrap it in a try catch in case it is
+	// wrapped in strict mode code which doesn't define any globals.  It's inside a
+	// function because try/catches deoptimize in certain engines.
+
+	var cachedSetTimeout;
+	var cachedClearTimeout;
+
+	function defaultSetTimout() {
+	    throw new Error('setTimeout has not been defined');
+	}
+	function defaultClearTimeout () {
+	    throw new Error('clearTimeout has not been defined');
+	}
+	(function () {
+	    try {
+	        if (typeof setTimeout === 'function') {
+	            cachedSetTimeout = setTimeout;
+	        } else {
+	            cachedSetTimeout = defaultSetTimout;
+	        }
+	    } catch (e) {
+	        cachedSetTimeout = defaultSetTimout;
+	    }
+	    try {
+	        if (typeof clearTimeout === 'function') {
+	            cachedClearTimeout = clearTimeout;
+	        } else {
+	            cachedClearTimeout = defaultClearTimeout;
+	        }
+	    } catch (e) {
+	        cachedClearTimeout = defaultClearTimeout;
+	    }
+	} ())
+	function runTimeout(fun) {
+	    if (cachedSetTimeout === setTimeout) {
+	        //normal enviroments in sane situations
+	        return setTimeout(fun, 0);
+	    }
+	    // if setTimeout wasn't available but was latter defined
+	    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+	        cachedSetTimeout = setTimeout;
+	        return setTimeout(fun, 0);
+	    }
+	    try {
+	        // when when somebody has screwed with setTimeout but no I.E. maddness
+	        return cachedSetTimeout(fun, 0);
+	    } catch(e){
+	        try {
+	            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+	            return cachedSetTimeout.call(null, fun, 0);
+	        } catch(e){
+	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+	            return cachedSetTimeout.call(this, fun, 0);
+	        }
+	    }
+
+
+	}
+	function runClearTimeout(marker) {
+	    if (cachedClearTimeout === clearTimeout) {
+	        //normal enviroments in sane situations
+	        return clearTimeout(marker);
+	    }
+	    // if clearTimeout wasn't available but was latter defined
+	    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+	        cachedClearTimeout = clearTimeout;
+	        return clearTimeout(marker);
+	    }
+	    try {
+	        // when when somebody has screwed with setTimeout but no I.E. maddness
+	        return cachedClearTimeout(marker);
+	    } catch (e){
+	        try {
+	            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+	            return cachedClearTimeout.call(null, marker);
+	        } catch (e){
+	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+	            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+	            return cachedClearTimeout.call(this, marker);
+	        }
+	    }
+
+
+
+	}
+	var queue = [];
+	var draining = false;
+	var currentQueue;
+	var queueIndex = -1;
+
+	function cleanUpNextTick() {
+	    if (!draining || !currentQueue) {
+	        return;
+	    }
+	    draining = false;
+	    if (currentQueue.length) {
+	        queue = currentQueue.concat(queue);
+	    } else {
+	        queueIndex = -1;
+	    }
+	    if (queue.length) {
+	        drainQueue();
+	    }
+	}
+
+	function drainQueue() {
+	    if (draining) {
+	        return;
+	    }
+	    var timeout = runTimeout(cleanUpNextTick);
+	    draining = true;
+
+	    var len = queue.length;
+	    while(len) {
+	        currentQueue = queue;
+	        queue = [];
+	        while (++queueIndex < len) {
+	            if (currentQueue) {
+	                currentQueue[queueIndex].run();
+	            }
+	        }
+	        queueIndex = -1;
+	        len = queue.length;
+	    }
+	    currentQueue = null;
+	    draining = false;
+	    runClearTimeout(timeout);
+	}
+
+	process.nextTick = function (fun) {
+	    var args = new Array(arguments.length - 1);
+	    if (arguments.length > 1) {
+	        for (var i = 1; i < arguments.length; i++) {
+	            args[i - 1] = arguments[i];
+	        }
+	    }
+	    queue.push(new Item(fun, args));
+	    if (queue.length === 1 && !draining) {
+	        runTimeout(drainQueue);
+	    }
+	};
+
+	// v8 likes predictible objects
+	function Item(fun, array) {
+	    this.fun = fun;
+	    this.array = array;
+	}
+	Item.prototype.run = function () {
+	    this.fun.apply(null, this.array);
+	};
+	process.title = 'browser';
+	process.browser = true;
+	process.env = {};
+	process.argv = [];
+	process.version = ''; // empty string to avoid regexp issues
+	process.versions = {};
+
+	function noop() {}
+
+	process.on = noop;
+	process.addListener = noop;
+	process.once = noop;
+	process.off = noop;
+	process.removeListener = noop;
+	process.removeAllListeners = noop;
+	process.emit = noop;
+
+	process.binding = function (name) {
+	    throw new Error('process.binding is not supported');
+	};
+
+	process.cwd = function () { return '/' };
+	process.chdir = function (dir) {
+	    throw new Error('process.chdir is not supported');
+	};
+	process.umask = function() { return 0; };
+
+
+/***/ },
+/* 24 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('div', {
+	    staticClass: "about_wrap"
+	  }, [_c('div', {
+	    staticClass: "left_menu"
+	  }, [_c('ul', [_c('li', [_c('router-link', {
+	    attrs: {
+	      "to": "about"
+	    }
+	  }, [_vm._v("关于本站")])], 1), _vm._v(" "), _c('li', [_c('router-link', {
+	    attrs: {
+	      "to": "me"
+	    }
+	  }, [_vm._v("关于我")])], 1)])]), _vm._v(" "), _c('div', {
+	    staticClass: "right_body"
+	  }, [_c('router-view')], 1)])
+	},staticRenderFns: []}
+	module.exports.render._withStripped = true
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-hot-reload-api").rerender("data-v-3c4d0efc", module.exports)
+	  }
+	}
+
+/***/ },
+/* 25 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('div', {}, [_c('s-head', {
+	    attrs: {
+	      "text": "关于本站"
+	    }
+	  }), _vm._v(" "), _c('s-about')], 1)
+	},staticRenderFns: []}
+	module.exports.render._withStripped = true
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-hot-reload-api").rerender("data-v-7aa5935d", module.exports)
+	  }
+	}
+
+/***/ },
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var _vueRouter = __webpack_require__(505);
+	var _vueRouter = __webpack_require__(22);
 
 	var _vueRouter2 = _interopRequireDefault(_vueRouter);
 
-	var _about_view = __webpack_require__(508);
+	var _about_view = __webpack_require__(27);
 
 	var _about_view2 = _interopRequireDefault(_about_view);
 
-	var _me_view = __webpack_require__(513);
+	var _me_view = __webpack_require__(32);
 
 	var _me_view2 = _interopRequireDefault(_me_view);
 
@@ -12011,19 +12189,18 @@
 	module.exports = new _vueRouter2.default({ routes: routes });
 
 /***/ },
-
-/***/ 508:
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
 	/* styles */
-	__webpack_require__(518)
+	__webpack_require__(28)
 
 	var Component = __webpack_require__(7)(
 	  /* script */
-	  __webpack_require__(511),
+	  __webpack_require__(30),
 	  /* template */
-	  __webpack_require__(512),
+	  __webpack_require__(31),
 	  /* scopeId */
 	  null,
 	  /* cssModules */
@@ -12050,8 +12227,47 @@
 
 
 /***/ },
+/* 28 */
+/***/ function(module, exports, __webpack_require__) {
 
-/***/ 511:
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(29);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(6)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-23ccbf1c!./../../node_modules/sass-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./about_view.vue", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-23ccbf1c!./../../node_modules/sass-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./about_view.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 29 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(5)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "", ""]);
+
+	// exports
+
+
+/***/ },
+/* 30 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -12070,8 +12286,7 @@
 	exports.default = {};
 
 /***/ },
-
-/***/ 512:
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -12090,19 +12305,18 @@
 	}
 
 /***/ },
-
-/***/ 513:
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
 	/* styles */
-	__webpack_require__(514)
+	__webpack_require__(33)
 
 	var Component = __webpack_require__(7)(
 	  /* script */
-	  __webpack_require__(516),
+	  __webpack_require__(35),
 	  /* template */
-	  __webpack_require__(517),
+	  __webpack_require__(36),
 	  /* scopeId */
 	  null,
 	  /* cssModules */
@@ -12129,14 +12343,13 @@
 
 
 /***/ },
-
-/***/ 514:
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(515);
+	var content = __webpack_require__(34);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(6)(content, {});
@@ -12156,8 +12369,7 @@
 	}
 
 /***/ },
-
-/***/ 515:
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(5)();
@@ -12171,8 +12383,7 @@
 
 
 /***/ },
-
-/***/ 516:
+/* 35 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -12191,8 +12402,7 @@
 	exports.default = {};
 
 /***/ },
-
-/***/ 517:
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -12208,48 +12418,5 @@
 	  }
 	}
 
-/***/ },
-
-/***/ 518:
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(519);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(6)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-23ccbf1c!./../../node_modules/sass-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./about_view.vue", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-23ccbf1c!./../../node_modules/sass-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./about_view.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-
-/***/ 519:
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(5)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "", ""]);
-
-	// exports
-
-
 /***/ }
-
-/******/ });
+/******/ ]);
