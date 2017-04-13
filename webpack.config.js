@@ -37,7 +37,7 @@ module.exports = {
             { test: /\.html$/, loader: "html-loader" },
             { test: /\.(png|jpg|gif|jpeg)$/, loader: "url-loader?limit=8192" },
             { test: /\.vue$/, loader: "vue-loader" },
-            { test: /\.(js|jsx)$/, loader: 'babel-loader', exclude: /node_module/ },
+            { test: /\.(js|jsx)$/, loader: 'babel-loader', exclude: /node_module/},
             { test: /\.(eot|svg|ttf|woff)(\?\S*)?$/, loader: 'url-loader' },
         ]
     },
@@ -69,23 +69,17 @@ module.exports = {
         inline: true,
         grogress: true,
     },
+    plugins:[
+        // new webpack.optimize.UglifyJsPlugin({
+        //     compress: {
+        //         warnings: false
+        //     }
+        // }),
+        // new webpack.DefinePlugin({
+        //      'process.env.NODE_ENV': '"production"'
+        // }),
+    ],
     // 开启以后文件会变大，上线时 关闭
+    // devtool: '#eval'
     // devtool: '#eval-source-map'
 };
-
-if (process.env.NODE_ENV === 'production') {
-    module.exports.devtool = '#source-map'
-        // http://vue-loader.vuejs.org/en/workflow/production.html
-    module.exports.plugins = (module.exports.plugins || []).concat([
-        new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: '"production"'
-            }
-        }),
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false
-            }
-        })
-    ])
-}

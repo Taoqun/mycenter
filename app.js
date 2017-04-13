@@ -9,8 +9,9 @@ const app = express()
 
 app.engine('.html', require('ejs').__express);
 app.set('view engine', 'html');
-
 app.set('views',__dirname+'/views')
+
+app.use(express.compress());
 app.use(cookieParser())
 // 设置静态文件
 app.use(express.static('public')) // public 文件  && 字体文件element.css里配置
