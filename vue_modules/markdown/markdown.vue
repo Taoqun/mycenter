@@ -45,9 +45,8 @@
     import hyperdown from 'hyperdown'
     import { ajax } from "JS/ajax.js"
     import Vue from 'vue'
-    import ElementUI from "element-ui"
-    Vue.use(ElementUI)
-
+    import {Message} from "element-ui"
+    Vue.prototype.$message = Message
     export default {
         data(){
             return {

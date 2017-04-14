@@ -68,10 +68,10 @@
     </div>
 </template>
 <script>
-  import Vue from 'vue'
-  import element from 'element-ui'
-  import {ajax} from 'JS/ajax.js'
-  Vue.use(element)
+    import Vue from 'vue'
+    import element from 'element-ui'
+    import {ajax} from 'JS/ajax.js'
+    Vue.use(element)
     export default{
         data(){
             return{
