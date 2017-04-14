@@ -13,14 +13,12 @@ const markdown_data_type = new mongoose.Schema({
     type: String,
 });
 
+let paper = mongoose.model('paper', markdown_data_type)
 
-exports.getMarkdownModel = function(account) {
-    return mongoose.model(account + '_md', markdown_data_type)
-};
+exports.getPaperModel = paper
 exports.init = function(account) {
-    let md = mongoose.model(account + '_md', markdown_data_type)
     let date = parseInt( (new Date()).valueOf() ) + (1000*60*60*8)
-    let data = new md({
+    let data = new paper({
         account: account,
         paper_id: account + '_' + (new Date()).valueOf(),
         name: '',

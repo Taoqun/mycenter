@@ -1,4 +1,4 @@
-const mk = require('../dataModel/markdownDataModel.js').getMarkdownModel
+const Paper = require('../dataModel/markdownDataModel.js').getPaperModel
 const userInfo = require("../dataModel/userInfoDataModel.js").userInfo
 const getAccount = require("./getAccount.js")
 const error = require("./error.js")
@@ -13,7 +13,6 @@ exports.getUserId = (req,res)=>{
             })
     })
 };
-
 exports.getPaperList = function(req, res) {
     let id = req.params.id
     let page = req.query.page || 1
@@ -31,8 +30,8 @@ exports.getPaperList = function(req, res) {
     })
 
     function render_paper(account) {
-        let markdown = mk(account)
-        markdown.count({}, (err, count) => {
+        let markdown = Paper
+        markdown.count({account}, (err, count) => {
             if (err) {
                 error(err,res)
                 return
@@ -43,7 +42,7 @@ exports.getPaperList = function(req, res) {
             if (page <= 0) {
                 page = 1
             }
-            markdown.find({}).sort({ date: -1 }).limit(10).skip((page - 1) * 10).exec((err, result) => {
+            markdown.find({account}).sort({ date: -1 }).limit(10).skip((page - 1) * 10).exec((err, result) => {
                 if (err) {
                     error(err,res)
                     return
@@ -62,7 +61,6 @@ exports.getPaperList = function(req, res) {
         })
     }
 };
-
 exports.addPaper = function(req, res) {
     let sessions_id = req.cookies.sessions_id
     getAccount(sessions_id).then((account)=>{
@@ -75,10 +73,9 @@ exports.addPaper = function(req, res) {
                 let account = result[0].account
                 let user_id = result[0]["_id"]
                 let name = result[0]["name"]
-                let md = mk(account)
                 let paper_id = account + '_' +  (new Date()).valueOf()
                 let date = parseInt( (new Date()).valueOf() ) + (1000*60*60*8)
-                let paper = new md({
+                let paper = new Paper({
                     account:account,
                     date:(new Date(date)).valueOf(),
                     title:"",
@@ -89,7 +86,7 @@ exports.addPaper = function(req, res) {
                 })
                 paper.save( (err) => {
                     if(err){ error(err,res) ;return; }
-                    md.find({paper_id:paper_id},(err,result) => {
+                    Paper.find({paper_id:paper_id},(err,result) => {
                         if(err){ return console.log(err) }
                         let paper_id = result[0]["_id"]
                         let str = "/updatePaper/"+user_id +'/' +paper_id
@@ -102,13 +99,10 @@ exports.addPaper = function(req, res) {
         })
     }
 };
-
 exports.getPaper = function(req, res) {
-
     let user_id = req.params.user_id
     let paper_id = req.params.paper_id
     let sessions_id = req.cookies.sessions_id
-
     getAccount(sessions_id).then((account)=>{
         userInfo.find({ _id: user_id }, (err, result) => {
             if(err){ error(err,res) ;return; }
@@ -118,8 +112,7 @@ exports.getPaper = function(req, res) {
         })
     })
     function verifyAccount(author,Paper_account){
-        let markdown = mk(Paper_account)
-        markdown.find({ _id: paper_id }, (err, result) => {
+        Paper.find({ _id: paper_id }, (err, result) => {
             if(err){ error(err,res) ;return; }
             // 渲染模板
             // 文章标签 关键词 标题 内容 时间 修改文章的地址 等等
@@ -143,7 +136,6 @@ exports.getPaper = function(req, res) {
         })
     }
 };
-
 exports.updatePaper = function(req, res) {
     let user_id = req.params.user_id
     let paper_id = req.params.paper_id
@@ -151,9 +143,7 @@ exports.updatePaper = function(req, res) {
         if(err){ error(err,res) ;return; }
         if( result.length ){
             let account = result[0]["account"]
-            let md = mk(account)
-
-            md.find( {_id:paper_id} , (err,result) => {
+            Paper.find( {_id:paper_id} , (err,result) => {
                 if(err){ return console.log(err) }
                 if(result.length){
                     let obj = result[0]
@@ -171,14 +161,10 @@ exports.savePaper = (req,res)=>{
     let user_id = req.body.user_id
     let paper_id = req.body.paper_id
     let sessions_id = req.cookies.sessions_id
-
     getAccount(sessions_id).then((account) => {
-        let md = mk(account)
         let obj = {}
-
         obj.title = title
         obj.content = content
-
         if( keywords && Array.isArray(keywords) ){
             obj.keywords = keywords
         }else if(keywords && typeof keywords === 'string'){
@@ -186,9 +172,8 @@ exports.savePaper = (req,res)=>{
         }else{
             obj.keywords = []
         }
-
         obj.des = content.substr(0,500).replace( /[\#\-\*\>\``]/gi,'')
-        md.update({_id:paper_id},obj,(err,result)=>{
+        Paper.update({_id:paper_id},obj,(err,result)=>{
             if(err){
                 console.log(err)
                 res.json({code:0,des:"error"})
@@ -205,9 +190,7 @@ exports.delPaper = (req, res) => {
         if(err){ error(err,res) ;return; }
         if( result.length ){
             let account = result[0]["account"]
-            let md = mk(account)
-
-            md.find( {_id:paper_id} , (err,result) => {
+            Paper.find( {_id:paper_id} , (err,result) => {
                 if(err){ return console.log(err) }
                 if(result.length){
                     md.remove( {_id:paper_id},(err,result) => {

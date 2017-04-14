@@ -180,6 +180,11 @@
             },
         },
         mounted(){
+
+            let load = document.querySelector(".sk-cube-grid")
+            if(load){
+                load.parentNode.removeChild(load)
+            }
             document.addEventListener('click',()=>{
                 this.drop_list_show = false
                 this.task_dis = {}
@@ -225,7 +230,7 @@
                     loadscreen.close()
                     this.$message({message:'数据获取完毕！',type:'success'});
                     this.getAllTask()
-                },500)
+                },0)
 
             })
         },

@@ -33,28 +33,27 @@ var task_type = new mongoose.Schema({
     date: Date,
 })
 
-var taskList = mongoose.model('tasklist', list_type)
-
+var groupList = mongoose.model('grouplist', list_type)
+var taskList = mongoose.model('tasklist',task_type)
 function run() {}
 
 run.prototype.init = function(account, res) {
 
-    var taskdata = mongoose.model(account, task_type)
     let taskArr = [
-        { name: '已完成的任务会在这里显示', IsComplete: true, id: parseInt(Date.now()).toString() + Math.random().toString(36).substr(2), list_id: 'all', dis: '已完成的任务会在这里显示', date: Date.now() },
-        { name: '取消勾选，可回退至待完成', IsComplete: true, id: parseInt(Date.now()).toString() + Math.random().toString(36).substr(2), list_id: 'all', dis: '取消勾选，可回退至待完成', date: Date.now() },
-        { name: '是不是很赞', IsComplete: true, id: parseInt(Date.now()).toString() + Math.random().toString(36).substr(2), list_id: 'all', dis: '是不是很赞', date: Date.now() },
-        { name: '回车添加任务', IsComplete: false, id: parseInt(Date.now()).toString() + Math.random().toString(36).substr(2), list_id: 'all', dis: '回车添加任务', date: Date.now() },
-        { name: '点击查看任务详情', IsComplete: false, id: parseInt(Date.now()).toString() + Math.random().toString(36).substr(2), list_id: 'all', dis: '点击查看任务详情', date: Date.now() },
-        { name: '勾选完成任务', IsComplete: false, id: parseInt(Date.now()).toString() + Math.random().toString(36).substr(2), list_id: 'all', dis: '勾选完成任务', date: Date.now() }
+        {account, name: '已完成的任务会在这里显示', IsComplete: true, id: parseInt(Date.now()).toString() + Math.random().toString(36).substr(2), list_id: 'all', dis: '已完成的任务会在这里显示', date: Date.now() },
+        {account, name: '取消勾选，可回退至待完成', IsComplete: true, id: parseInt(Date.now()).toString() + Math.random().toString(36).substr(2), list_id: 'all', dis: '取消勾选，可回退至待完成', date: Date.now() },
+        {account, name: '是不是很赞', IsComplete: true, id: parseInt(Date.now()).toString() + Math.random().toString(36).substr(2), list_id: 'all', dis: '是不是很赞', date: Date.now() },
+        {account, name: '回车添加任务', IsComplete: false, id: parseInt(Date.now()).toString() + Math.random().toString(36).substr(2), list_id: 'all', dis: '回车添加任务', date: Date.now() },
+        {account, name: '点击查看任务详情', IsComplete: false, id: parseInt(Date.now()).toString() + Math.random().toString(36).substr(2), list_id: 'all', dis: '点击查看任务详情', date: Date.now() },
+        {account, name: '勾选完成任务', IsComplete: false, id: parseInt(Date.now()).toString() + Math.random().toString(36).substr(2), list_id: 'all', dis: '勾选完成任务', date: Date.now() }
     ]
     taskArr.map((i) => {
-        let task = new taskdata(i)
+        let task = new taskList(i)
         task.save(function(err) {})
     })
 
     let group_id = Date.now().toString() + Math.random().toString(36).substr(2) + account + parseInt(account).toString(36)
-    let list = new taskList({
+    let list = new groupList({
         account: account,
         list_arr: [
             { name: "这里是清单", type: "list", list_id: Date.now().toString() + Math.random().toString(36).substr(2), group_id: '', moreMenu: false },
@@ -83,5 +82,5 @@ run.prototype.init = function(account, res) {
     })
 }
 exports.run = new run()
-exports.tasklist = taskList
-exports.task_type = task_type
+exports.groupList = groupList
+exports.taskList = taskList

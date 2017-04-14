@@ -218,7 +218,7 @@ exports.delAccount = function(req, res) {
                 let session = require('../dataModel/sessionDataModel.js').session
                 let mongoose = require('mongoose')
                 let task = require("../dataModel/taskDataModel.js")
-                var taskdata = mongoose.model(account, task.task_type)
+                var taskdata = mogoose.model(account, task.task_type)
                 session.remove({ account: account }, (err) => {
                     if (err) {
                         console.log(err);

@@ -31,14 +31,11 @@
     </div>
 </template>
 <script>
-    import {Button,Input,Dialog} from 'element-ui'
+    import Vue from 'vue'
+    import element from 'element-ui'
     import {ajax} from 'JS/ajax.js'
+    Vue.use(element)
     export default{
-        components:{
-            'el-input':Input,
-            'el-button':Button,
-            'el-dialog':Dialog,
-        },
         data(){
             return{
                 account:'',

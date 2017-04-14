@@ -45,8 +45,8 @@
     import hyperdown from 'hyperdown'
     import { ajax } from "JS/ajax.js"
     import Vue from 'vue'
-    import {Message} from "element-ui"
-    Vue.prototype.$message = Message
+    import element from "element-ui"
+    Vue.use(element)
     export default {
         data(){
             return {
@@ -81,6 +81,10 @@
             this.paper_id = paper_id
             this.keywords = keywords
             this.content = document.querySelector("#content").value
+            let load = document.querySelector(".sk-cube-grid")
+            if(load){
+                load.parentNode.removeChild(load)
+            }
         },
         methods:{
             stop(){
