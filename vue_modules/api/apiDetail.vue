@@ -113,6 +113,11 @@
         },
         created(){},
         mounted(){
+            let load = document.querySelector(".sk-cube-grid")
+            if(load){
+                load.parentNode.removeChild(load)
+            }
+            
             document.addEventListener('keydown',(event)=>{
                 if( event.keyCode === 83 && event.ctrlKey ){
                     this.updateApi()
