@@ -49,7 +49,7 @@
                 </el-date-picker>
                 <input class="death_input" type="text" name="" v-model="death_span" @keyup="death_span = parseInt( death_span ) " placeholder="输入你的寿命 如:100">
                 <div class="btn_date">
-                    <el-button type="success" size="large" @click="close_date_model">确定</el-buttom>
+                    <el-button type="success" size="large" @click="close_date_model">确定</el-button>
                 </div>
             </div>
         </div>

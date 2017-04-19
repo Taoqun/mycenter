@@ -1,17 +1,17 @@
 <template lang="html">
   <div>
     <s-head text="注册"></s-head>
-    <s-register></register>
+    <s-register></s-register>
   </div>
 </template>
 
 <script>
 import Shead from 'VUEMODULES/common/head'
-import Register from 'VUEMODULES/account/register'
+import register from 'VUEMODULES/account/register'
 export default {
   components:{
     "s-head":Shead,
-    's-register':Register
+    's-register':register
   }
 }
 </script>
