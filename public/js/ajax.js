@@ -3,8 +3,8 @@ import VueResource from 'vue-resource'
 Vue.use(VueResource)
 Vue.http.options.emulateJSON = true;
 
-import { obj } from 'ROOT/config.js'
-
+obj.hostname = location.hostname
+obj.port = location.port
 let host = obj.hostname + ':' + obj.port
 console.log(host)
 exports.ajax = function(obj) {
