@@ -69,9 +69,9 @@
 </template>
 <script>
     import Vue from 'vue'
-    import {input,Button,Loading,Dialog,Alert} from 'element-ui'
+    import {Input,Button,Loading,Dialog,Alert} from 'element-ui'
     import {ajax} from 'JS/ajax.js'
-    Vue.use(input)
+    Vue.use(Input)
     Vue.use(Button)
     Vue.use(Loading)
     Vue.use(Dialog)
