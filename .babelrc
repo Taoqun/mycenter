@@ -5,9 +5,6 @@
      "stage-0"
   ],
   "plugins": [["component", [
-    {
-      "libraryName": "element-ui",
-      "styleLibraryName": "theme-default"
-    }
+
   ]]]
 }

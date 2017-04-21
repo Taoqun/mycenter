@@ -91,13 +91,34 @@
     // import "CSS/element.css"
     import 'CSS/ali/iconfont.css'
     import Vue from 'vue'
-    import ElementUI from 'element-ui'
     import dropMenu from 'VUEMODULES/common/drop-down'
     import {ajax,gotologin} from 'JS/ajax.js'
-    import { MessageBox , Loading  } from 'element-ui';
+    import {
+        MessageBox,
+        Message,
+        Loading,
+        Dialog,
+        Button,
+        Input,
+        RadioGroup,
+        RadioButton,
+      } from 'element-ui';
     import s_list_name from './list-name.vue'
     import s_list_group from './list-group.vue'
-    Vue.use(ElementUI)
+
+    Vue.use(Dialog)
+    Vue.use(Button)
+    Vue.use(Input)
+    Vue.use(RadioGroup)
+    Vue.use(RadioButton)
+    Vue.use(Loading)
+
+    Vue.prototype.$msgbox = MessageBox
+    Vue.prototype.$alert = MessageBox.alert
+    Vue.prototype.$confirm = MessageBox.confirm
+    Vue.prototype.$prompt = MessageBox.prompt
+    Vue.prototype.$message = Message
+
     export default {
         components:{
             "s-drop-menu":dropMenu,

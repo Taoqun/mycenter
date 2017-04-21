@@ -193,7 +193,7 @@ exports.delPaper = (req, res) => {
             Paper.find( {_id:paper_id} , (err,result) => {
                 if(err){ return console.log(err) }
                 if(result.length){
-                    md.remove( {_id:paper_id},(err,result) => {
+                    Paper.remove( {_id:paper_id},(err,result) => {
                         let str = '/getPaperList/'+user_id
                         res.redirect(str)
                     })

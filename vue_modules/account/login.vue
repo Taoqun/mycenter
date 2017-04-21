@@ -32,9 +32,11 @@
 </template>
 <script>
     import Vue from 'vue'
-    import element from 'element-ui'
+    import {Input, Button , Dialog} from 'element-ui'
     import {ajax} from 'JS/ajax.js'
-    Vue.use(element)
+    Vue.use(Input)
+    Vue.use(Button)
+    Vue.use(Dialog)
     export default{
         data(){
             return{

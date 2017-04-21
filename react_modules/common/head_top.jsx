@@ -11,7 +11,7 @@ let lis = headList.map( (item,index) => {
     }
 })
 
-const Head = React.createClass({
+class Head extends React.Component({
     render(){
         return (
             <ul className="head">

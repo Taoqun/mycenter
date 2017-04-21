@@ -8,12 +8,12 @@ let lis = headList.map( (item)=>{
         return <li key={item.name}><a href={item.url} >{item.name}</a></li>
     });
 
-const Component1 = React.createClass({
-    getDefaultProps() {
+class Head extends React.Component{
+    defaultProps() {
         return {
             text:'测试'
         }
-    },
+    }
     render() {
         return (
           <div className="head">
@@ -22,7 +22,6 @@ const Component1 = React.createClass({
           </div>
         );
     }
-})
+};
 
-// 导出组件
-export default Component1;
+export default Head

@@ -57,9 +57,27 @@
 
 <script>
     import Vue from 'vue'
-    import element_ui,{Loading} from 'element-ui'
+    import {
+        Button,
+        Loading,
+        Select,
+        DatePicker,
+        MessageBox,
+        Message,
+        Option, } from 'element-ui'
+
     import {ajax, gotologin} from 'JS/ajax.js'
-    Vue.use(element_ui)
+    Vue.use(Button)
+    Vue.use(Loading)
+    Vue.use(Select)
+    Vue.use(Option)
+    Vue.use(DatePicker)
+
+    Vue.prototype.$msgbox = MessageBox
+    Vue.prototype.$alert = MessageBox.alert
+    Vue.prototype.$confirm = MessageBox.confirm
+    Vue.prototype.$prompt = MessageBox.prompt
+    Vue.prototype.$message = Message
 
     export default {
         data(){
