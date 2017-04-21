@@ -138,10 +138,16 @@
                 this.user_info.birth_day = this.user_info.birth_day || ''
                 this.user_info.sex = this.user_info.sex || ''
 
+                let obj = {}
+                    obj.birth_day = this.user_info.birth_day
+                    obj.sex = this.user_info.sex
+                    obj.name = this.user_info.name
+                    obj.email = this.user_info.email
+                    obj.phone = this.user_info.phone
                 ajax({
                     method:'post',
                     url:'/account/updateUserInfo',
-                    data: this.user_info,
+                    data: obj,
                 }).then( (data)=>{
                     if(data.code){
                         this.$message({
