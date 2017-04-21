@@ -1,6 +1,7 @@
 const userInfo = require('../dataModel/userInfoDataModel.js').userInfo
 const getaccount = require("./getAccount.js")
 
+
 // 登录账户验证
 exports.login = function(req, res) {
     let obj = {
@@ -81,9 +82,7 @@ exports.login = function(req, res) {
         }
     })
 }
-
 // 注册保存账户
-
 exports.register = function(req, res) {
 
     // 存储需要注册的账号密码
@@ -102,6 +101,7 @@ exports.register = function(req, res) {
                 account: account,
                 password: password,
                 name: name,
+                avatar:'/image/avatar.png',
                 date: Date.now()
             })
 
@@ -145,7 +145,6 @@ exports.register = function(req, res) {
         }
     })
 }
-
 // 退出 清除session
 exports.exit = function(req, res) {
         let session_id = req.cookies.sessions_id
@@ -173,6 +172,7 @@ exports.getUserInfo = function(req, res) {
             json.name = obj.name
             json.phone = obj.phone
             json.email = obj.email
+            json.avatar = obj.avatar || '/image/avatar.png'
             json.sex = obj.sex
             json.date = obj.date.valueOf()
             json.birth_day = obj.birth_day
@@ -180,7 +180,6 @@ exports.getUserInfo = function(req, res) {
         })
     })
 }
-
 // 更新用户信息
 exports.updateUserInfo = function(req, res) {
     let session_id = req.cookies.sessions_id
@@ -205,7 +204,35 @@ exports.updateUserInfo = function(req, res) {
         })
     })
 }
-
+// 更新上传头像
+exports.updateAvatar = function(req,res){
+    let a = req.body.avatar
+    let sessions_id = req.cookies.sessions_id
+    getaccount(sessions_id).then((account)=>{
+        let formidable = require('formidable')
+        let path = require("path")
+        let fs = require("fs")
+        let form = new formidable()
+            form.encoding = 'utf-8'; // 编码
+            form.keepExtensions = true; // 保留扩展名
+            form.maxFieldsSize = 10 * 1024 * 1024; // 文件大小
+            form.uploadDir = path.resolve(__dirname) + '/../public/image'
+            form.parse(req,function(err,fileds,files){ // 解析 formData数据
+                if(err){ return console.log(err) }
+                let imgPath = files.img.path // 获取文件路径
+                let imgName = form.uploadDir+"/"+ account + '.' + files.img.type.split("/")[1] // 修改之后的名字
+                let avatar = account + '.' + files.img.type.split("/")[1]
+                let data = fs.readFileSync(imgPath) // 同步读取文件
+                fs.writeFile(imgName,data,function(err){ // 存储文件
+                    if(err){ return console.log(err) }
+                    fs.unlink(imgPath,function(){}) // 删除文件
+                    userInfo.update({account},{avatar},(err,result)=>{
+                        res.json({code:1,img:"/image/"+ avatar })
+                    })
+                })
+            })
+        })
+}
 // 删除账户
 exports.delAccount = function(req, res) {
     let session_id = req.cookies.sessions_id

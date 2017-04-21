@@ -10,6 +10,13 @@
             <div class="setting_right">
                 <div v-show="show_content == 'setting_base' " class="setting_content setting_base">
                     <h6>基础设置</h6>
+                    <div class="line_row">
+                        <span class="row_text">头像</span>
+                        <div class="row_input avatar">
+                            <img @click="clickAvatar" ref="avatarImg" :src="user_info.avatar" alt="">
+                            <input @change="avatarChange" ref="avatarInput" style="display:none;" type="file">
+                        </div>
+                    </div>
                     <div class="line_row"><span class="row_text">姓名</span><input class="row_input" type="text" name="" v-model="user_info.name"></div>
                     <div class="line_row"><span class="row_text">邮箱</span><input class="row_input" type="text" name="" v-model="user_info.email"></div>
                     <div class="line_row"><span class="row_text">电话</span><input class="row_input" type="text" name="" v-model="user_info.phone"></div>
@@ -62,7 +69,8 @@
                     birth_day:'',
                     sex:'',
                     email:'',
-                    phone:''
+                    phone:'',
+                    avatar:'',
                 },
                 sexlist:[
                     {
@@ -93,12 +101,36 @@
                 this.user_info.sex = data.sex || ""
                 this.user_info.email = data.email || ""
                 this.user_info.phone = data.phone || ""
+                this.user_info.avatar = data.avatar || "/image/avatar.png"
             } )
         },
         mounted(){
 
         },
         methods:{
+            clickAvatar(){
+                this.$refs.avatarInput.click()
+            },
+            avatarChange(event){
+                let file = event.target.files[0]
+                let fr = new FileReader()
+                    fr.onload = (e)=>{
+                        this.user_info.avatar = e.target.result
+                        this.updateAvatar(file)
+                    }
+                    fr.readAsDataURL(file)
+            },
+            updateAvatar(file){
+                let form = new FormData()
+                    form.append("img",file)
+                ajax({
+                    method:'post',
+                    url:"/account/updateAvatar",
+                    data:form
+                }).then((data)=>{
+                    console.log(data)
+                })
+            },
             saveUserInfo(){
                 if(this.user_info.birth_day && this.user_info.birth_day instanceof Date){
                     this.user_info.birth_day = (new Date(this.user_info.birth_day)).valueOf()
@@ -263,6 +295,19 @@
                     &:focus{
                         color:#475669;
                         border:1px solid #475669;
+                    }
+                }
+                .avatar{
+                    margin-left:10px;
+                    padding:0;
+                    width:100px;
+                    height:100px;
+                    border-radius:50%;
+                    border:1px solid #666;
+                    overflow:hidden;
+                    img{
+                        width:100%;
+                        height:100%;
                     }
                 }
                 .row_date{

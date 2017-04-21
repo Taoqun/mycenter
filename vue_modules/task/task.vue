@@ -3,7 +3,7 @@
         <div class="list-group" @click="chooseList">
             <div class="user-info">
                 <div class="img" @click.stop="showDropList">
-                    <img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=950162565,3259577602&fm=21&gp=0.jpg" alt="" width=50 height=50>
+                    <img :src="user_info.avatar" alt="" width=50 height=50>
                 </div>
                 <p class="name" @click.stop="showDropList">{{user_info.name}}</p>
                 <s-drop-menu :list="drop_list" :show="drop_list_show"></s-drop-menu>
@@ -116,6 +116,7 @@
                 user_info:{
                     name:'',
                     account:'',
+                    avatar:'',
                 },
                 task_list_name:{name:'所有任务'},
                 drop_list_show:false,
@@ -213,6 +214,7 @@
                 this.list_group = data.list_arr
                 this.user_info.name = data.name
                 this.user_info.account = data.account
+                this.user_info.avatar = data.avatar
 
                 this.list_ui_group.map( (i)=>{
                     let arr = []

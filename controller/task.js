@@ -3,7 +3,7 @@
 const groupList = require('../dataModel/taskDataModel.js').groupList
 const taskList = require('../dataModel/taskDataModel.js').taskList
 const session = require('../dataModel/sessionDataModel.js').session
-
+const userInfo = require("../dataModel/userInfoDataModel").userInfo
 // 引入数据库中间件
 const mongoose = require('mongoose')
 
@@ -103,14 +103,18 @@ exports.getList = function(req,res){
     session.find({session_id:id},(err,result)=>{
         let account = result[0].account
         let name = result[0].name
-        groupList.find( {account:account} , (err,result)=>{
-            if(err){return console.log(err)}
-            let obj = {}
-            obj.list_arr = result[0].list_arr
-            obj.group_arr = result[0].group_arr
-            obj.account = account
-            obj.name = name
-            res.json(obj)
+        userInfo.find({account},(err,result)=>{
+            let avatar = result[0]["avatar"] ? '/image/'+result[0]["avatar"] : '/image/avatar.png'
+            groupList.find( {account:account} , (err,result)=>{
+                if(err){return console.log(err)}
+                let obj = {}
+                obj.list_arr = result[0].list_arr
+                obj.group_arr = result[0].group_arr
+                obj.account = account
+                obj.name = name
+                obj.avatar = avatar
+                res.json(obj)
+            })
         })
     })
 }

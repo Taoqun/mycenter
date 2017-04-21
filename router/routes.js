@@ -39,6 +39,7 @@ module.exports = function(app){
 
     // 获取更新个人资料
     app.get('/account/getUserInfo',verify,Login.getUserInfo)
+    app.post("/account/updateAvatar",urlencodedParser,verify,Login.updateAvatar)
     app.post('/account/updateUserInfo',urlencodedParser,verify,Login.updateUserInfo)
     app.post('/account/delAccount',urlencodedParser,verify,Login.delAccount)
 
