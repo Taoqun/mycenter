@@ -1,0 +1,98 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/Cellar/yarn/1.0.1/libexec/bin/yarn.js
+
+PATH: 
+  /Library/Frameworks/Python.framework/Versions/3.6/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Applications/Wireshark.app/Contents/MacOS
+
+Yarn version: 
+  1.0.1
+
+Node version: 
+  6.2.0
+
+Platform: 
+  darwin x64
+
+npm manifest: 
+  {
+    "name": "mycode",
+    "version": "1.0.0",
+    "description": "my code ",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://git.coding.net/taoqun/myCode.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+      "antd": "^2.8.1",
+      "autoprefixer-loader": "^3.2.0",
+      "babel-cli": "^6.23.0",
+      "babel-core": "^6.22.1",
+      "babel-loader": "^6.2.8",
+      "babel-plugin-component": "^0.6.0",
+      "babel-plugin-transform-runtime": "^6.15.0",
+      "babel-preset-es2015": "^6.18.0",
+      "babel-preset-react": "^6.23.0",
+      "babel-preset-stage-0": "^6.16.0",
+      "babel-runtime": "^6.18.0",
+      "body-parser": "^1.16.0",
+      "child_process": "^1.0.2",
+      "compression": "^1.6.2",
+      "cookie-parser": "^1.4.3",
+      "cross-env": "^3.1.3",
+      "css-loader": "^0.26.1",
+      "echarts": "^3.3.2",
+      "ejs": "^2.5.6",
+      "element-theme-default": "^1.1.6",
+      "element-ui": "^1.1.6",
+      "express": "^4.14.1",
+      "file-loader": "^0.9.0",
+      "formidable": "^1.1.1",
+      "html-loader": "^0.4.4",
+      "hyperdown": "^2.1.1",
+      "jquery": "^3.1.1",
+      "jsx-loader": "^0.13.2",
+      "less": "^2.7.2",
+      "less-loader": "^2.2.3",
+      "markdown": "^0.5.0",
+      "mint-ui": "^2.0.5",
+      "mongoose": "^4.8.1",
+      "multer": "^1.3.0",
+      "node-sass": "^3.13.1",
+      "postcss-loader": "^1.2.2",
+      "react": "^15.4.2",
+      "react-dom": "^15.4.2",
+      "sass-loader": "^4.0.2",
+      "scss-loader": "0.0.1",
+      "style-loader": "^0.13.1",
+      "stylus": "^0.54.5",
+      "stylus-loader": "^2.4.0",
+      "url-loader": "^0.5.7",
+      "vue": "^2.1.10",
+      "vue-hot-reload-api": "^2.0.6",
+      "vue-html-loader": "^1.2.3",
+      "vue-loader": "^10.0.2",
+      "vue-resource": "^1.2.0",
+      "vue-router": "^2.2.0",
+      "vue-style-loader": "^1.0.0",
+      "vue-template-compiler": "^2.1.4",
+      "vuex": "^2.2.1",
+      "webpack": "^1.13.3",
+      "webpack-dev-server": "^1.16.2"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: EACCES: permission denied, rmdir '/Users/taoqun/webProject/mycode/node_modules/markdown/node_modules/.bin'
+      at Error (native)
